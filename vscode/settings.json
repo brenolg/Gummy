@@ -1,0 +1,21 @@
+{
+  // Usa o Prettier como formatador padrão
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+
+  // Formata o código automaticamente ao salvar
+  "editor.formatOnSave": true,
+
+  // Usa quebra de linha LF (compatível com Git e Linux)
+  "files.eol": "\n",
+
+  // Mostra status do ESLint na barra inferior
+  "eslint.alwaysShowStatus": true,
+
+  // Faz o ESLint validar arquivos TS e TSX
+  "eslint.validate": ["javascript", "typescript", "typescriptreact"],
+
+  // Define indentação consistente
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
+  "editor.detectIndentation": false
+}
