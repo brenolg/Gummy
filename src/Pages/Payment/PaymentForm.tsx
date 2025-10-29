@@ -2,9 +2,13 @@ import { useForm, FormProvider } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { paymentSchema } from './paymentSchema'
 import InputComponent from '../../components/form/MaskedInput' 
+import SelectComponent from '../../components/form/Select'
+import Checkbox from '../../components/form/Checkbox'
 
 type PaymentFormData = {
   nome: string
+  parcelas: string
+  acceptTerms: boolean 
 }
 
 export default function PaymentForm() {
@@ -12,6 +16,8 @@ export default function PaymentForm() {
     resolver: yupResolver(paymentSchema),
     defaultValues: {
       nome: '',
+      parcelas: '',
+      acceptTerms: false
     },
     mode: 'onBlur',
   })
@@ -59,8 +65,21 @@ export default function PaymentForm() {
             name="nome"
             type="text"
             placeholder="FULANO DE TAL"
-            dataTestId="nome-cartao"
             hasAsterisk
+          />
+          <Checkbox
+            name="acceptTerms"
+            label="Aceito os termos de uso"
+          />
+          <SelectComponent
+            name="parcelas"
+            placeholder="Parcelas"
+            hasAsterisk
+            options={[
+              { label: '1x de R$ 368,90', value: '1' },
+              { label: '2x de R$ 184,45', value: '2' },
+              { label: '3x de R$ 122,97', value: '3' },
+            ]}
           />
         </div>
 

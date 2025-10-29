@@ -59,13 +59,13 @@ export const Placeholder = styled.span<PlaceholderProps>`
 interface IStyleProps {
   $error: boolean
   $disabled?: boolean
-  ['data-testid']: string
 }
 
 export const InputError = styled.div<IStyleProps>`
   font-size: 11px;
   position: absolute;
   bottom: 0px;
+  background: rgba(255,0,0,0.1);
   transform: translateY(100%);
   font-style: normal;
   font-weight: 400;

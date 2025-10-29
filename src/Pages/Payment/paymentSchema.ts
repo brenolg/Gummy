@@ -5,5 +5,14 @@ export const paymentSchema = yup.object({
     .string()
     .required('Nome obrigatório')
     .min(3, 'Nome muito curto'),
+  
+  parcelas: yup
+    .string()
+    .required('Selecione uma opção de parcelamento'),
 
+
+  acceptTerms: yup
+    .boolean()
+    .oneOf([true], 'Você precisa aceitar os termos de uso')
+    .required('Obrigatório'),
 })

@@ -8,7 +8,6 @@ interface InputFieldProps {
   name: string
   type: string
   disabled?: boolean
-  dataTestId: string
   placeholder: string
   hasAsterisk?: boolean
   onBlur?: () => void
@@ -20,7 +19,6 @@ interface InputFieldProps {
 const InputComponent: React.FC<InputFieldProps> = ({
   name,
   disabled,
-  dataTestId,
   placeholder,
   hasAsterisk,
   onBlur,
@@ -78,7 +76,6 @@ const InputComponent: React.FC<InputFieldProps> = ({
                   }}
                   $disabled={disabled}
                   $error={!!fieldError}
-                  data-testid={dataTestId}
                   maxLength={maxLength}
                 />
 
@@ -94,7 +91,6 @@ const InputComponent: React.FC<InputFieldProps> = ({
                 <InputError
                   $error={!!fieldError}
                   $disabled={disabled}
-                  data-testid={`${dataTestId}-error`}
                 >
                   {fieldError}
                 </InputError>
