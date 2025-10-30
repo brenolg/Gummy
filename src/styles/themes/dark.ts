@@ -1,13 +1,17 @@
 import { css } from "styled-components";
 
 export const darkTheme = {
- colors: {
+  colors: {
     neutral: {
       black700: '#424242',
       Grey500: '#CCCCCC',
       white0: '#FFFFFF'
     },
     roxo700: '#502665',
+    roxo900: '#2C1830',
+    roxo500:'#7D37A1',
+    roxo25: '#EBD7F5',
+    roxo0: '#FDFBFE'
   },
   typography: {
     input: css`
@@ -18,4 +22,6 @@ export const darkTheme = {
       letter-spacing: 0;
       vertical-align: middle;
     `,
-  },}
+  },
+
+}
