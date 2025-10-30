@@ -9,9 +9,10 @@ interface PlaceholderProps {
 }
 
 export const InputContainer = styled.div<{
-
+  $mb?: number
 }>`
   position: relative;
+  ${({ $mb }) => $mb && `margin-bottom: ${$mb}px;`}
   .relative {
     position: relative;
   }
@@ -19,7 +20,7 @@ export const InputContainer = styled.div<{
   input:-webkit-autofill:hover,
   input:-webkit-autofill:focus,
   input:-webkit-autofill:active {
-    -webkit-box-shadow: 0 0 0 30px #444 inset !important;
+    -webkit-box-shadow: 0 0 0 30px #FFFFFF inset !important;
   }
 `
 

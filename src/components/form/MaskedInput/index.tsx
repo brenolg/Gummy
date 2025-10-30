@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Controller, useFormContext, useWatch } from 'react-hook-form'
-import { Placeholder, InputError } from '../FormCommomStyle'
+import { Placeholder, InputError, InputContainer } from '../FormCommomStyle'
 import { Input } from './styles'
 import { getMaskConfig } from './getMaskConfig'
 
@@ -14,6 +14,7 @@ interface InputFieldProps {
   maxLength?: number
   loading?: boolean
   rightIcon?: string
+  mb?: number
 }
 
 const InputComponent: React.FC<InputFieldProps> = ({
@@ -25,6 +26,7 @@ const InputComponent: React.FC<InputFieldProps> = ({
   maxLength,
   type,
   rightIcon,
+  mb,
 }) => {
   const { control } = useFormContext()
 
@@ -43,7 +45,7 @@ const InputComponent: React.FC<InputFieldProps> = ({
   const { mask, blocks, unmask } = getMaskConfig(type)
 
   return (
-    <div style={{ width: '100%' }}>
+    <InputContainer $mb={mb}>
       <div className="relative" style={{ position: 'relative' }}>
         {/* label flutuante */}
         <Placeholder $isFocusedOrValid={isFocusedOrValid} isDisabled={disabled}>
@@ -99,7 +101,7 @@ const InputComponent: React.FC<InputFieldProps> = ({
           }}
         />
       </div>
-    </div>
+    </InputContainer>
   )
 }
 

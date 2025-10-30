@@ -5,7 +5,7 @@ export const StyledMainButton = styled.button`
   outline: none;
   height: 68px;
   color: ${({ theme }) => theme.colors.neutral.white0};
-
+  width: 100%;
   background: linear-gradient(
     90deg,
     ${({ theme }) => theme.colors.roxo700} 0%,
