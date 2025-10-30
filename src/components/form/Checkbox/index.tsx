@@ -8,6 +8,7 @@ import {
   Text,
 } from './styles'
 import { InputError } from '../FormCommomStyle'
+import checkbox from '../../../../public/icons/check.svg'
 
 type CheckboxFieldProps = {
   name: string
@@ -59,20 +60,7 @@ const Checkbox: React.FC<CheckboxFieldProps> = ({
           aria-hidden="true"
         >
           {!!value && (
-            <svg
-              viewBox="0 0 24 24"
-              width={14}
-              height={14}
-            >
-              <polyline
-                points="20 6 9 17 4 12"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="3"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
+            <img src={checkbox}/>
           )}
         </Box>
 

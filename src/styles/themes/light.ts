@@ -1,36 +1,27 @@
+import { css } from "styled-components";
+
 export const lightTheme = {
-  title: 'light',
-
   colors: {
-    background: '#F9F9F9',
-    text: '#1E1E1E',
-    primary: '#3F5EFB',
-    secondary: '#FC466B',
-    accent: '#00BFA6',
-    border: '#E0E0E0',
-    card: '#FFFFFF',
-  },
-
-  font: {
-    family: "'Segoe UI', sans-serif",
-    sizes: {
-      small: '0.875rem',
-      medium: '1rem',
-      large: '1.25rem',
-      title: '2rem',
+    neutral: {
+      black700: '#424242',
+      Grey500: '#CCCCCC',
+      white0: '#FFFFFF'
     },
-    weight: {
-      regular: 400,
-      medium: 500,
-      bold: 700,
-    },
+    roxo700: '#502665',
+    roxo900: '#2C1830',
+    roxo500:'#7D37A1',
+    roxo25: '#EBD7F5',
+    roxo0: '#FDFBFE'
+  },
+  typography: {
+    input: css`
+      font-weight: 400;
+      font-style: normal;
+      font-size: 14px;
+      line-height: 100%;
+      letter-spacing: 0;
+      vertical-align: middle;
+    `,
   },
 
-  spacing: (factor: number) => `${factor * 8}px`,
-
-  radius: {
-    sm: '4px',
-    md: '8px',
-    lg: '16px',
-  },
 }

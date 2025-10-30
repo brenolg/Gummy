@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { colors, typography } from '../../../styles/themeUtils'
 
 export const SelectWrapper = styled.div<{ error?: string }>`
   position: relative;
@@ -19,27 +20,26 @@ export const SelectDisplay = styled.input<{
   disabled?: boolean
   error?: string
 }>`
-  background-color: ${({ disabled }) => (disabled ? '#EEEEEE' : '#fff')};
-  border: 1px solid #ccc;
-  padding: 12px;
-  border-radius: 4px;
-  max-height: 44px;
-  height: 44px;
   display: flex;
   align-items: center;
+  padding: 16px;
+  transition: all 0.3s ease-out;
+  height: 48px;
+  outline: none;
+  border-radius: 5px;
+  border: 1px solid ;
   width: 100%;
   max-width: 100%;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 20px;
-  font-family: 'Inter';
-  height: 44px;
+  border: 1px solid ${t => colors(t).neutral.Grey500};
+  box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.05);
+  color: ${t => colors(t).neutral.black700};
   outline: none;
-  color: #424242;
+  
   transition: all 0.3s ease-out;
+  background-color: ${({ disabled }) => (disabled ? '#EEEEEE' : '#fff')};
   background: ${(props) =>
     props.disabled ? '#EEEEEE' : 'red'};
+  background: ${t => colors(t).neutral.white0};
   border: 1px solid;
   border-color: ${(props) =>
     props.disabled
@@ -89,4 +89,7 @@ export const DropdownItem = styled.div<{ $isSelected?: boolean }>`
   &:hover {
     background-color: #fff9e7;
   }
+
+  background: ${t => colors(t).neutral.white0};
+  ${t => typography(t).input};
 `

@@ -1,19 +1,15 @@
 import { IMaskInput } from 'react-imask'
 import styled from 'styled-components'
+import { colors } from "../../../styles/themeUtils";
+import { typography } from '../../../styles/themeUtils';
 
 interface IStyleProps {
-  small?: boolean
-  medium?: boolean
-  large?: boolean
   error?: string
   disabled?: boolean
 }
 
 
 interface IStyleProps {
-  small?: boolean
-  medium?: boolean
-  large?: boolean
   error?: string
   disabled?: boolean
 }
@@ -22,55 +18,22 @@ interface IStyleProps {
 type InputBaseProps = IStyleProps & Record<string, unknown>
 
 export const Input = styled(IMaskInput)<InputBaseProps>`
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 20px;
-  box-sizing: border-box;
-  padding: 12px;
-  margin-left: 0.5px;
+  padding: 16px;
   transition: all 0.3s ease-out;
-  height: 44px;
-  font-family: 'Inter';
+  height: 48px;
   outline: none;
   border-radius: 5px;
-  color: #424242;
-
-  border: 1px solid;
-
-  
-  &:disabled {
-    color: rgb(84, 84, 84);
-  }
+  border: 1px solid ;
   width: 100%;
   max-width: 100%;
+  border: 1px solid ${t => colors(t).neutral.Grey500};
+  box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.05);
+  color: ${t => colors(t).neutral.black700};
+  background: ${t => colors(t).neutral.white0};
+
+  ${t => typography(t).input};
 `
 
-
-export const Error = styled.p`
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 400;
-
-  margin-top: 10px;
-`
-
-export const InputError = styled.div`
- 
-  position: absolute;
-  bottom: -3px;
-  transform: translateY(100%);
-  font-size: 10px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 14px;
-  letter-spacing: 0em;
-  text-align: start;
-  width: 100%;
-  text-overflow: ellipsis;
-  overflow: hidden;
-
-`
 export const Loading = styled.div<{ $loading: boolean | undefined }>`
   pointer-events: none;
   position: absolute;

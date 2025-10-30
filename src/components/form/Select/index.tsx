@@ -11,7 +11,6 @@ interface Option {
   label: string
   value: string | number
 }
-
 interface SelectComponentProps {
   name: string
   placeholder: string
@@ -33,9 +32,6 @@ const CustomSelectComponent: React.FC<SelectComponentProps> = ({
   hasAsterisk,
   onBlur,
   isSearchable,
-  large,
-  small,
-  customWith,
 }) => {
   const {
     formState: { errors },
@@ -81,9 +77,6 @@ const CustomSelectComponent: React.FC<SelectComponentProps> = ({
     <InputContainer
       ref={dropdownRef}
       className="select"
-      large={large}
-      small={small}
-      customWith={customWith}
     >
       <div className="relative">
         <Placeholder $isFocusedOrValid={isFocusedOrValid} isDisabled={disabled}>

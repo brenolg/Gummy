@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { colors, typography } from '../../../styles/themeUtils'
 
 
 interface PlaceholderProps {
@@ -8,20 +9,11 @@ interface PlaceholderProps {
 }
 
 export const InputContainer = styled.div<{
-  small?: boolean
-  large?: boolean
-  customWith?: number
+
 }>`
   position: relative;
   .relative {
     position: relative;
-    width: ${({ small, large, customWith }) => {
-      let width = '100%'
-      if (small) width = '155px'
-      if (large) width = '315px'
-      if (customWith) width = `${customWith}px`
-      return width
-    }};
   }
   input:-webkit-autofill,
   input:-webkit-autofill:hover,
@@ -34,27 +26,23 @@ export const InputContainer = styled.div<{
 export const Placeholder = styled.span<PlaceholderProps>`
   position: absolute;
   left: ${(props: PlaceholderProps) =>
-    props.isSearchable ? '38.5px' : '12.5px'};
+    props.isSearchable ? '38.5px' : '10px'};
   top: ${(props: PlaceholderProps) => (props.$isFocusedOrValid ? 0 : '50%')};
   transform: translateY(-50%);
   z-index: 2;
   color: black;
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 400;
   padding: 0 6px;
   border-radius: 10px;
   pointer-events: none;
   transition: all 0.2s ease-out;
   ${(props) => props.isDisabled && 'color: #757575;'}
-
+  
+  background: ${t => colors(t).neutral.white0};
+  ${t => typography(t).input};
   .asterisk {
     color: #d61212;
   }
 
-  @media only screen and (min-width: 1441px) {
-    font-size: 13px;
-  }
 `
 interface IStyleProps {
   $error: boolean
@@ -65,7 +53,6 @@ export const InputError = styled.div<IStyleProps>`
   font-size: 11px;
   position: absolute;
   bottom: 0px;
-  background: rgba(255,0,0,0.1);
   transform: translateY(100%);
   font-style: normal;
   font-weight: 400;
@@ -96,3 +83,4 @@ export const InputError = styled.div<IStyleProps>`
       brightness(91%) contrast(89%);
   }
 `
+
