@@ -91,7 +91,7 @@ export default function Payment() {
             {step === 1 && (
               <AddressForm/>
             )}
-            {step === 2 && (
+            {step === 0 && (
               <PaymentCardForm/>
             )}
 

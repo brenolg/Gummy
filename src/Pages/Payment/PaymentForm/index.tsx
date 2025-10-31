@@ -1,4 +1,5 @@
-import { MInput, Select, } from '../../../components';
+import { Divider, MInput, Select, } from '../../../components';
+import PaymentMethodSelector from '../PaymentMethodSelector';
 import { FormTitle, InputContainer, TwoInputContainer } from '../styles';
 
 export default function PaymentCardForm() {
@@ -7,6 +8,8 @@ export default function PaymentCardForm() {
   return (
     <InputContainer>
       <FormTitle>Pagamento</FormTitle>
+      <PaymentMethodSelector/>
+      <Divider/>
       <MInput name="cardNumber" type="card"   placeholder="Número do Cartão" hasAsterisk mb={16}/>
       <TwoInputContainer>
         <MInput name="expiry" type="expiry" placeholder="Validade" hasAsterisk mb={16}/>
