@@ -1,7 +1,7 @@
-import { useState } from 'react';
-import { FormProvider, useForm } from 'react-hook-form';
+import { useEffect, useState } from 'react';
+import { FormProvider, useForm, type Resolver } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { checkoutSchema} from './schema';
+import {  schemaFull} from './schema';
 import {  MainButton } from '../../components';
 import { FormContainer, MainContainer, PageTitle, ProductContainer } from './styles';
 import InfoForm from './InfoForm';
@@ -47,33 +47,35 @@ export default function Payment() {
   const [step, setStep] = useState(0);
 
   const methods = useForm<CheckoutFormData>({
-    resolver: yupResolver(checkoutSchema),
-    defaultValues: {
-      // Info
-      name: '', email: '', cell: '', advertisement: false,
-      // Endereço
-      zipCode: '', address: '', district: '', complement: '', number: '', city: '', state: '',
-      // Cartão
-      cardNumber: '', expiry: '', cvv: '', holderName: '', installments: 1,
+    resolver: yupResolver(schemaFull) as Resolver<CheckoutFormData>,
+    defaultValues: { 
+      name:'', email:'', cell:'', advertisement:false,
+      zipCode:'', address:'', district:'', complement:'', number:'', city:'', state:'',
+      cardNumber:'', expiry:'', cvv:'', holderName:'', installments:1,
     },
     mode: 'onBlur',
+    reValidateMode: 'onChange'
   });
 
-  const { handleSubmit, trigger, formState: { isSubmitting } } = methods;
+  useEffect(() => {
+    methods.reset(methods.getValues()); // mantém valores e religa resolver
+  }, [step, methods]);
 
-  const onSubmit = (data: CheckoutFormData) => {
-    console.log('CHECKOUT OK', data);
+  const handleStep = async () => {
+    const valid = await methods.trigger(STEP_FIELDS[step], { shouldFocus: true });
+
+    if (!valid) return;
+
+    // se for o último passo → submete
+    if (step === STEP_FIELDS.length - 1) {
+      methods.handleSubmit((data) => {
+      console.log("CHECKOUT OK", data);
+    });
+    } else {
+      setStep((s) => s + 1);
+    }
   };
 
-  const next = async () => {
-    const fields = STEP_FIELDS[step];
-    const ok = await trigger(fields, { shouldFocus: true });
-    console.log("STEP")
-
-    if (ok) setStep(prev => prev + 1);
-  };
-
-  const isLast = step === STEP_FIELDS.length - 1;
 
   return (
     <MainContainer>
@@ -84,29 +86,21 @@ export default function Payment() {
 
           <CheckoutStepper step={step} />
 
-          <form id="checkout-form" onSubmit={handleSubmit(onSubmit)}>
+          <form id="checkout-form" >
             {step === 0 && (
               <InfoForm/>
             )}
             {step === 1 && (
               <AddressForm/>
             )}
-            {step === 0 && (
+            {step === 2 && (
               <PaymentCardForm/>
             )}
 
-            {/* Navegação / Submit */}
-            <div >
-              {!isLast ? (
-                <MainButton type="button" onClick={next} >
-                  Avançar
-                </MainButton>
-              ) : (
-                <MainButton type="submit" loading={isSubmitting} >
-                  Confirmar Pagamento
-                </MainButton>
-              )}
-            </div>
+          <MainButton type="button" onClick={handleStep}>
+            {step === STEP_FIELDS.length - 1 ? "Confirmar Pagamento" : "Avançar"}
+          </MainButton>
+
           </form>
         </FormContainer>
       </FormProvider>
