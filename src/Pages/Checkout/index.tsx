@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import {  useState } from 'react';
 import { FormProvider, useForm, type Resolver } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import {  schemaFull} from './schema';
@@ -9,7 +9,6 @@ import AddressForm from './AddressForm';
 import PaymentCardForm from './PaymentForm';
 import CheckoutStepper from './CheckoutStepper';
 import SecureTxt from './SecureTxt';
-
 
 export type CheckoutFormData = {
   /** PASSO 1 — Contato */
@@ -34,6 +33,7 @@ export type CheckoutFormData = {
   holderName: string;
   installments: number;
 };
+
 // campos por passo: usados no trigger() para validar só o passo atual
 const STEP_FIELDS: Array<(keyof CheckoutFormData)[]> = [
   // 0: Info
@@ -59,10 +59,6 @@ export default function Checkout() {
     reValidateMode: 'onChange'
   });
 
-  useEffect(() => {
-    methods.reset(methods.getValues()); // mantém valores e religa resolver
-  }, [step, methods]);
-
   const handleStep = async () => {
     const valid = await methods.trigger(STEP_FIELDS[step], { shouldFocus: true });
     if (!valid) return;
@@ -70,7 +66,7 @@ export default function Checkout() {
     // PASSO 0: se advertisement = true, faz loading 3s e loga
     const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
     if (step === 0) {
-      const wantsAds = methods.getValues('advertisement'); // boolean
+      const wantsAds = methods.getValues('advertisement');
       if (wantsAds) {
         setLoading(true);
         await sleep(3000);
@@ -78,7 +74,6 @@ export default function Checkout() {
         setLoading(false);
       }
     }
-
     if (step === STEP_FIELDS.length - 1) {
       await methods.handleSubmit((data) => {
         console.log("CHECKOUT OK", data);
@@ -89,17 +84,24 @@ export default function Checkout() {
     setStep((s) => s + 1);
   };
 
-
   return (
     <MainContainer>
-      <FormProvider {...methods}>
-        <FormContainer >
-          {/* Stepper simples (opcional) */}
-          <PageTitle>Finalizar Compra</PageTitle>
+      <FormContainer >
+        {/* Stepper simples (opcional) */}
+        <PageTitle>Finalizar Compra</PageTitle>
 
-          <CheckoutStepper step={step} />
+        <CheckoutStepper step={step} />
 
-          <form id="checkout-form" >
+        <FormProvider {...methods}>
+          <form 
+            id="checkout-form"  
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                e.preventDefault(); // impede submit automático
+                handleStep();       // chama sua lógica de próxima etapa
+              }
+            }} 
+            >
             {step === 0 && (
               <InfoForm/>
             )}
@@ -114,11 +116,11 @@ export default function Checkout() {
               {step === STEP_FIELDS.length - 1 ? "Confirmar Pagamento" : "Avançar"}
             </MainButton>
           </form>
+        </FormProvider>
 
-          <SecureTxt/>
+        <SecureTxt/>
           
         </FormContainer>
-      </FormProvider>
 
       <ProductContainer>
         <PageTitle>Resumo do pedido</PageTitle>
