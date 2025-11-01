@@ -28,7 +28,7 @@ const InputComponent: React.FC<InputFieldProps> = ({
   rightIcon,
   mb,
 }) => {
-  const { control } = useFormContext()
+  const { control, clearErrors } = useFormContext()
 
   const [inputFocused, setInputFocused] = useState(false)
   const inputValue = useWatch({ control, name })
@@ -71,7 +71,10 @@ const InputComponent: React.FC<InputFieldProps> = ({
                   unmask={unmask}
                   id={name}
                   value={field.value ?? ''}
-                  onFocus={() => setInputFocused(true)}
+                  onFocus={() => {
+                    setInputFocused(true);
+                    clearErrors(name)
+                  }}
                   onBlur={() => {
                     field.onBlur()
                     handleBlur()
