@@ -3,12 +3,14 @@ import { FormProvider, useForm, type Resolver } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import {  schemaFull} from './schema';
 import {  MainButton } from '../../components';
-import { FormContainer, MainContainer, PageTitle, ProductContainer } from './styles';
+import { FormContainer, MainContainer, PageTitle, ProductContainer, BackButton } from './styles';
 import InfoForm from './InfoForm';
 import AddressForm from './AddressForm';
 import PaymentCardForm from './PaymentForm';
 import CheckoutStepper from './CheckoutStepper';
 import SecureTxt from './SecureTxt';
+import backArow from '@/assets/icons/backArow.svg'
+import { useNavigate } from 'react-router-dom';
 
 export type CheckoutFormData = {
   /** PASSO 1 — Contato */
@@ -47,6 +49,7 @@ const STEP_FIELDS: Array<(keyof CheckoutFormData)[]> = [
 export default function Checkout() {
   const [step, setStep] = useState(0);
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const methods = useForm<CheckoutFormData>({
     resolver: yupResolver(schemaFull) as Resolver<CheckoutFormData>,
@@ -87,9 +90,13 @@ export default function Checkout() {
   return (
     <MainContainer>
       <FormContainer >
-        {/* Stepper simples (opcional) */}
-        <PageTitle>Finalizar Compra</PageTitle>
 
+        <BackButton onClick={() => navigate(-1)}>
+          <img src={backArow}/>
+          <PageTitle>Finalizar Compra</PageTitle>
+        </BackButton>
+
+        {/* Stepper de status do form */}
         <CheckoutStepper step={step} />
 
         <FormProvider {...methods}>
@@ -123,7 +130,7 @@ export default function Checkout() {
         </FormContainer>
 
       <ProductContainer>
-        <PageTitle>Resumo do pedido</PageTitle>
+        <PageTitle $mb={48}>Resumo do pedido</PageTitle>
       </ProductContainer>
     </MainContainer>
   );
