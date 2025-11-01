@@ -3,7 +3,7 @@ import * as yup from 'yup';
 // schemaStep1.ts
 export const schemaStep1 = yup.object({
   name: yup.string().required('Nome é obrigatório'),
-  email: yup.string().email().required('E-mail é obrigatório'),
+  email: yup.string().required('E-mail é obrigatório'),
   cell: yup.string().required('Celular é obrigatório'),
   advertisement: yup.boolean(),
 });

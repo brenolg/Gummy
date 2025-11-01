@@ -1,10 +1,10 @@
-import { useState } from "react";
 import { Wrapper, Option } from "./styles";
 import CreditCardIcon from './CreditCardIcon'
 import PixIcon from "./PixIcon"; // se quiser, te ajudo a criar esse também
+import { useCoreData } from "@/context/coreDataContext";
 
 export default function PaymentMethodSelector() {
-  const [method, setMethod] = useState<"card" | "pix">("card");
+  const { method, setMethod } = useCoreData();
 
   return (
     <Wrapper>

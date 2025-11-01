@@ -8,6 +8,7 @@ import InfoForm from './InfoForm';
 import AddressForm from './AddressForm';
 import PaymentCardForm from './PaymentForm';
 import CheckoutStepper from './CheckoutStepper';
+import SecureTxt from './SecureTxt';
 
 
 export type CheckoutFormData = {
@@ -43,8 +44,9 @@ const STEP_FIELDS: Array<(keyof CheckoutFormData)[]> = [
   ['cardNumber', 'expiry', 'cvv', 'holderName', 'installments'],
 ];
 
-export default function Payment() {
+export default function Checkout() {
   const [step, setStep] = useState(0);
+  const [loading, setLoading] = useState(false);
 
   const methods = useForm<CheckoutFormData>({
     resolver: yupResolver(schemaFull) as Resolver<CheckoutFormData>,
@@ -63,17 +65,28 @@ export default function Payment() {
 
   const handleStep = async () => {
     const valid = await methods.trigger(STEP_FIELDS[step], { shouldFocus: true });
-
     if (!valid) return;
 
-    // se for o último passo → submete
-    if (step === STEP_FIELDS.length - 1) {
-      methods.handleSubmit((data) => {
-      console.log("CHECKOUT OK", data);
-    });
-    } else {
-      setStep((s) => s + 1);
+    // PASSO 0: se advertisement = true, faz loading 3s e loga
+    const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
+    if (step === 0) {
+      const wantsAds = methods.getValues('advertisement'); // boolean
+      if (wantsAds) {
+        setLoading(true);
+        await sleep(3000);
+        console.log('Advertisement marcado: iniciando fluxo com delay de 3s.');
+        setLoading(false);
+      }
     }
+
+    if (step === STEP_FIELDS.length - 1) {
+      await methods.handleSubmit((data) => {
+        console.log("CHECKOUT OK", data);
+      })(); // executa
+      return;
+    }
+
+    setStep((s) => s + 1);
   };
 
 
@@ -97,11 +110,13 @@ export default function Payment() {
               <PaymentCardForm/>
             )}
 
-          <MainButton type="button" onClick={handleStep}>
-            {step === STEP_FIELDS.length - 1 ? "Confirmar Pagamento" : "Avançar"}
-          </MainButton>
-
+            <MainButton type="button" onClick={handleStep} loading={loading}>
+              {step === STEP_FIELDS.length - 1 ? "Confirmar Pagamento" : "Avançar"}
+            </MainButton>
           </form>
+
+          <SecureTxt/>
+          
         </FormContainer>
       </FormProvider>
 

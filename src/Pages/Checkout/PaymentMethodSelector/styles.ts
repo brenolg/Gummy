@@ -7,7 +7,7 @@ export const Wrapper = styled.div`
   margin-bottom: 24px;
 `;
 
-export const Option = styled.button<{ $active: boolean }>`
+export const Option =  styled.button.attrs({ type: 'button' })<{ $active: boolean }>`
   display: flex;
   align-items: center;
   gap: 12px;
