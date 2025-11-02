@@ -1,7 +1,7 @@
 import { useCoreData } from '@/context/coreDataContext';
-import { Divider, MInput, Select, } from '../../../components';
+import { Divider, MInput, Select, } from '@/components';
 import PaymentMethodSelector from '../PaymentMethodSelector';
-import { FormTitle, InputContainer, TwoInputContainer } from '../styles';
+import { InputContainer, TwoInputContainer, FormTitle } from '../styles';
 
 export default function PaymentCardForm() {
   const installmentsOptions = Array.from({ length: 12 }, (_, i) => ({ label: `${i+1}x`, value: i+1 }));

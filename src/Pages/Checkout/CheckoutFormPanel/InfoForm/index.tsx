@@ -1,5 +1,6 @@
-import { MInput, Checkbox} from '../../../components'
-import { FormTitle, InputContainer } from '../styles'
+import { MInput, Checkbox} from '@/components'
+import { InputContainer } from '../styles'
+import { FormTitle } from '../styles'
 
 export default function InfoForm() {
   return (

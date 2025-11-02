@@ -1,5 +1,6 @@
-import {MInput} from '../../../components'
-import { FormTitle, InputContainer, TwoInputContainer } from '../styles'
+import {MInput} from '@/components'
+import { InputContainer, TwoInputContainer } from '../styles'
+import { FormTitle } from '../styles'
 
 export default function AddressForm() {
 
