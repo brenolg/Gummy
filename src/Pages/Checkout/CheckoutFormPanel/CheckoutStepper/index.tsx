@@ -24,8 +24,8 @@ export default function CheckoutStepper({ step }: StepperProps) {
       <StepDivider $active={step > 1} />
 
       <StepItem $active={step >= 2}>
-        <StepCircle $active={step === 2}>{step > 2 ? "✔" : "3"}</StepCircle>
-        <StepLabel $active={step === 2}>Pagamento</StepLabel>
+        <StepCircle $active={step >=  2}>{step > 2 ? "✔" : "3"}</StepCircle>
+        <StepLabel $active={step >= 2}>Pagamento</StepLabel>
       </StepItem>
     </StepperWrapper>
   );

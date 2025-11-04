@@ -12,6 +12,8 @@ import SecureTxt from './SecureTxt';
 import backArow from '@/assets/icons/backArow.svg'
 import { useNavigate } from 'react-router-dom';
 import { BackButton } from './styles'
+import OrderSuccess from './OrderSuccess';
+import { useCoreData } from '@/context/coreDataContext';
 
 export type CheckoutFormData = {
   /** PASSO 1 — Contato */
@@ -48,6 +50,7 @@ const STEP_FIELDS: Array<(keyof CheckoutFormData)[]> = [
 export default function CheckoutFormPanel() {
   const [step, setStep] = useState(0);
   const [loading, setLoading] = useState(false);
+  const { method } = useCoreData(); 
   const navigate = useNavigate();
 
   const methods = useForm<CheckoutFormData>({
@@ -61,29 +64,50 @@ export default function CheckoutFormPanel() {
     reValidateMode: 'onChange'
   });
 
+  const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
   const handleStep = async () => {
-    const valid = await methods.trigger(STEP_FIELDS[step], { shouldFocus: true });
-    if (!valid) return;
+    // passos 0–2: validar apenas os campos do passo atual
+    if (step <= 2) {
+      const valid = await methods.trigger(STEP_FIELDS[step], { shouldFocus: true });
+      if (!valid) return;
 
-    // PASSO 0: se advertisement = true, faz loading 3s e loga
-    const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
-    if (step === 0) {
-      const wantsAds = methods.getValues('advertisement');
-      if (wantsAds) {
+      if (step === 0 && methods.getValues('advertisement')) {
         setLoading(true);
         await sleep(3000);
-        console.log('Advertisement marcado: iniciando fluxo com delay de 3s.');
+        console.log('Advertisement marcado: delay simulado de 3s.');
         setLoading(false);
       }
-    }
-    if (step === STEP_FIELDS.length - 1) {
-      await methods.handleSubmit((data) => {
-        console.log("CHECKOUT OK", data);
-      })(); // executa
+
+      if (step === 2) {
+        // submit dos dados do checkout
+        await methods.handleSubmit((data) => {
+          console.log("CHECKOUT OK", data);
+          // após o submit, decide o próximo step:
+          if (method === 'pix') {
+            // vai para o QR Code
+            setStep(3);
+          } else {
+            // cartão: já mostra success
+            setStep(3);
+          }
+        })();
+        return;
+      }
+
+      setStep((s) => s + 1);
       return;
     }
 
-    setStep((s) => s + 1);
+    // step 3:
+    if (step === 3) {
+      if (method === 'pix') {
+        // usuário clicou "Já paguei" → mostrar sucesso
+        setStep(4);
+      } else {
+        // cartão: já está no sucesso; botão pode ficar escondido
+      }
+      return;
+    }
   };
 
   return (
@@ -116,6 +140,9 @@ export default function CheckoutFormPanel() {
             )}
             {step === 2 && (
               <PaymentCardForm/>
+            )}
+            {step === 3 && (
+              <OrderSuccess/>
             )}
 
             <MainButton type="button" onClick={handleStep} loading={loading}>

@@ -3,5 +3,6 @@ import styled from "styled-components";
 export const CartContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 14px
+  gap: 14px;
+  margin-bottom: 21px;
 `

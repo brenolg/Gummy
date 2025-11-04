@@ -1,5 +1,6 @@
 import React from "react";
 import { ImageContainer, Info, QuantityBadge, Title, Wrapper, Price , SubTitle } from "./styles";
+import { QuantitySelector } from "./QuantitySelector";
 
 
 interface ProductCartItemProps {
@@ -8,6 +9,7 @@ interface ProductCartItemProps {
   subtitle: string;
   quantity: number;
   unitPrice: number;
+  id: number
 }
 
 export const ProductCartItem: React.FC<ProductCartItemProps> = ({
@@ -15,7 +17,8 @@ export const ProductCartItem: React.FC<ProductCartItemProps> = ({
   title,
   subtitle,
   quantity,
-  unitPrice
+  unitPrice,
+  id
 }) => {
   const total = quantity * unitPrice;
 
@@ -28,8 +31,11 @@ export const ProductCartItem: React.FC<ProductCartItemProps> = ({
         <Title>{title}</Title>
         <SubTitle>{subtitle}</SubTitle>
       </Info>
-
-      <Price>{total.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}</Price>
+      
+      <div>
+        <Price>{total.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}</Price>
+        <QuantitySelector productId={id} />
+      </div>
     </Wrapper>
   );
 };
