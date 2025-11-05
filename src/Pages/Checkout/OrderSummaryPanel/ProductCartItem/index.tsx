@@ -1,6 +1,7 @@
 import React from "react";
 import { ImageContainer, Info, QuantityBadge, Title, Wrapper, Price , SubTitle } from "./styles";
 import { QuantitySelector } from "./QuantitySelector";
+import { useCoreData } from "@/context/coreDataContext";
 
 
 interface ProductCartItemProps {
@@ -21,6 +22,8 @@ export const ProductCartItem: React.FC<ProductCartItemProps> = ({
   id
 }) => {
   const total = quantity * unitPrice;
+  const { formStep } = useCoreData();
+  const showInput = formStep !== "qrcode" && formStep !== "success";
 
   return (
     <Wrapper>
@@ -34,7 +37,7 @@ export const ProductCartItem: React.FC<ProductCartItemProps> = ({
       
       <div>
         <Price>{total.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}</Price>
-        <QuantitySelector productId={id} />
+        {showInput && <QuantitySelector productId={id} />}
       </div>
     </Wrapper>
   );

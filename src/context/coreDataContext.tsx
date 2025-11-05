@@ -16,6 +16,8 @@ export type Coupon = {
   discount: number; // ex: 10 => 10%
 };
 
+export type FormStep = 0 | 1 | 2 | "qrcode" | "success";
+
 type CoreDataContextProps = {
   method: PaymentMethod;
   setMethod: (m: PaymentMethod) => void;
@@ -26,6 +28,9 @@ type CoreDataContextProps = {
   
   coupons: Coupon[];
   setCoupons: React.Dispatch<React.SetStateAction<Coupon[]>>;
+
+  formStep: FormStep;
+  setFormStep: React.Dispatch<React.SetStateAction<FormStep>>;
 };
 
 export const CoreDataContext = createContext<CoreDataContextProps | undefined>(undefined);

@@ -1,31 +1,36 @@
+import { useCoreData, type FormStep } from "@/context/coreDataContext.tsx";
 import { StepCircle, StepDivider, StepItem, StepLabel, StepperWrapper } from "./styles.ts";
 
-type StepperProps = {
-  step: number; // 0, 1, 2
-};
+const toIndex = (s: FormStep): 0 | 1 | 2 | 3 => (typeof s === "number" ? s : 3);
 
-export default function CheckoutStepper({ step }: StepperProps) {
+export default function CheckoutStepper() {
+  const { formStep } = useCoreData();
+  const idx = toIndex(formStep); // 0..3
+
+
+
   return (
     <StepperWrapper>
-      <StepItem $active={step >= 0}>
-        <StepCircle $active={step === 0 || step > 0}>
-          {step >= 0 ? "✔" : "1"}
-        </StepCircle>
-        <StepLabel $active={step === 0}>Informações</StepLabel>
+      {/* Step 0 - Informações */}
+      <StepItem $active={idx >= 0} role="button" tabIndex={0}>
+        <StepCircle $active={idx >= 0}>{idx > 0 ? "✔" : "1"}</StepCircle>
+        <StepLabel $active={idx === 0}>Informações</StepLabel>
       </StepItem>
 
-      <StepDivider $active={step > 0} />
+      <StepDivider $active={idx > 0} />
 
-      <StepItem $active={step >= 1}>
-        <StepCircle $active={step === 1 || step > 1}>{step > 1 ? "✔" : "2"}</StepCircle>
-        <StepLabel $active={step === 1}>Endereço</StepLabel>
+      {/* Step 1 - Endereço */}
+      <StepItem $active={idx >= 1}  role="button" tabIndex={0}>
+        <StepCircle $active={idx >= 1}>{idx > 1 ? "✔" : "2"}</StepCircle>
+        <StepLabel $active={idx === 1}>Endereço</StepLabel>
       </StepItem>
 
-      <StepDivider $active={step > 1} />
+      <StepDivider $active={idx > 1} />
 
-      <StepItem $active={step >= 2}>
-        <StepCircle $active={step >=  2}>{step > 2 ? "✔" : "3"}</StepCircle>
-        <StepLabel $active={step >= 2}>Pagamento</StepLabel>
+      {/* Step 2 - Pagamento */}
+      <StepItem $active={idx >= 2} role="button" tabIndex={0}>
+        <StepCircle $active={idx >= 2}>{idx > 2 ? "✔" : "3"}</StepCircle>
+        <StepLabel $active={idx === 2}>Pagamento</StepLabel>
       </StepItem>
     </StepperWrapper>
   );
