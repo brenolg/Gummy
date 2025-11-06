@@ -4,16 +4,16 @@ import PixIcon from "./PixIcon"; // se quiser, te ajudo a criar esse também
 import { useCoreData } from "@/context/coreDataContext";
 
 export default function PaymentMethodSelector() {
-  const { method, setMethod } = useCoreData();
+  const { paymentMethod, setPaymentMethod } = useCoreData();
 
   return (
     <Wrapper>
-      <Option $active={method === "card"} onClick={() => setMethod("card")}>
+      <Option $active={paymentMethod === "CREDIT_CARD"} onClick={() => setPaymentMethod("CREDIT_CARD")}>
         <CreditCardIcon />
         <span>Cartão de crédito</span>
       </Option>
 
-      <Option $active={method === "pix"} onClick={() => setMethod("pix")}>
+      <Option $active={paymentMethod === "PIX"} onClick={() => setPaymentMethod("PIX")}>
         <PixIcon />
         <span>PIX</span>
       </Option>

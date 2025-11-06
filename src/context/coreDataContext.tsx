@@ -1,9 +1,9 @@
 import { createContext, useContext } from "react";
 
-export type PaymentMethod = "card" | "pix";
+export type PaymentMethod = "CREDIT_CARD" | "PIX";
 
 export type CartItem = {
-  id: number;
+  productId: string;
   image: string;
   title: string;
   subtitle: string;
@@ -19,8 +19,8 @@ export type Coupon = {
 export type FormStep = 0 | 1 | 2 | "qrcode" | "success";
 
 type CoreDataContextProps = {
-  method: PaymentMethod;
-  setMethod: (m: PaymentMethod) => void;
+  paymentMethod: PaymentMethod;
+  setPaymentMethod: (m: PaymentMethod) => void;
 
   cart: CartItem[];
   setCart: React.Dispatch<React.SetStateAction<CartItem[]>>; 

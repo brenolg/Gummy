@@ -4,17 +4,17 @@ import * as yup from 'yup';
 export const schemaStep1 = yup.object({
   name: yup.string().required('Nome é obrigatório'),
   email: yup.string().required('E-mail é obrigatório'),
-  cell: yup.string().required('Celular é obrigatório'),
+  phone: yup.string().required('Celular é obrigatório'),
   advertisement: yup.boolean(),
 });
 
 // schemaStep2.ts
 export const schemaStep2 = yup.object({
-  zipCode: yup.string().required('CEP é obrigatório'),
+  postalCode: yup.string().required('CEP é obrigatório'),
   address: yup.string().required('Endereço é obrigatório'),
   district: yup.string().required('Bairro é obrigatório'),
-  complement: yup.string(),
-  number: yup.string().required('Número é obrigatório'),
+  addressComplement: yup.string().required('Comple'),
+  addressNumber: yup.string().required('Número é obrigatório'),
   city: yup.string().required('Cidade é obrigatória'),
   state: yup.string().required('UF é obrigatória'),
 });

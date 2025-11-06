@@ -4,7 +4,7 @@ import trio from '@/assets/imgs/trioGummy.png';
 
 const mockCartItems: CartItem[] = [
   {
-    id: 1,
+    productId: 'powergum-kit-3',
     image: trio,
     title: "Trio Power Gummy® - 90 gomas",
     subtitle: "Frutas vermelhas - 3 frascos",
@@ -12,9 +12,9 @@ const mockCartItems: CartItem[] = [
     unitPrice: 100
   },
   {
-    id: 2,
+    productId: 'powergum-1',
     image: trio,
-    title: "Trio Power Gummy® - 90 gomas",
+    title: "ONE® - 90 gomas",
     subtitle: "Frutas vermelhas - 3 frascos",
     quantity: 2,
     unitPrice: 100
@@ -22,13 +22,13 @@ const mockCartItems: CartItem[] = [
 ];
 
 export default function CoreDataProvider({ children }: { children: ReactNode }) {
-  const [method, setMethod] = useState<PaymentMethod>("card");
+  const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>("CREDIT_CARD");
   const [cart, setCart] = useState<CartItem[]>(mockCartItems);
   const [coupons, setCoupons] = useState<Coupon[]>([]);
   const [formStep, setFormStep] = useState<FormStep>(0);     
 
   return (
-    <CoreDataContext.Provider value={{ method, setMethod, cart, setCart, coupons, setCoupons, formStep, setFormStep }}>
+    <CoreDataContext.Provider value={{ paymentMethod, setPaymentMethod, cart, setCart, coupons, setCoupons, formStep, setFormStep }}>
       {children}
     </CoreDataContext.Provider>
   );

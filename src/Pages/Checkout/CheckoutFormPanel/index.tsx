@@ -23,14 +23,14 @@ export type CheckoutFormData = {
   /** PASSO 1 — Contato */
   name: string;
   email: string;
-  cell: string;
+  phone: string;
   advertisement: boolean;
   /** PASSO 2 — Endereço */
-  zipCode: string;
+  postalCode: string;
   address: string;
   district: string;
-  complement: string;
-  number: string;
+  addressComplement: string;
+  addressNumber: string;
   city: string;
   state: string;
   /** PASSO 3 — Cartão */
@@ -44,24 +44,24 @@ export type CheckoutFormData = {
 // passos numéricos usados para validação campo-a-campo
 const STEP_FIELDS: Array<(keyof CheckoutFormData)[]> = [
   // 0: Info
-  ['name', 'email', 'cell', 'advertisement'],
+  ['name', 'email', 'phone', 'advertisement'],
   // 1: Endereço
-  ['zipCode', 'address', 'district', 'complement', 'number', 'city', 'state'],
+  ['postalCode', 'address', 'district', 'addressComplement', 'addressNumber', 'city', 'state'],
   // 2: Pagamento (cartão)
   ['cardNumber', 'expiry', 'cvv', 'holderName', 'installments'],
 ];
 
 export default function CheckoutFormPanel() {
-  const { formStep, setFormStep, method } = useCoreData();
+  const { formStep, setFormStep, paymentMethod } = useCoreData();
   const [loading, setLoading] = useState(false);
-  const isPix = method === 'pix';
+  const isPix = paymentMethod === 'PIX';
   const navigate = useNavigate();
 
   const methods = useForm<CheckoutFormData>({
     resolver: yupResolver(schemaFull) as Resolver<CheckoutFormData>,
     defaultValues: { 
-      name:'', email:'', cell:'', advertisement:false,
-      zipCode:'', address:'', district:'', complement:'', number:'', city:'', state:'',
+      name:'', email:'', phone:'', advertisement:false,
+      postalCode:'', address:'', district:'', addressComplement:'', addressNumber:'', city:'', state:'',
       cardNumber:'', expiry:'', cvv:'', holderName:'', installments:1,
     },
     mode: 'onBlur',

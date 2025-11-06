@@ -14,14 +14,14 @@ interface DiscountCouponsProps {
 }
 
 export const DiscountCoupons: React.FC<DiscountCouponsProps> = ({ onChange }) => {
-  const { method , coupons, setCoupons } = useCoreData(); 
+  const { paymentMethod , coupons, setCoupons } = useCoreData(); 
   const [code, setCode] = useState("");
 
-  const PIX_COUPON: Coupon = { code: "PIX10", discount: 10 };
+  const PIX_COUPON: Coupon = { code: "PIX05", discount: 5 };
 
   // ✅ Adiciona/remover cupom PIX automaticamente
   useEffect(() => {
-    if (method === "pix") {
+    if (paymentMethod === "PIX") {
       const exists = coupons.some((c) => c.code === PIX_COUPON.code);
       if (!exists) {
         const updated = [...coupons, PIX_COUPON];
@@ -35,7 +35,7 @@ export const DiscountCoupons: React.FC<DiscountCouponsProps> = ({ onChange }) =>
         onChange?.(updated);
       }
     }
-  }, [method]);
+  }, [paymentMethod]);
 
   function handleApply() {
     if (!code.trim()) return;

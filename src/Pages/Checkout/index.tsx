@@ -6,7 +6,7 @@ export type CheckoutFormData = {
   /** PASSO 1 — Contato */
   name: string;
   email: string;
-  cell: string;
+  phone: string;
   advertisement: boolean;
 
   /** PASSO 2 — Endereço */

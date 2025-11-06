@@ -5,7 +5,7 @@ import { InputContainer, TwoInputContainer, FormTitle } from '../styles';
 
 export default function PaymentCardForm() {
   const installmentsOptions = Array.from({ length: 12 }, (_, i) => ({ label: `${i+1}x`, value: i+1 }));
-  const { method } = useCoreData();
+  const { paymentMethod} = useCoreData();
 
   return (
     <InputContainer>
@@ -13,7 +13,7 @@ export default function PaymentCardForm() {
       <PaymentMethodSelector/>
       <Divider mb={24}/>
 
-      {method === 'card' ? 
+      {paymentMethod === 'CREDIT_CARD' ? 
         <>
           <MInput name="cardNumber" type="card"   placeholder="Número do Cartão" hasAsterisk mb={16}/>
           <TwoInputContainer>

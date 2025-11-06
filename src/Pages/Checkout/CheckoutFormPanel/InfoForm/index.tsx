@@ -8,7 +8,7 @@ export default function InfoForm() {
       <FormTitle>Contato</FormTitle>
       <MInput name="name"  type="text" placeholder="Nome" hasAsterisk mb={16} />
       <MInput name="email" type="text" placeholder="Email"  hasAsterisk mb={16}/>
-      <MInput name="cell"  type="cell" placeholder="Celular" hasAsterisk mb={24}/>
+      <MInput name="phone"  type="phone" placeholder="Celular" hasAsterisk mb={24}/>
       <Checkbox name="advertisement" label="Enviar novidades e promoções" />
     </InputContainer>
   )
