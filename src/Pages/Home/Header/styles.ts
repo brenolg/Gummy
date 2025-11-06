@@ -92,7 +92,7 @@ export const CartButton = styled.button`
     color: ${({ theme }) => theme.colors.roxo0};
     text-align: center;
     font-family: Poppins;
-    font-size: 18px;
+    font-size: 16px;
     font-style: normal;
     font-weight: 600;
     line-height: normal;
