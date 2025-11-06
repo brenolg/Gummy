@@ -9,7 +9,11 @@ const mockCartItems: CartItem[] = [
     title: "Trio Power Gummy® - 90 gomas",
     subtitle: "Frutas vermelhas - 3 frascos",
     quantity: 1,
-    unitPrice: 100
+    unitPrice: 100,
+    peso: 1,
+    altura: 20,
+    largura: 2,
+    profundidade: 3,
   },
   {
     productId: 'powergum-1',
@@ -17,7 +21,11 @@ const mockCartItems: CartItem[] = [
     title: "ONE® - 90 gomas",
     subtitle: "Frutas vermelhas - 3 frascos",
     quantity: 2,
-    unitPrice: 100
+    unitPrice: 100,
+    peso: 1,
+    altura: 20,
+    largura: 2,
+    profundidade: 3,
   }
 ];
 

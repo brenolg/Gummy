@@ -9,6 +9,10 @@ export type CartItem = {
   subtitle: string;
   quantity: number;
   unitPrice: number;
+  peso: number,
+  altura: number,
+  largura: number,
+  profundidade: number
 };
 
 export type Coupon = {
