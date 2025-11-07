@@ -52,6 +52,11 @@ const Rail = styled.div`
   position: relative; overflow: hidden; 
   margin-left: 120px;
   margin-right: 119px;
+  cursor: grab;
+
+  &.dragging {
+    cursor: grabbing;
+  }
 `;
 
 const Track = styled.div<{ $index: number }>`
@@ -89,6 +94,10 @@ const Card = styled.div`
       font-weight: 700;
       line-height: normal;
     }
+    .dots {
+      display: flex;
+      align-items: center;
+    }
   }
 `;
 
@@ -98,7 +107,7 @@ const ThumbContainer = styled.article`
   width: 352px;
 `;
 
-const Thumb = styled.a`
+const Thumb = styled.div`
   display: block; aspect-ratio: 352.00/469.08; background: #f0eee9;
   img, video { width: 100%; height: 100%; object-fit: cover; display:block; }
 `;
@@ -147,6 +156,9 @@ export default function InstaFeedCarousel() {
   const perView = usePerView();
   const [items, setItems] = useState<FeedItem[] | null>(null);
   const [index, setIndex] = useState(0);
+  const [isDragging, setIsDragging] = useState(false);
+  const [startX, setStartX] = useState(0);
+
 
   const totalPages = useMemo(() => {
     const total = Math.max(0, (items?.length || 0) - perView);
@@ -180,6 +192,38 @@ export default function InstaFeedCarousel() {
   if (items === null) return null;          
   if (!items.length) return null; 
 
+  function handleMouseDown(e: React.MouseEvent) {
+    setIsDragging(true);
+    setStartX(e.clientX);
+  }
+
+  function handleMouseMove(e: React.MouseEvent) {
+    if (!isDragging) return;
+
+    const diff = e.clientX - startX;
+    const cardWidth = 352 + 40;
+
+    if (Math.abs(diff) > cardWidth / 3) {
+      if (diff < 0 && index < totalPages) {
+        setIndex(idx => idx + 1);
+        setStartX(e.clientX);
+      }
+
+      if (diff > 0 && index > 0) {
+        setIndex(idx => idx - 1);
+        setStartX(e.clientX);
+      }
+    }
+  }
+
+  function handleMouseUp() {
+    setIsDragging(false);
+  }
+
+  function handleMouseLeave() {
+    setIsDragging(false);
+  }
+
   return (
     <Section>
       <Header>
@@ -202,7 +246,13 @@ export default function InstaFeedCarousel() {
         </Controls>
       </Header>
 
-      <Rail>
+      <Rail
+      className={isDragging ? "dragging" : ""}
+      onMouseDown={handleMouseDown}
+      onMouseMove={handleMouseMove}
+      onMouseUp={handleMouseUp}
+      onMouseLeave={handleMouseLeave}
+      >
         <Track $index={index}>
           {items.map((p) => (
             <Card key={p.id} >
@@ -211,15 +261,19 @@ export default function InstaFeedCarousel() {
                   <img className="logo" src={logoRound }/>
                   <p className="txt">powergummybr</p>
                 </div>
-                <img className="dots" src={dots}/>
+                <a className="dots" href={p.permalink} target="_blank" aria-label="Abrir no Instagram">
+                  <img src={dots}/>
+                </a>
 
               </div>
               <ThumbContainer >
-                <Thumb href={p.permalink} target="_blank" aria-label="Abrir no Instagram">
+                <Thumb >
                   {(p.media_type === "IMAGE" || p.media_type === "CAROUSEL_ALBUM") ? (
                       <img
                         src={p.thumbnail_url || p.media_url}
                         alt={p.caption || 'Post do Instagram'}
+                        draggable={false}                
+                        onDragStart={(e) => e.preventDefault()}
                       />
                     ) : (
                       <video
@@ -227,6 +281,8 @@ export default function InstaFeedCarousel() {
                         playsInline
                         preload="metadata"
                         poster={p.thumbnail_url || p.media_url}
+                        draggable={false}               
+                        onDragStart={(e) => e.preventDefault()}
                       >
                         <source src={p.media_url} />
                       </video>
