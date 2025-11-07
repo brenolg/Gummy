@@ -41,6 +41,7 @@ export default function InstaFeedCarousel() {
   const [index, setIndex] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
   const [startX, setStartX] = useState(0);
+  const [moved, setMoved] = useState(false);
 
   const totalPages = useMemo(() => {
     const total = Math.max(0, (items?.length || 0) - perView);
@@ -76,27 +77,30 @@ export default function InstaFeedCarousel() {
 
   function handleMouseDown(e: React.MouseEvent) {
     setIsDragging(true);
+    setMoved(false); 
     setStartX(e.clientX);
   }
 
-  function handleMouseMove(e: React.MouseEvent) {
-    if (!isDragging) return;
+ function handleMouseMove(e: React.MouseEvent) {
+  if (!isDragging) return;
 
-    const diff = e.clientX - startX;
-    const cardWidth = 352 + 40;
+  const diff = e.clientX - startX;
+  if (Math.abs(diff) > 5) setMoved(true);   // 👈 limiar de movimento
 
-    if (Math.abs(diff) > cardWidth / 3) {
-      if (diff < 0 && index < totalPages) {
-        setIndex(idx => idx + 1);
-        setStartX(e.clientX);
-      }
+  const cardWidth = 352 + 40;
 
-      if (diff > 0 && index > 0) {
-        setIndex(idx => idx - 1);
-        setStartX(e.clientX);
-      }
+  if (Math.abs(diff) > cardWidth / 3) {
+    if (diff < 0 && index < totalPages) {
+      setIndex(idx => idx + 1);
+      setStartX(e.clientX);
+    }
+
+    if (diff > 0 && index > 0) {
+      setIndex(idx => idx - 1);
+      setStartX(e.clientX);
     }
   }
+}
 
   function handleMouseUp() {
     setIsDragging(false);
@@ -137,19 +141,33 @@ export default function InstaFeedCarousel() {
       >
         <Track $index={index}>
           {items.map((p) => (
-            <Card key={p.id} >
+            <Card key={p.id}   
+              onClickCapture={(e) => {
+                if (moved) {
+                  e.preventDefault();
+                  e.stopPropagation();
+                }
+              }}
+            >
               <div className="cardHeader">
                 <div className="fistContainer">
                   <img className="logo" src={logoRound }/>
                   <p className="txt">powergummybr</p>
                 </div>
                 <a className="dots" href={p.permalink} target="_blank" aria-label="Abrir no Instagram">
-                  <img src={dots}/>
+                  <img src={dots}  onClickCapture={(e) => moved && e.preventDefault()}/>
                 </a>
 
               </div>
               <ThumbContainer >
-                <Thumb >
+                <Thumb
+                  onClickCapture={(e) => {
+                    if (moved) {
+                      e.preventDefault();
+                      e.stopPropagation();
+                    }
+                  }} 
+                >
                   {(p.media_type === "IMAGE" || p.media_type === "CAROUSEL_ALBUM") ? (
                       <img
                         src={p.thumbnail_url || p.media_url}
