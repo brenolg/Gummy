@@ -81,7 +81,7 @@ export default function InstaFeedCarousel() {
     setStartX(e.clientX);
   }
 
- function handleMouseMove(e: React.MouseEvent) {
+  function handleMouseMove(e: React.MouseEvent) {
   if (!isDragging) return;
 
   const diff = e.clientX - startX;

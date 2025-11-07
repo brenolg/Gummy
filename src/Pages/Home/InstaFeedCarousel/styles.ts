@@ -44,9 +44,6 @@ export const Title = styled.h3`
 export const Rail = styled.div`
   position: relative; overflow: hidden; 
   margin-left: 120px;
-  margin-right: 119px;
-  cursor: grab;
-
   &.dragging {
     cursor: grabbing;
   }
