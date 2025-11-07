@@ -11,8 +11,8 @@ export default function Home() {
     <div>
       <Header/>
       <FirstBanner src={banner1 }/>
-      <InstaFeedCarousel/>
       <InfoCarousel/>
+      <InstaFeedCarousel/>
 
   
       

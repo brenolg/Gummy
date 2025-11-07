@@ -1,48 +1,105 @@
 import { useEffect, useMemo, useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
+import goldenInstaLogo from '@/assets/icons/goldenInstaLogo.svg'
+import instaTxt from '@/assets/icons/instaTxt.svg'
+import goldenArow from '@/assets/icons/goldenArrow.svg'
+import dots from "@/assets/icons/dots.svg"
+import logoRound from '@/assets/icons/logoRound.svg'
 
 const Section = styled.section`
   width: 100%;
-  background: #faf7f5;
+  background: ${({ theme }) => theme.colors.roxo0};
   border-radius: 20px;
-  padding: 20px 16px 28px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+  padding: 120px 0px 120px 0px;
 `;
 
 const Header = styled.header`
-  display: flex; align-items: center; gap: 12px; margin-bottom: 16px;
+  padding-right: 120px;
+  padding-left: 120px;
+  margin-bottom: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  .titleContainer {
+    display: flex;
+    align-items: center;
+  }
 `;
 
-const IgLogo = styled.span`
-  display: inline-flex; width: 28px; height: 28px; border-radius: 50%;
-  background: radial-gradient(circle at 30% 30%, #ffdc80, #f77737, #c13584 60%, #5851db);
+const GoldenLogo = styled.img`
+  width: 48px;
+  height: 48px;
+  margin-right: 27px;
+`;
+
+const InstaTxt= styled.img`
+  width: 148.105px;
+  height: 42px;
 `;
 
 const Title = styled.h3`
-  margin: 0; font-size: 18px; font-weight: 800; color: #1e1b16;
-  display: flex; gap: 8px; align-items: center;
-  span.handle { color: #7a6d5f; font-weight: 700; }
+  color: #151D53;
+  font-family: Montserrat;
+  font-size: 28.993px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  padding-bottom: 7px;
 `;
 
 const Rail = styled.div`
-  position: relative; overflow: hidden; border: 2px solid #e9e2da; border-radius: 14px;
+  position: relative; overflow: hidden; 
+  margin-left: 120px;
+  margin-right: 119px;
 `;
 
 const Track = styled.div<{ $index: number }>`
-  display: grid; grid-auto-flow: column; grid-auto-columns: var(--cardW);
-  gap: 16px; padding: 16px;
+  display: grid; grid-auto-flow: column; 
+  gap: 40px;
   transition: transform .5s cubic-bezier(.2,.8,.2,1);
-  transform: translateX(${p => `calc(${p.$index} * (var(--cardW) + 16px) * -1)`});
+  transform: translateX(${p => `calc(${p.$index} * (352px + 40px) * -1)`});
 `;
 
-const Card = styled.article<{ $active?: boolean }>`
-  position: relative; background: #ffffff; border-radius: 16px; overflow: hidden;
-  box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+const Card = styled.div`
+  border-radius: 7px;
+  border: 1px solid #D6D6D6;
+  width: 352px;               
+  box-sizing: border-box; 
+  background: #FFF;
+  .cardHeader {
+    padding: 16px 0;
+    padding-left: 16px;
+    padding-right: 16px;
+    display: flex;
+    justify-content: space-between;
+    .fistContainer {
+      display: flex;
+    }
+    .logo {
+      width: 35px;
+      height: 35px;
+      margin-right: 11px;
+    }
+    .txt {
+      color: #000;
+      font-family: 'Roboto';
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: normal;
+    }
+  }
+`;
+
+const ThumbContainer = styled.article`
+  position: relative; background: #ffffff; border-bottom-right-radius: 7px; border-bottom-left-radius: 7px; overflow: hidden;
+  height: 469.083px;
+  width: 352px;
 `;
 
 const Thumb = styled.a`
-  display: block; aspect-ratio: 1 / 1; background: #f0eee9;
+  display: block; aspect-ratio: 352.00/469.08; background: #f0eee9;
   img, video { width: 100%; height: 100%; object-fit: cover; display:block; }
 `;
 
@@ -51,10 +108,10 @@ const Controls = styled.div`
 `;
 
 const IconBtn = styled.button`
-  all: unset; cursor: pointer; width: 36px; height: 36px; border-radius: 10px;
-  display: grid; place-items: center; background: #ffffff; border: 1px solid #e9e2da;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.06);
   &:disabled { opacity: .4; cursor: not-allowed; }
+  .prev {
+    transform: rotate(180deg);
+  }
 `;
 
 
@@ -77,7 +134,6 @@ function usePerView() {
       if (w < 540) setPer(1);
       else if (w < 920) setPer(2);
       else setPer(3);
-      document.documentElement.style.setProperty("--cardW", w < 540 ? "88vw" : w < 920 ? "44vw" : "280px");
     };
     onResize();
     window.addEventListener("resize", onResize);
@@ -98,7 +154,6 @@ export default function InstaFeedCarousel() {
   }, [items, perView]);
 
   useEffect(() => {
-    let active = true;
     (async () => {
       try {
           const token = import.meta.env.VITE_INSTA_TOKEN as string;
@@ -106,7 +161,7 @@ export default function InstaFeedCarousel() {
           const fields = "id,media_url,media_type,permalink,thumbnail_url,timestamp,caption";
           const url = `https://graph.instagram.com/me/media?fields=${fields}&access_token=${token}`;
           const { data } = await axios.get(url);
-          if (!active) return;
+    
           setItems(data?.data ?? []);
         
       }  catch (e: unknown)  {
@@ -114,7 +169,7 @@ export default function InstaFeedCarousel() {
         setItems([]);
       }
     })();
-    return () => { active = false; };
+  
   }, []);
 
   useEffect(() => { setIndex(0); }, [perView]);
@@ -128,17 +183,21 @@ export default function InstaFeedCarousel() {
   return (
     <Section>
       <Header>
-        <IgLogo />
+        <div className="titleContainer">
+        <GoldenLogo src={goldenInstaLogo}/>
+        <InstaTxt src={instaTxt}/>
         <Title>
-          Instagram <span className="handle">@xx</span>
+          @powergummybr
         </Title>
-        
+        </div>
+
         <Controls>
           <IconBtn onClick={() => setIndex(i => Math.max(0, i - 1))} disabled={!canPrev} aria-label="Anterior">
-            ◀
+            <img src={goldenArow } className="prev"/>
           </IconBtn>
-          <IconBtn onClick={() => setIndex(i => Math.min(totalPages, i + 1))} disabled={!canNext} aria-label="Próximo">
-            ▶
+          <IconBtn onClick={() => setIndex(i => Math.min(totalPages, i + 1))} disabled={!canNext} aria-label="Próximo"
+            >
+            <img src={goldenArow }/>
           </IconBtn>
         </Controls>
       </Header>
@@ -147,15 +206,33 @@ export default function InstaFeedCarousel() {
         <Track $index={index}>
           {items.map((p) => (
             <Card key={p.id} >
-              <Thumb href={p.permalink} target="_blank" aria-label="Abrir no Instagram">
-                {p.media_type === "IMAGE" ? (
-                  <img src={p.media_url} alt={p.caption || 'Post do Instagram'} />
-                ) : (
-                  <video controls>
-                    <source src={p.media_url} />
-                  </video>
-                )}
-              </Thumb>
+              <div className="cardHeader">
+                <div className="fistContainer">
+                  <img className="logo" src={logoRound }/>
+                  <p className="txt">powergummybr</p>
+                </div>
+                <img className="dots" src={dots}/>
+
+              </div>
+              <ThumbContainer >
+                <Thumb href={p.permalink} target="_blank" aria-label="Abrir no Instagram">
+                  {(p.media_type === "IMAGE" || p.media_type === "CAROUSEL_ALBUM") ? (
+                      <img
+                        src={p.thumbnail_url || p.media_url}
+                        alt={p.caption || 'Post do Instagram'}
+                      />
+                    ) : (
+                      <video
+                        controls
+                        playsInline
+                        preload="metadata"
+                        poster={p.thumbnail_url || p.media_url}
+                      >
+                        <source src={p.media_url} />
+                      </video>
+                    )}
+                </Thumb>
+              </ThumbContainer>
             </Card>
           ))}
         </Track>
