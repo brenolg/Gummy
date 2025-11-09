@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 import styled from "styled-components";
 import { useCoreData } from "@/context/coreDataContext";
 
@@ -57,6 +57,25 @@ export default function OrderSummary({ shipping = null, couponMode = "sum" }: Pr
 
   const fmtBRL = (n: number) =>
     n.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+
+  //async function calcularFrete() {
+  //  const body= {
+  //    cep: "65095-290",
+   //   subtotal: 149.9,
+ //     peso: 0.5,
+ //     altura: 10,
+//      largura: 15,
+ //     profundidade: 5,
+ //   };
+//
+  //  const resp = await fetcher(
+  //    "/calculate-shipping",
+  //    "POST",
+  //    { body }
+  //  );
+
+   // console.log(resp);
+ // }
 
   return (
     <Box>

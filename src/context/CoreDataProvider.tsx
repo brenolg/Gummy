@@ -1,6 +1,7 @@
 import { useState, type ReactNode } from "react";
 import { CoreDataContext, type PaymentMethod, type CartItem, type Coupon,  type FormStep } from "./coreDataContext";
-import trio from '@/assets/imgs/trioGummy.png';
+import trio from '@/assets/imgs/trioGummy.svg'
+import one from '@/assets/imgs/oneGummy.svg'
 
 const mockCartItems: CartItem[] = [
   {
@@ -17,7 +18,7 @@ const mockCartItems: CartItem[] = [
   },
   {
     productId: 'powergum-1',
-    image: trio,
+    image: one,
     title: "ONE® - 90 gomas",
     subtitle: "Frutas vermelhas - 3 frascos",
     quantity: 2,

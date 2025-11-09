@@ -1,9 +1,12 @@
+import BuyContainer from "./BuyContainer";
 import Header from "./Header";
 import InfoCarousel from "./InfoCarousel";
 import InstaFeedCarousel from "./InstaFeedCarousel";
-import { FirstBanner } from "./styles";
+import { Banner, FirstBanner } from "./styles";
 import banner1 from '@/assets/imgs/banner1.png'
-
+import formula from '@/assets/imgs/formula.svg'
+import FAQ from "./FAQ";
+import {faqData} from './factory'
 
 export default function Home() {
 
@@ -12,6 +15,9 @@ export default function Home() {
       <Header/>
       <FirstBanner src={banner1 }/>
       <InfoCarousel/>
+      <FAQ items={ faqData } contactCtaHref="/contato" />
+      <Banner src={formula }/>
+      <BuyContainer/>
       <InstaFeedCarousel/>
 
   

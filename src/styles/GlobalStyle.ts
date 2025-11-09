@@ -21,6 +21,9 @@ export const GlobalStyle = createGlobalStyle`
     overflow-x: hidden;
     min-height: 100vh;
   }
+  p {
+    white-space: pre-line;
+  }
   /* MEDIA ELEMENTS */
   img, picture, video, canvas, svg {
     display: block;
