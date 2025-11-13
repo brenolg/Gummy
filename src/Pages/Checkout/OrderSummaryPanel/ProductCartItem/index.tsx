@@ -10,7 +10,7 @@ interface ProductCartItemProps {
   subtitle: string;
   quantity: number;
   unitPrice: number;
-  id: number
+  productId: string
 }
 
 export const ProductCartItem: React.FC<ProductCartItemProps> = ({
@@ -19,7 +19,7 @@ export const ProductCartItem: React.FC<ProductCartItemProps> = ({
   subtitle,
   quantity,
   unitPrice,
-  id
+  productId
 }) => {
   const total = quantity * unitPrice;
   const { formStep } = useCoreData();
@@ -37,7 +37,7 @@ export const ProductCartItem: React.FC<ProductCartItemProps> = ({
       
       <div>
         <Price>{total.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}</Price>
-        {showInput && <QuantitySelector productId={id} />}
+        {showInput && <QuantitySelector productId={productId} />}
       </div>
     </Wrapper>
   );

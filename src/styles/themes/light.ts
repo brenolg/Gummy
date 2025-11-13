@@ -13,6 +13,7 @@ export const lightTheme = {
     roxo25: '#EBD7F5',
     roxo0: '#FDFBFE',
     dourado200: '#BA7E1B',
+    dourado100: '#FAE4C1',
   },
   typography: {
     input: css`

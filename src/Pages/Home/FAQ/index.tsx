@@ -3,8 +3,6 @@ import instaIcon from '@/assets/icons/whatsappW.svg'
 import { AsideCard, ContactBtn, Panel, Wrapper } from "./styles";
 import AccordionRow from "./AccordionRow";
 
-
-
 type FaqItem = { id?: string; question: string; answer: React.ReactNode };
 
 interface FAQProps {

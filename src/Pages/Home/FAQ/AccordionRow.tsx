@@ -16,7 +16,11 @@ const Header = styled.button<{ $open: boolean }>`
   background: transparent;
   border: 0;
   outline: 0;
-  color: ${({ theme }) => theme.colors.roxo0};
+  color: ${({ $open, theme }) =>
+    $open
+      ? theme.colors.dourado100   // quando aberto
+      : theme.colors.roxo0        // quando fechado
+  };
   font-family: Montserrat;
   font-size: 24px;
   font-style: normal;

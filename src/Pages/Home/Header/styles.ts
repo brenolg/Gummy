@@ -80,28 +80,3 @@ export const BuyButton = styled.button`
     opacity: 0.9;
   }
 `;
-
-export const CartButton = styled.button`
-  background: transparent;
-  border: none;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-
-  span {
-    color: ${({ theme }) => theme.colors.roxo0};
-    text-align: center;
-    font-family: Poppins;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: normal;
-    letter-spacing: 0.6px;
-    cursor: pointer;
-  }
-
-  img {
-    width: 30px;
-    height: 31px;
-  }
-`;
