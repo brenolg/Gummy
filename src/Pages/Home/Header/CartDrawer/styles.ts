@@ -49,15 +49,14 @@ export const Header = styled.div`
   align-items: flex-start;
   gap: 8px;
   align-self: stretch;
-  border-bottom: 1px solid var(--Roxo-200, #B575D6);
+  border-bottom: 1px solid ${({ theme }) => theme.colors.roxo200};
   p {
-    color: var(--Roxo-900, #2C1830);
+    color: ${({ theme }) => theme.colors.roxo900};
     font-family: "Nunito Sans";
     font-size: 24px;
     font-style: normal;
     font-weight: 500;
     line-height: 24px; /* 100% */
-    color: var(--Roxo-900, #2C1830);
   }
   span {
     font-weight: 700;
@@ -81,14 +80,14 @@ export const ShippingContainer = styled.div`
   align-items: center;
   gap: 16px;
   align-self: stretch;
-  background: var(--Roxo-0, #FDFBFE);
+  background: ${({ theme }) => theme.colors.roxo0};
   margin-bottom: 24px;
   img {
     width: 16px;
     height: 16px;
   }
   p {
-    color: var(--roxo-700, #502665);
+    color: ${({ theme }) => theme.colors.roxo700};
     font-family: "Nunito Sans";
     font-size: 14px;
     font-style: normal;
@@ -138,7 +137,7 @@ export const Item = styled.div`
   }
   .title {
     overflow: hidden;
-    color: var(--Roxo-900, #2C1830);
+    color: ${({ theme }) => theme.colors.roxo900};
     text-overflow: ellipsis;
     font-family: Inter;
     font-size: 20px;
@@ -156,7 +155,7 @@ export const Item = styled.div`
     align-items: center;
   }
   .price {
-    color: var(--Grey-800, #292929);
+    color: ${({ theme }) => theme.colors.neutral.grey800};
     font-family: Inter;
     font-size: 16px;
     font-style: normal;
@@ -198,23 +197,23 @@ export const EBookContainer = styled.div<{ $visible: boolean }>`
   gap: 24px;
   align-self: stretch;
   border-radius: 4px;
-  border: 1px solid var(--Roxo-25, #EBD7F5);
+  border: 1px solid  ${({ theme }) => theme.colors.roxo25};
   background: #FFF;
   .eBookImg {
     width: 104px;
     height: 104px;
   }
   .light {
-    color: var(--Roxo-900, #2C1830);
-    font-family: Inter;
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 120%;
+      color: ${({ theme }) => theme.colors.roxo900};
+      font-family: Inter;
+      font-size: 20px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 120%;
     }
   .strong {
     overflow: hidden;
-    color: var(--Roxo-900, #2C1830);
+    color: ${({ theme }) => theme.colors.roxo900};
     text-overflow: ellipsis;
     white-space: nowrap;
     font-family: Inter;
@@ -226,14 +225,14 @@ export const EBookContainer = styled.div<{ $visible: boolean }>`
 `
 export const Footer = styled.div`
   padding: 32px;
-  border-top: 1px solid var(--Roxo-200, #B575D6);
+  border-top: 1px solid ${({ theme }) => theme.colors.roxo200};
   .totalContainer {
     display: flex;
     justify-content: space-between;
     margin-bottom: 32px;
   }
   .total {
-    color: var(--Roxo-900, #2C1830);
+    color: 1px solid ${({ theme }) => theme.colors.roxo900};
     font-family: Inter;
     font-size: 20px;
     font-style: normal;
@@ -241,7 +240,7 @@ export const Footer = styled.div`
     line-height: 24px; /* 120% */
   }
   strong {
-    color: var(--Roxo-900, #2C1830);
+    color: ${({ theme }) => theme.colors.roxo900};
     text-align: right;
     font-family: Inter;
     font-size: 20px;

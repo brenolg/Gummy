@@ -12,7 +12,7 @@ export const Button = styled.button`
   padding: 8px 12px;
   justify-content: center;
   align-items: center;
-  border: 0.5px solid var(--Grey-400, #A3A3A3);
+  border: 0.5px solid ${({ theme }) => theme.colors.neutral.grey400};
   img {
     width: 16px;
     height: 16px;
@@ -38,8 +38,8 @@ export const Value = styled.div`
   justify-content: center;
   align-items: center;
   gap: 10px;
-  border: 0.5px solid var(--Grey-400, #A3A3A3);
-  color: var(--Roxo-900, #2C1830);
+  border: 0.5px solid ${({ theme }) => theme.colors.neutral.grey400};
+  color: ${({ theme }) => theme.colors.roxo900};
   text-align: center;
   font-family: Inter;
   font-size: 16px;

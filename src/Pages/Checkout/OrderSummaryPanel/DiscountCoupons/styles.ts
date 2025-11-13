@@ -66,10 +66,10 @@ export const Chip = styled.div`
   align-items: center;
   gap: 8px;
   border-radius: 8px;
-  background: var(--Dourado-100, #FAE4C1);
+  background: ${({ theme }) => theme.colors.dourado100};
   height: 40px;
   span {
-    color: var(--dourado-200, #BA7E1B);
+    color: ${({ theme }) => theme.colors.dourado200};
     font-family: Inter;
     font-size: 14px;
     font-style: normal;

@@ -37,16 +37,16 @@ export const AsideCard = styled.aside`
     font-family: Montserrat;
     font-size:  12px;
     font-style: normal;
-    font-weight: var(--font-weight-600, 600);
-    line-height: var(--font-size-16, 16px);
+    font-weight:  600;
+    line-height:  16px;
     margin-bottom: 16px;
   }
   .faqTitle{
     font-family: "Nunito Sans";
     font-size: 40px;
     font-style: normal;
-    font-weight: var(--font-weight-700, 700);
-    line-height: var(--font-size-48, 48px); 
+    font-weight:  700;
+    line-height:  48px; 
     background: ${({ theme }) => `
       linear-gradient(
       103deg,
@@ -71,9 +71,9 @@ export const AsideCard = styled.aside`
     color: ${({ theme }) => `${theme.colors.roxo700}`};
     text-align: center;
     font-family: "Nunito Sans";
-    font-size: var(--font-size-18, 18px);
+    font-size:  18px;
     font-style: normal;
-    font-weight: var(--font-weight-400, 400);
+    font-weight:  400;
     line-height: 120%; /* 21.6px */
     margin-bottom: 64px;
   }
@@ -92,7 +92,7 @@ export const AsideCard = styled.aside`
     padding: 16px 32px 32px 32px;
     flex-direction: column;
     align-items: flex-start;
-    gap: var(--font-size-16, 16px);
+    gap: 16px;
     align-self: stretch;
     border-radius: 24px;
     background: ${({ theme }) => `

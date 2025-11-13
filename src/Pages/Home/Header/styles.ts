@@ -32,7 +32,7 @@ export const Nav = styled.nav`
   padding: 0 17.78px ;
 `;
 
-export const NavItem = styled.a`
+export const NavItem = styled.div`
   display: flex;
   padding: 10px 15px 11px 15px;
   color: ${({ theme }) => theme.colors.roxo0};
@@ -42,7 +42,8 @@ export const NavItem = styled.a`
   font-weight: 300;
   line-height: normal;
   letter-spacing: 0.6px;
-
+  cursor: pointer;
+  transition: all 0.3s;
   &:hover {
     opacity: 0.7;
   }

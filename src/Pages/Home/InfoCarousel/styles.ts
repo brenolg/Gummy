@@ -56,7 +56,7 @@ export const Item = styled.div`
     font-weight: 800;
     line-height: 120%; /* 14.4px */
     letter-spacing: 2.3px;
-    color: var(--roxo-700, #502665);
+    color: 0.5px solid ${({ theme }) => theme.colors.roxo700};
   }
   .light {
     font-weight: 400;
