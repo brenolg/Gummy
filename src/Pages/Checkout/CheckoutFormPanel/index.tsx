@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FormProvider, useForm, type Resolver } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { schemaFull } from './schema';
@@ -52,7 +52,7 @@ const STEP_FIELDS: Array<(keyof CheckoutFormData)[]> = [
 ];
 
 export default function CheckoutFormPanel() {
-  const { formStep, setFormStep, paymentMethod } = useCoreData();
+  const { formStep, setFormStep, paymentMethod, setFormPostalCode } = useCoreData();
   const [loading, setLoading] = useState(false);
   const isPix = paymentMethod === 'PIX';
   const navigate = useNavigate();
@@ -134,6 +134,16 @@ export default function CheckoutFormPanel() {
     return 'Avançar';
   };
 
+  // usa o watch DO useForm (methods), não do useFormContext
+  const postalCode = methods.watch("postalCode");
+
+  useEffect(() => {
+    if (postalCode.length === 9) {
+      setFormPostalCode(postalCode);   // CEP válido -> salva no contexto global
+    } else {
+      setFormPostalCode("");           // opcional: limpa quando não tiver completo
+    }
+  }, [postalCode, setFormPostalCode]);
   return (
     <>
       <FormContainer>

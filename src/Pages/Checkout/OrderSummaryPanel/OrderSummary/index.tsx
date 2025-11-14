@@ -1,6 +1,7 @@
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import styled from "styled-components";
 import { useCoreData } from "@/context/coreDataContext";
+import { useFetch } from "@/hooks/useFetch";
 
 type Props = {
   /** Valor do frete; se null/undefined, mostra a dica para digitar o CEP */
@@ -11,6 +12,7 @@ type Props = {
 
 export default function OrderSummary({ shipping = null, couponMode = "sum" }: Props) {
   const { cart, coupons } = useCoreData();
+  const { fetcher } = useFetch();
 
   const {
     itemsCount,
@@ -58,24 +60,31 @@ export default function OrderSummary({ shipping = null, couponMode = "sum" }: Pr
   const fmtBRL = (n: number) =>
     n.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
 
-  //async function calcularFrete() {
-  //  const body= {
-  //    cep: "65095-290",
-   //   subtotal: 149.9,
- //     peso: 0.5,
- //     altura: 10,
-//      largura: 15,
- //     profundidade: 5,
- //   };
-//
-  //  const resp = await fetcher(
-  //    "/calculate-shipping",
-  //    "POST",
-  //    { body }
-  //  );
+  async function calcularFrete() {
+    const body= {
+      cep: "65095-290",
+      subtotal: 149.9,
+      peso: 0.5,
+      altura: 10,
+      largura: 15,
+      profundidade: 5,
+    };
 
-   // console.log(resp);
- // }
+    const resp = await fetcher(
+      "public/calculate-shipping",
+      "POST",
+      { body }
+    );
+
+  console.log(resp);
+  }
+  const { formPostalCode } = useCoreData();
+
+  useEffect(() => {
+    if (formPostalCode.length) {
+      calcularFrete()
+    }
+  }, [ formPostalCode ]);
 
   return (
     <Box>

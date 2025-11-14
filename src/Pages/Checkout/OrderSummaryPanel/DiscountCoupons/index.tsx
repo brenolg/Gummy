@@ -3,6 +3,7 @@ import { Wrapper, Row, Input, ApplyButton, Chips, Chip, Icon, RemoveButton } fro
 import couponIcon from "@/assets/icons/couponIcon.svg";
 import xGolden from "@/assets/icons/xGolden.svg";
 import { useCoreData } from "@/context/coreDataContext";
+import { useFetch } from "@/hooks/useFetch";
 
 type Coupon = {
   code: string;
@@ -16,6 +17,8 @@ interface DiscountCouponsProps {
 export const DiscountCoupons: React.FC<DiscountCouponsProps> = ({ onChange }) => {
   const { paymentMethod , coupons, setCoupons } = useCoreData(); 
   const [code, setCode] = useState("");
+  const [loading, setLoading] = useState(false)
+  const { fetcher } = useFetch();
 
   const PIX_COUPON: Coupon = { code: "PIX05", discount: 5 };
 
@@ -37,8 +40,9 @@ export const DiscountCoupons: React.FC<DiscountCouponsProps> = ({ onChange }) =>
     }
   }, [paymentMethod]);
 
-  function handleApply() {
-    if (!code.trim()) return;
+  async function handleApply() {
+    if (!code.trim() || loading) return;
+
     const normalized = code.trim().toUpperCase();
 
     // evita duplicados
@@ -47,12 +51,34 @@ export const DiscountCoupons: React.FC<DiscountCouponsProps> = ({ onChange }) =>
       return;
     }
 
-    const newCoupon: Coupon = { code: normalized, discount: 5 }; // 👈 ex: cupons manuais dão 5%
-    const updated = [...coupons, newCoupon];
+    try {
+      setLoading(true);
 
-    setCoupons(updated);
-    setCode("");
-    onChange?.(updated);
+      // 👇 resp vem do backend: { code: string, percent: number }
+      const resp = await fetcher<{ code: string; percent: number }>(
+        "/public/validate-coupon",
+        "POST",
+        { body: { code: code } }
+      );
+
+      if (!resp) return;
+
+      const { code: serverCode, percent } = resp;
+
+      const newCoupon: Coupon = {
+        code: serverCode,   // código validado pelo back
+        discount: percent,  // 🔥 percent → discount
+      };
+
+      const updated = [...coupons, newCoupon];
+      setCoupons(updated);
+      onChange?.(updated);
+      setCode("");
+    } catch (err) {
+      console.error("Erro ao validar cupom:", err);
+    } finally {
+      setLoading(false);
+    }
   }
 
   function handleRemove(code: string) {

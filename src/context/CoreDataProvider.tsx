@@ -5,6 +5,7 @@ export default function CoreDataProvider({ children }: { children: ReactNode }) 
   const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>("CREDIT_CARD");
   const [coupons, setCoupons] = useState<Coupon[]>([]);
   const [formStep, setFormStep] = useState<FormStep>(0);
+  const [formPostalCode, setFormPostalCode] = useState("");
 
   const CART_KEY = "powergummy.cart";
   const [cart, setCart] = useState<CartItem[]>(() => {
@@ -22,7 +23,9 @@ export default function CoreDataProvider({ children }: { children: ReactNode }) 
   }, [cart]);
 
   return (
-    <CoreDataContext.Provider value={{ paymentMethod, setPaymentMethod, cart, setCart, coupons, setCoupons, formStep, setFormStep }}>
+    <CoreDataContext.Provider value={
+      { paymentMethod, setPaymentMethod, cart, setCart, coupons, setCoupons, formStep, setFormStep , formPostalCode, setFormPostalCode}
+      }>
       {children}
     </CoreDataContext.Provider>
   );

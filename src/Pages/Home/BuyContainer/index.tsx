@@ -36,7 +36,7 @@ const CATALOG: Record<string, Omit<CartItem, "quantity">> = {
     image: "/src/assets/imgs/oneGummy.svg",
     title: "1 Power Gummy® - 30 gomas",
     subtitle: "Frutas vermelhas - 1 frasco",
-    unitPrice: 109.9,
+    unitPrice: 100,
     peso: 1, altura: 20, largura: 2, profundidade: 3,
   },
   "powergum-kit-3": {
@@ -44,8 +44,8 @@ const CATALOG: Record<string, Omit<CartItem, "quantity">> = {
     image: "/src/assets/imgs/trioGummy.svg",
     title: "Trio Power Gummy® - 90 gomas",
     subtitle: "Frutas vermelhas - 3 frascos",
-    unitPrice: 269.0,
-    peso: 1, altura: 20, largura: 2, profundidade: 3,
+    unitPrice: 300,
+    peso: 3, altura: 20, largura: 2, profundidade: 3,
   },
 };
 

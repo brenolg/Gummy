@@ -35,6 +35,9 @@ type CoreDataContextProps = {
 
   formStep: FormStep;
   setFormStep: React.Dispatch<React.SetStateAction<FormStep>>;
+
+  formPostalCode: string
+  setFormPostalCode: React.Dispatch<React.SetStateAction<string>>;
 };
 
 export const CoreDataContext = createContext<CoreDataContextProps | undefined>(undefined);

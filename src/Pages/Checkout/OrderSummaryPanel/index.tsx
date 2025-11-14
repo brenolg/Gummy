@@ -15,8 +15,8 @@ export default function OrderSummaryPanel() {
       <CartContainer className='cart'>
       {cart.map(item => (
         <ProductCartItem
-          key={item.id}
-          id={item.id}
+          key={item.productId}
+          productId={item.productId}
           image={item.image}
           title={item.title}
           subtitle={item.subtitle}

@@ -20,7 +20,6 @@ const itens = [
 
 export default function InfoCarousel() {
 
-
   return (
     <Bar>
       <Scroller>
