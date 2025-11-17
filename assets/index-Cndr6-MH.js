@@ -1193,9 +1193,9 @@ Nossa equipe está pronta para ajudar você!`}),x.jsxs(NS,{"aria-label":"Entrar 
   border-radius: 16px;
   background: rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
   width: fit-content;
   margin: auto;
-// Perguntar dany sobre blur
 `,t7=q.div`
   color: var(--dourado-200, #BA7E1B);
   text-align: center;
@@ -1222,6 +1222,7 @@ Nossa equipe está pronta para ajudar você!`}),x.jsxs(NS,{"aria-label":"Entrar 
   flex-direction: column;
   gap: 24px;
   margin-top: 60px;
+
 `,lg=q.div`
   display: flex;
   padding: 16px;
@@ -1231,6 +1232,7 @@ Nossa equipe está pronta para ajudar você!`}),x.jsxs(NS,{"aria-label":"Entrar 
   border-radius: 16px;
   background: rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
   align-items: ${({$right:a})=>a?"flex-end":"flex-start"};
 `,sg=q.p`
   color: ${({theme:a})=>a.colors.dourado200};
@@ -1238,7 +1240,7 @@ Nossa equipe está pronta para ajudar você!`}),x.jsxs(NS,{"aria-label":"Entrar 
   font-size: 34px;
   font-style: normal;
   font-weight: 700;
-  line-height: 37.4px; /* 110% */
+  line-height: 37.4px; 
   text-align: ${({$right:a})=>a?"right":"left"};
 `,ug=q.p`
   color: ${({theme:a})=>a.colors.roxo700};
@@ -1258,12 +1260,11 @@ Nossa equipe está pronta para ajudar você!`}),x.jsxs(NS,{"aria-label":"Entrar 
   line-height: 120%; /* 19.2px */
   text-align: ${({$right:a})=>a?"right":"left"};
 `,i7=q.div`
-  position: relative;          /* 👈 AGORA o absolute vai usar este contêiner */
+  position: relative;       
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 16px;
-
   .bottle {
     max-width: 260px;
     width: 100%;
