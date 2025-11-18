@@ -7,7 +7,7 @@ export const Section = styled.section`
   justify-content: center;
   background-image: url(${ingredientsBg});
   background-repeat: no-repeat;
-  background-size: cover;     /* cobre toda área */
+  background-size: cover;     
   background-position: center;
 `;
 

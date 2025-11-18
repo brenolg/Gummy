@@ -9,6 +9,7 @@ import FAQ from "./FAQ";
 import {faqData} from './FAQ/factory'
 import Ingredients from "./Ingredients";
 import Hero from "./Hero";
+import ScienceSection from "./ScienceSection";
 
 export default function Home() {
 
@@ -18,6 +19,7 @@ export default function Home() {
       <FirstBanner src={banner1 }/>
       <InfoCarousel/>
       <Hero/>
+      <ScienceSection/>
       <Ingredients/>
       <FAQ items={ faqData } contactCtaHref="/contato" />
       <Banner src={formula }/>

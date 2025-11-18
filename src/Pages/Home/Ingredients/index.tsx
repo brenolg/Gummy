@@ -7,7 +7,7 @@ import { BannerSubtitle, BannerTitle,  BottleWrapper, BottomNote, Column, Conten
 
 export default function Ingredients() {
   return (
-    <Section>
+    <Section id='ingredients'>
       <Content>
         {/* Banner superior */}
         <TopBanner>
@@ -45,7 +45,6 @@ export default function Ingredients() {
           <Column>
             {rightIngredients.map((ing, i) => (
               <Ingredient key={`right-${i}`} $right>
-                <IngredientTitle $right>{ing.title}</IngredientTitle>
                 <IngredientSubtitle $right>{ing.subtitle }</IngredientSubtitle>
                 <IngredientText $right>{ing.text}</IngredientText>
               </Ingredient>

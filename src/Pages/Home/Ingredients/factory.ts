@@ -20,9 +20,8 @@ const leftIngredients = [
 
 const rightIngredients = [
   {
-    title: "Ácido Pantotênico",
     subtitle: 'Vitamina B5',
-    text: "Apoio à resistência e hidratação de cabelos e unhas.",
+    text: "Oferece hidratação e resistência, deixando os fios mais macios, fortes e com menos quebra.",
   },
   {
     subtitle: "Vitamina B6",

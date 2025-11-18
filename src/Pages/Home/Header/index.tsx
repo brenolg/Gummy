@@ -27,10 +27,10 @@ export default function Header() {
         <Logo src={ logo } alt="Logo" />
 
         <Nav>
-          <Link to="buy" {...defaultScrollProps}>
+          <Link to="science" {...defaultScrollProps}>
             <NavItem >CABELO, PELE & UNHA</NavItem>
           </Link>
-            <Link to="buy" {...defaultScrollProps}>
+            <Link to="ingredients" {...defaultScrollProps}>
           <NavItem>FÓRMULA</NavItem>
           </Link>
           <Link to="buy" {...defaultScrollProps}>

@@ -40,15 +40,14 @@ export default function Hero() {
               <BenefitItem>🍇 Sabor irresistível de frutas vermelhas</BenefitItem>
               <BenefitItem>⚡ Ácido Hialurônico + 8 Vitaminas</BenefitItem>
             </BenefitsList>
-        </LeftContent>
+          </LeftContent>
 
-        <BottleWrapper>
-          <BottleImage src={bottleImg} alt="Power Gummy Cabelo, Pele & Unha" />
-        </BottleWrapper>
+          <BottleWrapper>
+            <BottleImage src={bottleImg} alt="Power Gummy Cabelo, Pele & Unha" />
+          </BottleWrapper>
 
-       
           <FruitsImage $img={fruitsImg}  />
-       
+
         </div>
         <div className="line"/>
       </Card>

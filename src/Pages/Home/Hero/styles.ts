@@ -59,8 +59,6 @@ export const Title = styled.h1`
   }
 `;
 
-
-
 export const BenefitsList = styled.ul`
   margin-top: 16px;
   display: flex;
