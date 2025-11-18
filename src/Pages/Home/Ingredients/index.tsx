@@ -1,5 +1,7 @@
 import bottleImg from "@/assets/imgs/oneGummy.svg"; 
 import bottleImgHover from "@/assets/imgs/trioGummy.svg"
+import seal from "@/assets/imgs/seal.svg"
+
 import { leftIngredients, rightIngredients } from "./factory";
 import { BannerSubtitle, BannerTitle,  BottleWrapper, BottomNote, Column, Content, Ingredient, IngredientSubtitle, IngredientText, IngredientTitle, Main, Section, TopBanner } from "./styles";
 
@@ -35,6 +37,7 @@ export default function Ingredients() {
               <p>
                 Ativos nas doses certas que agem em conjunto para uma combinação equilibrada potencializando os resultados.
               </p>
+              <img src={seal} className="seal"/>
     
             </BottomNote>
           </BottleWrapper>

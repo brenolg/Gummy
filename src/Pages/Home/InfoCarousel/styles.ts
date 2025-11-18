@@ -9,7 +9,7 @@ const loopRight = keyframes`
 export const Bar = styled.div`
   width: 100%;
   overflow: hidden;
-  background: #fff;
+  background: ${({ theme }) => theme.colors.roxo0};
   padding: 24px 0;
   position: relative;
 `;
@@ -56,7 +56,8 @@ export const Item = styled.div`
     font-weight: 800;
     line-height: 120%; /* 14.4px */
     letter-spacing: 2.3px;
-    color: 0.5px solid ${({ theme }) => theme.colors.roxo700};
+    color: ${({ theme }) => theme.colors.roxo700};
+    text-transform: uppercase;
   }
   .light {
     font-weight: 400;

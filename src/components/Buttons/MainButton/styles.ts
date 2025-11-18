@@ -1,23 +1,20 @@
 import styled, { keyframes } from "styled-components";
 
-export const StyledMainButton = styled.button`
+export const StyledMainButton = styled.button<{ $maxW?: number }>`
   border: 1px solid #ECECEC;
   outline: none;
   height: 68px;
   width: 100%;
   border-radius: 16px;
-
-  /* 👇 grid para centralizar e sobrepor filhos */
+  max-width: ${({ $maxW }) => ($maxW ? `${$maxW}px` : "100%")}; 
   display: grid;
   place-items: center;
-
   color: ${({ theme }) => theme.colors.neutral.white0};
   background: linear-gradient(
     90deg,
     ${({ theme }) => theme.colors.roxo700} 0%,
     ${({ theme }) => theme.colors.roxo500} 100%
   );
-
   text-align: center;
   font-family: "Nunito Sans";
   font-size: 19px;

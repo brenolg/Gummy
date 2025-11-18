@@ -26,7 +26,7 @@ export const Input = styled(IMaskInput)<InputBaseProps>`
   border: 1px solid ;
   width: 100%;
   max-width: 100%;
-  border: 1px solid ${t => colors(t).neutral.Grey500};
+  border: 1px solid ${t => colors(t).neutral.grey500};
   box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.05);
   color: ${t => colors(t).neutral.black700};
   background: ${t => colors(t).neutral.white0};

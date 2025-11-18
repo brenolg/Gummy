@@ -8,6 +8,7 @@ import formula from '@/assets/imgs/formula.svg'
 import FAQ from "./FAQ";
 import {faqData} from './FAQ/factory'
 import Ingredients from "./Ingredients";
+import Hero from "./Hero";
 
 export default function Home() {
 
@@ -16,6 +17,7 @@ export default function Home() {
       <Header/>
       <FirstBanner src={banner1 }/>
       <InfoCarousel/>
+      <Hero/>
       <Ingredients/>
       <FAQ items={ faqData } contactCtaHref="/contato" />
       <Banner src={formula }/>

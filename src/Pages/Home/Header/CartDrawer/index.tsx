@@ -30,9 +30,7 @@ export default function CartDrawer() {
   );
 
   function goToCheckout() {
-    if (cartCount > 0) {
     navigate("/checkout");
-    }
   }
 
   function handleDescriptionnTxt(id: string) {

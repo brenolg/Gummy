@@ -1,11 +1,14 @@
 import styled from "styled-components";
+import ingredientsBg from '@/assets/imgs/ingredientsBg.svg'
 
 export const Section = styled.section`
   width: 100%;
   display: flex;
   justify-content: center;
-  background: gray;
-  // Perguntar dany sobre blur
+  background-image: url(${ingredientsBg});
+  background-repeat: no-repeat;
+  background-size: cover;     /* cobre toda área */
+  background-position: center;
 `;
 
 export const Content = styled.div`
@@ -25,9 +28,9 @@ export const TopBanner = styled.div`
   border-radius: 16px;
   background: rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
   width: fit-content;
   margin: auto;
-// Perguntar dany sobre blur
 `;
 
 export const BannerTitle = styled.div`
@@ -41,13 +44,13 @@ export const BannerTitle = styled.div`
 `;
 
 export const BannerSubtitle = styled.div`
-color: var(--roxo-700, #502665);
-text-align: center;
-font-family: "Nunito Sans";
-font-size: 16px;
-font-style: normal;
-font-weight: 400;
-line-height: 120%;
+  color: var(--roxo-700, #502665);
+  text-align: center;
+  font-family: "Nunito Sans";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 120%;
 `;
 
 export const Main = styled.div`
@@ -62,6 +65,7 @@ export const Column = styled.div`
   flex-direction: column;
   gap: 24px;
   margin-top: 60px;
+
 `;
 
 export const Ingredient = styled.div<{ $right?: boolean }>`
@@ -73,6 +77,7 @@ export const Ingredient = styled.div<{ $right?: boolean }>`
   border-radius: 16px;
   background: rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
   align-items: ${({ $right }) => ($right ? "flex-end" : "flex-start")};
 `;
 
@@ -82,7 +87,7 @@ export const IngredientTitle = styled.p<{ $right?: boolean }>`
   font-size: 34px;
   font-style: normal;
   font-weight: 700;
-  line-height: 37.4px; /* 110% */
+  line-height: 37.4px; 
   text-align: ${({ $right }) => ($right ? "right" : "left")};
 `;
 
@@ -108,12 +113,11 @@ export const IngredientText = styled.p<{ $right?: boolean }>`
 `;
 
 export const BottleWrapper = styled.div`
-  position: relative;          /* 👈 AGORA o absolute vai usar este contêiner */
+  position: relative;       
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 16px;
-
   .bottle {
     max-width: 260px;
     width: 100%;
@@ -160,6 +164,7 @@ export const BottomNote = styled.div`
   align-items: center;
   gap: 8px;
   border-radius: 16px;
+  position: relative                     ;
   border: var(--stroke-weight-1, 1px) solid rgba(186, 160, 106, 0.24);
   background: rgba(246, 234, 208, 0.08);
   box-shadow: 0 0 8px 1px rgba(185, 158, 104, 0.24);
@@ -184,5 +189,10 @@ export const BottomNote = styled.div`
     font-style: normal;
     font-weight: 400;
     line-height: 150%; /* 18px */
+  }
+  .seal {
+    position: absolute;
+    bottom:  53px;
+    right: -36px;
   }
 `;

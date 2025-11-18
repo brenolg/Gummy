@@ -61,7 +61,7 @@ export const Box = styled.span<{
         ? '#d61212' // borda vermelha se erro
         : $checked
         ? theme.colors.roxo700 // borda verde se marcado
-        : theme.colors.neutral.Grey500};  // borda cinza padrão
+        : theme.colors.neutral.grey500};  // borda cinza padrão
 `
 
 export const Text = styled.span`

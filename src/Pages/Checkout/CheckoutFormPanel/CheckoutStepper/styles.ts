@@ -28,24 +28,24 @@ export const StepCircle = styled.div<{ $active: boolean }>`
     $active ? theme.colors.roxo700 : "transparent"};
 
   color: ${({ $active, theme }) =>
-    $active ? theme.colors.neutral.white0 : theme.colors.neutral.Grey500};
+    $active ? theme.colors.neutral.white0 : theme.colors.neutral.grey500};
 
   border: 2px solid
     ${({ $active, theme }) =>
-      $active ? theme.colors.roxo700 : theme.colors.neutral.Grey500};
+      $active ? theme.colors.roxo700 : theme.colors.neutral.grey500};
 `;
 
 export const StepLabel = styled.span<{ $active: boolean }>`
   font-size: 14px;
   font-weight: ${({ $active }) => ($active ? 600 : 400)};
   color: ${({ $active, theme }) =>
-    $active ? theme.colors.roxo700 : theme.colors.neutral.Grey500};
+    $active ? theme.colors.roxo700 : theme.colors.neutral.grey500};
 `;
 
 export const StepDivider = styled.div<{ $active: boolean }>`
   width: 80px;
   height: 2px;
   background: ${({ $active, theme }) =>
-    $active ? theme.colors.roxo700 : theme.colors.neutral.Grey500};
+    $active ? theme.colors.roxo700 : theme.colors.neutral.grey500};
   opacity: 0.4;
 `;

@@ -7,6 +7,7 @@ type MainButtonProps = {
   children: React.ReactNode; // texto/label
   loading?: boolean;
   disabled?: boolean;
+  maxW?: number; 
 };
 
 export default function MainButton({
@@ -15,7 +16,7 @@ export default function MainButton({
   children,
   loading = false,
   disabled = false,
-
+  maxW, 
 }: MainButtonProps) {
   const isDisabled = disabled || loading;
 
@@ -24,7 +25,7 @@ export default function MainButton({
       type={type}
       onClick={onClick}
       disabled={isDisabled}
-
+      $maxW={maxW} 
       aria-busy={loading}
       aria-live="polite"
       aria-disabled={isDisabled}

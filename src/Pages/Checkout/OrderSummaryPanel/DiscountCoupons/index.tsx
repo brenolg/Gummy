@@ -22,7 +22,7 @@ export const DiscountCoupons: React.FC<DiscountCouponsProps> = ({ onChange }) =>
 
   const PIX_COUPON: Coupon = { code: "PIX05", discount: 5 };
 
-  // ✅ Adiciona/remover cupom PIX automaticamente
+  // Adiciona/remover cupom PIX automaticamente
   useEffect(() => {
     if (paymentMethod === "PIX") {
       const exists = coupons.some((c) => c.code === PIX_COUPON.code);
@@ -54,7 +54,7 @@ export const DiscountCoupons: React.FC<DiscountCouponsProps> = ({ onChange }) =>
     try {
       setLoading(true);
 
-      // 👇 resp vem do backend: { code: string, percent: number }
+      // resp vem do backend: { code: string, percent: number }
       const resp = await fetcher<{ code: string; percent: number }>(
         "/public/validate-coupon",
         "POST",
@@ -67,7 +67,7 @@ export const DiscountCoupons: React.FC<DiscountCouponsProps> = ({ onChange }) =>
 
       const newCoupon: Coupon = {
         code: serverCode,   // código validado pelo back
-        discount: percent,  // 🔥 percent → discount
+        discount: percent,  // percent
       };
 
       const updated = [...coupons, newCoupon];
