@@ -7,40 +7,40 @@ export const faqData = [
     {
       question: "Quem pode tomar Power Gummy?",
       answer:
-        "Adultos saudáveis. Gestantes, lactantes, crianças e pessoas sob tratamento devem consultar um profissional de saúde.",
+        "O consumo é indicado para pessoas a partir de 19 anos. Gestantes, lactantes e pessoas com alguma condição de saúde devem consumir somente sob orientação de um médico ou nutricionista.",
     },
     {
       question: "O que tem dentro da Power Gummy?",
       answer:
-        "Complexo de vitaminas do grupo B, biotina, ácido hialurônico e minerais selecionados.",
+        "As gominhas possuem 8 vitaminas e minerais + ácido hialurônico. São eles: Ácido Hialurônico, Biotina (B7), Vitamina A, Vitamina D, Vitamina E, Vitamina B5, Vitamina B6, Vitamina B12 e Zinco.",
     },
     {
       question: "Power Gummy contém açúcar ou glúten?",
-      answer: "Não contém glúten. A formulação pode variar por lote; verifique o rótulo.",
+      answer: "Não. O produto é livre de glúten e zero açúcar, sendo adoçado com maltitol e estévia",
     },
     {
       question: "Power Gummy engorda?",
       answer:
-        "O aporte calórico por porção é baixo. Consulte a tabela nutricional para valores exatos.",
+        "Não. Nossa fórmula não contém açúcar e possui apenas 8 kcal por goma. É uma opção leve e prática de autocuidado que pode ser incluída na sua rotina sem preocupação.",
     },
     {
       question: "Quantas gominhas posso ingerir?",
-      answer: "Siga a recomendação do rótulo (geralmente 2 gominhas ao dia) ou orientação profissional.",
+      answer: "É recomendado o consumo de 1 goma por dia. O horário pode ser escolhido de acordo com sua rotina.",
     },
     {
       question:
         "Power Gummy funciona para todos os tipos de cabelo, pele e unhas?",
       answer:
-        "A ação depende de hábitos, rotina de cuidados e regularidade do uso.",
+        "Sim! Nossa fórmula foi pensada para oferecer benefícios que atuam de dentro para fora, independente do tipo de fio, pele ou unha.",
     },
     {
       question: "Em quanto tempo posso perceber resultados?",
       answer:
-        "Em geral, entre 4 e 8 semanas de uso contínuo, variando por organismo.",
+        "Os resultados podem variar de acordo com o estilo de vida, alimentação e metabolismo de cada pessoa. A constância no consumo é fundamental para potencializar os resultados..",
     },
     {
-      question: "Power Gummy possui contraindicações?",
+      question: "PowerGummy possui contraindicações?",
       answer:
-        "Pessoas com alergias específicas ou condições de saúde devem consultar um profissional antes do uso.",
+        "O produto é seguro e não possui efeitos colaterais conhecidos. Porém, se você tiver menos de 19 anos, estiver grávida, amamentando ou possuir alguma condição de saúde, recomendamos que consulte um médico ou nutricionista antes de iniciar o consumo.",
     },
   ];

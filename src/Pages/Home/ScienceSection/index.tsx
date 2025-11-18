@@ -1,7 +1,8 @@
 import { MainButton } from "@/components"; 
 import hairImg from "@/assets/imgs/hairGirl.svg";
-import nailsImg from "@/assets/imgs/nails.png";
+import nailsImg from "@/assets/imgs/nails.svg";
 import skinImg from "@/assets/imgs/skin.svg";
+import nailsBack from "@/assets/imgs/nailsBack.svg"
 
 import {
   Section,
@@ -14,6 +15,7 @@ import {
   Card,
   DescriptionStrong,
   FeaturedImage,
+  BackImage,
 } from "./styles";
 import { useNavigate } from "react-router-dom";
 
@@ -45,6 +47,7 @@ export default function ScienceSection() {
 
           <Card>
             <FeaturedImage $img={nailsImg} $width={ 343.5 } />
+            <BackImage $img={nailsBack}  />
           </Card>
 
           <Card>
