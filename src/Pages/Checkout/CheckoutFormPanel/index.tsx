@@ -68,71 +68,7 @@ export default function CheckoutFormPanel() {
     reValidateMode: 'onChange'
   });
 
-  const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
-
-
-  const handleStep = async () => {
-    // fluxo principal enquanto ainda estamos nos passos 0,1,2
-    if (formStep === 0 || formStep === 1 || formStep === 2) {
-      const isPaymentStep = formStep === 2;
-
-      // PIX: não validar o passo 2 (cartão)
-      const mustValidateThisStep = !(isPix && isPaymentStep);
-
-      if (mustValidateThisStep) {
-        const valid = await methods.trigger(STEP_FIELDS[formStep], { shouldFocus: true });
-        if (!valid) return;
-      }
-
-      if (formStep === 0 && methods.getValues('advertisement')) {
-        setLoading(true);
-        await sleep(3000);
-        console.log('Advertisement marcado: delay simulado de 3s.');
-        setLoading(false);
-      }
-
-      if (isPaymentStep) {
-        if (isPix) {
-          // PIX: sem handleSubmit; pega os dados sem validar o cartão
-          const data = methods.getValues();
-          console.log('Fluxo PIX — dados parciais do checkout:', data);
-          setFormStep('qrcode'); // vai para tela de QR Code
-          return;
-        } else {
-          // Cartão: submete validando e vai para sucesso
-          await methods.handleSubmit((data) => {
-            console.log('CHECKOUT OK (Cartão)', data);
-            setFormStep('success');
-          })();
-          return;
-        }
-      }
-
-      setFormStep((s: FormStep) => (s === 0 ? 1 : 2));
-      return;
-    }
-
-    // passo 'qrcode' (PIX): usuário confirma pagamento
-    if (formStep === 'qrcode') {
-      console.log('PIX confirmado pelo usuário');
-      setFormStep('success');
-      return;
-    }
-
-    // passo 'success': aqui você pode navegar para outra rota, se quiser
-    if (formStep === 'success') {
-      // navigate('/obrigado'); // opcional
-      return;
-    }
-  };
-
-  const getCtaLabel = () => {
-    if (formStep === 0 || formStep === 1) return 'Avançar';
-    if (formStep === 2) return isPix ? 'Gerar QR Code' : 'Confirmar Pagamento';
-    if (formStep === 'qrcode') return 'Já paguei';
-    if (formStep === 'success') return 'Concluir';
-    return 'Avançar';
-  };
+  
 
   // usa o watch DO useForm (methods), não do useFormContext
   const postalCode = methods.watch("postalCode");
@@ -155,27 +91,13 @@ export default function CheckoutFormPanel() {
         {/* Stepper de status do form (usa índice numérico mapeado) */}
         <CheckoutStepper />
 
-        <FormProvider {...methods}>
-          <form
-            id="checkout-form"
-            onKeyDown={(e) => {
-              if (e.key === 'Enter') {
-                e.preventDefault(); // impede submit automático
-                handleStep();       // lógica de próxima etapa
-              }
-            }}
-          >
+      
             {formStep === 0 && <InfoForm/>}
             {formStep === 1 && <AddressForm/>}
             {formStep === 2 && <PaymentCardForm/>}
             {formStep === 'qrcode' && <QRCode/>}
             {formStep === 'success' && <OrderSuccess/>}
 
-            <MainButton type="button" onClick={handleStep} loading={loading}>
-              {getCtaLabel()}
-            </MainButton>
-          </form>
-        </FormProvider>
 
         <SecureTxt/>
       </FormContainer>

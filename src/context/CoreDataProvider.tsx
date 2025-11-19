@@ -7,6 +7,8 @@ export default function CoreDataProvider({ children }: { children: ReactNode }) 
   const [coupons, setCoupons] = useState<Coupon[]>([]);
   const [formStep, setFormStep] = useState<FormStep>(0);
   const [formPostalCode, setFormPostalCode] = useState("");
+  const [globalLoading, setGlobalLoading] = useState(false)
+  const [formData, setFormData] = useState<Record<string, string | boolean | number>>({});
 
   const CART_KEY = "powergummy.cart";
  // 🔹 Estado minimalista que VAI pro localStorage: só id + quantidade
@@ -51,7 +53,7 @@ export default function CoreDataProvider({ children }: { children: ReactNode }) 
 
   return (
     <CoreDataContext.Provider value={
-      { paymentMethod, setPaymentMethod, cart, setCart, coupons, setCoupons, formStep, setFormStep , formPostalCode, setFormPostalCode, cartStorage, setCartStorage}
+      { paymentMethod, setPaymentMethod, cart, setCart, coupons, setCoupons, formStep, setFormStep , formPostalCode, setFormPostalCode, cartStorage, setCartStorage, globalLoading, setGlobalLoading, formData, setFormData}
       }>
       {children}
     </CoreDataContext.Provider>

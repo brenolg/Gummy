@@ -18,20 +18,20 @@ export default function MainButton({
   disabled = false,
   maxW, 
 }: MainButtonProps) {
-  const isDisabled = disabled || loading;
+  const isdisabled = disabled || loading;
 
   return (
     <StyledMainButton
       type={type}
       onClick={onClick}
-      disabled={isDisabled}
+      disabled={isdisabled}
       $maxW={maxW} 
       aria-busy={loading}
       aria-live="polite"
-      aria-disabled={isDisabled}
+      aria-disabled={isdisabled}
     >
-      {loading && <Spinner aria-hidden="true" />}
       <Label $hidden={loading}>{children}</Label>
+      {loading && <div className="loading-container"><Spinner aria-hidden="true" /></div>}
     </StyledMainButton>
   );
 }

@@ -1,18 +1,18 @@
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import styled from "styled-components";
 import { useCoreData } from "@/context/coreDataContext";
 import { useFetch } from "@/hooks/useFetch";
 
 type Props = {
   /** Valor do frete; se null/undefined, mostra a dica para digitar o CEP */
-  shipping?: number | null;
   /** Como combinar vários cupons: "sum" (soma %) ou "sequential" (aplica em cascata) */
   couponMode?: "sum" | "sequential";
 };
 
-export default function OrderSummary({ shipping = null, couponMode = "sum" }: Props) {
-  const { cart, coupons } = useCoreData();
+export default function OrderSummary({  couponMode = "sum" }: Props) {
+  const { cart, coupons, formPostalCode } = useCoreData();
   const { fetcher } = useFetch();
+  const [shipping, setShipping] =useState(0)
 
   const {
     itemsCount,
@@ -45,7 +45,7 @@ export default function OrderSummary({ shipping = null, couponMode = "sum" }: Pr
     // valor absoluto de desconto
     const couponsAmount = +(subtotal * (couponsPct / 100)).toFixed(2);
     const totalBeforeShipping = Math.max(0, subtotal - couponsAmount);
-    const total = +(totalBeforeShipping + (shipping ?? 0)).toFixed(2);
+    const total = +(totalBeforeShipping + (shipping.valor ?? 0)).toFixed(2);
 
     return {
       itemsCount,
@@ -76,15 +76,16 @@ export default function OrderSummary({ shipping = null, couponMode = "sum" }: Pr
       { body }
     );
 
-  console.log(resp);
+    setShipping(resp.frete);
   }
-  const { formPostalCode } = useCoreData();
+
 
   useEffect(() => {
+    console.log("formPostalCode")
     if (formPostalCode.length) {
       calcularFrete()
     }
-  }, [ formPostalCode ]);
+  }, [ formPostalCode, cart ]);
 
   return (
     <Box>
@@ -107,7 +108,7 @@ export default function OrderSummary({ shipping = null, couponMode = "sum" }: Pr
         {shipping == null ? (
           <Hint>Digite o CEP para calcular</Hint>
         ) : (
-          <Value>{fmtBRL(shipping)}</Value>
+          <Value>{shipping.valor}</Value>
         )}
       </Row>
 

@@ -5,7 +5,7 @@ import { colors, typography } from '../../../styles/themeUtils'
 interface PlaceholderProps {
   $isFocusedOrValid: boolean
   isSearchable?: boolean
-  isDisabled?: boolean
+  $isDisabled?: boolean
 }
 
 export const InputContainer = styled.div<{
@@ -36,7 +36,7 @@ export const Placeholder = styled.span<PlaceholderProps>`
   border-radius: 10px;
   pointer-events: none;
   transition: all 0.2s ease-out;
-  ${(props) => props.isDisabled && 'color: #757575;'}
+  ${(props) => props.$isDisabled && 'color: #757575;'}
   
   background: ${t => colors(t).neutral.white0};
   ${t => typography(t).input};

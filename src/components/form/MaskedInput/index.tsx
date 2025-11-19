@@ -48,7 +48,7 @@ const InputComponent: React.FC<InputFieldProps> = ({
     <InputContainer $mb={mb}>
       <div className="relative" style={{ position: 'relative' }}>
         {/* label flutuante */}
-        <Placeholder $isFocusedOrValid={isFocusedOrValid} isDisabled={disabled}>
+        <Placeholder $isFocusedOrValid={isFocusedOrValid} $isDisabled={disabled}>
           {placeholder}
           {hasAsterisk && <span className="asterisk"> * </span>}
         </Placeholder>
@@ -80,6 +80,7 @@ const InputComponent: React.FC<InputFieldProps> = ({
                     handleBlur()
                   }}
                   $disabled={disabled}
+                  disabled={disabled}
                   $error={!!fieldError}
                   maxLength={maxLength}
                 />

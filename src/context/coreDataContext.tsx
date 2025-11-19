@@ -27,6 +27,8 @@ export type MinimalCartItem = {
   quantity: number;
 };
 
+export type FormDataType = Record<string, string | boolean | number>;
+
 type CoreDataContextProps = {
   paymentMethod: PaymentMethod;
   setPaymentMethod: (m: PaymentMethod) => void;
@@ -43,8 +45,14 @@ type CoreDataContextProps = {
   formPostalCode: string
   setFormPostalCode: React.Dispatch<React.SetStateAction<string>>;
 
-  cartStorage: MinimalCartItem[]; // ✅ ARRUMADO
+  cartStorage: MinimalCartItem[]; 
   setCartStorage: React.Dispatch<React.SetStateAction<MinimalCartItem[]>>;
+
+  globalLoading: boolean;
+  setGlobalLoading: React.Dispatch<React.SetStateAction<boolean>>;
+
+  formData: FormDataType;
+  setFormData: React.Dispatch<React.SetStateAction<FormDataType>>;
 };
 
 export const CoreDataContext = createContext<CoreDataContextProps | undefined>(undefined);
