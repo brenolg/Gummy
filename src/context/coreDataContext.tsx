@@ -22,13 +22,17 @@ export type Coupon = {
 
 export type FormStep = 0 | 1 | 2 | "qrcode" | "success";
 
+export type MinimalCartItem = {
+  productId: string;
+  quantity: number;
+};
+
 type CoreDataContextProps = {
   paymentMethod: PaymentMethod;
   setPaymentMethod: (m: PaymentMethod) => void;
 
   cart: CartItem[];
   setCart: React.Dispatch<React.SetStateAction<CartItem[]>>; 
-
   
   coupons: Coupon[];
   setCoupons: React.Dispatch<React.SetStateAction<Coupon[]>>;
@@ -38,6 +42,9 @@ type CoreDataContextProps = {
 
   formPostalCode: string
   setFormPostalCode: React.Dispatch<React.SetStateAction<string>>;
+
+  cartStorage: MinimalCartItem[]; // ✅ ARRUMADO
+  setCartStorage: React.Dispatch<React.SetStateAction<MinimalCartItem[]>>;
 };
 
 export const CoreDataContext = createContext<CoreDataContextProps | undefined>(undefined);

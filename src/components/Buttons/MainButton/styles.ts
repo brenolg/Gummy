@@ -1,7 +1,6 @@
 import styled, { keyframes } from "styled-components";
 
 export const StyledMainButton = styled.button<{ $maxW?: number }>`
-  border: 1px solid #ECECEC;
   outline: none;
   height: 68px;
   width: 100%;

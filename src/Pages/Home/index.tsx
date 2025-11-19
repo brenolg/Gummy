@@ -2,29 +2,31 @@ import BuyContainer from "./BuyContainer";
 import Header from "./Header";
 import InfoCarousel from "./InfoCarousel";
 import InstaFeedCarousel from "./InstaFeedCarousel";
-import { Banner, FirstBanner } from "./styles";
+import {  FirstBanner } from "./styles";
 import banner1 from '@/assets/imgs/banner1.png'
-import formula from '@/assets/imgs/formula.svg'
 import FAQ from "./FAQ";
 import {faqData} from './FAQ/factory'
 import Ingredients from "./Ingredients";
 import Hero from "./Hero";
 import ScienceSection from "./ScienceSection";
+import BenefitsSection from "./BenefitsSection";
+import Footer from "./Footer";
 
 export default function Home() {
 
   return (
     <div>
       <Header/>
+      <BenefitsSection/>
       <FirstBanner src={banner1 }/>
       <InfoCarousel/>
       <Hero/>
       <ScienceSection/>
       <Ingredients/>
       <FAQ items={ faqData } contactCtaHref="/contato" />
-      <Banner src={formula }/>
       <BuyContainer/>
       <InstaFeedCarousel/>
+      <Footer/>
 
   
       
