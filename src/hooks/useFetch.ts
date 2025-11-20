@@ -2,7 +2,7 @@
 import { useCallback } from "react";
 
 const BASE =
- "http://127.0.0.1:5001/powergum-backend/us-central1/api/";
+ "http://127.0.0.1:5001/powergum-backend/us-central1/api";
 //"https://3b90dac04c3b.ngrok-free.app/powergum-backend/us-central1/api"
 
 
@@ -50,6 +50,8 @@ export function useFetch(baseUrl: string = BASE) {
       const { body, query, headers, token, signal } = opts || {};
 
       const url = joinUrl(baseUrl, path) + queryString(query);
+
+      console.log(url)
 
       const h: Record<string, string> = {
         "Content-Type": "application/json",

@@ -17,7 +17,6 @@ export default function Home() {
   return (
     <div>
       <Header/>
-      <BenefitsSection/>
       <FirstBanner src={banner1 }/>
       <InfoCarousel/>
       <Hero/>
@@ -26,6 +25,7 @@ export default function Home() {
       <FAQ items={ faqData } contactCtaHref="/contato" />
       <BuyContainer/>
       <InstaFeedCarousel/>
+      <BenefitsSection/>
       <Footer/>
 
   

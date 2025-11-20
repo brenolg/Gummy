@@ -1,8 +1,7 @@
-import { useEffect, useState } from 'react';
-import { FormProvider, useForm, type Resolver } from 'react-hook-form';
+import { useEffect } from 'react';
+import {  useForm, type Resolver } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { schemaFull } from './schema';
-import { MainButton } from '@/components';
 import { FormContainer, PageTitle } from '../styles';
 import InfoForm from './InfoForm';
 import AddressForm from './AddressForm';
@@ -13,7 +12,7 @@ import backArow from '@/assets/icons/backArow.svg'
 import { useNavigate } from 'react-router-dom';
 import { BackButton } from './styles'
 import OrderSuccess from './OrderSuccess';
-import { useCoreData, type FormStep } from '@/context/coreDataContext';
+import { useCoreData } from '@/context/coreDataContext';
 import QRCode from './QR Code';
 
 // Se tiver um componente de QR Code, importe aqui
@@ -41,20 +40,8 @@ export type CheckoutFormData = {
   installments: number;
 };
 
-// passos numéricos usados para validação campo-a-campo
-const STEP_FIELDS: Array<(keyof CheckoutFormData)[]> = [
-  // 0: Info
-  ['name', 'email', 'phone', 'advertisement'],
-  // 1: Endereço
-  ['postalCode', 'address', 'district', 'addressComplement', 'addressNumber', 'city', 'state'],
-  // 2: Pagamento (cartão)
-  ['cardNumber', 'expiry', 'cvv', 'holderName', 'installments'],
-];
-
 export default function CheckoutFormPanel() {
-  const { formStep, setFormStep, paymentMethod, setFormPostalCode } = useCoreData();
-  const [loading, setLoading] = useState(false);
-  const isPix = paymentMethod === 'PIX';
+  const { formStep, setFormPostalCode } = useCoreData();
   const navigate = useNavigate();
 
   const methods = useForm<CheckoutFormData>({

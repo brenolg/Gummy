@@ -1,20 +1,7 @@
-import { useCoreData } from "@/context/coreDataContext";
+import { useCoreData, type CartItem } from "@/context/coreDataContext";
 import { MainButton } from "@/components";
 import { CartItemsData } from "@/context/data";
 import { Card, Grid, Price, Section } from "./styles";
-
-export type CartItem = {
-  productId: string;
-  image: string;
-  title: string;
-  subtitle: string;
-  quantity: number;
-  unitPrice: number;
-  peso: number;
-  altura: number;
-  largura: number;
-  profundidade: number;
-};
 
 // helper: upsert
 function upsertCart(

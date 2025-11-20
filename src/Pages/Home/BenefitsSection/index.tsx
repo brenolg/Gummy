@@ -1,5 +1,4 @@
-import gummyImg from "@/assets/imgs/fruits.svg"; // substitua pela sua imagem de gominhas
-import { Button, CardsRow, Container, GummyImage, HeaderText, LargeCard, PurposeBlock, PurposeSubtitle, PurposeTitle, ScienceText, SmallCard, SubText } from "./styles";
+import { Button, CardsRow, Container, HeaderText, LargeCard, PurposeBlock, PurposeSubtitle, PurposeTitle, ScienceText, SmallCard, SubText } from "./styles";
 
 
 export default function BenefitsSection() {
@@ -38,7 +37,6 @@ export default function BenefitsSection() {
 
       <Button>COMECE JÁ SUA MUDANÇA</Button>
 
-      <GummyImage src={gummyImg} />
     </Container>
   );
 }

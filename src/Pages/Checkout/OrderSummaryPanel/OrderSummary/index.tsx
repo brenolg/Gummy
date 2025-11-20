@@ -1,7 +1,22 @@
 import { useEffect, useMemo, useState } from "react";
-import styled from "styled-components";
 import { useCoreData } from "@/context/coreDataContext";
 import { useFetch } from "@/hooks/useFetch";
+import { handleNumberOfBoxes, handleProductWeight } from "./helper";
+import { fmtBRL } from "@/utils/helper";
+import { Box, DiscountValue, Hint, Label, Row, Spacer, TotalLabel, TotalRow, TotalValue, Value } from "./styles";
+
+export interface ShippingResponse {
+  frete: {
+    prazo: number;
+    valor: number;
+  };
+  endereco: {
+    rua: string;
+    bairro: string;
+    cidade: string;
+    estado: string;
+  };
+}
 
 type Props = {
   /** Valor do frete; se null/undefined, mostra a dica para digitar o CEP */
@@ -12,7 +27,7 @@ type Props = {
 export default function OrderSummary({  couponMode = "sum" }: Props) {
   const { cart, coupons, formPostalCode } = useCoreData();
   const { fetcher } = useFetch();
-  const [shipping, setShipping] =useState(0)
+  const [shipping, setShipping] = useState<ShippingResponse["frete"] | null>(null);
 
   const {
     itemsCount,
@@ -45,7 +60,7 @@ export default function OrderSummary({  couponMode = "sum" }: Props) {
     // valor absoluto de desconto
     const couponsAmount = +(subtotal * (couponsPct / 100)).toFixed(2);
     const totalBeforeShipping = Math.max(0, subtotal - couponsAmount);
-    const total = +(totalBeforeShipping + (shipping.valor ?? 0)).toFixed(2);
+    const total = +(totalBeforeShipping + (shipping?.valor ?? 0)).toFixed(2);
 
     return {
       itemsCount,
@@ -57,31 +72,51 @@ export default function OrderSummary({  couponMode = "sum" }: Props) {
     };
   }, [cart, coupons, couponMode, shipping]);
 
-  const fmtBRL = (n: number) =>
-    n.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
-
   async function calcularFrete() {
-    const body= {
-      cep: "65095-290",
-      subtotal: 149.9,
-      peso: 0.5,
-      altura: 10,
-      largura: 15,
-      profundidade: 5,
-    };
+      try {
+        const BOX_DATA = {
+          peso: 0.5,
+          altura: 40,
+          largura: 3,
+          profundidade: 20
+        }
 
-    const resp = await fetcher(
-      "public/calculate-shipping",
-      "POST",
-      { body }
-    );
+        const numberOfBoxes =  handleNumberOfBoxes(cart)
+        const pesoProdutos = handleProductWeight(cart)
+        
+        const pesoCaixas = BOX_DATA.peso * numberOfBoxes;
 
-    setShipping(resp.frete);
+        const body= {
+          cep: formPostalCode,
+          subtotal: subtotal,
+          peso: pesoCaixas + pesoProdutos,
+          altura:  BOX_DATA.altura * numberOfBoxes,
+          largura: BOX_DATA.largura * numberOfBoxes,
+          profundidade: BOX_DATA.profundidade * numberOfBoxes,
+        };
+        console.log(body)
+
+        const resp = await fetcher<ShippingResponse>(
+          "public/calculate-shipping",
+          "POST",
+          { body }
+        );
+        console.log(resp)
+
+        if (!resp || !resp.frete) {
+          console.warn("Resposta inesperada do servidor:", resp);
+          setShipping(null);
+          return;
+        }
+
+        setShipping(resp.frete);
+    } catch (error) {
+        console.error("Erro ao calcular frete:", error);
+        setShipping(null);
+    }
   }
 
-
   useEffect(() => {
-    console.log("formPostalCode")
     if (formPostalCode.length) {
       calcularFrete()
     }
@@ -122,60 +157,4 @@ export default function OrderSummary({  couponMode = "sum" }: Props) {
   );
 }
 
-/* ============== styles ============== */
 
-const Box = styled.div`
-  width: 100%;
-  background: #fbf9fb;
-  padding: 16px 20px;
-  border-radius: 12px;
-`;
-
-const Row = styled.div`
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 6px 0;
-`;
-
-const Label = styled.span`
-  color: #222;
-  font-size: 16px;
-`;
-
-const Value = styled.span`
-  color: #222;
-  font-size: 16px;
-`;
-
-const DiscountValue = styled.span`
-  color: #6e6e6e;
-  font-size: 16px;
-  small { margin-left: 6px; }
-`;
-
-const Hint = styled.span`
-  color: #9e9e9e;
-  font-size: 16px;
-`;
-
-const Spacer = styled.div`
-  height: 14px;
-`;
-
-const TotalRow = styled(Row)`
-  padding-top: 10px;
-`;
-
-const TotalLabel = styled.div`
-  font-weight: 700;
-  font-size: 20px;
-  color: #111;
-`;
-
-const TotalValue = styled.div`
-  font-weight: 800;
-  font-size: 22px;
-  color: #111;
-`;

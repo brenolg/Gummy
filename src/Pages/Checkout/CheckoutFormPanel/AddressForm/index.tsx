@@ -21,7 +21,7 @@ export type CheckoutFormData = {
 
 
 export default function AddressForm() {
-  const { setFormStep, setFormPostalCode } = useCoreData();
+  const { setFormStep, setFormPostalCode , setFormData } = useCoreData();
 
   const methods = useForm<CheckoutFormData>({
     resolver: yupResolver(schema) as Resolver<CheckoutFormData>,
@@ -40,10 +40,13 @@ export default function AddressForm() {
     }
 
     const data = methods.getValues();
-    console.log("FORM DATA:", data);
 
-
-    setFormStep(2); // agora só avança se estiver válido
+    setFormData(prev => ({
+      ...prev,
+      ...data
+    }));
+    
+    setFormStep(2); 
   };
   
   const postalCode = methods.watch("postalCode"); 
@@ -75,7 +78,7 @@ export default function AddressForm() {
         methods.setValue("addressComplement", data.complemento || "");
         methods.setValue("city", data.localidade || "");
         methods.setValue("state", data.uf || "");
-        console.log("setFormPostalCode")
+
         setFormPostalCode(postalCode);
 
       } catch (error) {

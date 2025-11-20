@@ -5,7 +5,7 @@ import { FormProvider, useForm, type Resolver } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { schema } from './schema';
 import { useCoreData } from '@/context/coreDataContext';
-import { useState } from 'react';
+import { useFetch } from '@/hooks/useFetch';
 
 export type CheckoutFormData = {
   name: string;
@@ -15,38 +15,42 @@ export type CheckoutFormData = {
 };
 
 export default function InfoForm() {
-  const { setFormStep } = useCoreData();
-  const [loading, setLoading] = useState(false);
+  const { setFormStep , setFormData} = useCoreData();
+  const { fetcher } = useFetch();
 
-  const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
-    const methods = useForm<CheckoutFormData>({
-      resolver: yupResolver(schema) as Resolver<CheckoutFormData>,
-      defaultValues: { 
-        name:'', email:'', phone:'', advertisement:false,
-      },
-      mode: 'onBlur',
-      reValidateMode: 'onChange'
-    });
+  const methods = useForm<CheckoutFormData>({
+    resolver: yupResolver(schema) as Resolver<CheckoutFormData>,
+    defaultValues: { 
+      name:'', email:'', phone:'', advertisement:false,
+    },
+    mode: 'onBlur',
+    reValidateMode: 'onChange'
+  });
 
   const handleStep = async () => {
     const isValid = await methods.trigger(); // valida todos os campos
 
     if (!isValid) {
-      console.log("Form inválido");
+      console.error("Form inválido");
       return; // impede avanço
     }
 
     const data = methods.getValues();
-    console.log("FORM DATA:", data);
 
     if (data.advertisement) {
-      setLoading(true);
-      await sleep(3000);
-      console.log("Advertisement marcado: delay simulado de 3s.");
-      setLoading(false);
-    }
+      const body = {
+        email: data.email, phone: data.phone 
+      }
 
-    setFormStep(1); // agora só avança se estiver válido
+      fetcher(
+        "/public/capture-lead",
+        "POST",
+        { body }
+      );
+    }
+    
+    setFormData(data)
+    setFormStep(1); 
   };
 
   return (
@@ -68,7 +72,7 @@ export default function InfoForm() {
           <Checkbox name="advertisement" label="Enviar novidades e promoções" />
         </InputContainer>
 
-        <MainButton type="submit" onClick={handleStep} loading={loading}>
+        <MainButton type="submit">
           Avançar
         </MainButton>
       </form>

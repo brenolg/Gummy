@@ -121,11 +121,3 @@ export const Button = styled.button`
   font-size: 15px;
 `;
 
-export const GummyImage = styled.img`
-  position: absolute;
-  right: 50px;
-  top: 20px;
-  width: 140px;
-  pointer-events: none;
-  user-select: none;
-`;
