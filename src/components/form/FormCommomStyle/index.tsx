@@ -36,12 +36,18 @@ export const Placeholder = styled.span<PlaceholderProps>`
   border-radius: 10px;
   pointer-events: none;
   transition: all 0.2s ease-out;
-  ${(props) => props.$isDisabled && 'color: #757575;'}
   
   background: ${t => colors(t).neutral.white0};
+  
   ${t => typography(t).input};
+  ${(props) => props.$isDisabled && 'color: #A3A3A3 ;'}
   .asterisk {
-    color: #d61212;
+    color: var(--Color-Semantic-Error-Error, #D61212);
+    font-family: Inter;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
   }
 
 `
@@ -51,37 +57,35 @@ interface IStyleProps {
 }
 
 export const InputError = styled.div<IStyleProps>`
-  font-size: 11px;
   position: absolute;
   bottom: 0px;
   transform: translateY(100%);
-  font-style: normal;
-  font-weight: 400;
-  line-height: 14px;
-  letter-spacing: 0em;
   text-align: start;
-  box-sizing: border-box;
-  padding-right: 4px;
   display: flex;
   opacity: ${(props) => {
     if (props.$error) return 1 // Com erro
     return 0 // Nenhuma condição atendida
   }};
   align-items: center;
-  gap: 4px;
-  max-height: 20px;
-  height: 20px;
   transition: all 0.3s ease-out;
   max-width: 100%;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  color: #d61212;
+  color: var(--Vermelho-Alerta, #F00);
+  font-family: Inter;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  display: flex;
+  padding: 2px 4px;
+  align-items: center;
+  gap: 4px;
+  align-self: stretch;
   .img-error {
     width: 12px;
     height: 12px;
-    filter: invert(12%) sepia(73%) saturate(6695%) hue-rotate(358deg)
-      brightness(91%) contrast(89%);
   }
 `
 

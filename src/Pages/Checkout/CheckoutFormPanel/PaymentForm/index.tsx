@@ -99,11 +99,11 @@ export default function PaymentCardForm() {
 
           {paymentMethod === 'CREDIT_CARD' ? 
             <>
-              <MInput name="cardNumber" type="card"   placeholder="Número do Cartão" hasAsterisk mb={16}/>
-              <MInput name="cpf" type="cpf"   placeholder="CPF" hasAsterisk mb={16}/>
+              <MInput name="cardNumber" type="card"   placeholder="Número do Cartão" hasAsterisk mb={18}/>
+              <MInput name="cpf" type="cpf"   placeholder="CPF" hasAsterisk mb={18}/>
               <TwoInputContainer>
-                <MInput name="expiry" type="expiry" placeholder="Validade" hasAsterisk mb={16}/>
-                <MInput name="cvv"    type="cvv"    placeholder="CVV"      hasAsterisk mb={16}/>
+                <MInput name="expiry" type="expiry" placeholder="Validade" hasAsterisk mb={18}/>
+                <MInput name="cvv"    type="cvv"    placeholder="CVV"      hasAsterisk mb={18}/>
               </TwoInputContainer>
               <MInput name="holderName" type="text" placeholder="Nome do titular do Cartão" hasAsterisk mb={24}/>
               <Select name="installments" placeholder="Parcelas" options={installmentsOptions} hasAsterisk />

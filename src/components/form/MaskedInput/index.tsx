@@ -3,6 +3,7 @@ import { Controller, useFormContext, useWatch } from 'react-hook-form'
 import { Placeholder, InputError, InputContainer } from '../FormCommomStyle'
 import { Input } from './styles'
 import { getMaskConfig } from './getMaskConfig'
+import imgError from '@/assets/icons/error.svg'
 
 interface InputFieldProps {
   name: string
@@ -98,7 +99,7 @@ const InputComponent: React.FC<InputFieldProps> = ({
                   $error={!!fieldError}
                   $disabled={disabled}
                 >
-                  {fieldError}
+                  <img src={imgError} className='img-error'/>  {fieldError}
                 </InputError>
               </>
             )

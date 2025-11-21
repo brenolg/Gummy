@@ -107,16 +107,16 @@ export default function AddressForm() {
       >
         <InputContainer>
           <FormTitle>Endereço</FormTitle>
-          <MInput name="postalCode"   type="cep"    placeholder="CEP"       hasAsterisk mb={16}/>
-          <MInput name="address"   type="text"   placeholder="Endereço" disabled  hasAsterisk mb={16} />
-          <MInput name="district"  type="text"   placeholder="Bairro" disabled   hasAsterisk mb={16}/>
+          <MInput name="postalCode"   type="cep"    placeholder="CEP"       hasAsterisk mb={18}/>
+          <MInput name="address"   type="text"   placeholder="Endereço" disabled   mb={18} />
+          <MInput name="district"  type="text"   placeholder="Bairro" disabled    mb={18}/>
           <TwoInputContainer>
-            <MInput name="addressComplement" type="text"  placeholder="Complemento" />
-            <MInput name="addressNumber"    type="number" placeholder="Número"    hasAsterisk mb={16}/>
+            <MInput name="addressComplement" type="text"  placeholder="Complemento"  hasAsterisk/>
+            <MInput name="addressNumber"    type="number" placeholder="Número"    hasAsterisk mb={18}/>
           </TwoInputContainer>
           <TwoInputContainer>
-            <MInput name="city"   disabled    type="text"   placeholder="Cidade"    hasAsterisk mb={16}/>
-            <MInput name="state"  disabled    type="text"   placeholder="Estado"    hasAsterisk />
+            <MInput name="city"   disabled    type="text"   placeholder="Cidade"    mb={18}/>
+            <MInput name="state"  disabled    type="text"   placeholder="Estado"     />
           </TwoInputContainer>
         </InputContainer>
         

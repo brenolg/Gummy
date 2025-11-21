@@ -4,13 +4,7 @@ import { colors } from "../../../styles/themeUtils";
 import { typography } from '../../../styles/themeUtils';
 
 interface IStyleProps {
-  error?: string
-  disabled?: boolean
-}
-
-
-interface IStyleProps {
-  error?: string
+  $error?: boolean
   disabled?: boolean
 }
 
@@ -32,6 +26,20 @@ export const Input = styled(IMaskInput)<InputBaseProps>`
   background: ${t => colors(t).neutral.white0};
 
   ${t => typography(t).input};
+  ${({ disabled }) =>
+    disabled &&
+    `
+      border: 1px solid var(--Grey-300, #D6D6D6);
+      background: var(--Grey-50, #FAFAFA);
+      color: var(--Grey-400, #A3A3A3);
+      cursor: not-allowed;
+    `};
+      ${({ $error }) =>
+    $error &&
+    `
+    border: 1px solid var(--Vermelho-Alerta, #F00);
+
+    `};
 `
 
 export const Loading = styled.div<{ $loading: boolean | undefined }>`

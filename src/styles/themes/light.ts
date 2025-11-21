@@ -23,12 +23,12 @@ export const lightTheme = {
   },
   typography: {
     input: css`
-      font-weight: 400;
-      font-style: normal;
+      color: var(--Color-Neutral-Black-700, #424242);
+      font-family: Inter;
       font-size: 14px;
-      line-height: 100%;
-      letter-spacing: 0;
-      vertical-align: middle;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
     `,
   },
 
