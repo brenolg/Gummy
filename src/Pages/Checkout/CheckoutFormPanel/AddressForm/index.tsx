@@ -29,7 +29,7 @@ export default function AddressForm() {
       postalCode:'', address:'', district:'', addressComplement:'', addressNumber:'', city:'', state:'',
     },
     mode: 'onBlur',
-    reValidateMode: 'onChange'
+    reValidateMode: 'onBlur'
   });
   
   const handleStep = async () => {
@@ -86,7 +86,7 @@ export default function AddressForm() {
 
         methods.setError("postalCode", {
           type: "manual",
-          message: "Erro ao consultar o CEP",
+          message: "CEP não encontrado. Verifique e tente novamente.",
         });
       }
     };
@@ -107,15 +107,15 @@ export default function AddressForm() {
       >
         <InputContainer>
           <FormTitle>Endereço</FormTitle>
-          <MInput name="postalCode"   type="cep"    placeholder="CEP"       hasAsterisk mb={18}/>
-          <MInput name="address"   type="text"   placeholder="Endereço" disabled   mb={18} />
-          <MInput name="district"  type="text"   placeholder="Bairro" disabled    mb={18}/>
+          <MInput name="postalCode"   type="cep"    placeholder="CEP"       hasAsterisk mb={24}/>
+          <MInput name="address"   type="text"   placeholder="Endereço" disabled   mb={24} />
+          <MInput name="district"  type="text"   placeholder="Bairro" disabled    mb={24}/>
           <TwoInputContainer>
             <MInput name="addressComplement" type="text"  placeholder="Complemento"  hasAsterisk/>
-            <MInput name="addressNumber"    type="number" placeholder="Número"    hasAsterisk mb={18}/>
+            <MInput name="addressNumber"    type="text" placeholder="Número"    hasAsterisk mb={24}/>
           </TwoInputContainer>
           <TwoInputContainer>
-            <MInput name="city"   disabled    type="text"   placeholder="Cidade"    mb={18}/>
+            <MInput name="city"   disabled    type="text"   placeholder="Cidade"    mb={24}/>
             <MInput name="state"  disabled    type="text"   placeholder="Estado"     />
           </TwoInputContainer>
         </InputContainer>

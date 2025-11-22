@@ -24,6 +24,14 @@ export const Input = styled(IMaskInput)<InputBaseProps>`
   box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.05);
   color: ${t => colors(t).neutral.black700};
   background: ${t => colors(t).neutral.white0};
+  &:hover {
+    border: 1px solid var(--Roxo-25, #EBD7F5);
+    background: var(--Roxo-0, #FDFBFE);
+  }
+  &:focus {
+    border: 1px solid var(--roxo-700, #502665);
+    background: var(--Color-Neutral-White-0, #FFF);
+  }
 
   ${t => typography(t).input};
   ${({ disabled }) =>
@@ -40,6 +48,7 @@ export const Input = styled(IMaskInput)<InputBaseProps>`
     border: 1px solid var(--Vermelho-Alerta, #F00);
 
     `};
+    
 `
 
 export const Loading = styled.div<{ $loading: boolean | undefined }>`

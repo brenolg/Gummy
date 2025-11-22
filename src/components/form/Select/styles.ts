@@ -41,25 +41,35 @@ export const SelectDisplay = styled.input<{
     props.disabled ? '#EEEEEE' : 'red'};
   background: ${t => colors(t).neutral.white0};
   border: 1px solid;
+
   border-color: ${(props) =>
     props.disabled
       ? 'red'
       : props.error
       ? '#D61212'
-      : '#cccccc'};
+      : '#CCCCCC'};
   &:hover {
     border-color: ${(props) =>
       props.disabled
         ? '#B00000'
         : props.error
         ? '#B00000'
-        : '#757575'};
+        : '#EBD7F5'};
   }
   &:disabled {
     color: rgb(84, 84, 84);
   }
   &::placeholder {
     color: rgb(84, 84, 84);
+  }
+  ${t => typography(t).input};
+    &:hover {
+    border: 1px solid var(--Roxo-25, #EBD7F5);
+    background: var(--Roxo-0, #FDFBFE);
+  }
+  &:focus {
+    border: 1px solid var(--roxo-700, #502665);
+    background: var(--Color-Neutral-White-0, #FFF);
   }
 `
 
@@ -69,11 +79,34 @@ export const Dropdown = styled.div`
   width: 100%;
   background-color: white;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 5px;
   z-index: 99;
   max-height: 300px;
   overflow-y: auto;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  &::-webkit-scrollbar-button {
+    display: none;
+    height: 0;
+    width: 0;
+  }
+  /* Barra fina */
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+        margin: 4px; 
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #b5b5b5;
+    border-radius: 8px;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: #9a9a9a;
+  }
 `
 
 export const DropdownItem = styled.div<{ $isSelected?: boolean }>`
@@ -83,11 +116,11 @@ export const DropdownItem = styled.div<{ $isSelected?: boolean }>`
   font-weight: 400;
   line-height: 20px;
   cursor: pointer;
-  background-color: ${(props) =>
-    props.$isSelected ? '#FFF9E7' : '#B00000'};
-  color: ${(props) => (props.$isSelected ? '#FFC600' : '#424242')};
+  color: ${t => colors(t).neutral.black700};
+  background: ${t => colors(t).neutral.white0};
+  color: ${(props) => (props.$isSelected ? '#5a5a5aff' : '#424242')};
   &:hover {
-    background-color: #fff9e7;
+    background-color: #dfdfdfff;
   }
 
   background: ${t => colors(t).neutral.white0};

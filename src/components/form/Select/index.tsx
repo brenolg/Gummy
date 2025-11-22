@@ -6,6 +6,7 @@ import {
   InputContainer,
 } from '../FormCommomStyle/index'
 import { SelectWrapper, SelectDisplay, Dropdown, DropdownItem } from './styles'
+import imgError from '@/assets/icons/error.svg'
 
 interface Option {
   label: string
@@ -49,7 +50,7 @@ const CustomSelectComponent: React.FC<SelectComponentProps> = ({
 
   const error = errors[name]?.message as string | undefined
   const isFocusedOrValid = focused || !!value || value === 0
-
+  const {  clearErrors } = useFormContext()
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -68,7 +69,8 @@ const CustomSelectComponent: React.FC<SelectComponentProps> = ({
     }
   }, [onBlur])
 
-  const selectedLabel = options.find((opt) => opt.value === value)?.label
+  const selectedLabel =
+  options.find((opt) => opt.value === value)?.label || "Parcelas"
   useEffect(() => {
     setSearchValue(selectedLabel || '')
   }, [selectedLabel]) // Troca o valor do input toda vez que o valor do select mudar
@@ -79,7 +81,7 @@ const CustomSelectComponent: React.FC<SelectComponentProps> = ({
       className="select"
     >
       <div className="relative">
-        <Placeholder $isFocusedOrValid={isFocusedOrValid} isDisabled={disabled}>
+        <Placeholder $isFocusedOrValid={isFocusedOrValid} $isDisabled={disabled}>
           {placeholder}
           {hasAsterisk && <span className="asterisk"> * </span>}
         </Placeholder>
@@ -91,6 +93,7 @@ const CustomSelectComponent: React.FC<SelectComponentProps> = ({
             ref={ref}
             error={error}
             onFocus={() => {
+              clearErrors(name)
               if (!disabled) setFocused(true)
             }}
             onBlur={() => {
@@ -113,7 +116,6 @@ const CustomSelectComponent: React.FC<SelectComponentProps> = ({
             disabled={disabled}
             value={searchValue}
           />
-   
 
           {open && (
             <Dropdown>
@@ -137,7 +139,7 @@ const CustomSelectComponent: React.FC<SelectComponentProps> = ({
           $error={!!error}
           $disabled={disabled}
         >
-          {error}
+          <img src={imgError} className='img-error'/>  {error}
         </InputError>
       </div>
     </InputContainer>

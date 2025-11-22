@@ -21,10 +21,10 @@ export default function InfoForm() {
   const methods = useForm<CheckoutFormData>({
     resolver: yupResolver(schema) as Resolver<CheckoutFormData>,
     defaultValues: { 
-      name:'', email:'', phone:'', advertisement:false,
+      name:'', email:'', phone:'', advertisement:true,
     },
     mode: 'onBlur',
-    reValidateMode: 'onChange'
+    reValidateMode: 'onBlur'
   });
 
   const handleStep = async () => {
@@ -66,8 +66,8 @@ export default function InfoForm() {
       >
         <InputContainer>
           <FormTitle>Contato</FormTitle>
-          <MInput name="name"  type="text" placeholder="Nome" hasAsterisk mb={18} />
-          <MInput name="email" type="text" placeholder="Email"  hasAsterisk mb={18}/>
+          <MInput name="name"  type="text" placeholder="Nome" hasAsterisk mb={24} />
+          <MInput name="email" type="text" placeholder="Email"  hasAsterisk mb={24}/>
           <MInput name="phone"  type="phone" placeholder="Celular" hasAsterisk mb={24}/>
           <Checkbox name="advertisement" label="Enviar novidades e promoções" />
         </InputContainer>

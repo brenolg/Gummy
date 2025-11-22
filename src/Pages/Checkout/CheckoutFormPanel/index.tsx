@@ -79,9 +79,9 @@ export default function CheckoutFormPanel() {
         <CheckoutStepper />
 
       
+            {formStep === 0 && <PaymentCardForm/>}
             {formStep === 0 && <InfoForm/>}
             {formStep === 1 && <AddressForm/>}
-            {formStep === 2 && <PaymentCardForm/>}
             {formStep === 'qrcode' && <QRCode/>}
             {formStep === 'success' && <OrderSuccess/>}
 
