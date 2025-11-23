@@ -2,122 +2,112 @@ import styled from "styled-components";
 
 export const Container = styled.section`
   width: 100%;
-  padding: 77px 110px 256px;
+  padding-bottom: 72px;
+  padding-top: 77px;
+  background: linear-gradient(180deg, var(--roxo-700, rgba(80, 38, 101, 0.24)) 0%, var(--Roxo-0, rgba(253, 251, 254, 0.24)) 100%), var(--Roxo-0, #FDFBFE);
 `;
 
 export const HeaderText = styled.p`
-color: var(--roxo-700, #502665);
-font-family: "Nunito Sans";
-font-size: 32px;
-font-style: normal;
-font-weight: 400;
-line-height: 150%;
-
-  strong {
-
-color: var(--dourado-200, #BA7E1B);
-font-family: "Nunito Sans";
-font-size: 40px;
-font-style: normal;
-font-weight: 900;
-line-height: 150%; /* 60px */
-  }
+  color: var(--roxo-700, #502665);
+  font-family: "Nunito Sans";
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: 150%; /* 60px */
+  padding-left: 110px;
 `;
 
 export const SubText = styled.p`
-color: ${({ theme }) => theme.colors.dourado100};
-color: var(--Roxo-600, #662F82);
-font-family: "Nunito Sans";
-font-size: 32px;
-font-style: normal;
-font-weight: 400;
-line-height: 150%;
-margin-bottom: 45px;
+  padding-left: 110px;
+  color: var(--dourado-200, #BA7E1B);
+  font-family: "Nunito Sans";
+  font-size: 34px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+  margin-bottom: 16px;
   strong {
-   color: var(--dourado-200, #BA7E1B);
-
-font-weight: 900;
-
+    color: var(--dourado-200, #BA7E1B);
+    font-family: "Nunito Sans";
+    font-size: 34px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 150%;
   }
-`;
-
-export const PurposeBlock = styled.div`
-display: flex;
-flex-direction: column;
-gap: 40px;
-  
 `;
 
 export const PurposeTitle = styled.h3`
-color: var(--roxo-700, #502665);
-font-family: "Nunito Sans";
-font-size: 32px;
-font-style: normal;
-font-weight: 400;
-line-height: 120%; /* 38.4px */
-strong {
-
-font-weight: 700;
-
-}
-`;
-
-export const PurposeSubtitle = styled.p`
-  color: var(--dourado-200, #BA7E1B);
-font-family: "Nunito Sans";
-font-size: 32px;
-font-style: normal;
-font-weight: 400;
-line-height: 120%;
-
-`;
-
-export const CardsRow = styled.div`
-  margin-top: 25px;
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
+  color: #BAA06A;
+  font-family: "Nunito Sans";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 120%;
   gap: 15px;
-`;
-
-export const SmallCard = styled.div`
-  padding: 18px 30px;
-  border-radius: 16px;
-
-  font-size: 14px;
-
-  font-weight: 600;
-  min-width: 140px;
-`;
-
-export const LargeCard = styled.div`
-  padding: 22px 35px;
-  border-radius: 16px;
-
-  font-size: 15px;
-
-  min-width: 180px;
+  display: flex;
+  padding-left: 110px;
+  margin-bottom: 40px;
 `;
 
 export const ScienceText = styled.p`
-  margin: 40px 0 20px;
-  font-size: 18px;
-
-
+  color: var(--roxo-700, #502665);
+  text-align: center;
+  font-family: "Nunito Sans";
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 120%; /* 38.4px */
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 25px;
   strong {
-
+    color: var(--dourado-200, #BA7E1B);
+    font-family: "Nunito Sans";
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: 120%;
   }
 `;
 
-export const Button = styled.button`
-  margin-top: 35px;
-  padding: 15px 40px;
-
-  border: none;
-  border-radius: 10px;
-  color: white;
-  font-weight: 700;
-  cursor: pointer;
-  font-size: 15px;
+export const CenterWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
 `;
 
+export const TransformatioTxt = styled.div`
+  color: #BAA06A;
+  text-align: center;
+  font-family: "Nunito Sans";
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%; /* 27px */
+  gap: 15px;
+  display: flex;
+  margin-bottom: 24px;
+`;
+
+export const CareTxt = styled.div`
+  color: var(--roxo-700, #502665);
+  text-align: center;
+  font-family: "Nunito Sans";
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%; /* 36px */
+`;
+
+
+export const HairTxt = styled.div`
+  color: var(--dourado-200, #BA7E1B);
+  font-family: "Nunito Sans";
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: 150%;
+  margin-bottom: 40px;
+`;

@@ -22,10 +22,10 @@ export default function Home() {
       <Hero/>
       <ScienceSection/>
       <Ingredients/>
-      <FAQ items={ faqData } contactCtaHref="/contato" />
+      <BenefitsSection/>
       <BuyContainer/>
       <InstaFeedCarousel/>
-      <BenefitsSection/>
+      <FAQ items={ faqData } contactCtaHref="/contato" />
       <Footer/>
 
   

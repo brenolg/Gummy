@@ -1,4 +1,8 @@
-import { Button, CardsRow, Container, HeaderText, LargeCard, PurposeBlock, PurposeSubtitle, PurposeTitle, ScienceText, SmallCard, SubText } from "./styles";
+import InfoCarousel from "./FeatureCarousel";
+import {  CareTxt, CenterWrapper, Container, HairTxt, HeaderText, PurposeTitle, ScienceText,  SubText, TransformatioTxt } from "./styles";
+import check from './check-circle.svg'
+import power from './power.svg'
+import { MainButton } from "@/components";
 
 
 export default function BenefitsSection() {
@@ -9,34 +13,26 @@ export default function BenefitsSection() {
       </HeaderText>
 
       <SubText>
-        Somos uma <strong>revolução em gomas de beleza com 
-      Cuidado 3 em 1</strong>
+        <strong>É Cuidado 3 em 1.</strong> Somos a evolução e em gomas de beleza
       </SubText>
 
-      <PurposeBlock>
-        <PurposeTitle>Nascemos de um <strong>propósito!</strong></PurposeTitle>
-        <PurposeSubtitle>Transformar autocuidado em:</PurposeSubtitle>
-
-        <CardsRow>
-          <SmallCard>Ritual leve</SmallCard>
-          <SmallCard>Delicioso</SmallCard>
-          <SmallCard>Realmente eficaz</SmallCard>
-        </CardsRow>
-      </PurposeBlock>
+      <PurposeTitle><img src={check}/>Nascemos de um propósito!</PurposeTitle>
 
       <ScienceText>
-        Criada com ciência e <strong>pensada para resultados consistentes ao longo do tempo.</strong>
+        Criada com ingredientes puros e inteligentes para
+        <strong>resultados rápidos, visíveis e consistentes</strong>
       </ScienceText>
 
-      <CardsRow>
-        <LargeCard>Crescimento dos fios</LargeCard>
-        <LargeCard>Adeus queda de cabelo</LargeCard>
-        <LargeCard>Fortalecer as unhas</LargeCard>
-        <LargeCard>Envelhecer com saúde</LargeCard>
-      </CardsRow>
+      <InfoCarousel/>
 
-      <Button>COMECE JÁ SUA MUDANÇA</Button>
+      <CenterWrapper>
+        <TransformatioTxt><img src={power}/>Transformação visível em poucas semanas</TransformatioTxt>
 
+        <CareTxt >PowerGummy: o cuidado que tira você da frustração e entrega resultado.</CareTxt>
+        <HairTxt>Cabelo, pele e unhas do jeito que você sempre sonhou.</HairTxt>
+
+        <MainButton maxW={579}>COMECE JÁ SUA MUDANÇA</MainButton>
+      </CenterWrapper>
     </Container>
   );
 }
