@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Wrapper, Row, Input, ApplyButton, Chips, Chip, Icon, RemoveButton } from "./styles";
+import { Wrapper, Row, Input, ApplyButton, Chips, Chip, Icon, RemoveButton, InputError } from "./styles";
 import couponIcon from "@/assets/icons/couponIcon.svg";
 import xGolden from "@/assets/icons/xGolden.svg";
 import { useCoreData } from "@/context/coreDataContext";
 import { useFetch } from "@/hooks/useFetch";
+import imgError from '@/assets/icons/error.svg'
 
 type Coupon = {
   code: string;
@@ -17,6 +18,7 @@ interface DiscountCouponsProps {
 export const DiscountCoupons: React.FC<DiscountCouponsProps> = ({ onChange }) => {
   const { paymentMethod , coupons, setCoupons } = useCoreData(); 
   const [code, setCode] = useState("");
+  const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
   const { fetcher } = useFetch();
 
@@ -41,7 +43,8 @@ export const DiscountCoupons: React.FC<DiscountCouponsProps> = ({ onChange }) =>
   }, [paymentMethod]);
 
   async function handleApply() {
-    if (!code.trim() || loading) return;
+    setError('')
+    if (loading) return;
 
     const normalized = code.trim().toUpperCase();
 
@@ -76,6 +79,7 @@ export const DiscountCoupons: React.FC<DiscountCouponsProps> = ({ onChange }) =>
       setCode("");
     } catch (err) {
       console.error("Erro ao validar cupom:", err);
+      setError('Nenhum cupom correspondente foi encontrado.')
     } finally {
       setLoading(false);
     }
@@ -83,25 +87,31 @@ export const DiscountCoupons: React.FC<DiscountCouponsProps> = ({ onChange }) =>
 
   function handleRemove(code: string) {
     //Impede a deleção do cupom pix
-    if (code === "PIX10") return;
+    if (code === "PIX05") return;
     const updated = coupons.filter((c) => c.code !== code);
     setCoupons(updated);
     onChange?.(updated);
   }
 
+  const nonPixCoupons = coupons.filter(c => c.code !== "PIX05");
+  const maxNormalCouponsReached = nonPixCoupons.length >= 1;
   return (
     <Wrapper>
       <Row>
         <Input
           placeholder="Código de desconto"
           value={code}
+          onFocus={() => setError('')}
           onChange={(e) => setCode(e.target.value)}
           onKeyDown={(e) => e.key === "Enter" && (e.preventDefault(), handleApply())}
         />
 
-        <ApplyButton disabled={!code.trim()} onClick={handleApply}>
+        <ApplyButton disabled={maxNormalCouponsReached} onClick={handleApply}>
           Aplicar
         </ApplyButton>
+      <InputError $error={!!error}>
+        <img src={imgError} className='img-error'/>  {error}
+      </InputError>
       </Row>
 
       {coupons.length > 0 && (

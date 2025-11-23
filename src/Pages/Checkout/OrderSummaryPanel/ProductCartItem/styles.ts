@@ -15,11 +15,11 @@ export const ImageContainer = styled.div<{ $img: string }>`
   height: 64px;
   width: 64px;
   border: 2px solid #FFF;
-  background: url(${({ $img }) => $img}) lightgray;
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
   position: relative;
+  background: url(${({ $img }) => $img}) #EBD7F5 3.589px 10px / 88.783% 71.538% no-repeat;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
 `;
 
 export const QuantityBadge = styled.div`
@@ -27,9 +27,8 @@ export const QuantityBadge = styled.div`
   top: -7px;
   right: -7px;
   display: flex;
-  min-width: 24px;
-  min-height: 24px;
-  padding: 3px 9.75px 3px 9.73px;
+  width: 24px;
+  height: 24px;
   justify-content: center;
   align-items: center;
   border-radius: 8px;
@@ -41,28 +40,42 @@ export const QuantityBadge = styled.div`
   font-style: normal;
   font-weight: 700;
   line-height: 18px;
+  z-index: 1;
 `;
 
 export const Info = styled.div`
   flex: 1;
   display: flex;
   flex-direction: column;
+  padding-left: 14px;
 `;
 
 export const Title = styled.p`
-  font-size: 15px;
-  font-weight: 600;
-  margin: 0;
+overflow: hidden;
+color: #000;
+text-overflow: ellipsis;
+font-family: "Nunito Sans";
+font-size: 14px;
+font-style: normal;
+font-weight: 400;
+line-height: 21px; /* 150% */
 `;
 
 export const SubTitle = styled.p`
-  font-size: 13px;
-  color: #6b6b6b;
-  margin: 2px 0 0;
+color: rgba(0, 0, 0, 0.56);
+font-family: "Nunito Sans";
+font-size: 12px;
+font-style: normal;
+font-weight: 400;
+line-height: 18px; /* 150% */
 `;
 
 export const Price = styled.p`
-  font-size: 15px;
-  font-weight: 600;
-  color: #000;
+color: #000;
+font-family: "Nunito Sans";
+font-size: 14px;
+font-style: normal;
+font-weight: 700;
+line-height: 21px; /* 150% */
+text-align: end;
 `;

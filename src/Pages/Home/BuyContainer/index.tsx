@@ -2,6 +2,7 @@ import { useCoreData, type CartItem } from "@/context/coreDataContext";
 import { MainButton } from "@/components";
 import { CartItemsData } from "@/context/data";
 import { Card, Grid, Price, Section } from "./styles";
+import { fmtBRL } from "@/utils/helper";
 
 // helper: upsert
 function upsertCart(
@@ -51,7 +52,7 @@ export default function BuyContainer() {
 
           <Price>
             <p className="priceNumber">
-              R$ {CartItemsData[0].unitPrice.toFixed(2)}
+              {fmtBRL(Number(CartItemsData[0].unitPrice.toFixed(2)))}
             </p>
             <p className="payMethod">ou 3 x de R$ 36,63 (sem juros)</p>
           </Price>
@@ -80,7 +81,7 @@ export default function BuyContainer() {
           <Price>
             <p className="dashed">R$ 327,00</p>
             <p className="priceNumber">
-              R$ {CartItemsData[1].unitPrice.toFixed(2)}
+              {fmtBRL(Number(CartItemsData[1].unitPrice.toFixed(2)))}
             </p>
             <p className="payMethod">ou 3 x de R$ 89,67 (sem juros)</p>
           </Price>

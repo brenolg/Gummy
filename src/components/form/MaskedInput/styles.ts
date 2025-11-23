@@ -14,9 +14,9 @@ type InputBaseProps = IStyleProps & Record<string, unknown>
 export const Input = styled(IMaskInput)<InputBaseProps>`
   padding: 16px;
   transition: all 0.3s ease-out;
-  height: 48px;
-  outline: none;
   border-radius: 5px;
+  outline: none;
+  height: 48px;
   border: 1px solid ;
   width: 100%;
   max-width: 100%;

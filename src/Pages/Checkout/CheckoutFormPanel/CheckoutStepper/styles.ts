@@ -28,11 +28,18 @@ export const StepCircle = styled.div<{ $active: boolean }>`
     $active ? theme.colors.roxo700 : "transparent"};
 
   color: ${({ $active, theme }) =>
-    $active ? theme.colors.neutral.white0 : theme.colors.neutral.grey500};
+    $active ? theme.colors.neutral.white0 : theme.colors.neutral.grey400};
 
-  border: 2px solid
+  border: 1px solid
     ${({ $active, theme }) =>
-      $active ? theme.colors.roxo700 : theme.colors.neutral.grey500};
+      $active ? theme.colors.roxo700 : theme.colors.neutral.grey400};
+
+  text-align: center;
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
 `;
 
 export const StepLabel = styled.span<{ $active: boolean }>`

@@ -1,53 +1,61 @@
+import { colors, typography } from "@/styles/themeUtils";
 import styled from "styled-components";
 
 export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  margin-bottom:21px;
 `;
 
 export const Row = styled.div`
   display: flex;
   gap: 10px;
   margin-bottom: 21px;
+  position: relative;
 `;
 
 export const Input = styled.input`
-  padding: 14px 11px;
-  border: 1px solid #DEDEDE;
-  border-radius: 8px;
-  height: 50px;
+  transition: all 0.3s ease-out;
+  border-radius: 5px;
+  outline: none;
   width: 100%;
-  color: #707070;
-  font-family: Poppins;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
+  padding: 14px 11px;
+  border: 1px solid ${t => colors(t).neutral.grey500};
+  box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.05);
+  color: ${t => colors(t).neutral.black700};
+  background: ${t => colors(t).neutral.white0};
+  &:hover {
+    border: 1px solid var(--Roxo-25, #EBD7F5);
+    background: var(--Roxo-0, #FDFBFE);
+  }
+  &:focus {
+    border: 1px solid var(--roxo-700, #502665);
+    background: var(--Color-Neutral-White-0, #FFF);
+  }
+
+  ${t => typography(t).input};
 `;
 
 export const ApplyButton = styled.button`
   height: 50px;
-display: flex;
-padding: 14.5px 14px 15px 14px;
-flex-direction: column;
-align-items: flex-start;
-border-radius: 8px;
-opacity: 0.5;
-background: #D7CBEE;
-box-shadow: 0 0 0 1px #ECD0DF inset;
-color: #FFF;
-
-text-align: center;
-font-family: Poppins;
-font-size: 14px;
-font-style: normal;
-font-weight: 700;
-line-height: 21px;
+  display: flex;
+  padding: 14.5px 14px 15px 14px;
+  flex-direction: column;
+  align-items: flex-start;
+  border-radius: 8px;
+  transition: all ease 0.3s;
+  color: #FFF;
+  border-radius: 16px;
+  border: 1px solid #ECECEC;
+  background: linear-gradient(92deg, var(--roxo-700, #502665) 5.08%, var(--Roxo-500, #7D37A1) 102.77%);
+  color: #FFF;
+  text-align: center;
+  font-family: "Nunito Sans";
+  font-size: 14px;
+  font-weight: 700;
   cursor: pointer;
-
   &:disabled {
-    opacity: 0.5;
+    background: #D7CBEE;
+    box-shadow: 0 0 0 1px #ECD0DF inset;
     cursor: not-allowed;
   }
 `;
@@ -87,3 +95,41 @@ export const RemoveButton = styled.button`
   cursor: pointer;
   color: #9a6a05;
 `;
+
+interface IStyleProps {
+  $error: boolean
+}
+
+export const InputError = styled.div<IStyleProps>`
+  position: absolute;
+  bottom: 0px;
+  transform: translateY(100%);
+  text-align: start;
+  display: flex;
+  opacity: ${(props) => {
+    if (props.$error) return 1 // Com erro
+    return 0 // Nenhuma condição atendida
+  }};
+  align-items: center;
+  transition: all 0.3s ease-out;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--Vermelho-Alerta, #F00);
+  font-family: Inter;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  display: flex;
+  padding: 2px 4px;
+  align-items: center;
+  gap: 4px;
+  align-self: stretch;
+  .img-error {
+    width: 12px;
+    height: 12px;
+  }
+`
+

@@ -39,7 +39,7 @@ export default function InfoForm() {
 
     if (data.advertisement) {
       const body = {
-        email: data.email, phone: data.phone 
+        email: data.email, phone: data.phone , name: data.name
       }
 
       fetcher(

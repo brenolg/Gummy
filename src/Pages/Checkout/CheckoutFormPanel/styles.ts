@@ -20,6 +20,10 @@ export const InputContainer  = styled.div`
   margin-bottom: 32px;
 `
 
+export const ContentContainer  = styled.div`
+  max-width: 382px;
+`
+
 export const FormTitle = styled.h2`
   color: #3C3C3C;
   font-family: "Nunito Sans";

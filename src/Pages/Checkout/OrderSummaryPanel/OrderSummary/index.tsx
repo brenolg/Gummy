@@ -3,7 +3,7 @@ import { useCoreData } from "@/context/coreDataContext";
 import { useFetch } from "@/hooks/useFetch";
 import { handleNumberOfBoxes, handleProductWeight } from "./helper";
 import { fmtBRL } from "@/utils/helper";
-import { Box, DiscountValue, Hint, Label, Row, Spacer, TotalLabel, TotalRow, TotalValue, Value } from "./styles";
+import { Box, DiscountValue, Label, Row, TotalLabel, TotalRow, TotalValue, } from "./styles";
 
 export interface ShippingResponse {
   frete: {
@@ -101,7 +101,6 @@ export default function OrderSummary({  couponMode = "sum" }: Props) {
           "POST",
           { body }
         );
-        console.log(resp)
 
         if (!resp || !resp.frete) {
           console.warn("Resposta inesperada do servidor:", resp);
@@ -126,7 +125,7 @@ export default function OrderSummary({  couponMode = "sum" }: Props) {
     <Box>
       <Row>
         <Label>Subtotal · {itemsCount} {itemsCount === 1 ? "item" : "itens"}</Label>
-        <Value>{fmtBRL(subtotal)}</Value>
+        <Label>{fmtBRL(subtotal)}</Label>
       </Row>
 
       {coupons.length > 0 ? (
@@ -141,13 +140,12 @@ export default function OrderSummary({  couponMode = "sum" }: Props) {
       <Row>
         <Label>Frete</Label>
         {shipping == null ? (
-          <Hint>Digite o CEP para calcular</Hint>
+          <DiscountValue>Digite o CEP para calcular</DiscountValue>
         ) : (
-          <Value>{shipping.valor}</Value>
+          <DiscountValue>{shipping.valor}</DiscountValue>
         )}
       </Row>
 
-      <Spacer />
 
       <TotalRow>
         <TotalLabel>Total</TotalLabel>

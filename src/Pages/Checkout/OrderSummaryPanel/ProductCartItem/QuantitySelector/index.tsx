@@ -1,6 +1,8 @@
 import { useCoreData } from "@/context/coreDataContext";
 import type { CartItem } from "@/context/coreDataContext";
-import { Button, Value, Wrapper } from "./styles";
+import { MinusButton, PlusButton, Value, Wrapper } from "./styles";
+import minus from '@/assets/icons/minus.svg'
+import plus from '@/assets/icons/plus.svg'
 
 type Props = {
   productId: string;
@@ -34,9 +36,14 @@ export function QuantitySelector({ productId }: Props) {
 
   return (
     <Wrapper>
-      <Button onClick={decrease}>–</Button>
+      <MinusButton onClick={decrease}>
+        <img src={minus}/>
+      </MinusButton>
       <Value>{item.quantity}</Value>
-      <Button onClick={increase}>+</Button>
+      <PlusButton onClick={increase}>
+        <img src={plus}/>
+      </PlusButton >
     </Wrapper>
+    
   );
 }

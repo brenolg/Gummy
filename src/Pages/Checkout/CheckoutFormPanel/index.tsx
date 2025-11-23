@@ -1,7 +1,3 @@
-import { useEffect } from 'react';
-import {  useForm, type Resolver } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { schemaFull } from './schema';
 import { FormContainer, PageTitle } from '../styles';
 import InfoForm from './InfoForm';
 import AddressForm from './AddressForm';
@@ -10,7 +6,7 @@ import CheckoutStepper from './CheckoutStepper';
 import SecureTxt from './SecureTxt';
 import backArow from '@/assets/icons/backArow.svg'
 import { useNavigate } from 'react-router-dom';
-import { BackButton } from './styles'
+import { BackButton, ContentContainer } from './styles'
 import OrderSuccess from './OrderSuccess';
 import { useCoreData } from '@/context/coreDataContext';
 import QRCode from './QR Code';
@@ -41,35 +37,15 @@ export type CheckoutFormData = {
 };
 
 export default function CheckoutFormPanel() {
-  const { formStep, setFormPostalCode } = useCoreData();
+  const { formStep } = useCoreData();
   const navigate = useNavigate();
 
-  const methods = useForm<CheckoutFormData>({
-    resolver: yupResolver(schemaFull) as Resolver<CheckoutFormData>,
-    defaultValues: { 
-      name:'', email:'', phone:'', advertisement:false,
-      postalCode:'', address:'', district:'', addressComplement:'', addressNumber:'', city:'', state:'',
-      cardNumber:'', expiry:'', cvv:'', holderName:'', installments:1,
-    },
-    mode: 'onBlur',
-    reValidateMode: 'onChange'
-  });
 
-  
-
-  // usa o watch DO useForm (methods), não do useFormContext
-  const postalCode = methods.watch("postalCode");
-
-  useEffect(() => {
-    if (postalCode.length === 9) {
-      setFormPostalCode(postalCode);   // CEP válido -> salva no contexto global
-    } else {
-      setFormPostalCode("");           // opcional: limpa quando não tiver completo
-    }
-  }, [postalCode, setFormPostalCode]);
   return (
     <>
       <FormContainer>
+        
+        <ContentContainer>
         <BackButton onClick={() => navigate(-1)}>
           <img src={backArow}/>
           <PageTitle>Finalizar Compra</PageTitle>
@@ -78,15 +54,14 @@ export default function CheckoutFormPanel() {
         {/* Stepper de status do form (usa índice numérico mapeado) */}
         <CheckoutStepper />
 
-      
-            {formStep === 0 && <PaymentCardForm/>}
-            {formStep === 0 && <InfoForm/>}
-            {formStep === 1 && <AddressForm/>}
-            {formStep === 'qrcode' && <QRCode/>}
-            {formStep === 'success' && <OrderSuccess/>}
-
+          {formStep === 0 && <InfoForm/>}
+          {formStep === 1 && <AddressForm/>}
+          {formStep === 2 && <PaymentCardForm/>}
+          {formStep === 'qrcode' && <QRCode/>}
+          {formStep === 'success' && <OrderSuccess/>}
 
         <SecureTxt/>
+        </ContentContainer>
       </FormContainer>
     </>
   );
