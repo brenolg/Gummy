@@ -6,16 +6,20 @@ import chevron from "@/assets/imgs/chevron-down.svg";
 import ebook from "@/assets/pdf/ebook.pdf";
 import { CheckIcon, Header, TitlePedido, Wrapper, MainTitle, SubTitle, GiftText, GiftImage, EmailHint, DetailsWrapper, DetailsHeader, ChevronIcon, DetailsContent, SectionCard, SectionTitle, Field, FieldLabel, FieldValue, FieldRow, ShippingRow, ShippingPrice, ShippingSub } from "./styles";
 import { useCoreData } from "@/context/coreDataContext";
+import cardIcon from "@/assets/icons/creditCardPurple.svg"
+import pixIcon from "@/assets/icons/pixP.svg";
 
 export default function OrderConfirmed() {
   const [open, setOpen] = useState(false); // começa aberto ou fechado, como quiser
-  const { cart } = useCoreData();
+  const { cart, formData, paymentMethod } = useCoreData();
   console.log(cart)
 
   const hasGift = cart.some(
     item => item.productId.toLowerCase().includes("kit") && item.quantity > 0
   );
 
+  console.log(paymentMethod)
+  const isCreditCard = paymentMethod === 'CREDIT_CARD'
   return (
     <Wrapper>
       <Header>
@@ -57,11 +61,11 @@ export default function OrderConfirmed() {
               <SectionTitle>Contato</SectionTitle>
               <Field>
                 <FieldLabel>Email</FieldLabel>
-                <FieldValue>teste@gmail.com</FieldValue>
+                <FieldValue>{formData.email}</FieldValue>
               </Field>
               <Field>
                 <FieldLabel>Celular</FieldLabel>
-                <FieldValue>(48) 98812-3456</FieldValue>
+                <FieldValue>{formData.phone}</FieldValue>
               </Field>
             </SectionCard>
 
@@ -70,36 +74,36 @@ export default function OrderConfirmed() {
               <SectionTitle>Entrega</SectionTitle>
               <Field>
                 <FieldLabel>CEP</FieldLabel>
-                <FieldValue>01234-567</FieldValue>
+                <FieldValue>{formData.postalCode}</FieldValue>
               </Field>
               <Field>
                 <FieldLabel>Endereço</FieldLabel>
-                <FieldValue>Add</FieldValue>
+                <FieldValue>{formData.address}</FieldValue>
               </Field>
               <Field>
                 <FieldLabel>Bairro</FieldLabel>
-                <FieldValue>Add</FieldValue>
+                <FieldValue>{formData.district}</FieldValue>
               </Field>
 
               <FieldRow>
                 <Field flex={1}>
                   <FieldLabel>Complemento</FieldLabel>
-                  <FieldValue>Add</FieldValue>
+                  <FieldValue>{formData.addressComplement}</FieldValue>
                 </Field>
                 <Field flex={1}>
                   <FieldLabel>Número</FieldLabel>
-                  <FieldValue>Add</FieldValue>
+                  <FieldValue>{formData.addressNumber}</FieldValue>
                 </Field>
               </FieldRow>
 
               <FieldRow>
                 <Field flex={1}>
                   <FieldLabel>Cidade</FieldLabel>
-                  <FieldValue>Add</FieldValue>
+                  <FieldValue>{formData.city}</FieldValue>
                 </Field>
                 <Field flex={1}>
                   <FieldLabel>Estado</FieldLabel>
-                  <FieldValue>Add</FieldValue>
+                  <FieldValue>{formData.state}</FieldValue>
                 </Field>
               </FieldRow>
             </SectionCard>
@@ -109,7 +113,7 @@ export default function OrderConfirmed() {
               <SectionTitle>Frete</SectionTitle>
               <ShippingRow>
                 <div className="row">
-                  <FieldLabel>&lt;Nome do frete&gt;</FieldLabel>
+                  <FieldLabel>Frete EXP</FieldLabel>
                 <ShippingPrice>Grátis</ShippingPrice>
                 </div>
                   <ShippingSub>3 a 4 dias úteis</ShippingSub>
@@ -120,10 +124,8 @@ export default function OrderConfirmed() {
             <SectionCard>
               <SectionTitle>Forma de pagamento</SectionTitle>
               <Field>
-                <FieldValue>Cartão de crédito</FieldValue>
-              </Field>
-              <Field>
-                <FieldValue>PIX</FieldValue>
+                <img src={isCreditCard?  cardIcon : pixIcon}/>
+                <FieldValue>{isCreditCard ? 'Cartão de crédito' : "Pix"}</FieldValue>
               </Field>
             </SectionCard>
           </DetailsContent>

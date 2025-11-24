@@ -5,6 +5,7 @@ import Checkout from './Pages/Checkout'
 import TrackOrderPage from './Pages/TrackOrderPage'
 
 export default function AppRoutes() {
+
   return (
     <BrowserRouter>
       <Routes>

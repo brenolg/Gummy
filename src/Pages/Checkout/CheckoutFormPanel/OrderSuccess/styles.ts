@@ -159,6 +159,9 @@ border-radius: 8px;
 border: 1px solid var(--roxo-700, #502665);
 background: var(--Roxo-0, #FDFBFE);
 width: 100%;
+img {
+  width: 22px;
+}
 `;
 
 export const FieldLabel = styled.span`

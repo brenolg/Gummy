@@ -1,7 +1,6 @@
 import { useEffect, useState, type ReactNode } from "react";
 import { CoreDataContext, type PaymentMethod, type CartItem, type Coupon,  type FormStep, type MinimalCartItem } from "./coreDataContext";
 import { CartItemsData } from "./data";
-import { useLocation } from "react-router-dom"; 
 
 export default function CoreDataProvider({ children }: { children: ReactNode }) {
   const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>("CREDIT_CARD");
@@ -51,15 +50,6 @@ export default function CoreDataProvider({ children }: { children: ReactNode }) 
         // ignora erros de storage (ex: modo privado)
       }
     }, [cartStorage]);
-
-    const location = useLocation();
-
-    useEffect(() => {
-      // sempre que mudar de página:
-      setCoupons([]);
-      setFormData({});
-      setFormStep(0);
-    }, [location.pathname]);
 
   return (
     <CoreDataContext.Provider value={
