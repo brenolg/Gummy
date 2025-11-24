@@ -5,7 +5,7 @@ import { CartItemsData } from "./data";
 export default function CoreDataProvider({ children }: { children: ReactNode }) {
   const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>("CREDIT_CARD");
   const [coupons, setCoupons] = useState<Coupon[]>([]);
-  const [formStep, setFormStep] = useState<FormStep>('success');
+  const [formStep, setFormStep] = useState<FormStep>('qrcode');
   const [formPostalCode, setFormPostalCode] = useState("");
   const [globalLoading, setGlobalLoading] = useState(false)
   const [formData, setFormData] = useState<Record<string, string | boolean | number>>({});
