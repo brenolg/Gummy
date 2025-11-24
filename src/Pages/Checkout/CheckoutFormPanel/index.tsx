@@ -46,22 +46,26 @@ export default function CheckoutFormPanel() {
       <FormContainer>
         
         <ContentContainer>
-        <BackButton onClick={() => navigate(-1)}>
-          <img src={backArow}/>
-          <PageTitle>Finalizar Compra</PageTitle>
-        </BackButton>
+        {typeof formStep === "number" && 
+          <BackButton onClick={() => navigate('/')}>
+            <img src={backArow}/>
+            <PageTitle>Finalizar Compra</PageTitle>
+          </BackButton>
+        
+        }
 
         {/* Stepper de status do form (usa índice numérico mapeado) */}
-        <CheckoutStepper />
+          {typeof formStep === "number" && <CheckoutStepper />}
 
-          {formStep === 0 && <PaymentCardForm/>}
           {formStep === 0 && <InfoForm/>}
           {formStep === 1 && <AddressForm/>}
+          {formStep === 2 && <PaymentCardForm/>}
           {formStep === 'qrcode' && <QRCode/>}
-          {formStep === 'success' && <OrderSuccess/>}
 
-        <SecureTxt/>
+        
+        {typeof formStep === "number" && <SecureTxt/>}
         </ContentContainer>
+        {formStep === 'success' && <OrderSuccess/>}
       </FormContainer>
     </>
   );

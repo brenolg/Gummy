@@ -73,6 +73,10 @@ export default function OrderSummary({  couponMode = "sum" }: Props) {
   }, [cart, coupons, couponMode, shipping]);
 
   async function calcularFrete() {
+      if (subtotal > 119 && (formPostalCode.startsWith("8") || formPostalCode.startsWith("9"))) {
+        setShipping({ valor: 0, prazo: 0 });
+        return; 
+      }
       try {
         const BOX_DATA = {
           peso: 0.5,
@@ -139,13 +143,15 @@ export default function OrderSummary({  couponMode = "sum" }: Props) {
 
       <Row>
         <Label>Frete</Label>
+
         {shipping == null ? (
           <DiscountValue>Digite o CEP para calcular</DiscountValue>
         ) : (
-          <DiscountValue>{shipping.valor}</DiscountValue>
+          <DiscountValue>
+            {shipping.valor === 0 ? "Grátis" : fmtBRL(shipping.valor)}
+          </DiscountValue>
         )}
       </Row>
-
 
       <TotalRow>
         <TotalLabel>Total</TotalLabel>

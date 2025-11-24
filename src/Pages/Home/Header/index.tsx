@@ -2,23 +2,19 @@
 import logo from '@/assets/imgs/logo.svg'
 import { BuyButton, Container, Content, Logo, Nav, NavItem, RightArea } from "./styles";
 import CartDrawer from "./CartDrawer";
-import { useCoreData } from '@/context/coreDataContext';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-scroll';
 import defaultScrollProps from '@/utils/defaultScrollProps';
 
 export default function Header() {
-  const { cart } = useCoreData();
   const navigate = useNavigate();
 
-  const cartCount = cart.reduce(
-    (acc, item) => acc + (item.quantity || 0),
-    0
-  );
   function goToCheckout() {
-    if (cartCount > 0) {
     navigate("/checkout");
-    }
+  }
+
+  function goToTrack() {
+    navigate("/track");
   }
 
   return (
@@ -43,8 +39,9 @@ export default function Header() {
             <NavItem>DEPOIMENTOS</NavItem>
           </Link>
 
+          <button type='button' onClick={goToTrack}>
           <NavItem>RASTREAR PEDIDO</NavItem>
-          
+          </button>
           <BuyButton type="button" onClick={goToCheckout} >COMPRAR</BuyButton>
         </Nav>
 

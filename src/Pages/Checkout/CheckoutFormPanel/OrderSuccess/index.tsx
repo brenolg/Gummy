@@ -1,11 +1,14 @@
 import styled from "styled-components";
 import giftIcon from "@/assets/gif/gift.gif"; // Troque pelo seu ícone
+import check from '@/assets/imgs/checkP.svg'
+import { MainButton } from "@/components";
+import chevron from "@/assets/imgs/chevron-down.svg"
 
 export default function OrderConfirmed() {
   return (
     <Wrapper>
       <Header>
-        <CheckIcon>✔</CheckIcon>
+        <CheckIcon src={check}/>
         <TitlePedido>Pedido confirmado</TitlePedido>
       </Header>
 
@@ -16,14 +19,15 @@ export default function OrderConfirmed() {
 
       <GiftImage src={giftIcon} alt="Presente" />
 
-      <DownloadButton>Baixar e-book gratuito</DownloadButton>
+      <MainButton maxW={382}>Baixar e-book gratuito</MainButton>
 
       <EmailHint>
-        Você receberá um email de confirmação em breve, <br />
+        Você receberá um email de confirmação em breve, 
+        <br />
         junto com seu e-book!
       </EmailHint>
 
-      <DetailsButton>Detalhes da compra ⌄</DetailsButton>
+      <DetailsButton>Detalhes da compra <img src={chevron}/></DetailsButton>
     </Wrapper>
   );
 }
@@ -32,56 +36,64 @@ export default function OrderConfirmed() {
 
 const Wrapper = styled.div`
   width: 100%;
-  max-width: 480px;
-  margin: 0 auto;
-  padding: 32px 16px;
-  text-align: center;
-  font-family: "Inter", sans-serif;
-  color: #3c005a;
+  max-width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `;
 
 const Header = styled.div`
   display: flex;
-  align-items: center;
   gap: 8px;
-  justify-content: center;
-  margin-bottom: 32px;
+  justify-content: flex-start;
+  margin-bottom: 52px;
 `;
 
-const CheckIcon = styled.div`
-  width: 22px;
-  height: 22px;
-  background: #7b3bf3;
-  color: white;
-  font-size: 14px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+const CheckIcon = styled.img`
+width: 32px;
+height: 32px;
 `;
 
 const TitlePedido = styled.span`
-  font-size: 18px;
-  font-weight: 600;
+color: var(--roxo-700, #502665);
+font-family: "Nunito Sans";
+font-size: 20px;
+font-style: normal;
+font-weight: 700;
+line-height: 150%;
 `;
 
 const MainTitle = styled.h2`
-  font-size: 26px;
-  font-weight: 700;
-  margin-bottom: 4px;
+color: var(--roxo-700, #502665);
+text-align: center;
+font-family: "Nunito Sans";
+font-size: 32px;
+font-style: normal;
+font-weight: 700;
+line-height: 150%; /* 48px */
 `;
 
 const SubTitle = styled.p`
-  font-size: 16px;
-  font-weight: 400;
-  margin-bottom: 20px;
-  color: #5a00a3;
+  color: var(--roxo-700, #502665);
+  font-family: "Nunito Sans";
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 150%;
+  text-align: center;
+  margin-bottom: 52px;
 `;
 
 const GiftText = styled.p`
-  color: #c57c00;
-  font-weight: 600;
-  margin-bottom: 20px;
+color: var(--dourado-200, #BA7E1B);
+text-align: center;
+font-family: "Nunito Sans";
+font-size: 20px;
+font-style: normal;
+font-weight: 700;
+line-height: 32px; /* 160% */
 `;
 
 const GiftImage = styled.img`
@@ -90,34 +102,33 @@ const GiftImage = styled.img`
   display: block;
 `;
 
-const DownloadButton = styled.button`
-  width: 100%;
-  background: linear-gradient(90deg, #6a00f4, #b400f6);
-  border: none;
-  padding: 14px 0;
-  margin-top: 12px;
-  margin-bottom: 20px;
-  border-radius: 12px;
-  color: white;
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-`;
-
 const EmailHint = styled.p`
-  font-size: 13px;
-  color: #575757;
-  margin-bottom: 28px;
-  line-height: 1.4;
+  color: var(--Color-Neutral-Black-700, #424242);
+  text-align: center;
+  font-family: "Nunito Sans";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin-top: 24px;
+  margin-bottom: 24px;
 `;
 
 const DetailsButton = styled.button`
+  border-radius: 24px 24px 0 0;
+  border: 1px solid var(--roxo-700, #502665);
+  background: var(--Roxo-0, #FDFBFE);
+  height: 75px;
+  color: var(--roxo-700, #502665);
+  text-align: center;
+  font-family: "Nunito Sans";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
   width: 100%;
-  background: #f9f4ff;
-  border: 1px solid #e8d8ff;
-  padding: 14px 0;
-  border-radius: 12px;
-  font-size: 15px;
-  font-weight: 500;
-  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
 `;
