@@ -18,6 +18,16 @@ export const InputContainer  = styled.div`
   background: #FFF;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.08);
   margin-bottom: 32px;
+
+  .pix-description {
+    color: var(--Color-Neutral-Black-700, #424242);
+    text-align: center;
+    font-family: "Nunito Sans";
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
 `
 
 export const ContentContainer  = styled.div`

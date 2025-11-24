@@ -1,5 +1,18 @@
 import { createContext, useContext } from "react";
 
+export interface ShippingResponse {
+  frete: {
+    prazo: number;
+    valor: number;
+  };
+  endereco: {
+    rua: string;
+    bairro: string;
+    cidade: string;
+    estado: string;
+  };
+}
+
 export type PaymentMethod = "CREDIT_CARD" | "PIX";
 
 export type CartItem = {
@@ -53,6 +66,10 @@ type CoreDataContextProps = {
 
   formData: FormDataType;
   setFormData: React.Dispatch<React.SetStateAction<FormDataType>>;
+
+  shipping :ShippingResponse["frete"] | null;
+  setShipping: React.Dispatch<React.SetStateAction<ShippingResponse["frete"] | null>>;
+
 };
 
 export const CoreDataContext = createContext<CoreDataContextProps | undefined>(undefined);

@@ -8,11 +8,11 @@ import { CheckIcon, Header, TitlePedido, Wrapper, MainTitle, SubTitle, GiftText,
 import { useCoreData } from "@/context/coreDataContext";
 import cardIcon from "@/assets/icons/creditCardPurple.svg"
 import pixIcon from "@/assets/icons/pixP.svg";
+import { fmtBRL } from "@/utils/helper";
 
 export default function OrderConfirmed() {
   const [open, setOpen] = useState(false); // começa aberto ou fechado, como quiser
-  const { cart, formData, paymentMethod } = useCoreData();
-  console.log(cart)
+  const { cart, formData, paymentMethod, shipping} = useCoreData();
 
   const hasGift = cart.some(
     item => item.productId.toLowerCase().includes("kit") && item.quantity > 0
@@ -114,9 +114,9 @@ export default function OrderConfirmed() {
               <ShippingRow>
                 <div className="row">
                   <FieldLabel>Frete EXP</FieldLabel>
-                <ShippingPrice>Grátis</ShippingPrice>
+                <ShippingPrice>{shipping?.valor !== undefined ? fmtBRL(shipping.valor) : "--"}</ShippingPrice>
                 </div>
-                  <ShippingSub>3 a 4 dias úteis</ShippingSub>
+                  <ShippingSub>{shipping?.prazo} dias</ShippingSub>
               </ShippingRow>
             </SectionCard>
 

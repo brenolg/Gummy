@@ -1,22 +1,9 @@
-import { useEffect, useMemo, useState } from "react";
-import { useCoreData } from "@/context/coreDataContext";
+import { useEffect, useMemo } from "react";
+import { useCoreData, type ShippingResponse } from "@/context/coreDataContext";
 import { useFetch } from "@/hooks/useFetch";
 import { handleNumberOfBoxes, handleProductWeight } from "./helper";
 import { fmtBRL } from "@/utils/helper";
 import { Box, DiscountValue, Label, Row, TotalLabel, TotalRow, TotalValue, } from "./styles";
-
-export interface ShippingResponse {
-  frete: {
-    prazo: number;
-    valor: number;
-  };
-  endereco: {
-    rua: string;
-    bairro: string;
-    cidade: string;
-    estado: string;
-  };
-}
 
 type Props = {
   /** Valor do frete; se null/undefined, mostra a dica para digitar o CEP */
@@ -25,9 +12,8 @@ type Props = {
 };
 
 export default function OrderSummary({  couponMode = "sum" }: Props) {
-  const { cart, coupons, formPostalCode } = useCoreData();
+  const { cart, coupons, formPostalCode, shipping, setShipping, setGlobalLoading } = useCoreData();
   const { fetcher } = useFetch();
-  const [shipping, setShipping] = useState<ShippingResponse["frete"] | null>(null);
 
   const {
     itemsCount,
@@ -78,6 +64,7 @@ export default function OrderSummary({  couponMode = "sum" }: Props) {
         return; 
       }
       try {
+        setGlobalLoading(true)
         const BOX_DATA = {
           peso: 0.5,
           altura: 40,
@@ -116,6 +103,8 @@ export default function OrderSummary({  couponMode = "sum" }: Props) {
     } catch (error) {
         console.error("Erro ao calcular frete:", error);
         setShipping(null);
+    } finally {
+      setGlobalLoading(false)
     }
   }
 

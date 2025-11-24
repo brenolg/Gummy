@@ -1,5 +1,5 @@
 import { useEffect, useState, type ReactNode } from "react";
-import { CoreDataContext, type PaymentMethod, type CartItem, type Coupon,  type FormStep, type MinimalCartItem } from "./coreDataContext";
+import { CoreDataContext, type PaymentMethod, type CartItem, type Coupon,  type FormStep, type MinimalCartItem, type ShippingResponse } from "./coreDataContext";
 import { CartItemsData } from "./data";
 
 export default function CoreDataProvider({ children }: { children: ReactNode }) {
@@ -9,6 +9,7 @@ export default function CoreDataProvider({ children }: { children: ReactNode }) 
   const [formPostalCode, setFormPostalCode] = useState("");
   const [globalLoading, setGlobalLoading] = useState(false)
   const [formData, setFormData] = useState<Record<string, string | boolean | number>>({});
+  const [shipping, setShipping] = useState<ShippingResponse["frete"] | null>(null);
 
     const CART_KEY = "powergummy.cart";
     // 🔹 Estado minimalista que VAI pro localStorage: só id + quantidade
@@ -53,7 +54,7 @@ export default function CoreDataProvider({ children }: { children: ReactNode }) 
 
   return (
     <CoreDataContext.Provider value={
-      { paymentMethod, setPaymentMethod, cart, setCart, coupons, setCoupons, formStep, setFormStep , formPostalCode, setFormPostalCode, cartStorage, setCartStorage, globalLoading, setGlobalLoading, formData, setFormData}
+      { paymentMethod, setPaymentMethod, cart, setCart, coupons, setCoupons, formStep, setFormStep , formPostalCode, setFormPostalCode, cartStorage, setCartStorage, globalLoading, setGlobalLoading, formData, setFormData, shipping, setShipping}
       }>
       {children}
     </CoreDataContext.Provider>

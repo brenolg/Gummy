@@ -30,7 +30,7 @@ export default function PaymentCardForm() {
     { label: "11x", value: 11 },
     { label: "12x", value: 12 },
   ];
-  const { paymentMethod, formData, cartStorage, setFormStep , setFormData} = useCoreData();
+  const { paymentMethod, formData, cartStorage, setFormStep , setFormData, globalLoading} = useCoreData();
 
   const methods = useForm<CheckoutFormData>({
     resolver: paymentMethod === "CREDIT_CARD"
@@ -44,6 +44,7 @@ export default function PaymentCardForm() {
   });
 
   const handleStep = async () => {
+    if (globalLoading) return
     if (paymentMethod !== "PIX") {
       const isValid = await methods.trigger(); // valida só no cartão
 
@@ -127,14 +128,14 @@ export default function PaymentCardForm() {
               <MInput name="holderName" type="text" placeholder="Nome do titular do Cartão" hasAsterisk mb={24}/>
               <Select name="installments" placeholder="Parcelas" options={installmentsOptions} hasAsterisk />
             </> : 
-            <div>
+            <div className='pix-description'>
               Clique no botão de “Confirmar pagamento”
               para visualizar o QR Code de pagamento
             </div>
           }
 
         </InputContainer>
-          <MainButton type="submit" >
+          <MainButton type="submit" loading={globalLoading} >
             Confirmar Pagamento
           </MainButton>
       </form>
