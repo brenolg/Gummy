@@ -33,13 +33,13 @@ export default function Header() {
             <Link to="ingredients" {...defaultScrollProps}>
           <NavItem>FÓRMULA</NavItem>
           </Link>
-          <Link to="buy" {...defaultScrollProps}>
+          <Link to="beneficios" {...defaultScrollProps}>
             <NavItem>BENEFÍCIOS</NavItem>
           </Link>
-            <Link to="buy" {...defaultScrollProps}>
+            <Link to="use" {...defaultScrollProps}>
           <NavItem>COMO USAR</NavItem>
           </Link>
-          <Link to="buy" {...defaultScrollProps}>
+          <Link to="depoimentos" {...defaultScrollProps}>
             <NavItem>DEPOIMENTOS</NavItem>
           </Link>
 

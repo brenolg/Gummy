@@ -12,7 +12,7 @@ import { MainButton } from "@/components";
 
 export default function HowToUse() {
   return (
-    <Wrapper>
+    <Wrapper id='use'>
       <LeftBox>
         <Title>COMO USAR</Title>
 

@@ -18,7 +18,7 @@ const depoimentos = [
 
 export default function Testimonials() {
   return (
-    <Wrapper>
+    <Wrapper id='depoimentos'>
       <TitleArea>
         <SubTitle>O QUE ESTÃO FALANDO</SubTitle>
         <Title>Depoimentos <span>Power Gummy</span></Title>

@@ -14,7 +14,7 @@ export default function BenefitsSection() {
     
   }
   return (
-    <Container>
+    <Container id='beneficios'>
       <HeaderText>
         <strong>Power Gummy</strong> é mais que um suplemento
       </HeaderText>
