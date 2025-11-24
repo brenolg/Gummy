@@ -1,134 +1,136 @@
-import styled from "styled-components";
-import giftIcon from "@/assets/gif/gift.gif"; // Troque pelo seu ícone
-import check from '@/assets/imgs/checkP.svg'
+import { useState } from "react";
+import giftIcon from "@/assets/gif/gift.gif";
+import check from "@/assets/imgs/checkP.svg";
 import { MainButton } from "@/components";
-import chevron from "@/assets/imgs/chevron-down.svg"
+import chevron from "@/assets/imgs/chevron-down.svg";
+import ebook from "@/assets/pdf/ebook.pdf";
+import { CheckIcon, Header, TitlePedido, Wrapper, MainTitle, SubTitle, GiftText, GiftImage, EmailHint, DetailsWrapper, DetailsHeader, ChevronIcon, DetailsContent, SectionCard, SectionTitle, Field, FieldLabel, FieldValue, FieldRow, ShippingRow, ShippingPrice, ShippingSub } from "./styles";
+import { useCoreData } from "@/context/coreDataContext";
 
 export default function OrderConfirmed() {
+  const [open, setOpen] = useState(false); // começa aberto ou fechado, como quiser
+  const { cart } = useCoreData();
+  console.log(cart)
+
+  const hasGift = cart.some(
+    item => item.productId.toLowerCase().includes("kit") && item.quantity > 0
+  );
+
   return (
     <Wrapper>
       <Header>
-        <CheckIcon src={check}/>
+        <CheckIcon src={check} />
         <TitlePedido>Pedido confirmado</TitlePedido>
       </Header>
 
       <MainTitle>Parabéns,</MainTitle>
       <SubTitle>sua compra foi realizada com sucesso!</SubTitle>
+      {hasGift && (
+        <>
+          <GiftText>Sua pedido desbloqueou um presente!</GiftText>
 
-      <GiftText>Sua pedido desbloqueou um presente!</GiftText>
+          <GiftImage src={giftIcon} alt="Presente" />
 
-      <GiftImage src={giftIcon} alt="Presente" />
+          <MainButton maxW={382} onClick={() => window.open(ebook, "_blank")}>
+            Baixar e-book gratuito
+          </MainButton>
 
-      <MainButton maxW={382}>Baixar e-book gratuito</MainButton>
+          <EmailHint>
+            Você receberá um email de confirmação em breve,
+            <br />
+            junto com seu e-book!
+          </EmailHint>
+        </>
+      )}
 
-      <EmailHint>
-        Você receberá um email de confirmação em breve, 
-        <br />
-        junto com seu e-book!
-      </EmailHint>
+      {/* DROPDOWN DE DETALHES */}
+      <DetailsWrapper>
+        <DetailsHeader type="button" onClick={() => setOpen((p) => !p)} $open={open}>
+          <span>Detalhes da compra</span>
+          <ChevronIcon src={chevron} alt="" $open={open} />
+        </DetailsHeader>
 
-      <DetailsButton>Detalhes da compra <img src={chevron}/></DetailsButton>
+        {open && (
+          <DetailsContent>
+            {/* CONTATO */}
+            <SectionCard>
+              <SectionTitle>Contato</SectionTitle>
+              <Field>
+                <FieldLabel>Email</FieldLabel>
+                <FieldValue>teste@gmail.com</FieldValue>
+              </Field>
+              <Field>
+                <FieldLabel>Celular</FieldLabel>
+                <FieldValue>(48) 98812-3456</FieldValue>
+              </Field>
+            </SectionCard>
+
+            {/* ENTREGA */}
+            <SectionCard>
+              <SectionTitle>Entrega</SectionTitle>
+              <Field>
+                <FieldLabel>CEP</FieldLabel>
+                <FieldValue>01234-567</FieldValue>
+              </Field>
+              <Field>
+                <FieldLabel>Endereço</FieldLabel>
+                <FieldValue>Add</FieldValue>
+              </Field>
+              <Field>
+                <FieldLabel>Bairro</FieldLabel>
+                <FieldValue>Add</FieldValue>
+              </Field>
+
+              <FieldRow>
+                <Field flex={1}>
+                  <FieldLabel>Complemento</FieldLabel>
+                  <FieldValue>Add</FieldValue>
+                </Field>
+                <Field flex={1}>
+                  <FieldLabel>Número</FieldLabel>
+                  <FieldValue>Add</FieldValue>
+                </Field>
+              </FieldRow>
+
+              <FieldRow>
+                <Field flex={1}>
+                  <FieldLabel>Cidade</FieldLabel>
+                  <FieldValue>Add</FieldValue>
+                </Field>
+                <Field flex={1}>
+                  <FieldLabel>Estado</FieldLabel>
+                  <FieldValue>Add</FieldValue>
+                </Field>
+              </FieldRow>
+            </SectionCard>
+
+            {/* FRETE */}
+            <SectionCard>
+              <SectionTitle>Frete</SectionTitle>
+              <ShippingRow>
+                <div className="row">
+                  <FieldLabel>&lt;Nome do frete&gt;</FieldLabel>
+                <ShippingPrice>Grátis</ShippingPrice>
+                </div>
+                  <ShippingSub>3 a 4 dias úteis</ShippingSub>
+              </ShippingRow>
+            </SectionCard>
+
+            {/* FORMA DE PAGAMENTO */}
+            <SectionCard>
+              <SectionTitle>Forma de pagamento</SectionTitle>
+              <Field>
+                <FieldValue>Cartão de crédito</FieldValue>
+              </Field>
+              <Field>
+                <FieldValue>PIX</FieldValue>
+              </Field>
+            </SectionCard>
+          </DetailsContent>
+        )}
+      </DetailsWrapper>
     </Wrapper>
   );
 }
 
-/* ---------------- STYLES ---------------- */
 
-const Wrapper = styled.div`
-  width: 100%;
-  max-width: 100%;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`;
-
-const Header = styled.div`
-  display: flex;
-  gap: 8px;
-  justify-content: flex-start;
-  margin-bottom: 52px;
-`;
-
-const CheckIcon = styled.img`
-width: 32px;
-height: 32px;
-`;
-
-const TitlePedido = styled.span`
-color: var(--roxo-700, #502665);
-font-family: "Nunito Sans";
-font-size: 20px;
-font-style: normal;
-font-weight: 700;
-line-height: 150%;
-`;
-
-const MainTitle = styled.h2`
-color: var(--roxo-700, #502665);
-text-align: center;
-font-family: "Nunito Sans";
-font-size: 32px;
-font-style: normal;
-font-weight: 700;
-line-height: 150%; /* 48px */
-`;
-
-const SubTitle = styled.p`
-  color: var(--roxo-700, #502665);
-  font-family: "Nunito Sans";
-  font-size: 20px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 150%;
-  text-align: center;
-  margin-bottom: 52px;
-`;
-
-const GiftText = styled.p`
-color: var(--dourado-200, #BA7E1B);
-text-align: center;
-font-family: "Nunito Sans";
-font-size: 20px;
-font-style: normal;
-font-weight: 700;
-line-height: 32px; /* 160% */
-`;
-
-const GiftImage = styled.img`
-  width: 120px;
-  margin: 16px auto;
-  display: block;
-`;
-
-const EmailHint = styled.p`
-  color: var(--Color-Neutral-Black-700, #424242);
-  text-align: center;
-  font-family: "Nunito Sans";
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-  margin-top: 24px;
-  margin-bottom: 24px;
-`;
-
-const DetailsButton = styled.button`
-  border-radius: 24px 24px 0 0;
-  border: 1px solid var(--roxo-700, #502665);
-  background: var(--Roxo-0, #FDFBFE);
-  height: 75px;
-  color: var(--roxo-700, #502665);
-  text-align: center;
-  font-family: "Nunito Sans";
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: normal;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-`;
