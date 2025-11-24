@@ -54,9 +54,9 @@ export default function CheckoutFormPanel() {
         {/* Stepper de status do form (usa índice numérico mapeado) */}
         <CheckoutStepper />
 
+          {formStep === 0 && <PaymentCardForm/>}
           {formStep === 0 && <InfoForm/>}
           {formStep === 1 && <AddressForm/>}
-          {formStep === 2 && <PaymentCardForm/>}
           {formStep === 'qrcode' && <QRCode/>}
           {formStep === 'success' && <OrderSuccess/>}
 

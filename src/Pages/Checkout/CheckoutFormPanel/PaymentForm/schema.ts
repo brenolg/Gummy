@@ -15,10 +15,10 @@ const cpfRegex = /^[0-9]{11}$/;
 export const schema = yup.object({
   cardNumber: yup
     .string()
-    .required("Número do cartão é obrigatório.")
+    .required("Campo obrigatório, Digite o número do cartão.")
     .test(
       "cartao-valido",
-      "Digite um número de cartão válido.",
+      "Número do cartão inválido.",
       (value) => {
         if (!value) return false;
         const digits = value.replace(/\D/g, "");
@@ -28,11 +28,11 @@ export const schema = yup.object({
 
   expiry: yup
     .string()
-    .required("Informe a validade do cartão.")
-    .matches(expiryRegex, "Data inválida. Use o formato MM/AA.")
+    .required("Informe a validade.")
+    .matches(expiryRegex, "Data de validade inválida.")
     .test(
       "validade-futura",
-      "O cartão está vencido.",
+      "Este cartão já está vencido.",
       (value) => {
         if (!value) return false;
         const [mm, yy] = value.split("/").map(Number);
@@ -52,8 +52,8 @@ export const schema = yup.object({
 
   holderName: yup
     .string()
-    .required("Informe o nome do titular.")
-    .matches(/^[A-Za-zÀ-ÿ\s]+$/, "Use apenas letras no nome.")
+    .required("Digite o nome como está no cartão.")
+    .matches(/^[A-Za-zÀ-ÿ\s]+$/, "Use apenas letras.")
     .test(
       "nome-composto",
       "Digite o nome completo.",

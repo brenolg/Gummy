@@ -8,7 +8,7 @@ import {
   Text,
 } from './styles'
 import { InputError } from '../FormCommomStyle'
-import checkbox from "@/assets/icons/check.svg";
+import checkbox from "@/assets/icons/checkC.svg";
 
 type CheckboxFieldProps = {
   name: string
