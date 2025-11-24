@@ -11,6 +11,8 @@ import Hero from "./Hero";
 import ScienceSection from "./ScienceSection";
 import BenefitsSection from "./BenefitsSection";
 import Footer from "./Footer";
+import HowToUse from "./HowToUse";
+import Testimonials from "./Testimonials";
 
 export default function Home() {
 
@@ -24,6 +26,8 @@ export default function Home() {
       <Ingredients/>
       <BenefitsSection/>
       <BuyContainer/>
+      <HowToUse/>
+      <Testimonials/>
       <InstaFeedCarousel/>
       <FAQ items={ faqData } contactCtaHref="/contato" />
       <Footer/>

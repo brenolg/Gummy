@@ -3,9 +3,16 @@ import {  CareTxt, CenterWrapper, Container, HairTxt, HeaderText, PurposeTitle, 
 import check from './check-circle.svg'
 import power from './power.svg'
 import { MainButton } from "@/components";
+import { useNavigate } from "react-router-dom";
 
 
 export default function BenefitsSection() {
+  const navigate = useNavigate();
+
+  function goToCheckout() {
+    navigate("/checkout");
+    
+  }
   return (
     <Container>
       <HeaderText>
@@ -31,7 +38,7 @@ export default function BenefitsSection() {
         <CareTxt >PowerGummy: o cuidado que tira você da frustração e entrega resultado.</CareTxt>
         <HairTxt>Cabelo, pele e unhas do jeito que você sempre sonhou.</HairTxt>
 
-        <MainButton maxW={579}>COMECE JÁ SUA MUDANÇA</MainButton>
+        <MainButton maxW={579} onClick={goToCheckout}>COMECE JÁ SUA MUDANÇA</MainButton>
       </CenterWrapper>
     </Container>
   );
