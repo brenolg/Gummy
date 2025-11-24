@@ -1,11 +1,12 @@
 import * as yup from 'yup';
 
 export const schema = yup.object({
-  postalCode: yup.string().required('Campo obrigatório, Informe o CEP'),
+  postalCode: yup.string().required('Campo obrigatório, Informe o CEP').transform((value) => value.replace(/\D/g, '')) // remove tudo que não é dígito
+  .length(8, 'Digite um CEP válido.'),
   address: yup.string().required('Campo obrigatório, informe o nome da rua ou avenida.'),
   district: yup.string().required('Campo obrigatório, informe o bairro.'),
   addressComplement: yup.string(),
-addressNumber: yup
+  addressNumber: yup
   .string()
   .required('Campo obrigatório, informe o número do endereço.')
   .test(

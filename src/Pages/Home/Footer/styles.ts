@@ -22,7 +22,11 @@ export const Column = styled.div<ColumnProps>`
 display: flex;
 flex-direction: column;
   ${({ $gap }) => $gap !== undefined && `gap: ${$gap}px;`}
-    ${({ $minW }) => $minW !== undefined && `min-width: ${$minW}px;`}
+  ${({ $minW }) => $minW !== undefined && `min-width: ${$minW}px;`}
+  .buyButton {
+    display: flex;
+    justify-content: flex-start;
+  }
 `;
 
 export const Logo = styled.img`
@@ -75,10 +79,13 @@ font-style: normal;
 font-weight: 300;
 line-height: var(--line-height-22_5, 22.5px); /* 140.625% */
 letter-spacing: var(--letter-spacing--0_4, -0.4px);
+cursor: pointer;
+display: flex;
+gap: 7px;
 `;
 
 export const SmallText = styled.p`
- color: #FFF;
+color: #FFF;
 font-family: "Nunito Sans";
 font-size: 16px;
 font-style: normal;

@@ -14,7 +14,7 @@ export default function HowToUse() {
   return (
     <Wrapper id='use'>
       <LeftBox>
-        <Title>COMO USAR</Title>
+        <Title>Seu ritual diário</Title>
 
         <List>
           <li>Para levar em qualquer lugar</li>

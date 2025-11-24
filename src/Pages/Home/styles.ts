@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 export const Banner = styled.img`
   width: 100%;
@@ -8,4 +8,16 @@ export const Banner = styled.img`
 
 export const FirstBanner = styled(Banner)`
   margin-top:-88px;
+`;
+
+const spin = keyframes` to { transform: rotate(360deg); }`;
+
+export const Spinner = styled.span`
+  width: 100px;
+  height: 100px;
+  margin: auto;
+  border-radius: 50%;
+  border: 10px solid ${({ theme }) => theme.colors.roxo900};
+  border-right-color: transparent;
+  animation: ${spin} .7s linear infinite;
 `;

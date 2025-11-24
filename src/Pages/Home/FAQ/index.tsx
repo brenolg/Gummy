@@ -17,7 +17,7 @@ export default function FAQ({
   const titleId = useId();
 
   return (
-    <Wrapper aria-labelledby={titleId}>
+    <Wrapper aria-labelledby={titleId} id="faq">
       {/* Lateral */}
       <AsideCard>
         <p className="faqTag">FAQ</p>

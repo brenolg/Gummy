@@ -120,7 +120,6 @@ export const DetailsContent = styled.div`
   border-top: none;
   display: flex;
   flex-direction: column;
-  gap: 16px;
 `;
 
 /* CARDS E CAMPOS INTERNOS */
@@ -185,7 +184,6 @@ line-height: 14px; /* 100% */
 export const ShippingRow = styled.div`
   display: flex;
   padding: 16px;
-  flex-direction: column;
   align-items: flex-start;
   gap: 12px;
   align-self: stretch;

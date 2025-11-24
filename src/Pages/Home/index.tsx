@@ -2,8 +2,7 @@ import BuyContainer from "./BuyContainer";
 import Header from "./Header";
 import InfoCarousel from "./InfoCarousel";
 import InstaFeedCarousel from "./InstaFeedCarousel";
-import {  FirstBanner } from "./styles";
-import banner1 from '@/assets/imgs/banner1.png'
+import { Spinner } from "./styles";
 import FAQ from "./FAQ";
 import {faqData} from './FAQ/factory'
 import Ingredients from "./Ingredients";
@@ -13,13 +12,60 @@ import BenefitsSection from "./BenefitsSection";
 import Footer from "./Footer";
 import HowToUse from "./HowToUse";
 import Testimonials from "./Testimonials";
+import { useFetch } from "@/hooks/useFetch";
+import { useEffect, useState } from "react";
+import RotatingBanner from "./Banner";
+
+type BannerData = {
+  imageUrl: string;
+  position: number;
+};
 
 export default function Home() {
+  const { fetcher } = useFetch();
+  const [loading, setLoading]=useState(true)
+  const [banerData, setBanerData] = useState<BannerData[] | null>(null);
+
+  useEffect(() => {
+    async function load() {
+      try {
+        setLoading(true);
+
+        const data = await fetcher<BannerData[]>(
+          "/public/banner",
+          "GET"
+        );
+          console.log(data)
+          setBanerData(data as BannerData[]); 
+
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    load();
+  }, []);
+
+    if (loading) {
+    return (
+      <div style={{
+        width: "100%",
+        height: "100vh",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}>
+        <Spinner/>
+      </div>
+    )
+  }
 
   return (
     <div>
       <Header/>
-      <FirstBanner src={banner1 }/>
+      { banerData && 
+        <RotatingBanner banners={banerData} />
+      }
       <InfoCarousel/>
       <Hero/>
       <ScienceSection/>
@@ -31,9 +77,6 @@ export default function Home() {
       <InstaFeedCarousel/>
       <FAQ items={ faqData } contactCtaHref="/contato" />
       <Footer/>
-
-  
-      
     </div>
   )
 }

@@ -112,11 +112,8 @@ export default function OrderConfirmed() {
             <SectionCard>
               <SectionTitle>Frete</SectionTitle>
               <ShippingRow>
-                <div className="row">
-                  <FieldLabel>Frete EXP</FieldLabel>
                 <ShippingPrice>{shipping?.valor !== undefined ? fmtBRL(shipping.valor) : "--"}</ShippingPrice>
-                </div>
-                  <ShippingSub>{shipping?.prazo} dias</ShippingSub>
+                <ShippingSub>{shipping?.prazo} dias úteis após o envio</ShippingSub>
               </ShippingRow>
             </SectionCard>
 

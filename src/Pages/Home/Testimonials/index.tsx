@@ -7,8 +7,8 @@ const depoimentos = [
     text: "Eu amei as gominhas! meus cabelos estão muito melhores desde que comecei a tomar elas, minhas unhas sempre demoravam para crescer e depois das gomi...",
   },
   {
-    name: "Laura Schneider",
-    text: "Eu amei as gominhas! meus cabelos estão muito melhores desde que comecei a tomar elas, minhas unhas sempre demoravam para crescer e depois das gomi...",
+    name: "Kawani Castro",
+    text: "Estou finalizando o segundo pote e diminuiu muito a queda, absurdamente, e a minha unha está melhor.",
   },
   {
     name: "Laura Schneider",

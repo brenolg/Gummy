@@ -10,7 +10,7 @@ export default function OrderSummaryPanel() {
 
   return (
     <ProductContainer>
-      <PageTitle $mb={48}>Resumo do pedddido</PageTitle>
+      <PageTitle $mb={48}>Resumo do pedido</PageTitle>
 
       <CartContainer className='cart'>
       {cart.map(item => (

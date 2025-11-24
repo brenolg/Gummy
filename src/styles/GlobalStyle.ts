@@ -14,6 +14,9 @@ export const GlobalStyle = createGlobalStyle`
     height: 100%;
     width: 100%;
   }
+  html, body {
+    scrollbar-gutter: stable;
+  }
 
   body {
     -webkit-font-smoothing: antialiased;

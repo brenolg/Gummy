@@ -92,10 +92,10 @@ export default function PaymentCardForm() {
     
 
     if (paymentMethod === "CREDIT_CARD") {
-      setFormStep('success')
+      //setFormStep('success')
     }
     if (paymentMethod === 'PIX') {
-      setFormStep('qrcode')
+      //setFormStep('qrcode')
     }
 
     console.log(body)

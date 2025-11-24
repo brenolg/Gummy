@@ -3,6 +3,7 @@ import { MainButton } from "@/components";
 import { CartItemsData } from "@/context/data";
 import { Card, Grid, Price, Section } from "./styles";
 import { fmtBRL } from "@/utils/helper";
+import seal from '@/assets/imgs/freeShipingR.svg'
 
 // helper: upsert
 function upsertCart(
@@ -64,6 +65,7 @@ export default function BuyContainer() {
 
         {/* CARD 2 */}
         <Card>
+          <img src={seal} className="seal"/>
           <h3 className="cardTitle">Kit 3 Power Gummy</h3>
           <h2 className="cardSubtitle">Frutas vermelhas</h2>
 

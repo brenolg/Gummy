@@ -4,8 +4,23 @@ import { MainButton } from "@/components";
 import logo from '@/assets/imgs/logo.svg'
 import instaW from '@/assets/icons/instaWhite.svg'
 import IKIGAI from '@/assets/icons/IKIGAI.svg'
+import defaultScrollProps from "@/utils/defaultScrollProps";
+import { Link } from "react-scroll";
+import { useNavigate } from "react-router-dom";
+import insta from "@/assets/icons/instaG.svg"
+import email from "@/assets/icons/mailG.svg"
 
 export default function Footer() {
+  const navigate = useNavigate();
+
+  function goToCheckout() {
+    navigate("/checkout");
+  }
+
+  function goToTrack() {
+    navigate("/track");
+  }
+
   return (
     <FooterContainer>
       <Content>
@@ -18,30 +33,59 @@ export default function Footer() {
             Somos uma revolução em gomas de beleza, transformando ciência
             em experiência, rotina em prazer e constância em resultados.
           </Description>
-
+          <a
+            href="https://instagram.com/powergummybr/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
           <SocialIcon>
             <img src={instaW}/>
           </SocialIcon>
+          </a>
         </Column>
 
         {/* COLUNA 2 – MAPA DO SITE */}
         <Column $gap={16} >
           <Title>MAPA DO SITE</Title>
-          <LinkItem>CABELO, PELE & UNHA</LinkItem>
-          <LinkItem>FÓRMULA</LinkItem>
-          <LinkItem>BENEFÍCIOS</LinkItem>
-          <LinkItem>COMO USAR</LinkItem>
-          <LinkItem>DEPOIMENTOS</LinkItem>
-          <LinkItem>DÚVIDAS FREQUENTES</LinkItem>
-          <LinkItem>COMPRAR</LinkItem>
+          <Link to="science" {...defaultScrollProps}>
+            <LinkItem>CABELO, PELE & UNHA</LinkItem>
+          </Link>
+          <Link to="ingredients" {...defaultScrollProps}>
+            <LinkItem>FÓRMULA</LinkItem>
+          </Link>
+          <Link to="beneficios" {...defaultScrollProps}>
+            <LinkItem>BENEFÍCIOS</LinkItem>
+          </Link>
+          <Link to="use" {...defaultScrollProps}>
+            <LinkItem>COMO USAR</LinkItem>
+          </Link>
+          <Link to="depoimentos" {...defaultScrollProps}>
+            <LinkItem>DEPOIMENTOS</LinkItem>
+          </Link>
+          <Link to="faq" {...defaultScrollProps}>
+            <LinkItem>DÚVIDAS FREQUENTES</LinkItem>
+          </Link>
+          <button type='button' onClick={goToCheckout} className="buyButton">
+            <LinkItem>COMPRAR</LinkItem>
+          </button>
         </Column>
 
         {/* COLUNA 3 – CONTATO */}
         <Column $gap={16}>
           <Title>CONTATO</Title>
-          <LinkItem>@powergummybr</LinkItem>
-          <LinkItem>(XX) add</LinkItem>
-          <LinkItem>email</LinkItem>
+            <a   href="https://wa.me/5547992064104" target="_blank" rel="noopener noreferrer">
+              <LinkItem>
+                <img src={insta}/>
+                (47) 99206-4104
+              </LinkItem>
+            </a>
+
+            <a href="mailto:contato@powergummybr.com.br" target="_blank" rel="noopener noreferrer">
+              <LinkItem>
+                <img src={email}/>
+                contato@powergummybr.com.br
+              </LinkItem>
+            </a>
           <div>
             <SmallText>Atendimento</SmallText>
             <SmallText>Seg à Sex (08:00 às 17:00)</SmallText>
@@ -54,7 +98,7 @@ export default function Footer() {
         <Column $gap={16} $minW={273.8}>
           <Title>INFORMAÇÕES</Title>
 
-          <MainButton >RASTREAR MEU PEDIDO</MainButton>
+          <MainButton onClick={goToTrack}>RASTREAR MEU PEDIDO</MainButton>
           <MainButton>FALAR COM SUPORTE</MainButton>
 
           <Guarantee>Garantia Power Gummy</Guarantee>

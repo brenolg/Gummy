@@ -41,6 +41,7 @@ export const Grid = styled.div`
 `;
 export const Card = styled.div`
   display: flex;
+  position: relative;
   padding: 48px 40px;
   flex-direction: column;
   justify-content: space-between;
@@ -93,6 +94,11 @@ export const Card = styled.div`
   }
   .mb24 {
     margin-bottom: 24px;
+  }
+  .seal {
+    position: absolute;
+    top: -41px;
+    right: -81px;
   }
 `;
 

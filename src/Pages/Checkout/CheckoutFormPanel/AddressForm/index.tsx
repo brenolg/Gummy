@@ -8,6 +8,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { schema } from './schema';
 import { useEffect } from 'react';
 import { Warning } from './styles';
+import { useFetch } from '@/hooks/useFetch';
 
 export type CheckoutFormData = {
   postalCode: string;
@@ -21,7 +22,8 @@ export type CheckoutFormData = {
 
 
 export default function AddressForm() {
-  const { setFormStep, setFormPostalCode , setFormData } = useCoreData();
+  const {  cartStorage, setFormPostalCode , setFormData , formData, coupons, setFormStep} = useCoreData();
+  const { fetcher } = useFetch();
 
   const methods = useForm<CheckoutFormData>({
     resolver: yupResolver(schema) as Resolver<CheckoutFormData>,
@@ -40,6 +42,37 @@ export default function AddressForm() {
     }
 
     const data = methods.getValues();
+
+    const coupom =coupons[0]
+    if (formData.advertisement) {
+      const body = {
+        email: formData.email,
+        phone: formData.phone ,
+        name: formData.name,
+        ...(coupom && {
+          coupom: {
+            code: coupom.code,
+            discountValue: coupom.discount,
+          }
+        }),
+        address: {
+          cep: data.postalCode,
+          street: data.address,
+          number: data.addressNumber,
+          neighborhood: data.district,
+          city: data.city,
+          state: data.state,
+        },
+        
+        cartItems: cartStorage,
+      }
+
+      fetcher(
+        "/public/capture-lead",
+        "POST",
+        { body }
+      );
+    }
 
     setFormData(prev => ({
       ...prev,
@@ -64,7 +97,7 @@ export default function AddressForm() {
         if (data.erro) {
           methods.setError("postalCode", {
             type: "manual",
-            message: "CEP não encontrado",
+            message: "CEP não encontrado. Verifique e tente novamente.",
           });
           return;
         }
