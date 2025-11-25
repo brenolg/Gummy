@@ -55,6 +55,7 @@ export const CardsWrapper = styled.div<{ $isDragging: boolean }>`
   padding: 40px 0 104px;
   width: 100%;
   max-width: 100%;
+  padding-bottom: 104px;
   box-sizing: border-box;
   align-self: stretch;
   overflow-x: hidden;

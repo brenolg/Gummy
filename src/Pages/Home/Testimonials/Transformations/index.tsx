@@ -1,11 +1,30 @@
 import { useRef, useState } from "react";
-import { Card, CardsWrapper } from "../styles";
+import {  CardsWrapper, Subtitle, Title,  } from "./styles";
 import video1 from "@/assets/videos/test1.mp4"
 import bef1 from "@/assets/imgs/bef1.jpeg"
 import after1 from "@/assets/imgs/after1.jpeg"
 import VideoCard from "./VideoCard";
+import BeforeAfterCard from "./BeforeAfterCard";
+import { MainButton } from "@/components";
+import { useNavigate } from "react-router-dom";
 
-const depoimentos = [
+type DepVideo = {
+  isVideo: true;
+  videoUrl: string;
+  text: string;
+};
+
+type DepBeforeAfter = {
+  isVideo: false;
+  before: string;
+  after: string;
+  label: string;
+  time: string;
+};
+
+type Depoimento = DepVideo | DepBeforeAfter;
+
+const depoimentos: Depoimento[]  = [
   {
     isVideo: true,
     videoUrl: video1,
@@ -18,13 +37,37 @@ const depoimentos = [
     label: "Unhas mais resistentes",
     time: '6 semanas'
   },
+    {
+    isVideo: true,
+    videoUrl: video1,
+    text: 'Notei muita diferença no meu cabelo, na minha pele e na minha unha',
+  },
+  {
+    isVideo: false,
+    before: bef1,
+    after: after1,
+    label: "Unhas mais resistentes",
+    time: '6 semanas'
+  },
+    {
+    isVideo: false,
+    before: bef1,
+    after: after1,
+    label: "Unhas mais resistentes",
+    time: '6 semanas'
+  },
 ];
 
 export default function Transformations() {
+  const navigate = useNavigate();
   const sliderRef = useRef<HTMLDivElement | null>(null);
   const [isDragging, setIsDragging] = useState(false);
   const startXRef = useRef(0);
   const scrollLeftRef = useRef(0);
+
+  function goToCheckout() {
+    navigate("/checkout");
+  }
   
     const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
       if (!sliderRef.current) return;
@@ -71,7 +114,11 @@ export default function Transformations() {
     };
   
   return (
-    <CardsWrapper
+    <>
+    <Title>Trasformações</Title>
+    <Subtitle>falam mais que palavras</Subtitle>
+    
+    <CardsWrapper className="xxxxxxxxxx"
       ref={sliderRef}
       $isDragging={isDragging}
       onMouseDown={handleMouseDown}
@@ -82,21 +129,25 @@ export default function Transformations() {
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
     >
-      {depoimentos.map((dep, i) => (
-        <Card
+    {depoimentos.map((dep, i) =>
+      dep.isVideo ? (
+        <VideoCard 
           key={i}
-          $isFirst={i === 0}
-          $isLast={i === depoimentos.length - 1}
-        >
-          <div className="line" />
-        
-        </Card>
-      ))}
-      <VideoCard
-
-      text="Notei muita diferença no meu cabelo, na minha pele e na minha unha"
-      videoUrl={video1}
-      />
+          text={dep.text}
+          videoUrl={dep.videoUrl}
+        />
+      ) : (
+        <BeforeAfterCard
+          key={i}
+          beforeSrc={dep.before}
+          afterSrc={dep.after}
+          title={dep.label}
+          timeText={dep.time}
+        />
+      )
+    )}
     </CardsWrapper>
+    <MainButton maxW={659} onClick={goToCheckout}>GARANTIR MEU TRATAMENTO HOJE</MainButton>
+  </>
   );
 }

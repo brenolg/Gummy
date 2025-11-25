@@ -63,7 +63,6 @@ export default function Home() {
   return (
     <div>
       <Header/>
-      <Testimonials/>
       { banerData && 
         <RotatingBanner banners={banerData} />
       }
@@ -74,6 +73,7 @@ export default function Home() {
       <BenefitsSection/>
       <BuyContainer/>
       <HowToUse/>
+      <Testimonials/>
       <InstaFeedCarousel/>
       <FAQ items={ faqData } contactCtaHref="/contato" />
       <Footer/>
