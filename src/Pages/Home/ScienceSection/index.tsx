@@ -41,7 +41,6 @@ export default function ScienceSection() {
           </DescriptionStrong>
         </Heading>
         
-
         <CardsGrid>
           <Card>
             <FeaturedImage $img={hairImg} />
