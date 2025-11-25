@@ -49,7 +49,7 @@ export default function ScienceSection() {
           </Card>
 
           <Card>
-            <FeaturedImage $img={nailsImg} $width={ 343.5 } />
+            <FeaturedImage $img={nailsImg} />
             <BackImage $img={nailsBack}  />
           </Card>
 

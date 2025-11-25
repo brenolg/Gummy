@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import bg from './scienceBg.svg'
+import bg from '@/assets/imgs/scienceBg.svg'
 
 export const Section = styled.section`
   width: 100%;
