@@ -16,7 +16,7 @@ interface DiscountCouponsProps {
 }
 
 export const DiscountCoupons: React.FC<DiscountCouponsProps> = ({ onChange }) => {
-  const { paymentMethod , coupons, setCoupons } = useCoreData(); 
+  const { paymentMethod , coupons, setCoupons , formStep } = useCoreData(); 
   const [code, setCode] = useState("");
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
@@ -97,6 +97,7 @@ export const DiscountCoupons: React.FC<DiscountCouponsProps> = ({ onChange }) =>
   const maxNormalCouponsReached = nonPixCoupons.length >= 1;
   return (
     <Wrapper>
+      {typeof formStep === "number" && 
       <Row>
         <Input
           placeholder="Código de desconto"
@@ -113,6 +114,7 @@ export const DiscountCoupons: React.FC<DiscountCouponsProps> = ({ onChange }) =>
         <img src={imgError} className='img-error'/>  {error}
       </InputError>
       </Row>
+      }
 
       {coupons.length > 0 && (
         <Chips>

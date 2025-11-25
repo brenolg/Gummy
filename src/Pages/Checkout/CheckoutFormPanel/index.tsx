@@ -40,7 +40,6 @@ export default function CheckoutFormPanel() {
   const { formStep } = useCoreData();
   const navigate = useNavigate();
 
-
   return (
     <>
       <FormContainer>

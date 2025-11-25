@@ -13,6 +13,12 @@ export interface ShippingResponse {
   };
 }
 
+export type QrCodeData = {
+  payload: string;
+  image: string;
+
+};
+
 export type PaymentMethod = "CREDIT_CARD" | "PIX";
 
 export type CartItem = {
@@ -40,7 +46,7 @@ export type MinimalCartItem = {
   quantity: number;
 };
 
-export type FormDataType = Record<string, string | boolean | number>;
+export type FormDataType = Record<string, string | boolean | number >;
 
 type CoreDataContextProps = {
   paymentMethod: PaymentMethod;
@@ -70,6 +76,8 @@ type CoreDataContextProps = {
   shipping :ShippingResponse["frete"] | null;
   setShipping: React.Dispatch<React.SetStateAction<ShippingResponse["frete"] | null>>;
 
+  juros: number;
+  setJuros: React.Dispatch<React.SetStateAction<number>>;
 };
 
 export const CoreDataContext = createContext<CoreDataContextProps | undefined>(undefined);

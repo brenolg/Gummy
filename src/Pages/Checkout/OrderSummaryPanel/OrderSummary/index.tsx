@@ -1,18 +1,36 @@
+// OrderSummary.tsx
 import { useEffect, useMemo } from "react";
 import { useCoreData, type ShippingResponse } from "@/context/coreDataContext";
 import { useFetch } from "@/hooks/useFetch";
 import { handleNumberOfBoxes, handleProductWeight } from "./helper";
 import { fmtBRL } from "@/utils/helper";
-import { Box, DiscountValue, Label, Row, TotalLabel, TotalRow, TotalValue, } from "./styles";
+import {
+  Box,
+  DiscountValue,
+  Label,
+  Row,
+  TotalLabel,
+  TotalRow,
+  TotalValue,
+} from "./styles";
 
 type Props = {
-  /** Valor do frete; se null/undefined, mostra a dica para digitar o CEP */
   /** Como combinar vários cupons: "sum" (soma %) ou "sequential" (aplica em cascata) */
   couponMode?: "sum" | "sequential";
 };
 
-export default function OrderSummary({  couponMode = "sum" }: Props) {
-  const { cart, coupons, formPostalCode, shipping, setShipping, setGlobalLoading } = useCoreData();
+export default function OrderSummary({ couponMode = "sum" }: Props) {
+  const {
+    cart,
+    coupons,
+    formPostalCode,
+    shipping,
+    setShipping,
+    setGlobalLoading,
+    juros,
+    setFormData,
+  } = useCoreData();
+
   const { fetcher } = useFetch();
 
   const {
@@ -20,10 +38,18 @@ export default function OrderSummary({  couponMode = "sum" }: Props) {
     subtotal,
     couponsPct,
     couponsAmount,
+    interestAmount,
     total,
   } = useMemo(() => {
-    const itemsCount = cart.reduce((acc, i) => acc + (i.quantity || 0), 0);
-    const subtotal = cart.reduce((acc, i) => acc + (i.unitPrice * (i.quantity || 0)), 0);
+    const itemsCount = cart.reduce(
+      (acc, i) => acc + (i.quantity || 0),
+      0
+    );
+
+    const subtotal = cart.reduce(
+      (acc, i) => acc + i.unitPrice * (i.quantity || 0),
+      0
+    );
 
     // % total de desconto via cupons
     let couponsPct = 0;
@@ -35,9 +61,8 @@ export default function OrderSummary({  couponMode = "sum" }: Props) {
       );
     } else {
       // aplica em cascata (mais realista em e-commerce)
-      // guardamos pct "equivalente" apenas pra exibir
       let running = subtotal;
-      coupons.forEach(c => {
+      coupons.forEach((c) => {
         running -= running * (c.discount / 100);
       });
       couponsPct = subtotal > 0 ? (1 - running / subtotal) * 100 : 0;
@@ -45,79 +70,111 @@ export default function OrderSummary({  couponMode = "sum" }: Props) {
 
     // valor absoluto de desconto
     const couponsAmount = +(subtotal * (couponsPct / 100)).toFixed(2);
+
+    // total dos produtos já com cupom aplicado (sem frete)
     const totalBeforeShipping = Math.max(0, subtotal - couponsAmount);
-    const total = +(totalBeforeShipping + (shipping?.valor ?? 0)).toFixed(2);
+
+    // frete (0 quando não definido)
+    const shippingValue = shipping?.valor ?? 0;
+
+    // 🧮 total base que é parcelado: produtos - cupom + frete
+    const baseTotal = totalBeforeShipping + shippingValue;
+
+    // 🔥 juros vindo do contexto (ex.: 4.5)
+    const jurosPct = juros || 0;
+    const jurosFactor = jurosPct / 100;
+
+    // 💸 juros em R$ calculado sobre o total parcelado (baseTotal)
+    const interestAmount = +(baseTotal * jurosFactor).toFixed(2);
+
+    // total final: base + juros
+    const total = +(baseTotal + interestAmount).toFixed(2);
 
     return {
       itemsCount,
       subtotal: +subtotal.toFixed(2),
       couponsPct: +couponsPct.toFixed(2),
       couponsAmount,
-      totalBeforeShipping: +totalBeforeShipping.toFixed(2),
+      interestAmount,
       total,
     };
-  }, [cart, coupons, couponMode, shipping]);
+  }, [cart, coupons, couponMode, shipping, juros]);
+
+  useEffect(() => {
+    if (!total) return;
+
+    setFormData((prev) => ({
+      ...prev,
+      total,
+    }));
+  }, [total, setFormData]);
 
   async function calcularFrete() {
-      if (subtotal > 119 && (formPostalCode.startsWith("8") || formPostalCode.startsWith("9"))) {
-        setShipping({ valor: 0, prazo: 0 });
-        return; 
-      }
-      try {
-        setGlobalLoading(true)
-        const BOX_DATA = {
-          peso: 0.5,
-          altura: 40,
-          largura: 3,
-          profundidade: 20
-        }
+    if (
+      subtotal > 119 &&
+      (formPostalCode.startsWith("8") || formPostalCode.startsWith("9"))
+    ) {
+      setShipping({ valor: 0, prazo: 0 });
+      return;
+    }
 
-        const numberOfBoxes =  handleNumberOfBoxes(cart)
-        const pesoProdutos = handleProductWeight(cart)
-        
-        const pesoCaixas = BOX_DATA.peso * numberOfBoxes;
+    try {
+      setGlobalLoading(true);
 
-        const body= {
-          cep: formPostalCode,
-          subtotal: subtotal,
-          peso: pesoCaixas + pesoProdutos,
-          altura:  BOX_DATA.altura * numberOfBoxes,
-          largura: BOX_DATA.largura * numberOfBoxes,
-          profundidade: BOX_DATA.profundidade * numberOfBoxes,
-        };
-        console.log(body)
+      const BOX_DATA = {
+        peso: 0.5,
+        altura: 40,
+        largura: 3,
+        profundidade: 20,
+      };
 
-        const resp = await fetcher<ShippingResponse>(
-          "public/calculate-shipping",
-          "POST",
-          { body }
-        );
+      const numberOfBoxes = handleNumberOfBoxes(cart);
+      const pesoProdutos = handleProductWeight(cart);
 
-        if (!resp || !resp.frete) {
-          console.warn("Resposta inesperada do servidor:", resp);
-          setShipping(null);
-          return;
-        }
+      const pesoCaixas = BOX_DATA.peso * numberOfBoxes;
 
-        setShipping(resp.frete);
-    } catch (error) {
-        console.error("Erro ao calcular frete:", error);
+      const body = {
+        cep: formPostalCode,
+        subtotal: subtotal,
+        peso: pesoCaixas + pesoProdutos,
+        altura: BOX_DATA.altura * numberOfBoxes,
+        largura: BOX_DATA.largura * numberOfBoxes,
+        profundidade: BOX_DATA.profundidade * numberOfBoxes,
+      };
+
+      const resp = await fetcher<ShippingResponse>(
+        "public/calculate-shipping",
+        "POST",
+        { body }
+      );
+
+      if (!resp || !resp.frete) {
+        console.warn("Resposta inesperada do servidor:", resp);
         setShipping(null);
+        return;
+      }
+
+      setShipping(resp.frete);
+    } catch (error) {
+      console.error("Erro ao calcular frete:", error);
+      setShipping(null);
     } finally {
-      setGlobalLoading(false)
+      setGlobalLoading(false);
     }
   }
 
   useEffect(() => {
     if (formPostalCode.length) {
-      calcularFrete()
+      calcularFrete();
     }
-  }, [ formPostalCode, cart ]);
+  }, [formPostalCode, cart]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <Box>
       <Row>
-        <Label>Subtotal · {itemsCount} {itemsCount === 1 ? "item" : "itens"}</Label>
+        <Label>
+          Subtotal · {itemsCount} {itemsCount === 1 ? "item" : "itens"}
+        </Label>
         <Label>{fmtBRL(subtotal)}</Label>
       </Row>
 
@@ -125,7 +182,8 @@ export default function OrderSummary({  couponMode = "sum" }: Props) {
         <Row>
           <Label>Cupom de desconto aplicado</Label>
           <DiscountValue>
-            -{fmtBRL(couponsAmount)} <small>({Math.round(couponsPct)}%)</small>
+            -{fmtBRL(couponsAmount)}{" "}
+            <small>({Math.round(couponsPct)}%)</small>
           </DiscountValue>
         </Row>
       ) : null}
@@ -142,6 +200,13 @@ export default function OrderSummary({  couponMode = "sum" }: Props) {
         )}
       </Row>
 
+      {juros > 0 && (
+        <Row>
+          <Label>Juros ({juros.toFixed(1)}%)</Label>
+          <DiscountValue>+{fmtBRL(interestAmount)}</DiscountValue>
+        </Row>
+      )}
+
       <TotalRow>
         <TotalLabel>Total</TotalLabel>
         <TotalValue>{fmtBRL(total)}</TotalValue>
@@ -149,5 +214,3 @@ export default function OrderSummary({  couponMode = "sum" }: Props) {
     </Box>
   );
 }
-
-

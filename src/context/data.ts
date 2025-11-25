@@ -4,7 +4,7 @@ import type { CartItem } from './coreDataContext';
 
 export const CartItemsData: CartItem[] = [
     {
-    productId: 'powergum-1',
+    productId: 'powergummy-1',
     image: one,
     title: "ONE® - 90 gomas",
     subtitle: "Frutas vermelhas - 3 frascos",

@@ -1,17 +1,5 @@
 import type { CartItem } from "@/context/coreDataContext";
 
-  function isCepSul(cep: string) {
-    if (!cep) return false;
-
-    const numericCep = cep.replace(/\D/g, "");
-    
-    if (numericCep.length < 1) return false;
-
-    const firstDigit = numericCep[0];
-
-    return firstDigit === "8" || firstDigit === "9";
-  }
-
   function handleNumberOfBoxes(cart: CartItem[]) {
     let totalCaixas = 0;
 
@@ -42,4 +30,4 @@ import type { CartItem } from "@/context/coreDataContext";
 }
 
 
-export {handleNumberOfBoxes, handleProductWeight, isCepSul}
+export {handleNumberOfBoxes, handleProductWeight }

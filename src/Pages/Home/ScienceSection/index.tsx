@@ -2,7 +2,9 @@ import { MainButton } from "@/components";
 import hairImg from "@/assets/imgs/hairGirl.svg";
 import nailsImg from "@/assets/imgs/nails.svg";
 import skinImg from "@/assets/imgs/skin.svg";
-import nailsBack from "@/assets/imgs/nailsBack.svg"
+import nailsBack from "@/assets/imgs/nailsB.svg"
+import hairBack from '@/assets/imgs/hairB.svg'
+import skinB from "@/assets/imgs/skinB.svg"
 
 import {
   Section,
@@ -43,6 +45,7 @@ export default function ScienceSection() {
         <CardsGrid>
           <Card>
             <FeaturedImage $img={hairImg} />
+            <BackImage $img={hairBack}  />
           </Card>
 
           <Card>
@@ -52,6 +55,7 @@ export default function ScienceSection() {
 
           <Card>
             <FeaturedImage $img={skinImg}  />
+            <BackImage $img={skinB}  />
           </Card>
         </CardsGrid>
 

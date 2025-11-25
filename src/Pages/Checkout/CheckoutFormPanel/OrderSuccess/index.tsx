@@ -61,7 +61,7 @@ export default function OrderConfirmed() {
               <SectionTitle>Contato</SectionTitle>
               <Field>
                 <FieldLabel>Email</FieldLabel>
-                <FieldValue>{formData.email}</FieldValue>
+                <FieldValue>{formData.email }</FieldValue>
               </Field>
               <Field>
                 <FieldLabel>Celular</FieldLabel>

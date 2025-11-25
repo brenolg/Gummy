@@ -1,13 +1,14 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useCoreData } from '@/context/coreDataContext';
 import { Divider, MInput, Select, MainButton } from '@/components';
 import PaymentMethodSelector from '../PaymentMethodSelector';
 import { InputContainer, TwoInputContainer, FormTitle } from '../styles';
-import { FormProvider, useForm, type Resolver } from 'react-hook-form';
+import { FormProvider, useForm, useWatch, type Resolver } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { schema } from './schema';
 import { useFetch } from '@/hooks/useFetch';
 import { onlyDigits } from '@/utils/helper';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { InputError } from '@/components/form/FormCommomStyle';
 import imgError from '@/assets/icons/error.svg'
 
@@ -23,22 +24,22 @@ export type CheckoutFormData = {
 export default function PaymentCardForm() {
   const [error , setError] = useState('')
   const { fetcher } = useFetch();
+  const { paymentMethod, formData, cartStorage, setFormStep , setFormData, globalLoading, coupons, shipping, setGlobalLoading, setJuros} = useCoreData();
+  
   const installmentsOptions = [
-    { label: "1x", value: 1 },
-    { label: "2x", value: 2 },
-    { label: "3x", value: 3 },
-    { label: "4x", value: 4 },
-    { label: "5x", value: 5 },
-    { label: "6x", value: 6 },
-    { label: "7x", value: 7 },
-    { label: "8x", value: 8 },
-    { label: "9x", value: 9 },
-    { label: "10x", value: 10 },
-    { label: "11x", value: 11 },
-    { label: "12x", value: 12 },
+    { label: `1x sem juros`, value: 1 },
+    { label: "2x sem juros", value: 2 },
+    { label: "3x sem juros", value: 3 },
+    { label: "4x com juros", value: 4 },
+    { label: "5x com juros", value: 5 },
+    { label: "6x com juros", value: 6 },
+    { label: "7x com juros", value: 7 },
+    { label: "8x com juros", value: 8 },
+    { label: "9x com juros", value: 9 },
+    { label: "10x com juros", value: 10 },
+    { label: "11x com juros", value: 11 },
+    { label: "12x com juros", value: 12 },
   ];
-
-  const { paymentMethod, formData, cartStorage, setFormStep , setFormData, globalLoading, coupons, shipping, setGlobalLoading} = useCoreData();
 
   const methods = useForm<CheckoutFormData>({
     resolver: paymentMethod === "CREDIT_CARD"
@@ -50,6 +51,24 @@ export default function PaymentCardForm() {
     mode: 'onBlur',
     reValidateMode: 'onBlur'
   });
+
+  const { control } = methods;
+  const installments = useWatch({
+    control,
+    name: "installments",
+  });
+
+  useEffect(() => {
+    if (!installments) return;
+
+    if (installments > 3) {
+      const juros = 4.5;
+      setJuros(juros)
+
+    } else {
+      setJuros(0)
+    }
+  }, [installments]);
 
   const handleStep = async () => {
     if (globalLoading) return
@@ -102,18 +121,29 @@ export default function PaymentCardForm() {
             addressNumber: formData.addressNumber,
             addressComplement: formData.addressComplement,
             phone: onlyDigits(String(formData.phone)),
-          }
+          },
+          installmentCount: data.installments,
+          installmentValue: Number((Number(formData.total) / Number(data.installments)).toFixed(2))
         })
       }
       console.log("body", body)
-      const res = await fetcher(
+      const res : any = await fetcher(
         "/public/create-order",
         "POST",
         { body }
       );
 
-      console.log("Order criada com sucesso:", res);
+      if (paymentMethod === 'PIX') {
+        setFormData(prev => ({
+          ...prev,
+          ...data,
+            qrcodePayload: res.paymentData.payload,
+            qrcodeImage: res.paymentData.encodedImage,
+        }));
 
+        setFormStep('qrcode');
+        return;
+      }
     } catch (error) {
       console.error("Erro ao criar pedido:", error);
       setError('Não foi possível validar a compra. Verifique os dados e tente novamente.')
@@ -132,9 +162,7 @@ export default function PaymentCardForm() {
     if (paymentMethod === "CREDIT_CARD") {
       setFormStep('success')
     }
-    if (paymentMethod === 'PIX') {
-      setFormStep('qrcode')
-    }
+
   }  
 
   return (
