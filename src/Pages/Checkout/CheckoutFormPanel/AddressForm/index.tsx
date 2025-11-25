@@ -6,7 +6,6 @@ import { useCoreData } from '@/context/coreDataContext';
 import { FormProvider, useForm, type Resolver } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { schema } from './schema';
-import { useEffect } from 'react';
 import { Warning } from './styles';
 import { useFetch } from '@/hooks/useFetch';
 
@@ -82,50 +81,46 @@ export default function AddressForm() {
     setFormStep(2); 
   };
   
-  const postalCode = methods.watch("postalCode"); 
-  useEffect(() => {
-    const fetchCep = async () => {
-      if (postalCode.length !== 9) return;
 
-      const cleanCEP = postalCode.replace(/\D/g, "");
+  const handleCepBlur = async () => {
+  const postalCode = methods.getValues("postalCode");
+  if (!postalCode) return;
 
-      try {
-        const res = await fetch(`https://viacep.com.br/ws/${cleanCEP}/json/`);
-        const data = await res.json();
+  // se você está usando máscara "99999-999", aqui ainda vem com hífen
+  const cleanCEP = postalCode.replace(/\D/g, "");
 
-        // CEP inválido — dispara erro no input
-        if (data.erro) {
-          methods.setError("postalCode", {
-            type: "manual",
-            message: "CEP não encontrado. Verifique e tente novamente.",
-          });
-          return;
-        }
+  // só chama API se tiver 8 dígitos
+  if (cleanCEP.length !== 8) return;
 
-        // CEP válido — limpa o erro manual e do Yup
-        methods.clearErrors("postalCode");
+  try {
+    const res = await fetch(`https://viacep.com.br/ws/${cleanCEP}/json/`);
+    const data = await res.json();
 
-        // Preenche os campos automaticamente
-        methods.setValue("address", data.logradouro || "");
-        methods.setValue("district", data.bairro || "");
-        methods.setValue("addressComplement", data.complemento || "");
-        methods.setValue("city", data.localidade || "");
-        methods.setValue("state", data.uf || "");
+    if (data.erro) {
+      methods.setError("postalCode", {
+        type: "manual",
+        message: "CEP não encontrado. Verifique e tente novamente.",
+      });
+      return;
+    }
 
-        setFormPostalCode(postalCode);
+    methods.clearErrors("postalCode");
 
-      } catch (error) {
-        console.error("Erro ao buscar CEP:", error);
+    methods.setValue("address", data.logradouro || "");
+    methods.setValue("district", data.bairro || "");
+    methods.setValue("addressComplement", data.complemento || "");
+    methods.setValue("city", data.localidade || "");
+    methods.setValue("state", data.uf || "");
 
-        methods.setError("postalCode", {
-          type: "manual",
-          message: "CEP não encontrado. Verifique e tente novamente.",
-        });
-      }
-    };
-
-    fetchCep();
-  }, [postalCode]);
+    setFormPostalCode(postalCode);
+  } catch (error) {
+    console.error("Erro ao buscar CEP:", error);
+    methods.setError("postalCode", {
+      type: "manual",
+      message: "CEP não encontrado. Verifique e tente novamente.",
+    });
+  }
+};
 
   return (
     <FormProvider {...methods}>
@@ -140,7 +135,8 @@ export default function AddressForm() {
       >
         <InputContainer>
           <FormTitle>Endereço</FormTitle>
-          <MInput name="postalCode"   type="cep"    placeholder="CEP"       hasAsterisk mb={24}/>
+          <MInput name="postalCode"   type="cep"    placeholder="CEP"       hasAsterisk mb={24}   onBlur={handleCepBlur}
+          />
           <MInput name="address"   type="text"   placeholder="Endereço" disabled   mb={24} />
           <MInput name="district"  type="text"   placeholder="Bairro" disabled    mb={24}/>
           <TwoInputContainer>

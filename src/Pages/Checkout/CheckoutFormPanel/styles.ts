@@ -18,6 +18,7 @@ export const InputContainer  = styled.div`
   background: #FFF;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.08);
   margin-bottom: 32px;
+  position: relative;
 
   .pix-description {
     color: var(--Color-Neutral-Black-700, #424242);

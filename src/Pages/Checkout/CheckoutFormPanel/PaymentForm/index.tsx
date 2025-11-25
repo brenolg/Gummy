@@ -5,6 +5,11 @@ import { InputContainer, TwoInputContainer, FormTitle } from '../styles';
 import { FormProvider, useForm, type Resolver } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { schema } from './schema';
+import { useFetch } from '@/hooks/useFetch';
+import { onlyDigits } from '@/utils/helper';
+import { useState } from 'react';
+import { InputError } from '@/components/form/FormCommomStyle';
+import imgError from '@/assets/icons/error.svg'
 
 export type CheckoutFormData = {
   cardNumber: string;
@@ -16,6 +21,8 @@ export type CheckoutFormData = {
 };
 
 export default function PaymentCardForm() {
+  const [error , setError] = useState('')
+  const { fetcher } = useFetch();
   const installmentsOptions = [
     { label: "1x", value: 1 },
     { label: "2x", value: 2 },
@@ -30,7 +37,8 @@ export default function PaymentCardForm() {
     { label: "11x", value: 11 },
     { label: "12x", value: 12 },
   ];
-  const { paymentMethod, formData, cartStorage, setFormStep , setFormData, globalLoading} = useCoreData();
+
+  const { paymentMethod, formData, cartStorage, setFormStep , setFormData, globalLoading, coupons, shipping, setGlobalLoading} = useCoreData();
 
   const methods = useForm<CheckoutFormData>({
     resolver: paymentMethod === "CREDIT_CARD"
@@ -45,6 +53,7 @@ export default function PaymentCardForm() {
 
   const handleStep = async () => {
     if (globalLoading) return
+    
     if (paymentMethod !== "PIX") {
       const isValid = await methods.trigger(); // valida só no cartão
 
@@ -55,33 +64,62 @@ export default function PaymentCardForm() {
     }
 
     const data = methods.getValues();
+    try {
+      setGlobalLoading(true)
+      setError('')
+      const filteredCoupons = coupons.filter(c => c.code !== "PIX05");
+      const filteredItems = cartStorage.filter(item => item.quantity > 0);
+      const [month, year2] = data.expiry.split("/");
+      const year4 = `20${year2}`;
+      const body = {
+          customerData: {
+            name: formData.name,
+            email: formData.email,
+            cpf: onlyDigits(data.cpf),
+            phone: onlyDigits(String(formData.phone))
+          },
+          ...(filteredCoupons.length > 0 && {
+            coupon: filteredCoupons[0].code
+          }),
 
-    const body = {
-      customerData: {
-        name: formData.name,
-        email: formData.email,
-        cpf: data.cpf,
-        phone: formData.phone
-      },
-      items: cartStorage,
-      creditCard: {
-        holderName: data.holderName,
-        number: data.cardNumber,
-        expiryMonth: data.expiry, //Formatar
-        expiryYear: data.expiry,
-        ccv: data.cvv
-      },
-      shipping: '',
-      paymentMethod: paymentMethod,
-      creditCardHolderInfo: {
-        name: formData.name,
-        email: formData.email,
-        cpfCnpj: data.cpf,
-        postalCode: formData.postalCode,
-        addressNumber: formData.addressNumber,
-        addressComplement: formData.addressComplement,
-        phone: formData.phone
+          items: filteredItems,
+
+          shipping: shipping?.valor,
+          paymentMethod: paymentMethod,
+          ...(paymentMethod === "CREDIT_CARD" && {
+          creditCard: {
+            holderName: data.holderName,
+            number: onlyDigits(data.cardNumber),
+            expiryMonth: month, 
+            expiryYear: year4 ,
+            ccv: data.cvv
+          },
+          creditCardHolderInfo: {
+            name: formData.name,
+            email: formData.email,
+            cpfCnpj: onlyDigits(data.cpf),
+            postalCode: formData.postalCode,
+            addressNumber: formData.addressNumber,
+            addressComplement: formData.addressComplement,
+            phone: onlyDigits(String(formData.phone)),
+          }
+        })
       }
+      console.log("body", body)
+      const res = await fetcher(
+        "/public/create-order",
+        "POST",
+        { body }
+      );
+
+      console.log("Order criada com sucesso:", res);
+
+    } catch (error) {
+      console.error("Erro ao criar pedido:", error);
+      setError('Não foi possível validar o cartão. Verifique os dados e tente novamente.')
+      return
+    }finally {
+      setGlobalLoading(false)
     }
 
     //Salva os dados
@@ -92,13 +130,11 @@ export default function PaymentCardForm() {
     
 
     if (paymentMethod === "CREDIT_CARD") {
-      //setFormStep('success')
+      setFormStep('success')
     }
     if (paymentMethod === 'PIX') {
-      //setFormStep('qrcode')
+      setFormStep('qrcode')
     }
-
-    console.log(body)
   }  
 
   return (
@@ -133,8 +169,9 @@ export default function PaymentCardForm() {
               para visualizar o QR Code de pagamento
             </div>
           }
-
+          <InputError $error={!!error}><img src={imgError} className='img-error'/> {error}</InputError>
         </InputContainer>
+
           <MainButton type="submit" loading={globalLoading} >
             Confirmar Pagamento
           </MainButton>
