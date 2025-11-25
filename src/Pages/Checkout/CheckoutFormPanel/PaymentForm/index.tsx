@@ -88,7 +88,7 @@ export default function PaymentCardForm() {
           paymentMethod: paymentMethod,
           ...(paymentMethod === "CREDIT_CARD" && {
           creditCard: {
-            holderName: data.holderName,
+            holderName: data.holderName.toLocaleUpperCase(),
             number: onlyDigits(data.cardNumber),
             expiryMonth: month, 
             expiryYear: year4 ,
@@ -116,7 +116,7 @@ export default function PaymentCardForm() {
 
     } catch (error) {
       console.error("Erro ao criar pedido:", error);
-      setError('Não foi possível validar o cartão. Verifique os dados e tente novamente.')
+      setError('Não foi possível validar a compra. Verifique os dados e tente novamente.')
       return
     }finally {
       setGlobalLoading(false)
