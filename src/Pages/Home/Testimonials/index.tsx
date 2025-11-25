@@ -1,4 +1,16 @@
-import { Wrapper, TitleArea, SubTitle, Title, CardsWrapper, Card, Stars, Name, Text } from "./styles";
+// Testimonials.tsx
+import { useRef, useState } from "react";
+import {
+  Wrapper,
+  TitleArea,
+  SubTitle,
+  Title,
+  CardsWrapper,
+  Card,
+  Stars,
+  Name,
+  Text,
+} from "./styles";
 import Transformations from "./Transformations";
 
 const depoimentos = [
@@ -14,28 +26,94 @@ const depoimentos = [
     name: "Laura Schneider",
     text: "Eu amei as gominhas! meus cabelos estão muito melhores desde que comecei a tomar elas, minhas unhas sempre demoravam para crescer e depois das gomi...",
   },
+
 ];
 
 export default function Testimonials() {
+  const sliderRef = useRef<HTMLDivElement | null>(null);
+  const [isDragging, setIsDragging] = useState(false);
+  const startXRef = useRef(0);
+  const scrollLeftRef = useRef(0);
+
+  const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!sliderRef.current) return;
+    setIsDragging(true);
+    const slider = sliderRef.current;
+    startXRef.current = e.pageX - slider.offsetLeft;
+    scrollLeftRef.current = slider.scrollLeft;
+  };
+
+  const stopDragging = () => {
+    setIsDragging(false);
+  };
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!isDragging || !sliderRef.current) return;
+    e.preventDefault();
+    const slider = sliderRef.current;
+    const x = e.pageX - slider.offsetLeft;
+    const walk = (x - startXRef.current) * 1.2; // velocidade
+    slider.scrollLeft = scrollLeftRef.current - walk;
+  };
+
+  // touch (mobile) – opcional, mas deixa a experiência consistente
+  const handleTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
+    if (!sliderRef.current) return;
+    setIsDragging(true);
+    const slider = sliderRef.current;
+    const touch = e.touches[0];
+    startXRef.current = touch.pageX - slider.offsetLeft;
+    scrollLeftRef.current = slider.scrollLeft;
+  };
+
+  const handleTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
+    if (!isDragging || !sliderRef.current) return;
+    const slider = sliderRef.current;
+    const touch = e.touches[0];
+    const x = touch.pageX - slider.offsetLeft;
+    const walk = (x - startXRef.current) * 1.2;
+    slider.scrollLeft = scrollLeftRef.current - walk;
+  };
+
+  const handleTouchEnd = () => {
+    setIsDragging(false);
+  };
+
   return (
-    <Wrapper id='depoimentos'>
+    <Wrapper id="depoimentos">
       <TitleArea>
         <SubTitle>O QUE ESTÃO FALANDO</SubTitle>
-        <Title>Depoimentos <span>Power Gummy</span></Title>
+        <Title>
+          Depoimentos <span>Power Gummy</span>
+        </Title>
       </TitleArea>
 
-      <CardsWrapper>
+      <CardsWrapper
+        ref={sliderRef}
+        $isDragging={isDragging}
+        onMouseDown={handleMouseDown}
+        onMouseLeave={stopDragging}
+        onMouseUp={stopDragging}
+        onMouseMove={handleMouseMove}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
+      >
         {depoimentos.map((dep, i) => (
-          <Card key={i}>
+          <Card
+            key={i}
+            $isFirst={i === 0}
+            $isLast={i === depoimentos.length - 1}
+          >
             <Stars>★★★★★</Stars>
             <Name>{dep.name}</Name>
-            <div className="line"/>
+            <div className="line" />
             <Text>{dep.text}</Text>
           </Card>
         ))}
       </CardsWrapper>
 
-      <Transformations/>
+      <Transformations />
     </Wrapper>
   );
 }
