@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 export const Section = styled.section`
   width: 100%;
@@ -11,14 +11,19 @@ export const Section = styled.section`
   padding-right: 114px;
   padding-bottom: 53px;
   position: relative;
-`;
+  @media (max-width: 1350px) {
+    padding: 0;
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+`
 
 export const Card = styled.div`
   width: 100%;
   padding-top: 52px;
   min-height: 521px;
   position: relative;
-  .card-conteiner{
+  .card-conteiner {
     display: grid;
     grid-template-columns: 1fr 1fr;
     width: 100%;
@@ -30,7 +35,7 @@ export const Card = styled.div`
     border-radius: 5px;
     background: ${({ theme }) => theme.colors.roxo700};
   }
-`;
+`
 
 export const LeftContent = styled.div`
   display: flex;
@@ -44,20 +49,34 @@ export const LeftContent = styled.div`
     linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.2) 100%),
     ${({ theme }) => theme.colors.roxo700};
   height: fit-content;
-`;
+
+  @media (max-width: 1350px) {
+    padding: 32px 24px;
+    border-radius: 24px;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    padding-bottom: 240px;
+  }
+`
 
 export const Title = styled.h1`
   color: ${({ theme }) => theme.colors.roxo0};
-  font-family: "Nunito Sans";
+  font-family: 'Nunito Sans';
   font-size: 34px;
   font-style: normal;
   font-weight: 600;
-  line-height: 120%; 
+  line-height: 120%;
   text-transform: uppercase;
   .highlight {
     font-weight: 800;
   }
-`;
+  @media (max-width: 1350px) {
+    text-align: left;
+    width: 100%;
+    font-size: 26px;
+  }
+`
 
 export const BenefitsList = styled.ul`
   margin-top: 16px;
@@ -66,16 +85,19 @@ export const BenefitsList = styled.ul`
   list-style: none;
   padding: 0;
   width: 100%;
-`;
+`
 
 export const BenefitItem = styled.li`
   color: ${({ theme }) => theme.colors.roxo0};
-  font-family: "Nunito Sans";
+  font-family: 'Nunito Sans';
   font-size: 20px;
   font-style: normal;
   font-weight: 400;
   line-height: 180%; /* 36px */
-`;
+  @media (max-width: 1350px) {
+    font-size: 16px;
+  }
+`
 
 export const BottleWrapper = styled.div`
   display: flex;
@@ -84,15 +106,27 @@ export const BottleWrapper = styled.div`
   position: absolute;
   top: 0;
   left: 50%;
-  transform: translate(-50% ); 
+  transform: translate(-50%);
   z-index: 2;
-`;
+  @media (max-width: 1350px) {
+    width: 222px;
+    height: 300px;
+    transform: none;
+    top: auto;
+    left: calc(100% - 200px);
+    bottom: -60px;
+  }
+`
 
 export const BottleImage = styled.img`
   width: 438px;
   height: 521px;
-`;
-
+  @media (max-width: 1350px) {
+    width: 222px;
+    height: 300px;
+    aspect-ratio: 37/50;
+  }
+`
 
 export const FruitsImage = styled.div<{ $img: string }>`
   width: 100%;
@@ -103,17 +137,20 @@ export const FruitsImage = styled.div<{ $img: string }>`
   border-top-right-radius: 40px;
   border-bottom-right-radius: 40px;
   background:
-    url(${({ $img }) => $img})
-      -32.354px -4px / 116.688% 100.747%
-      no-repeat,
+    url(${({ $img }) => $img}) -32.354px -4px / 116.688% 100.747% no-repeat,
     linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.2) 100%),
     linear-gradient(
       180deg,
       ${({ theme }) => theme.colors.roxo800} 0%,
       ${({ theme }) => theme.colors.roxo700} 100%
     );
-`;
-
+`
+export const FruitMobile = styled.img`
+  position: absolute;
+  width: calc(445px -25px);
+  height: 273px;
+  bottom: -5px;
+`
 export const WomanImage = styled.img`
   position: absolute;
   right: 0;
@@ -121,9 +158,4 @@ export const WomanImage = styled.img`
   width: 30%;
   flex-shrink: 0;
   aspect-ratio: 1/1;
-`;
-
-
-
-
-
+`

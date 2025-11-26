@@ -1,13 +1,27 @@
-import bottleImg from "@/assets/imgs/oneGummy.svg"; 
-import bottleImgHover from "@/assets/imgs/trioGummy.svg"
-import seal from "@/assets/imgs/seal.svg"
+import bottleImg from '@/assets/imgs/Embalagem frente (1).svg'
+import bottleImgHover from '@/assets/imgs/Embalagem verso (1).svg'
+import seal from '@/assets/imgs/seal.svg'
 
-import { leftIngredients, rightIngredients } from "./factory";
-import { BannerSubtitle, BannerTitle,  BottleWrapper, BottomNote, Column, Content, Ingredient, IngredientSubtitle, IngredientText, IngredientTitle, Main, Section, TopBanner } from "./styles";
+import { leftIngredients, rightIngredients } from './factory'
+import {
+  BannerSubtitle,
+  BannerTitle,
+  BottleWrapper,
+  BottomNote,
+  Column,
+  Content,
+  Ingredient,
+  IngredientSubtitle,
+  IngredientText,
+  IngredientTitle,
+  Main,
+  Section,
+  TopBanner,
+} from './styles'
 
 export default function Ingredients() {
   return (
-    <Section id='ingredients'>
+    <Section id="ingredients">
       <Content>
         {/* Banner superior */}
         <TopBanner>
@@ -23,29 +37,29 @@ export default function Ingredients() {
             {leftIngredients.map((ing, i) => (
               <Ingredient key={`left-${i}`}>
                 <IngredientTitle>{ing.title}</IngredientTitle>
-                <IngredientSubtitle>{ing.subtitle }</IngredientSubtitle>
+                <IngredientSubtitle>{ing.subtitle}</IngredientSubtitle>
                 <IngredientText>{ing.text}</IngredientText>
               </Ingredient>
             ))}
           </Column>
 
           <BottleWrapper>
-              <img className="bottle default" src={bottleImg} alt="Power Gummy" />
-              <img className="bottle hover" src={bottleImgHover} alt="Power Gummy hover" />
+            <img src={seal} className="seal" />
+            <img className="bottle default" src={bottleImg} alt="Power Gummy" />
+            <img className="bottle hover" src={bottleImgHover} alt="Power Gummy hover" />
             <BottomNote>
               <h2>Sinergia inteligente de nutrientes</h2>
               <p>
-                Ativos nas doses certas que agem em conjunto para uma combinação equilibrada potencializando os resultados.
+                Ativos nas doses certas que agem em conjunto para uma combinação equilibrada
+                potencializando os resultados.
               </p>
-              <img src={seal} className="seal"/>
-    
             </BottomNote>
           </BottleWrapper>
 
           <Column>
             {rightIngredients.map((ing, i) => (
               <Ingredient key={`right-${i}`} $right>
-                <IngredientSubtitle $right>{ing.subtitle }</IngredientSubtitle>
+                <IngredientSubtitle $right>{ing.subtitle}</IngredientSubtitle>
                 <IngredientText $right>{ing.text}</IngredientText>
               </Ingredient>
             ))}
@@ -53,5 +67,5 @@ export default function Ingredients() {
         </Main>
       </Content>
     </Section>
-  );
+  )
 }

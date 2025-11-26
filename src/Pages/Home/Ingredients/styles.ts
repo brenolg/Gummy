@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 import ingredientsBg from '@/assets/imgs/ingredientsBg.svg'
 
 export const Section = styled.section`
@@ -7,16 +7,16 @@ export const Section = styled.section`
   justify-content: center;
   background-image: url(${ingredientsBg});
   background-repeat: no-repeat;
-  background-size: cover;     
+  background-size: cover;
   background-position: center;
-`;
+`
 
 export const Content = styled.div`
   width: 100%;
   padding: 48px 86px;
   display: flex;
   flex-direction: column;
-`;
+`
 
 export const TopBanner = styled.div`
   display: inline-flex;
@@ -31,42 +31,42 @@ export const TopBanner = styled.div`
   border: 1px solid rgba(255, 255, 255, 0.3);
   width: fit-content;
   margin: auto;
-`;
+`
 
 export const BannerTitle = styled.div`
-  color: var(--dourado-200, #BA7E1B);
+  color: var(--dourado-200, #ba7e1b);
   text-align: center;
-  font-family: "Nunito Sans";
+  font-family: 'Nunito Sans';
   font-size: 34px;
   font-style: normal;
   font-weight: 800;
   line-height: 37.4px; /* 110% */
-`;
+`
 
 export const BannerSubtitle = styled.div`
   color: var(--roxo-700, #502665);
   text-align: center;
-  font-family: "Nunito Sans";
+  font-family: 'Nunito Sans';
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
   line-height: 120%;
-`;
+`
 
 export const Main = styled.div`
   display: grid;
   grid-template-columns: 1.1fr auto 1.1fr;
   gap: 32px;
   align-items: center;
-`;
+`
 
 export const Column = styled.div`
   display: flex;
   flex-direction: column;
   gap: 24px;
   margin-top: 60px;
-
-`;
+  justify-content: flex-start;
+`
 
 export const Ingredient = styled.div<{ $right?: boolean }>`
   display: flex;
@@ -78,51 +78,62 @@ export const Ingredient = styled.div<{ $right?: boolean }>`
   background: rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(12px);
   border: 1px solid rgba(255, 255, 255, 0.3);
-  align-items: ${({ $right }) => ($right ? "flex-end" : "flex-start")};
-`;
+  align-items: ${({ $right }) => ($right ? 'flex-end' : 'flex-start')};
+`
 
 export const IngredientTitle = styled.p<{ $right?: boolean }>`
   color: ${({ theme }) => theme.colors.dourado200};
-  font-family: "Nunito Sans";
+  font-family: 'Nunito Sans';
   font-size: 34px;
   font-style: normal;
   font-weight: 700;
-  line-height: 37.4px; 
-  text-align: ${({ $right }) => ($right ? "right" : "left")};
-`;
+  line-height: 37.4px;
+  text-align: ${({ $right }) => ($right ? 'right' : 'left')};
+  @media (max-width: 1150px) {
+    font-size: 25px;
+  }
+`
 
 export const IngredientSubtitle = styled.p<{ $right?: boolean }>`
   color: ${({ theme }) => theme.colors.roxo700};
-  font-family: "Nunito Sans";
+  font-family: 'Nunito Sans';
   font-size: 34px;
   font-style: normal;
   font-weight: 700;
   line-height: 37.4px;
   margin-bottom: 8px;
-  text-align: ${({ $right }) => ($right ? "right" : "left")};
-`;
+  text-align: ${({ $right }) => ($right ? 'right' : 'left')};
+  @media (max-width: 1150px) {
+    font-size: 28px;
+  }
+`
 
 export const IngredientText = styled.p<{ $right?: boolean }>`
   color: ${({ theme }) => theme.colors.roxo700};
-  font-family: "Nunito Sans";
+  font-family: 'Nunito Sans';
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
   line-height: 120%; /* 19.2px */
-  text-align: ${({ $right }) => ($right ? "right" : "left")};
-`;
+  text-align: ${({ $right }) => ($right ? 'right' : 'left')};
+`
 
 export const BottleWrapper = styled.div`
-  position: relative;       
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 16px;
+  z-index: 1;
   .bottle {
     max-width: 260px;
     width: 100%;
     display: block;
-    transition: opacity 0.25s ease, transform 0.25s ease;
+    position: relative;
+    z-index: 1;
+    transition:
+      opacity 0.25s ease,
+      transform 0.25s ease;
   }
 
   .bottle.hover {
@@ -132,7 +143,7 @@ export const BottleWrapper = styled.div`
     transform: translateX(-50%);
     opacity: 0;
     pointer-events: none;
-    z-index: 2;              /* garante que fique na frente da default */
+    z-index: 2; /* garante que fique na frente da default */
   }
 
   .bottle.default {
@@ -146,14 +157,28 @@ export const BottleWrapper = styled.div`
 
   &:hover .bottle.hover {
     opacity: 1;
-    transform: translateX(-50%) scale(1.03);
+    transform: translateX(-50%);
   }
-`;
+  .seal {
+    position: absolute;
+    bottom: 62px;
+    right: -25px;
+    z-index: 5;
+  }
+
+  @media (max-width: 1150px) {
+    .seal {
+      bottom: 132px;
+      right: -25px;
+      z-index: 5;
+    }
+  }
+`
 
 export const BottleImage = styled.img`
   max-width: 260px;
   width: 100%;
-`;
+`
 
 export const BottomNote = styled.div`
   display: flex;
@@ -164,19 +189,19 @@ export const BottomNote = styled.div`
   align-items: center;
   gap: 8px;
   border-radius: 16px;
-  position: relative                     ;
+  position: relative;
   border: var(--stroke-weight-1, 1px) solid rgba(186, 160, 106, 0.24);
   background: rgba(246, 234, 208, 0.08);
   box-shadow: 0 0 8px 1px rgba(185, 158, 104, 0.24);
   backdrop-filter: blur(12px);
   h2 {
     text-align: center;
-    font-family: "Nunito Sans";
+    font-family: 'Nunito Sans';
     font-size: 16px;
     font-style: normal;
     font-weight: 700;
     line-height: 120%; /* 19.2px */
-    background: linear-gradient(90deg, #502665 0%, #A14CCB 100%);
+    background: linear-gradient(90deg, #502665 0%, #a14ccb 100%);
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -184,15 +209,14 @@ export const BottomNote = styled.div`
   p {
     color: var(--roxo-700, #502665);
     text-align: center;
-    font-family: "Nunito Sans";
+    font-family: 'Nunito Sans';
     font-size: 12px;
     font-style: normal;
     font-weight: 400;
     line-height: 150%; /* 18px */
   }
-  .seal {
-    position: absolute;
-    bottom:  53px;
-    right: -36px;
+
+  @media (max-width: 1150px) {
+    width: 250px;
   }
-`;
+`
