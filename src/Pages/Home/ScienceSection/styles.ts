@@ -10,6 +10,11 @@ export const Section = styled.section`
   background-repeat: no-repeat;
   background-size: cover;     
   background-position: center;
+  @media (max-width: 750px) { 
+    padding: 24px;
+    padding-top: 72px;
+    padding-bottom: 56px;
+  }
 `;
 
 export const Content = styled.div`
@@ -22,6 +27,9 @@ export const Content = styled.div`
 export const Heading = styled.header`
   text-align: center;
   margin-bottom: 80px;
+  @media (max-width: 750px) { 
+    margin-bottom: 40px;
+  }
 `;
 
 export const SuperTitle = styled.p`
@@ -32,6 +40,9 @@ export const SuperTitle = styled.p`
   font-style: normal;
   font-weight: 800;
   line-height: 120%; /* 48px */
+  @media (max-width: 750px) { 
+    font-size: 32px;
+  }
 `;
 
 export const Title = styled.h2`
@@ -42,6 +53,10 @@ export const Title = styled.h2`
   font-weight: 800;
   line-height: 120%;
   margin-bottom: 24px;
+  @media (max-width: 750px) { 
+    font-size: 32px;
+    margin-bottom: 16px;
+  }
 `;
 
 export const Description = styled.p`
@@ -52,6 +67,9 @@ export const Description = styled.p`
   font-style: normal;
   font-weight: 400;
   line-height: 150%; /* 36px */
+  @media (max-width: 750px) { 
+    font-size: 20px;
+  }
 `;
 
 export const DescriptionStrong = styled.p`
@@ -61,6 +79,9 @@ export const DescriptionStrong = styled.p`
   font-style: normal;
   font-weight: 700;
   line-height: 150%;
+  @media (max-width: 750px) { 
+    font-size: 20px;
+  }
 `;
 
 export const CardsGrid = styled.div`
@@ -69,6 +90,10 @@ export const CardsGrid = styled.div`
   justify-content: center;
   gap: 40.5px;
   margin-bottom: 80px;
+  flex-wrap: wrap;
+  @media (max-width: 750px) { 
+    margin-bottom: 40px;
+  }
 `;
 
 export const Card = styled.article`
