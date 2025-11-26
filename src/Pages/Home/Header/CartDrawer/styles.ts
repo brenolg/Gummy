@@ -41,6 +41,9 @@ export const Drawer = styled.div<{ $open: boolean }>`
   transition: 0.3s ease;
   background: #FFF;
   box-shadow: 0 0 40px 0 rgba(0, 0, 0, 0.25);
+    @media (max-width: 650px) { 
+    width: 320px;
+  }
 `;
 
 export const Header = styled.div`

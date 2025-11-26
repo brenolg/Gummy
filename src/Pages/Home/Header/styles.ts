@@ -8,6 +8,10 @@ export const Container = styled.header`
   background: #502665EB; 
   height: 88px;
   padding: 12px 80px;
+  @media (max-width: 650px) { 
+    padding: 12px 24px;
+    height: 80px;
+  }
 `;
 
 export const Content = styled.div`

@@ -5,6 +5,8 @@ import CartDrawer from "./CartDrawer";
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-scroll';
 import defaultScrollProps from '@/utils/defaultScrollProps';
+import { useMediaQuery } from 'react-responsive'
+import MobileMenu from './MobileMenu';
 
 export default function Header() {
   const navigate = useNavigate();
@@ -17,12 +19,21 @@ export default function Header() {
     navigate("/track");
   }
 
+
+  const isMobile = useMediaQuery({
+    query: '(max-width: 1245px)'
+  })
+
   return (
     <Container>
       <Content>
+        {isMobile && <MobileMenu  /> }
+  
         <Logo src={ logo } alt="Logo" />
 
         <Nav>
+          {!isMobile && 
+          <>
           <Link to="science" {...defaultScrollProps}>
             <NavItem >CABELO, PELE & UNHA</NavItem>
           </Link>
@@ -42,6 +53,8 @@ export default function Header() {
           <button type='button' onClick={goToTrack}>
           <NavItem>RASTREAR PEDIDO</NavItem>
           </button>
+          </>
+          }
           <BuyButton type="button" onClick={goToCheckout} >COMPRAR</BuyButton>
         </Nav>
 
