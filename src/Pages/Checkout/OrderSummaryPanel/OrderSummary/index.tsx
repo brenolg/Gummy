@@ -1,25 +1,17 @@
 // OrderSummary.tsx
-import { useEffect, useMemo } from "react";
-import { useCoreData, type ShippingResponse } from "@/context/coreDataContext";
-import { useFetch } from "@/hooks/useFetch";
-import { handleNumberOfBoxes, handleProductWeight } from "./helper";
-import { fmtBRL } from "@/utils/helper";
-import {
-  Box,
-  DiscountValue,
-  Label,
-  Row,
-  TotalLabel,
-  TotalRow,
-  TotalValue,
-} from "./styles";
+import { useEffect, useMemo } from 'react'
+import { useCoreData, type ShippingResponse } from '@/context/coreDataContext'
+import { useFetch } from '@/hooks/useFetch'
+import { handleNumberOfBoxes, handleProductWeight } from './helper'
+import { fmtBRL } from '@/utils/helper'
+import { Box, DiscountValue, Label, Row, TotalLabel, TotalRow, TotalValue } from './styles'
 
 type Props = {
   /** Como combinar vários cupons: "sum" (soma %) ou "sequential" (aplica em cascata) */
-  couponMode?: "sum" | "sequential";
-};
+  couponMode?: 'sum' | 'sequential'
+}
 
-export default function OrderSummary({ couponMode = "sum" }: Props) {
+export default function OrderSummary({ couponMode = 'sum' }: Props) {
   const {
     cart,
     coupons,
@@ -29,66 +21,53 @@ export default function OrderSummary({ couponMode = "sum" }: Props) {
     setGlobalLoading,
     juros,
     setFormData,
-  } = useCoreData();
+  } = useCoreData()
 
-  const { fetcher } = useFetch();
+  const { fetcher } = useFetch()
 
-  const {
-    itemsCount,
-    subtotal,
-    couponsPct,
-    couponsAmount,
-    interestAmount,
-    total,
-  } = useMemo(() => {
-    const itemsCount = cart.reduce(
-      (acc, i) => acc + (i.quantity || 0),
-      0
-    );
+  const { itemsCount, subtotal, couponsPct, couponsAmount, interestAmount, total } = useMemo(() => {
+    const itemsCount = cart.reduce((acc, i) => acc + (i.quantity || 0), 0)
 
-    const subtotal = cart.reduce(
-      (acc, i) => acc + i.unitPrice * (i.quantity || 0),
-      0
-    );
+    const subtotal = cart.reduce((acc, i) => acc + i.unitPrice * (i.quantity || 0), 0)
 
     // % total de desconto via cupons
-    let couponsPct = 0;
+    let couponsPct = 0
 
-    if (couponMode === "sum") {
+    if (couponMode === 'sum') {
       couponsPct = Math.min(
         100,
         coupons.reduce((acc, c) => acc + (c.discount || 0), 0)
-      );
+      )
     } else {
       // aplica em cascata (mais realista em e-commerce)
-      let running = subtotal;
+      let running = subtotal
       coupons.forEach((c) => {
-        running -= running * (c.discount / 100);
-      });
-      couponsPct = subtotal > 0 ? (1 - running / subtotal) * 100 : 0;
+        running -= running * (c.discount / 100)
+      })
+      couponsPct = subtotal > 0 ? (1 - running / subtotal) * 100 : 0
     }
 
     // valor absoluto de desconto
-    const couponsAmount = +(subtotal * (couponsPct / 100)).toFixed(2);
+    const couponsAmount = +(subtotal * (couponsPct / 100)).toFixed(2)
 
     // total dos produtos já com cupom aplicado (sem frete)
-    const totalBeforeShipping = Math.max(0, subtotal - couponsAmount);
+    const totalBeforeShipping = Math.max(0, subtotal - couponsAmount)
 
     // frete (0 quando não definido)
-    const shippingValue = shipping?.valor ?? 0;
+    const shippingValue = shipping?.valor ?? 0
 
     // 🧮 total base que é parcelado: produtos - cupom + frete
-    const baseTotal = totalBeforeShipping + shippingValue;
+    const baseTotal = totalBeforeShipping + shippingValue
 
     // 🔥 juros vindo do contexto (ex.: 4.5)
-    const jurosPct = juros || 0;
-    const jurosFactor = jurosPct / 100;
+    const jurosPct = juros || 0
+    const jurosFactor = jurosPct / 100
 
     // 💸 juros em R$ calculado sobre o total parcelado (baseTotal)
-    const interestAmount = +(baseTotal * jurosFactor).toFixed(2);
+    const interestAmount = +(baseTotal * jurosFactor).toFixed(2)
 
     // total final: base + juros
-    const total = +(baseTotal + interestAmount).toFixed(2);
+    const total = +(baseTotal + interestAmount).toFixed(2)
 
     return {
       itemsCount,
@@ -97,41 +76,38 @@ export default function OrderSummary({ couponMode = "sum" }: Props) {
       couponsAmount,
       interestAmount,
       total,
-    };
-  }, [cart, coupons, couponMode, shipping, juros]);
+    }
+  }, [cart, coupons, couponMode, shipping, juros])
 
   useEffect(() => {
-    if (!total) return;
+    if (!total) return
 
     setFormData((prev) => ({
       ...prev,
       total,
-    }));
-  }, [total, setFormData]);
+    }))
+  }, [total, setFormData])
 
   async function calcularFrete() {
-    if (
-      subtotal > 119 &&
-      (formPostalCode.startsWith("8") || formPostalCode.startsWith("9"))
-    ) {
-      setShipping({ valor: 0, prazo: 0 });
-      return;
+    if (subtotal > 119 && (formPostalCode.startsWith('8') || formPostalCode.startsWith('9'))) {
+      setShipping({ valor: 0, prazo: 0 })
+      return
     }
 
     try {
-      setGlobalLoading(true);
+      setGlobalLoading(true)
 
       const BOX_DATA = {
-        peso: 0.5,
-        altura: 40,
-        largura: 3,
-        profundidade: 20,
-      };
+        peso: 0.92,
+        altura: 14,
+        largura: 19,
+        profundidade: 10,
+      }
 
-      const numberOfBoxes = handleNumberOfBoxes(cart);
-      const pesoProdutos = handleProductWeight(cart);
+      const numberOfBoxes = handleNumberOfBoxes(cart)
+      const pesoProdutos = handleProductWeight(cart)
 
-      const pesoCaixas = BOX_DATA.peso * numberOfBoxes;
+      const pesoCaixas = BOX_DATA.peso * numberOfBoxes
 
       const body = {
         cep: formPostalCode,
@@ -140,40 +116,36 @@ export default function OrderSummary({ couponMode = "sum" }: Props) {
         altura: BOX_DATA.altura * numberOfBoxes,
         largura: BOX_DATA.largura * numberOfBoxes,
         profundidade: BOX_DATA.profundidade * numberOfBoxes,
-      };
-
-      const resp = await fetcher<ShippingResponse>(
-        "public/calculate-shipping",
-        "POST",
-        { body }
-      );
-
-      if (!resp || !resp.frete) {
-        console.warn("Resposta inesperada do servidor:", resp);
-        setShipping(null);
-        return;
       }
 
-      setShipping(resp.frete);
+      const resp = await fetcher<ShippingResponse>('public/calculate-shipping', 'POST', { body })
+
+      if (!resp || !resp.frete) {
+        console.warn('Resposta inesperada do servidor:', resp)
+        setShipping(null)
+        return
+      }
+
+      setShipping(resp.frete)
     } catch (error) {
-      console.error("Erro ao calcular frete:", error);
-      setShipping(null);
+      console.error('Erro ao calcular frete:', error)
+      setShipping(null)
     } finally {
-      setGlobalLoading(false);
+      setGlobalLoading(false)
     }
   }
 
   useEffect(() => {
     if (formPostalCode.length) {
-      calcularFrete();
+      calcularFrete()
     }
-  }, [formPostalCode, cart]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [formPostalCode, cart]) // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <Box>
       <Row>
         <Label>
-          Subtotal · {itemsCount} {itemsCount === 1 ? "item" : "itens"}
+          Subtotal · {itemsCount} {itemsCount === 1 ? 'item' : 'itens'}
         </Label>
         <Label>{fmtBRL(subtotal)}</Label>
       </Row>
@@ -182,8 +154,7 @@ export default function OrderSummary({ couponMode = "sum" }: Props) {
         <Row>
           <Label>Cupom de desconto aplicado</Label>
           <DiscountValue>
-            -{fmtBRL(couponsAmount)}{" "}
-            <small>({Math.round(couponsPct)}%)</small>
+            -{fmtBRL(couponsAmount)} <small>({Math.round(couponsPct)}%)</small>
           </DiscountValue>
         </Row>
       ) : null}
@@ -194,9 +165,7 @@ export default function OrderSummary({ couponMode = "sum" }: Props) {
         {shipping == null ? (
           <DiscountValue>Digite o CEP para calcular</DiscountValue>
         ) : (
-          <DiscountValue>
-            {shipping.valor === 0 ? "Grátis" : fmtBRL(shipping.valor)}
-          </DiscountValue>
+          <DiscountValue>{shipping.valor === 0 ? 'Grátis' : fmtBRL(shipping.valor)}</DiscountValue>
         )}
       </Row>
 
@@ -212,5 +181,5 @@ export default function OrderSummary({ couponMode = "sum" }: Props) {
         <TotalValue>{fmtBRL(total)}</TotalValue>
       </TotalRow>
     </Box>
-  );
+  )
 }
