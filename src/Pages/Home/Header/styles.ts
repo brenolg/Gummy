@@ -88,9 +88,7 @@ export const BuyButton = styled.button`
   &:hover {
     opacity: 0.9;
   }
-  @media (max-width: 650px) {
-    padding: 0;
-  }
+
   @media (max-width: 400px) {
     display: none;
   }

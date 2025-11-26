@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export const Section = styled.section`
   display: flex;
-  padding: 80px 150px;
+  padding: 80px 40px;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -33,11 +33,30 @@ export const Section = styled.section`
     line-height: 120%;
     margin-bottom: 64px;
   }
+  @media (max-width: 1270px) {
+    padding: 40px 24px;
+    .section-title {
+      font-size: 28px;
+    }
+    .section-subtitle {
+      font-size: 14px;
+      margin-bottom: 55px;
+    }
+  }
 `
 export const Grid = styled.div`
   display: flex;
   justify-content: center;
   gap: 40px;
+  grid-template-columns: repeat(auto-fit, minmax(182.84px, 550px));
+  width: 100%;
+  @media (max-width: 1270px) {
+    gap: 8px;
+  }
+  @media (max-width: 415px) {
+    display: flex;
+    flex-direction: column-reverse;
+  }
 `
 export const Card = styled.div`
   display: flex;
@@ -49,7 +68,8 @@ export const Card = styled.div`
   border-radius: 16px;
   background: rgba(255, 255, 255, 0.8);
   box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
-  width: 550px;
+  width: 100%; /* ocupa a célula inteira do grid */
+  max-width: 550px;
   .cardTitle {
     color: ${({ theme }) => theme.colors.roxo700};
     text-align: center;
@@ -100,6 +120,51 @@ export const Card = styled.div`
     top: -41px;
     right: -81px;
   }
+  @media (max-width: 1270px) {
+    padding: 16px 8px;
+    .seal {
+      top: -52px;
+      right: -11px;
+      width: 85px;
+      height: 69px;
+    }
+    .cardTitle {
+      font-size: 24px;
+      line-height: 100%;
+    }
+    .cardSubtitle {
+      color: var(--roxo-700, #502665);
+      font-family: 'Nunito Sans';
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 300;
+      line-height: 120%;
+      margin-bottom: 8px;
+    }
+    .description {
+      font-size: 14px;
+    }
+    .eBookPlus {
+      color: var(--roxo-700, #502665);
+      text-align: center;
+      font-family: 'Nunito Sans';
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 120%; /* 14.4px */
+    }
+    .mb24 {
+      margin-bottom: 8px;
+    }
+    .mb51 {
+      margin-bottom: 36px;
+    }
+  }
+  @media (max-width: 650px) {
+    .productImage {
+      height: 120px;
+    }
+  }
 `
 
 export const Price = styled.div`
@@ -111,7 +176,7 @@ export const Price = styled.div`
     font-size: 40px;
     font-style: normal;
     font-weight: 700;
-    line-height: 42px; /* 105% */
+    line-height: 105%; /* 105% */
     margin-bottom: 16px;
   }
   .payMethod {
@@ -121,7 +186,7 @@ export const Price = styled.div`
     font-size: 18px;
     font-style: normal;
     font-weight: 400;
-    line-height: 18px; /* 100% */
+    line-height: 100%; /* 100% */
   }
   .dashed {
     color: ${({ theme }) => theme.colors.neutral.grey600};
@@ -130,7 +195,20 @@ export const Price = styled.div`
     font-size: 20px;
     font-style: normal;
     font-weight: 400;
-    line-height: 42px; /* 210% */
+    line-height: 210%; /* 210% */
     text-decoration-line: line-through;
+  }
+  @media (max-width: 1270px) {
+    .dashed {
+      font-size: 12px;
+      line-height: 133.333%;
+    }
+    .priceNumber {
+      font-size: 24px;
+      margin-bottom: 8px;
+    }
+    .payMethod {
+      font-size: 12px;
+    }
   }
 `
