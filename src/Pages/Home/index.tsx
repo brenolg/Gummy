@@ -32,7 +32,7 @@ export default function Home() {
         setLoading(true)
 
         const data = await fetcher<BannerData[]>('/public/banner', 'GET')
-        console.log(data)
+        console.log('Baner', data)
         setBanerData(data as BannerData[])
       } finally {
         setLoading(false)

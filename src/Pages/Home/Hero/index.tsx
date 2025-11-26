@@ -27,7 +27,7 @@ export default function Hero() {
   }
 
   const isMobile = useMediaQuery({
-    query: '(max-width: 1350px)',
+    query: '(max-width: 1150px)',
   })
 
   return (

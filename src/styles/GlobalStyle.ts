@@ -42,6 +42,11 @@ export const GlobalStyle = createGlobalStyle`
   }
   button {
     cursor: pointer;
+    transition: all ease 0.3s;
+  }
+  button:hover {
+    opacity: 0.9;
+    transition: all ease 0.3s;
   }
   /* LINKS */
   a {

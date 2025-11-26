@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 export const Section = styled.section`
   display: flex;
@@ -16,29 +16,29 @@ export const Section = styled.section`
   .section-title {
     color: ${({ theme }) => theme.colors.roxo0};
     text-align: center;
-    font-family: "Nunito Sans";
+    font-family: 'Nunito Sans';
     font-size: 40px;
     font-style: normal;
     font-weight: 600;
-    line-height: 120%; 
-    margin-bottom: 16px
+    line-height: 120%;
+    margin-bottom: 16px;
   }
   .section-subtitle {
     color: ${({ theme }) => theme.colors.roxo0};
     text-align: center;
-    font-family: "Nunito Sans";
+    font-family: 'Nunito Sans';
     font-size: 20px;
     font-style: normal;
     font-weight: 400;
-    line-height: 120%; 
+    line-height: 120%;
     margin-bottom: 64px;
   }
-`;
+`
 export const Grid = styled.div`
   display: flex;
   justify-content: center;
   gap: 40px;
-`;
+`
 export const Card = styled.div`
   display: flex;
   position: relative;
@@ -47,13 +47,13 @@ export const Card = styled.div`
   justify-content: space-between;
   align-items: center;
   border-radius: 16px;
-  background: rgba(255, 255, 255, 0.80);
+  background: rgba(255, 255, 255, 0.8);
   box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
   width: 550px;
   .cardTitle {
     color: ${({ theme }) => theme.colors.roxo700};
     text-align: center;
-    font-family: "Nunito Sans";
+    font-family: 'Nunito Sans';
     font-size: 32px;
     font-style: normal;
     font-weight: 800;
@@ -61,7 +61,7 @@ export const Card = styled.div`
   }
   .cardSubtitle {
     color: ${({ theme }) => theme.colors.roxo700};
-    font-family: "Nunito Sans";
+    font-family: 'Nunito Sans';
     font-size: 20px;
     font-style: normal;
     font-weight: 300;
@@ -71,11 +71,11 @@ export const Card = styled.div`
   .description {
     color: ${({ theme }) => theme.colors.neutral.grey700};
     text-align: center;
-    font-family: "Nunito Sans";
+    font-family: 'Nunito Sans';
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
-    line-height: 120%; 
+    line-height: 120%;
     white-space: pre-line;
   }
   .productImage {
@@ -83,7 +83,7 @@ export const Card = styled.div`
   }
   .eBookPlus {
     color: ${({ theme }) => theme.colors.neutral.grey400};
-    font-family: "Nunito Sans";
+    font-family: 'Nunito Sans';
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
@@ -100,14 +100,14 @@ export const Card = styled.div`
     top: -41px;
     right: -81px;
   }
-`;
+`
 
 export const Price = styled.div`
   margin-bottom: 24px;
   .priceNumber {
     color: ${({ theme }) => theme.colors.roxo700};
     text-align: center;
-    font-family: "Nunito Sans";
+    font-family: 'Nunito Sans';
     font-size: 40px;
     font-style: normal;
     font-weight: 700;
@@ -117,7 +117,7 @@ export const Price = styled.div`
   .payMethod {
     color: ${({ theme }) => theme.colors.neutral.grey700};
     text-align: center;
-    font-family: "Nunito Sans";
+    font-family: 'Nunito Sans';
     font-size: 18px;
     font-style: normal;
     font-weight: 400;
@@ -126,12 +126,11 @@ export const Price = styled.div`
   .dashed {
     color: ${({ theme }) => theme.colors.neutral.grey600};
     text-align: center;
-    font-family: "Nunito Sans";
+    font-family: 'Nunito Sans';
     font-size: 20px;
     font-style: normal;
     font-weight: 400;
     line-height: 42px; /* 210% */
     text-decoration-line: line-through;
   }
-`;
-;
+`

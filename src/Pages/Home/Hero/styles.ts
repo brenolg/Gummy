@@ -11,7 +11,7 @@ export const Section = styled.section`
   padding-right: 114px;
   padding-bottom: 53px;
   position: relative;
-  @media (max-width: 1350px) {
+  @media (max-width: 1150px) {
     padding: 0;
     padding-left: 24px;
     padding-right: 24px;
@@ -50,7 +50,7 @@ export const LeftContent = styled.div`
     ${({ theme }) => theme.colors.roxo700};
   height: fit-content;
 
-  @media (max-width: 1350px) {
+  @media (max-width: 1150px) {
     padding: 32px 24px;
     border-radius: 24px;
     justify-content: flex-start;
@@ -71,10 +71,13 @@ export const Title = styled.h1`
   .highlight {
     font-weight: 800;
   }
-  @media (max-width: 1350px) {
-    text-align: left;
+  @media (max-width: 1150px) {
+    text-align: center;
     width: 100%;
     font-size: 26px;
+  }
+  @media (max-width: 500px) {
+    text-align: left;
   }
 `
 
@@ -94,8 +97,12 @@ export const BenefitItem = styled.li`
   font-style: normal;
   font-weight: 400;
   line-height: 180%; /* 36px */
-  @media (max-width: 1350px) {
+  @media (max-width: 1150px) {
     font-size: 16px;
+    text-align: center;
+  }
+  @media (max-width: 500px) {
+    text-align: left;
   }
 `
 
@@ -108,7 +115,7 @@ export const BottleWrapper = styled.div`
   left: 50%;
   transform: translate(-50%);
   z-index: 2;
-  @media (max-width: 1350px) {
+  @media (max-width: 1150px) {
     width: 222px;
     height: 300px;
     transform: none;
@@ -121,7 +128,7 @@ export const BottleWrapper = styled.div`
 export const BottleImage = styled.img`
   width: 438px;
   height: 521px;
-  @media (max-width: 1350px) {
+  @media (max-width: 1150px) {
     width: 222px;
     height: 300px;
     aspect-ratio: 37/50;

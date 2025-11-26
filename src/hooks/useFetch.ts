@@ -1,37 +1,34 @@
 // useFetch.ts
-import { useCallback } from "react";
+import { useCallback } from 'react'
 
-const BASE =
- "http://127.0.0.1:5001/powergum-backend/us-central1/api";
-//"https://3b90dac04c3b.ngrok-free.app/powergum-backend/us-central1/api"
+const BASE = 'http://127.0.0.1:5001/powergum-backend/us-central1/api' //'https://ee4e70e047d9.ngrok-free.app/powergum-backend/us-central1/api'
 
+type Method = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE'
 
-type Method = "GET" | "POST" | "PUT" | "PATCH" | "DELETE";
-
-type Query = Record<string, string | number | boolean | null | undefined>;
-type HeadersRec = Record<string, string>;
+type Query = Record<string, string | number | boolean | null | undefined>
+type HeadersRec = Record<string, string>
 
 export type FetchError = {
-  status: number;
-  payload: unknown;
-};
+  status: number
+  payload: unknown
+}
 
 function joinUrl(base: string, path: string) {
-  return base.replace(/\/+$/, "") + "/" + path.replace(/^\/+/, "");
+  return base.replace(/\/+$/, '') + '/' + path.replace(/^\/+/, '')
 }
 
 function queryString(q?: Query) {
-  if (!q) return "";
-  const s = new URLSearchParams();
+  if (!q) return ''
+  const s = new URLSearchParams()
   for (const [k, v] of Object.entries(q)) {
-    if (v !== undefined && v !== null) s.append(k, String(v));
+    if (v !== undefined && v !== null) s.append(k, String(v))
   }
-  const txt = s.toString();
-  return txt ? `?${txt}` : "";
+  const txt = s.toString()
+  return txt ? `?${txt}` : ''
 }
 
 function isAbortError(e: unknown): e is DOMException {
-  return e instanceof DOMException && e.name === "AbortError";
+  return e instanceof DOMException && e.name === 'AbortError'
 }
 
 export function useFetch(baseUrl: string = BASE) {
@@ -40,24 +37,24 @@ export function useFetch(baseUrl: string = BASE) {
       path: string,
       method: Method,
       opts?: {
-        body?: unknown;
-        query?: Query;
-        headers?: HeadersRec;
-        token?: string;
-        signal?: AbortSignal;
+        body?: unknown
+        query?: Query
+        headers?: HeadersRec
+        token?: string
+        signal?: AbortSignal
       }
     ): Promise<T | undefined> => {
-      const { body, query, headers, token, signal } = opts || {};
+      const { body, query, headers, token, signal } = opts || {}
 
-      const url = joinUrl(baseUrl, path) + queryString(query);
+      const url = joinUrl(baseUrl, path) + queryString(query)
 
       console.log(url)
 
       const h: Record<string, string> = {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
         ...(token ? { Authorization: `Bearer ${token}` } : {}),
         ...(headers ?? {}),
-      };
+      }
 
       try {
         const res = await fetch(url, {
@@ -65,30 +62,26 @@ export function useFetch(baseUrl: string = BASE) {
           headers: h,
           body: body !== undefined ? JSON.stringify(body) : undefined,
           signal,
-        });
+        })
 
-        const ct = res.headers.get("content-type") ?? "";
-        const isJson = ct.includes("application/json");
+        const ct = res.headers.get('content-type') ?? ''
+        const isJson = ct.includes('application/json')
 
         if (!res.ok) {
-          const payload = isJson
-            ? await res.json().catch(() => null)
-            : await res.text();
-          throw { status: res.status, payload } as FetchError;
+          const payload = isJson ? await res.json().catch(() => null) : await res.text()
+          throw { status: res.status, payload } as FetchError
         }
 
-        const data = (isJson
-          ? await res.json().catch(() => null)
-          : await res.text()) as T;
+        const data = (isJson ? await res.json().catch(() => null) : await res.text()) as T
 
-        return data;
+        return data
       } catch (e) {
-        if (isAbortError(e)) return undefined;
-        throw e;
+        if (isAbortError(e)) return undefined
+        throw e
       }
     },
     [baseUrl]
-  );
+  )
 
-  return { fetcher };
+  return { fetcher }
 }

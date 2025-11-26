@@ -1,117 +1,135 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useCoreData } from '@/context/coreDataContext';
-import { Divider, MInput, Select, MainButton } from '@/components';
-import PaymentMethodSelector from '../PaymentMethodSelector';
-import { InputContainer, TwoInputContainer, FormTitle } from '../styles';
-import { FormProvider, useForm, useWatch, type Resolver } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { schema } from './schema';
-import { useFetch } from '@/hooks/useFetch';
-import { onlyDigits } from '@/utils/helper';
-import { useEffect, useState } from 'react';
-import { InputError } from '@/components/form/FormCommomStyle';
+import { useCoreData } from '@/context/coreDataContext'
+import { Divider, MInput, Select, MainButton } from '@/components'
+import PaymentMethodSelector from '../PaymentMethodSelector'
+import { InputContainer, TwoInputContainer, FormTitle } from '../styles'
+import { FormProvider, useForm, useWatch, type Resolver } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { schema } from './schema'
+import { useFetch } from '@/hooks/useFetch'
+import { onlyDigits } from '@/utils/helper'
+import { useEffect, useState } from 'react'
+import { InputError } from '@/components/form/FormCommomStyle'
 import imgError from '@/assets/icons/error.svg'
 
 export type CheckoutFormData = {
-  cardNumber: string;
-  expiry: string;      // MM/AA
-  cvv: string;         // 3–4 dígitos
-  holderName: string;
-  installments: number;
-  cpf: string;
-};
+  cardNumber: string
+  expiry: string // MM/AA
+  cvv: string // 3–4 dígitos
+  holderName: string
+  installments: number
+  cpf: string
+}
 
 export default function PaymentCardForm() {
-  const [error , setError] = useState('')
-  const { fetcher } = useFetch();
-  const { paymentMethod, formData, cartStorage, setFormStep , setFormData, globalLoading, coupons, shipping, setGlobalLoading, setJuros} = useCoreData();
-  
+  const [error, setError] = useState('')
+  const { fetcher } = useFetch()
+  const {
+    paymentMethod,
+    formData,
+    cartStorage,
+    setFormStep,
+    setFormData,
+    globalLoading,
+    coupons,
+    shipping,
+    setGlobalLoading,
+    setJuros,
+  } = useCoreData()
+
   const installmentsOptions = [
     { label: `1x sem juros`, value: 1 },
-    { label: "2x sem juros", value: 2 },
-    { label: "3x sem juros", value: 3 },
-    { label: "4x com juros", value: 4 },
-    { label: "5x com juros", value: 5 },
-    { label: "6x com juros", value: 6 },
-    { label: "7x com juros", value: 7 },
-    { label: "8x com juros", value: 8 },
-    { label: "9x com juros", value: 9 },
-    { label: "10x com juros", value: 10 },
-    { label: "11x com juros", value: 11 },
-    { label: "12x com juros", value: 12 },
-  ];
+    { label: '2x sem juros', value: 2 },
+    { label: '3x sem juros', value: 3 },
+    { label: '4x com juros', value: 4 },
+    { label: '5x com juros', value: 5 },
+    { label: '6x com juros', value: 6 },
+    { label: '7x com juros', value: 7 },
+    { label: '8x com juros', value: 8 },
+    { label: '9x com juros', value: 9 },
+    { label: '10x com juros', value: 10 },
+    { label: '11x com juros', value: 11 },
+    { label: '12x com juros', value: 12 },
+  ]
 
   const methods = useForm<CheckoutFormData>({
-    resolver: paymentMethod === "CREDIT_CARD"
-      ? (yupResolver(schema) as Resolver<CheckoutFormData>)
-      : undefined, // <-- desliga toda validação quando for PIX
-    defaultValues: { 
-      cardNumber:'', expiry:'', cvv:'', installments: 0,cpf: '',
+    resolver:
+      paymentMethod === 'CREDIT_CARD'
+        ? (yupResolver(schema) as Resolver<CheckoutFormData>)
+        : undefined, // <-- desliga toda validação quando for PIX
+    defaultValues: {
+      cardNumber: '',
+      expiry: '',
+      cvv: '',
+      installments: 0,
+      cpf: '',
     },
     mode: 'onBlur',
-    reValidateMode: 'onBlur'
-  });
+    reValidateMode: 'onBlur',
+  })
 
-  const { control } = methods;
+  const { control } = methods
   const installments = useWatch({
     control,
-    name: "installments",
-  });
+    name: 'installments',
+  })
 
   useEffect(() => {
-    if (!installments) return;
+    if (!installments) return
 
     if (installments > 3) {
-      const juros = 4.5;
+      const juros = 4.5
       setJuros(juros)
-
     } else {
       setJuros(0)
     }
-  }, [installments]);
+    if (paymentMethod === 'PIX') {
+      setJuros(0)
+    }
+  }, [installments, paymentMethod])
 
   const handleStep = async () => {
     if (globalLoading) return
-    
-    if (paymentMethod !== "PIX") {
-      const isValid = await methods.trigger(); // valida só no cartão
+
+    if (paymentMethod !== 'PIX') {
+      const isValid = await methods.trigger() // valida só no cartão
 
       if (!isValid) {
-        console.error("Form inválido");
-        return;
+        console.error('Form inválido')
+        return
       }
     }
 
-    const data = methods.getValues();
+    const data = methods.getValues()
     try {
       setGlobalLoading(true)
       setError('')
-      const filteredCoupons = coupons.filter(c => c.code !== "PIX05");
-      const filteredItems = cartStorage.filter(item => item.quantity > 0);
-      const [month, year2] = data.expiry.split("/");
-      const year4 = `20${year2}`;
+      const filteredCoupons = coupons.filter((c) => c.code !== 'PIX05')
+      const filteredItems = cartStorage.filter((item) => item.quantity > 0)
+      const [month, year2] = data.expiry.split('/')
+      const year4 = `20${year2}`
       const body = {
-          customerData: {
-            name: formData.name,
-            email: formData.email,
-            cpf: onlyDigits(data.cpf),
-            phone: onlyDigits(String(formData.phone))
-          },
-          ...(filteredCoupons.length > 0 && {
-            coupon: filteredCoupons[0].code
-          }),
+        customerData: {
+          name: formData.name,
+          email: formData.email,
+          cpf: onlyDigits(data.cpf),
+          phone: onlyDigits(String(formData.phone)),
+        },
+        ...(filteredCoupons.length > 0 && {
+          coupon: filteredCoupons[0].code,
+        }),
 
-          items: filteredItems,
+        items: filteredItems,
 
-          shipping: shipping?.valor,
-          paymentMethod: paymentMethod,
-          ...(paymentMethod === "CREDIT_CARD" && {
+        shipping: shipping?.valor,
+        paymentMethod: paymentMethod,
+        ...(paymentMethod === 'CREDIT_CARD' && {
           creditCard: {
             holderName: data.holderName.toLocaleUpperCase(),
             number: onlyDigits(data.cardNumber),
-            expiryMonth: month, 
-            expiryYear: year4 ,
-            ccv: data.cvv
+            expiryMonth: month,
+            expiryYear: year4,
+            ccv: data.cvv,
           },
           creditCardHolderInfo: {
             name: formData.name,
@@ -123,87 +141,100 @@ export default function PaymentCardForm() {
             phone: onlyDigits(String(formData.phone)),
           },
           installmentCount: data.installments,
-          installmentValue: Number((Number(formData.total) / Number(data.installments)).toFixed(2))
-        })
+          installmentValue: Number((Number(formData.total) / Number(data.installments)).toFixed(2)),
+        }),
       }
-      console.log("body", body)
-      const res : any = await fetcher(
-        "/public/create-order",
-        "POST",
-        { body }
-      );
+      console.log('body', body)
+      const res: any = await fetcher('/public/create-order', 'POST', { body })
 
       if (paymentMethod === 'PIX') {
-        setFormData(prev => ({
+        setFormData((prev) => ({
           ...prev,
           ...data,
-            qrcodePayload: res.paymentData.payload,
-            qrcodeImage: res.paymentData.encodedImage,
-        }));
+          qrcodePayload: res.paymentData.payload,
+          qrcodeImage: res.paymentData.encodedImage,
+        }))
 
-        setFormStep('qrcode');
-        return;
+        setFormStep('qrcode')
+        return
       }
     } catch (error) {
-      console.error("Erro ao criar pedido:", error);
+      console.error('Erro ao criar pedido:', error)
       setError('Não foi possível validar a compra. Verifique os dados e tente novamente.')
       return
-    }finally {
+    } finally {
       setGlobalLoading(false)
     }
 
     //Salva os dados
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      ...data
-    }));
-    
+      ...data,
+    }))
 
-    if (paymentMethod === "CREDIT_CARD") {
+    if (paymentMethod === 'CREDIT_CARD') {
       setFormStep('success')
     }
-
-  }  
+  }
 
   return (
     <FormProvider {...methods}>
       <form
         id="checkout-form"
-        onSubmit={methods.handleSubmit(handleStep)}  // <-- CERTO
+        onSubmit={methods.handleSubmit(handleStep)} // <-- CERTO
         onKeyDown={(e) => {
-          if (e.key === "Enter") {
-            e.preventDefault();
+          if (e.key === 'Enter') {
+            e.preventDefault()
           }
         }}
       >
         <InputContainer>
           <FormTitle>Pagamento</FormTitle>
-          <PaymentMethodSelector/>
-          <Divider mb={24}/>
+          <PaymentMethodSelector />
+          <Divider mb={24} />
 
-          {paymentMethod === 'CREDIT_CARD' ? 
+          {paymentMethod === 'CREDIT_CARD' ? (
             <>
-              <MInput name="cardNumber" type="card"   placeholder="Número do Cartão" hasAsterisk mb={24}/>
-              <MInput name="cpf" type="cpf"   placeholder="CPF" hasAsterisk mb={24}/>
+              <MInput
+                name="cardNumber"
+                type="card"
+                placeholder="Número do Cartão"
+                hasAsterisk
+                mb={24}
+              />
+              <MInput name="cpf" type="cpf" placeholder="CPF" hasAsterisk mb={24} />
               <TwoInputContainer>
-                <MInput name="expiry" type="expiry" placeholder="Validade" hasAsterisk mb={24}/>
-                <MInput name="cvv"    type="cvv"    placeholder="CVV"      hasAsterisk mb={24}/>
+                <MInput name="expiry" type="expiry" placeholder="Validade" hasAsterisk mb={24} />
+                <MInput name="cvv" type="cvv" placeholder="CVV" hasAsterisk mb={24} />
               </TwoInputContainer>
-              <MInput name="holderName" type="text" placeholder="Nome do titular do Cartão" hasAsterisk mb={24}/>
-              <Select name="installments" placeholder="Parcelas" options={installmentsOptions} hasAsterisk />
-            </> : 
-            <div className='pix-description'>
-              Clique no botão de “Confirmar pagamento”
-              para visualizar o QR Code de pagamento
+              <MInput
+                name="holderName"
+                type="text"
+                placeholder="Nome do titular do Cartão"
+                hasAsterisk
+                mb={24}
+              />
+              <Select
+                name="installments"
+                placeholder="Parcelas"
+                options={installmentsOptions}
+                hasAsterisk
+              />
+            </>
+          ) : (
+            <div className="pix-description">
+              Clique no botão de “Confirmar pagamento” para visualizar o QR Code de pagamento
             </div>
-          }
-          <InputError $error={!!error}><img src={imgError} className='img-error'/> {error}</InputError>
+          )}
+          <InputError $error={!!error}>
+            <img src={imgError} className="img-error" /> {error}
+          </InputError>
         </InputContainer>
 
-          <MainButton type="submit" loading={globalLoading} >
-            Confirmar Pagamento
-          </MainButton>
+        <MainButton type="submit" loading={globalLoading}>
+          Confirmar Pagamento
+        </MainButton>
       </form>
     </FormProvider>
-  );
+  )
 }
