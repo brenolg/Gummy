@@ -78,6 +78,7 @@ export const AsideCard = styled.aside`
     margin-bottom: 64px;
   }
   @media (max-width: 900px) {
+    max-width: 100%;
     padding: 0;
     .faqFirstDescription {
       margin-bottom: 0;
@@ -124,6 +125,24 @@ export const FaqCard = styled.div`
     font-weight: 400;
     line-height: 120%;
   }
+  @media (max-width: 900px) {
+    display: flex;
+    justify-content: center;
+    max-width: 100%;
+    .faqSubtitle {
+      width: 100%;
+      font-size: 16px;
+      text-align: center;
+    }
+    .faqSecDescription {
+      width: 100%;
+      font-size: 16px;
+      text-align: center;
+    }
+  }
+  @media (max-width: 380px) {
+    padding: 24px;
+  }
 `
 
 export const ContactBtn = styled.a`
@@ -149,6 +168,13 @@ export const ContactBtn = styled.a`
   font-style: normal;
   font-weight: 700;
   line-height: normal;
+
+  @media (max-width: 900px) {
+    font-size: 16px;
+  }
+  @media (max-width: 380px) {
+    padding: 24px;
+  }
 `
 
 export const Panel = styled.div`
@@ -160,4 +186,7 @@ export const Panel = styled.div`
   border-radius: 16px;
   background: #502665;
   max-width: 690px;
+  @media (max-width: 900px) {
+    max-width: 100%;
+  }
 `

@@ -75,6 +75,25 @@ export default function FAQ({ items }: FAQProps) {
           )
         })}
       </Panel>
+
+      {isMobile && (
+        <FaqCard>
+          <h2 className="faqSubtitle">AINDA TEM DÚVIDAS?</h2>
+          <p className="faqSecDescription">
+            {'Não encontrou sua dúvida?\nNossa equipe está pronta para ajudar você!'}
+          </p>
+          <ContactBtn
+            aria-label="Entrar em contato"
+            as="a"
+            href={`https://wa.me/${phone}?text=${message}`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img src={instaIcon} />
+            ENTRAR EM CONTATO
+          </ContactBtn>
+        </FaqCard>
+      )}
     </Wrapper>
   )
 }
