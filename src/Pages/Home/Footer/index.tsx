@@ -186,7 +186,7 @@ export default function Footer() {
 
       {/* BARRA FINAL */}
       <BottomBar>
-        <LeftText>Power Gummy | © Todos os direitos reservados | CNPJ add</LeftText>
+        <LeftText>Power Gummy | © Todos os direitos reservados</LeftText>
 
         <RightText>
           Desenvolvido por <img src={IKIGAI} />

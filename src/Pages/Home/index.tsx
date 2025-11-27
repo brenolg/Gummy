@@ -15,6 +15,7 @@ import Testimonials from './Testimonials'
 import { useFetch } from '@/hooks/useFetch'
 import { useEffect, useState } from 'react'
 import RotatingBanner from './Banner'
+import { useMediaQuery } from 'react-responsive'
 
 type BannerData = {
   imageUrl: string
@@ -25,6 +26,10 @@ export default function Home() {
   const { fetcher } = useFetch()
   const [loading, setLoading] = useState(true)
   const [banerData, setBanerData] = useState<BannerData[] | null>(null)
+
+  const isMobile = useMediaQuery({
+    query: '(max-width: 640px)',
+  })
 
   useEffect(() => {
     async function load() {
@@ -40,7 +45,7 @@ export default function Home() {
     }
 
     load()
-  }, [])
+  }, [isMobile])
 
   if (loading) {
     return (

@@ -16,6 +16,9 @@ export const Content = styled.div`
   padding: 48px 86px;
   display: flex;
   flex-direction: column;
+  @media (max-width: 945px) {
+    padding: 40px 24px;
+  }
 `
 
 export const TopBanner = styled.div`
@@ -173,6 +176,19 @@ export const BottleWrapper = styled.div`
       z-index: 5;
     }
   }
+
+  @media (max-width: 820px) {
+    max-width: 382px;
+    margin: auto;
+    gap: 0;
+    .bottle {
+      max-width: 382px;
+    }
+    .seal {
+      bottom: 145px;
+      right: -20px;
+    }
+  }
 `
 
 export const BottleImage = styled.img`
@@ -218,5 +234,15 @@ export const BottomNote = styled.div`
 
   @media (max-width: 1150px) {
     width: 250px;
+  }
+
+  @media (max-width: 820px) {
+    width: 100%;
+    h2 {
+      font-size: 22px;
+    }
+    p {
+      font-size: 13px;
+    }
   }
 `
