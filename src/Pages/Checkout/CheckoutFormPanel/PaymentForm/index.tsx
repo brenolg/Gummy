@@ -68,6 +68,7 @@ export default function PaymentCardForm() {
     reValidateMode: 'onBlur',
   })
 
+  //Seta o juros com parcelas acima de 3
   const { control } = methods
   const installments = useWatch({
     control,
@@ -75,16 +76,20 @@ export default function PaymentCardForm() {
   })
 
   useEffect(() => {
-    if (!installments) return
-
-    if (installments > 3) {
-      const juros = 4.5
-      setJuros(juros)
-    } else {
-      setJuros(0)
-    }
+    // sempre zera se for PIX
     if (paymentMethod === 'PIX') {
       setJuros(0)
+      return
+    }
+    // se não houver parcelas ainda, não faz nada
+    if (!installments) return
+
+    if (installments <= 3) {
+      setJuros(0)
+    } else if (installments >= 4 && installments <= 6) {
+      setJuros(3.49)
+    } else if (installments >= 7 && installments <= 12) {
+      setJuros(3.99)
     }
   }, [installments, paymentMethod])
 

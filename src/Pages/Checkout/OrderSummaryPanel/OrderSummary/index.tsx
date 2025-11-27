@@ -67,7 +67,9 @@ export default function OrderSummary({ couponMode = 'sum' }: Props) {
     const interestAmount = +(baseTotal * jurosFactor).toFixed(2)
 
     // total final: base + juros
-    const total = +(baseTotal + interestAmount).toFixed(2)
+    const fixedFee = jurosPct > 0 ? 0.49 : 0
+
+    const total = +(baseTotal + interestAmount + fixedFee).toFixed(2)
 
     return {
       itemsCount,
@@ -171,8 +173,8 @@ export default function OrderSummary({ couponMode = 'sum' }: Props) {
 
       {juros > 0 && (
         <Row>
-          <Label>Juros ({juros.toFixed(1)}%)</Label>
-          <DiscountValue>+{fmtBRL(interestAmount)}</DiscountValue>
+          <Label>Juros ({fmtBRL(juros)}%) + taxa R$(0,49)</Label>
+          <DiscountValue>+{fmtBRL(interestAmount + 0.49)}</DiscountValue>
         </Row>
       )}
 

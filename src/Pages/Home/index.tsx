@@ -36,8 +36,10 @@ export default function Home() {
       try {
         setLoading(true)
 
-        const data = await fetcher<BannerData[]>('/public/banner', 'GET')
-        console.log('Baner', data)
+        const data = await fetcher<BannerData[]>(
+          `/public/banner?platform=${isMobile ? 'mobile' : 'desktop'}`,
+          'GET'
+        )
         setBanerData(data as BannerData[])
       } finally {
         setLoading(false)
