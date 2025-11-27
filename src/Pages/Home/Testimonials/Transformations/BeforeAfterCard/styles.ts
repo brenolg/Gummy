@@ -1,4 +1,3 @@
-// BeforeAfterCard.styles.ts
 import styled from 'styled-components'
 
 export const Card = styled.div`
@@ -7,25 +6,21 @@ export const Card = styled.div`
   border-radius: 16px;
   background: #b2872e33;
   padding: 4px;
-  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.25);
-  cursor: pointer;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
 `
 
 export const ImageContainer = styled.div`
   position: relative;
   width: 100%;
   height: 452px;
-  border-radius: 24px;
-  border-radius: 12px;
-
   overflow: hidden;
+  border-radius: 12px;
 `
 
 export const BaseImage = styled.img`
   width: 100%;
   height: 100%;
   object-fit: cover;
-  display: block;
 `
 
 export const OverlayImageWrapper = styled.div`
@@ -39,9 +34,21 @@ export const OverlayImage = styled.img`
   width: 100%;
   height: 100%;
   object-fit: cover;
-  display: block;
 `
 
+export const Handle = styled.img`
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 40px;
+  height: 40px;
+  cursor: grab;
+  /* 👇 ESSENCIAIS PARA BLOQUEAR SWIPE DO CARROSSEL */
+  touch-action: none;
+  -webkit-user-drag: none;
+  user-select: none;
+  pointer-events: auto;
+`
 export const LabelsRow = styled.div`
   position: absolute;
   top: 8px;
@@ -55,25 +62,20 @@ export const LabelsRow = styled.div`
 `
 
 export const Label = styled.img`
-  margin-top: 10px;
-  margin-right: 14px;
-  margin-left: 14px;
+  margin: 10px 14px 0 14px;
 `
 
 export const Content = styled.div`
   margin-top: 8px;
-  width: 100%;
   text-align: center;
 `
 
 export const Title = styled.p`
   color: var(--roxo-700, #502665);
-  text-align: center;
   font-family: Montserrat;
   font-size: 16px;
-  font-style: normal;
   font-weight: 700;
-  line-height: 24px; /* 150% */
+  line-height: 24px;
 `
 
 export const Footer = styled.div`
@@ -89,10 +91,8 @@ export const FooterIcon = styled.img`
 
 export const FooterText = styled.span`
   color: var(--roxo-700, #502665);
-  text-align: center;
   font-family: Montserrat;
   font-size: 16px;
-  font-style: normal;
   font-weight: 500;
-  line-height: 24px; /* 150% */
+  line-height: 24px;
 `

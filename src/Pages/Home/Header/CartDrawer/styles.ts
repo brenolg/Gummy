@@ -1,4 +1,4 @@
-import styled, { css, keyframes } from "styled-components";
+import styled, { css, keyframes } from 'styled-components'
 
 export const CartButton = styled.button`
   background: transparent;
@@ -22,11 +22,11 @@ export const CartButton = styled.button`
     width: 30px;
     height: 31px;
   }
-`;
+`
 
 export const Overlay = styled.div`
   position: fixed;
-`;
+`
 
 export const Drawer = styled.div<{ $open: boolean }>`
   position: fixed;
@@ -37,14 +37,17 @@ export const Drawer = styled.div<{ $open: boolean }>`
   z-index: 30;
   display: flex;
   flex-direction: column;
-  transform: translateX(${({ $open }) => ($open ? "0" : "100%")});
+  transform: translateX(${({ $open }) => ($open ? '0' : '100%')});
   transition: 0.3s ease;
-  background: #FFF;
+  background: #fff;
   box-shadow: 0 0 40px 0 rgba(0, 0, 0, 0.25);
-    @media (max-width: 650px) { 
+  @media (max-width: 850px) {
+    width: 435px;
+  }
+  @media (max-width: 450px) {
     width: 320px;
   }
-`;
+`
 
 export const Header = styled.div`
   display: flex;
@@ -55,7 +58,7 @@ export const Header = styled.div`
   border-bottom: 1px solid ${({ theme }) => theme.colors.roxo200};
   p {
     color: ${({ theme }) => theme.colors.roxo900};
-    font-family: "Nunito Sans";
+    font-family: 'Nunito Sans';
     font-size: 24px;
     font-style: normal;
     font-weight: 500;
@@ -64,7 +67,10 @@ export const Header = styled.div`
   span {
     font-weight: 700;
   }
-`;
+  @media (max-width: 850px) {
+    padding: 32px 48px 32px 32px;
+  }
+`
 
 export const Close = styled.button`
   position: absolute;
@@ -74,7 +80,7 @@ export const Close = styled.button`
     width: 24px;
     height: 24px;
   }
-`;
+`
 
 export const ShippingContainer = styled.div`
   display: flex;
@@ -91,7 +97,7 @@ export const ShippingContainer = styled.div`
   }
   p {
     color: ${({ theme }) => theme.colors.roxo700};
-    font-family: "Nunito Sans";
+    font-family: 'Nunito Sans';
     font-size: 14px;
     font-style: normal;
     font-weight: 500;
@@ -100,7 +106,11 @@ export const ShippingContainer = styled.div`
   span {
     font-weight: 700;
   }
-`;
+  @media (max-width: 850px) {
+    padding: 24px;
+    margin-bottom: 0;
+  }
+`
 
 export const ImageContainer = styled.div<{ $img: string }>`
   width: 104px;
@@ -111,7 +121,7 @@ export const ImageContainer = styled.div<{ $img: string }>`
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
-`;
+`
 
 export const Items = styled.div`
   padding-top: 24px;
@@ -121,15 +131,18 @@ export const Items = styled.div`
   flex-direction: column;
   gap: 24px;
   align-self: stretch;
-`;
+  @media (max-width: 850px) {
+    padding-bottom: 24px;
+    padding-top: 0;
+  }
+`
 
 export const Item = styled.div`
-    display: flex;
-    height: 104px;
-    align-items: center;
-    gap: 24px;
-    align-self: stretch;
-    padding: 0 56px 0 40px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  align-self: stretch;
+  padding: 0 56px 0 40px;
   .info {
     flex: 1;
     display: flex;
@@ -165,7 +178,23 @@ export const Item = styled.div`
     font-weight: 700;
     line-height: 20px; /* 125% */
   }
-`;
+
+  @media (max-width: 850px) {
+    padding: 0 24px;
+    .title {
+      font-size: 16px;
+    }
+  }
+
+  @media (max-width: 450px) {
+    .price-container {
+      flex-direction: column;
+      margin-top: 8px;
+      gap: 8px;
+      align-items: flex-start;
+    }
+  }
+`
 const fadeIn = keyframes`
   from {
     opacity: 0;
@@ -175,7 +204,7 @@ const fadeIn = keyframes`
     opacity: 1;
     transform: translateY(0px);
   }
-`;
+`
 
 const fadeOut = keyframes`
   from {
@@ -186,34 +215,37 @@ const fadeOut = keyframes`
     opacity: 0;
     transform: translateY(12px);
   }
-`;
+`
 
 export const EBookContainer = styled.div<{ $visible: boolean }>`
   animation: ${({ $visible }) =>
     $visible
-      ? css`${fadeIn} 0.35s ease forwards`
-      : css`${fadeOut} 0.35s ease forwards`
-  };
+      ? css`
+          ${fadeIn} 0.35s ease forwards
+        `
+      : css`
+          ${fadeOut} 0.35s ease forwards
+        `};
   display: flex;
   padding: 24px 40px;
   align-items: center;
   gap: 24px;
   align-self: stretch;
   border-radius: 4px;
-  border: 1px solid  ${({ theme }) => theme.colors.roxo25};
-  background: #FFF;
+  border: 1px solid ${({ theme }) => theme.colors.roxo25};
+  background: #fff;
   .eBookImg {
     width: 104px;
     height: 104px;
   }
   .light {
-      color: ${({ theme }) => theme.colors.roxo900};
-      font-family: Inter;
-      font-size: 20px;
-      font-style: normal;
-      font-weight: 400;
-      line-height: 120%;
-    }
+    color: ${({ theme }) => theme.colors.roxo900};
+    font-family: Inter;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 120%;
+  }
   .strong {
     overflow: hidden;
     color: ${({ theme }) => theme.colors.roxo900};
@@ -224,6 +256,13 @@ export const EBookContainer = styled.div<{ $visible: boolean }>`
     font-style: normal;
     font-weight: 700;
     line-height: 120%; /* 24px */
+  }
+  @media (max-width: 850px) {
+    padding: 24px;
+    .light,
+    .strong {
+      font-size: 16px;
+    }
   }
 `
 export const Footer = styled.div`
@@ -251,7 +290,7 @@ export const Footer = styled.div`
     font-weight: 700;
     line-height: 24px; /* 120% */
   }
-`;
+`
 
 export const EmptyContainer = styled.div`
   width: 100%;
@@ -274,5 +313,4 @@ export const EmptyContainer = styled.div`
     font-weight: 400;
     line-height: normal;
   }
-`;
-
+`

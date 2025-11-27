@@ -44,6 +44,12 @@ export const GlobalStyle = createGlobalStyle`
     cursor: pointer;
     transition: all ease 0.3s;
   }
+  img {
+user-select: none;
+-webkit-user-select: none;
+-webkit-user-drag: none;
+touch-action: none;
+}
   button:hover {
     opacity: 0.9;
     transition: all ease 0.3s;

@@ -121,7 +121,7 @@ export const IngredientText = styled.p<{ $right?: boolean }>`
   text-align: ${({ $right }) => ($right ? 'right' : 'left')};
 `
 
-export const BottleWrapper = styled.div`
+export const BottleWrapper = styled.div<{ $showHover?: boolean }>`
   position: relative;
   display: flex;
   flex-direction: column;
@@ -137,30 +137,32 @@ export const BottleWrapper = styled.div`
     transition:
       opacity 0.25s ease,
       transform 0.25s ease;
+    cursor: pointer;
   }
 
+  /* hover image */
   .bottle.hover {
     position: absolute;
     top: 0;
     left: 50%;
     transform: translateX(-50%);
-    opacity: 0;
+    opacity: ${({ $showHover }) => ($showHover ? 1 : 0)};
     pointer-events: none;
-    z-index: 2; /* garante que fique na frente da default */
+    z-index: 2;
   }
 
+  /* default image */
   .bottle.default {
-    opacity: 1;
-    z-index: 1;
+    opacity: ${({ $showHover }) => ($showHover ? 0 : 1)};
   }
 
+  /* hover desktop */
   &:hover .bottle.default {
     opacity: 0;
   }
 
   &:hover .bottle.hover {
     opacity: 1;
-    transform: translateX(-50%);
   }
   .seal {
     position: absolute;

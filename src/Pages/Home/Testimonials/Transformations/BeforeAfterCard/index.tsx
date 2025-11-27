@@ -12,16 +12,19 @@ import {
   Footer,
   FooterIcon,
   FooterText,
+  Handle,
 } from './styles'
+
 import befI from '@/assets/imgs/befIcon.svg'
+import handleImg from '@/assets/icons/fav.svg'
 import afterI from '@/assets/imgs/afterIcon.svg'
 import clock from '@/assets/icons/clock.svg'
 
 type BeforeAfterCardProps = {
   beforeSrc: string
   afterSrc: string
-  title: string // Ex: "Unhas mais resistentes"
-  timeText?: string // Ex: "6 semanas"
+  title: string
+  timeText?: string
 }
 
 const BeforeAfterCard: React.FC<BeforeAfterCardProps> = ({
@@ -34,7 +37,7 @@ const BeforeAfterCard: React.FC<BeforeAfterCardProps> = ({
   const [percent, setPercent] = useState(50)
   const [dragging, setDragging] = useState(false)
 
-  // calcula a posição em % de acordo com o X
+  // calcula posição em % com base no X
   const updatePositionFromClientX = (clientX: number) => {
     const container = containerRef.current
     if (!container) return
@@ -45,10 +48,10 @@ const BeforeAfterCard: React.FC<BeforeAfterCardProps> = ({
     if (x < 0) x = 0
     if (x > rect.width) x = rect.width
 
-    const p = (x / rect.width) * 100
-    setPercent(p)
+    setPercent((x / rect.width) * 100)
   }
 
+  // só inicia o drag ao clicar no handle
   const startDragMouse = (e: React.MouseEvent) => {
     e.preventDefault()
     setDragging(true)
@@ -61,6 +64,7 @@ const BeforeAfterCard: React.FC<BeforeAfterCardProps> = ({
     if (touch) updatePositionFromClientX(touch.clientX)
   }
 
+  // listeners globais durante o drag
   useEffect(() => {
     if (!dragging) return
 
@@ -70,8 +74,8 @@ const BeforeAfterCard: React.FC<BeforeAfterCardProps> = ({
     }
 
     const onMoveTouch = (e: TouchEvent) => {
-      const touch = e.touches[0] ?? e.changedTouches[0]
-      if (touch) updatePositionFromClientX(touch.clientX)
+      const t = e.touches[0] ?? e.changedTouches[0]
+      if (t) updatePositionFromClientX(t.clientX)
     }
 
     const stopDrag = () => setDragging(false)
@@ -91,12 +95,26 @@ const BeforeAfterCard: React.FC<BeforeAfterCardProps> = ({
 
   return (
     <Card>
-      <ImageContainer ref={containerRef} onMouseDown={startDragMouse} onTouchStart={startDragTouch}>
+      <ImageContainer ref={containerRef}>
         <BaseImage src={afterSrc} alt="Depois" />
 
         <OverlayImageWrapper style={{ width: `${percent}%` }}>
           <OverlayImage src={beforeSrc} alt="Antes" />
         </OverlayImageWrapper>
+
+        {/* HANDLE */}
+        <Handle
+          src={handleImg}
+          style={{ left: `${percent}%` }}
+          onTouchStart={(e) => {
+            e.stopPropagation()
+            startDragTouch(e)
+          }}
+          onMouseDown={(e) => {
+            e.stopPropagation()
+            startDragMouse(e)
+          }}
+        />
 
         <LabelsRow>
           <Label src={befI} />

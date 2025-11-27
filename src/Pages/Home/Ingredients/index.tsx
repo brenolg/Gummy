@@ -20,11 +20,20 @@ import {
 } from './styles'
 import { useMediaQuery } from 'react-responsive'
 import VitaminsAccordion from './VitaminsAccordion'
+import { useState } from 'react'
 
 export default function Ingredients() {
   const isMobile = useMediaQuery({
     query: '(max-width: 820px)',
   })
+
+  const [showHover, setShowHover] = useState(false)
+
+  const toggleBottle = () => {
+    if (isMobile) {
+      setShowHover((prev) => !prev)
+    }
+  }
 
   return (
     <Section id="ingredients">
@@ -50,7 +59,7 @@ export default function Ingredients() {
               ))}
             </Column>
 
-            <BottleWrapper>
+            <BottleWrapper onClick={toggleBottle} $showHover={showHover}>
               <img src={seal} className="seal" />
               <img className="bottle default" src={bottleImg} alt="Power Gummy" />
               <img className="bottle hover" src={bottleImgHover} alt="Power Gummy hover" />
