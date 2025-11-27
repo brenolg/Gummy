@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 export const Wrapper = styled.section`
   width: 100%;
@@ -15,7 +15,15 @@ export const Wrapper = styled.section`
   `};
   gap: 64px;
   justify-content: center;
-`;
+  flex-wrap: wrap;
+  @media (max-width: 1100px) {
+    padding: 40px 24px;
+  }
+  @media (max-width: 900px) {
+    flex-direction: column;
+    gap: 40px;
+  }
+`
 
 export const AsideCard = styled.aside`
   text-align: center;
@@ -30,23 +38,23 @@ export const AsideCard = styled.aside`
     justify-content: center;
     align-items: center;
     border-radius: 9999px;
-    border:${({ theme }) => `1px solid ${theme.colors.roxo700}`};
+    border: ${({ theme }) => `1px solid ${theme.colors.roxo700}`};
     width: fit-content;
     color: ${({ theme }) => `${theme.colors.roxo700}`};
     text-align: center;
     font-family: Montserrat;
-    font-size:  12px;
+    font-size: 12px;
     font-style: normal;
-    font-weight:  600;
-    line-height:  16px;
+    font-weight: 600;
+    line-height: 16px;
     margin-bottom: 16px;
   }
-  .faqTitle{
-    font-family: "Nunito Sans";
+  .faqTitle {
+    font-family: 'Nunito Sans';
     font-size: 40px;
     font-style: normal;
-    font-weight:  700;
-    line-height:  48px; 
+    font-weight: 700;
+    line-height: 48px;
     background: ${({ theme }) => `
       linear-gradient(
       103deg,
@@ -58,55 +66,67 @@ export const AsideCard = styled.aside`
     -webkit-text-fill-color: transparent;
     margin-bottom: 16px;
   }
-  .faqSubtitle {
-    color: ${({ theme }) => theme.colors.roxo700};
-    text-align: center;
-    font-family: "Nunito Sans";
-    font-size: 24px;
-    font-style: normal;
-    font-weight:  700;
-    line-height:  32px; 
-  }
+
   .faqFirstDescription {
     color: ${({ theme }) => `${theme.colors.roxo700}`};
     text-align: center;
-    font-family: "Nunito Sans";
-    font-size:  18px;
+    font-family: 'Nunito Sans';
+    font-size: 18px;
     font-style: normal;
-    font-weight:  400;
+    font-weight: 400;
     line-height: 120%; /* 21.6px */
     margin-bottom: 64px;
   }
-  .faqSecDescription {
-    color: ${({ theme }) => `${theme.colors.roxo700}`};
-    text-align: center;
-    font-family: "Nunito Sans";
-    font-size: 16px;
-    font-style: normal;
-    font-weight:  400;
-    line-height: 120%; 
+  @media (max-width: 900px) {
+    padding: 0;
+    .faqFirstDescription {
+      margin-bottom: 0;
+      font-size: 16px;
+    }
+    .faqTitle {
+      font-size: 24px;
+      line-height: 24px;
+    }
   }
-  .faqCard {
-    display: flex;
-    max-width:  672px;
-    padding: 16px 32px 32px 32px;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 16px;
-    align-self: stretch;
-    border-radius: 24px;
-    background: ${({ theme }) => `
+`
+export const FaqCard = styled.div`
+  display: flex;
+  max-width: 672px;
+  padding: 16px 32px 32px 32px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  align-self: stretch;
+  border-radius: 24px;
+  background: ${({ theme }) => `
       linear-gradient(
         141deg,
         ${theme.colors.roxo0}66 23.8%,
         rgba(235, 215, 245, 0.32) 80.23%
       )
     `};
-    box-shadow: 0 0 24px 0 rgba(80, 38, 101, 0.08);
+  box-shadow: 0 0 24px 0 rgba(80, 38, 101, 0.08);
+  .faqSubtitle {
+    color: ${({ theme }) => theme.colors.roxo700};
+    text-align: center;
+    font-family: 'Nunito Sans';
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 32px;
   }
-`;
+  .faqSecDescription {
+    color: ${({ theme }) => `${theme.colors.roxo700}`};
+    text-align: center;
+    font-family: 'Nunito Sans';
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 120%;
+  }
+`
 
-export const ContactBtn = styled.button`
+export const ContactBtn = styled.a`
   display: flex;
   padding: 20px 48px;
   justify-content: center;
@@ -121,15 +141,15 @@ export const ContactBtn = styled.button`
       ${theme.colors.roxo500} 100%
     )
   `};
-  box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.10);
+  box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.1);
   color: ${({ theme }) => `${theme.colors.roxo0}`};
   text-align: center;
-  font-family: "Nunito Sans";
+  font-family: 'Nunito Sans';
   font-size: 18px;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
-`;
+`
 
 export const Panel = styled.div`
   display: flex;
@@ -140,4 +160,4 @@ export const Panel = styled.div`
   border-radius: 16px;
   background: #502665;
   max-width: 690px;
-`;
+`

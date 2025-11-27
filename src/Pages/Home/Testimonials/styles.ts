@@ -11,6 +11,10 @@ export const Wrapper = styled.div`
     rgba(235, 215, 245, 0.04) 1.2%,
     var(--Roxo-0, #fdfbfe) 73.51%
   );
+  @media (max-width: 900px) {
+    padding: 40px 24px;
+    padding-right: 0;
+  }
 `
 
 export const TitleArea = styled.div`
@@ -18,6 +22,9 @@ export const TitleArea = styled.div`
   display: flex;
   gap: 12px;
   flex-direction: column;
+  @media (max-width: 900px) {
+    gap: 8px;
+  }
 `
 
 export const SubTitle = styled.p`
@@ -33,6 +40,9 @@ export const SubTitle = styled.p`
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  @media (max-width: 900px) {
+    font-size: 12px;
+  }
 `
 
 export const Title = styled.h2`
@@ -51,6 +61,14 @@ export const Title = styled.h2`
     font-weight: 700;
     line-height: 48px;
   }
+  @media (max-width: 900px) {
+    font-size: 24px;
+    line-height: 120%;
+    span {
+      font-size: 24px;
+      line-height: 120%;
+    }
+  }
 `
 
 export const CardsWrapper = styled.div<{ $isDragging: boolean }>`
@@ -66,6 +84,11 @@ export const CardsWrapper = styled.div<{ $isDragging: boolean }>`
   overflow-y: visible;
   cursor: ${({ $isDragging }) => ($isDragging ? 'grabbing' : 'grab')};
   user-select: none;
+  @media (max-width: 900px) {
+    padding: 0;
+    padding-top: 32px;
+    padding-bottom: 40px;
+  }
 `
 
 export const Card = styled.div<{ $isFirst?: boolean; $isLast?: boolean }>`
@@ -88,6 +111,10 @@ export const Card = styled.div<{ $isFirst?: boolean; $isLast?: boolean }>`
     height: 1px;
     background: linear-gradient(90deg, #ba7e1b 0%, var(--roxo-700, #502665) 100%);
     margin-bottom: 12px;
+  }
+  @media (max-width: 900px) {
+    margin-left: 0;
+    margin-right: 0;
   }
 `
 
