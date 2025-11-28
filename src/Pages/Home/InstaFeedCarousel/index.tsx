@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
-import axios from 'axios'
+
 import goldenInstaLogo from '@/assets/icons/goldenInstaLogo.svg'
 import instaTxt from '@/assets/icons/instaTxt.svg'
 import goldenArow from '@/assets/icons/goldenArrow.svg'
@@ -19,6 +19,7 @@ import {
   Title,
   Track,
 } from './styles'
+import { useFetch } from '@/hooks/useFetch'
 
 export type FeedItem = {
   id: string
@@ -54,6 +55,7 @@ export default function InstaFeedCarousel() {
   const [isDragging, setIsDragging] = useState(false)
   const [startX, setStartX] = useState(0)
   const [moved, setMoved] = useState(false)
+  const { fetcher } = useFetch()
 
   const totalPages = useMemo(() => {
     const total = Math.max(0, (items?.length || 0) - perView)
@@ -61,21 +63,19 @@ export default function InstaFeedCarousel() {
   }, [items, perView])
 
   useEffect(() => {
-    ;(async () => {
+    const load = async () => {
       try {
-        const token = import.meta.env.VITE_INSTA_TOKEN as string
-        if (!token) throw new Error('VITE_INSTA_TOKEN não definido')
-        const fields = 'id,media_url,media_type,permalink,thumbnail_url,timestamp,caption'
-        const url = `https://graph.instagram.com/me/media?fields=${fields}&access_token=${token}`
-        const { data } = await axios.get(url)
+        const res = await fetcher<FeedItem[]>(`/public/instagram`, 'GET')
 
-        setItems(data?.data ?? [])
-      } catch (e: unknown) {
+        setItems(res ?? [])
+      } catch (e) {
         console.error(e)
-        setItems([])
       }
-    })()
+    }
+
+    load()
   }, [])
+  console.log('items:', items)
 
   useEffect(() => {
     setIndex(0)
