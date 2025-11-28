@@ -120,7 +120,7 @@ export default function OrderSummaryPanel() {
 
           {/* Conteúdo interno */}
           {openMobileSummary && (
-            <div style={{ marginTop: 20, maxWidth: 420, margin: 'auto' }}>
+            <div style={{ marginTop: 20, maxWidth: 420, margin: 'auto', padding: 24 }}>
               <CartContainer className="cart">
                 {cart.map((item) => (
                   <ProductCartItem
