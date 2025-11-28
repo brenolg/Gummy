@@ -1,5 +1,5 @@
-import { useState } from "react";
-import Header from "./Header";
+import { useState } from 'react'
+import Header from './Header'
 import {
   Wrapper,
   Card,
@@ -9,35 +9,38 @@ import {
   Input,
   CheckLine,
   SubmitButton,
-  InputError
-} from "./styles";
+  InputError,
+} from './styles'
 
-import logo from "@/assets/imgs/logo.svg";
-import check from "@/assets/icons/check.svg";
-import glass from "@/assets/icons/magnifyingGlass.svg";
+import logo from '@/assets/imgs/logo.svg'
+import check from '@/assets/icons/check.svg'
+import glass from '@/assets/icons/magnifyingGlass.svg'
 import imgError from '@/assets/icons/error.svg'
 
 export default function TrackOrderPage() {
-  const [orderId, setOrderId] = useState("");
+  const [orderId, setOrderId] = useState('')
   const [error, setError] = useState('')
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault(); // evita reload da página
+    e.preventDefault() // evita reload da página
 
     if (!orderId.trim()) {
-      setError("Digite o ID do pedido.");
-      return;
+      setError('Digite o ID do pedido.')
+      return
     }
 
-    console.log("Pedido enviado:", orderId);
-  };
+    console.log('Pedido enviado:', orderId)
+  }
 
   return (
     <Wrapper>
       <Header />
 
       {/* FORM PARA ACEITAR ENTER */}
-      <form onSubmit={handleSubmit} style={{ width: "100%", display: "flex", justifyContent: "center" }}>
+      <form
+        onSubmit={handleSubmit}
+        style={{ width: '100%', display: 'flex', justifyContent: 'center' }}
+      >
         <Card>
           <img className="logo" src={logo} />
 
@@ -57,15 +60,18 @@ export default function TrackOrderPage() {
           <CheckLine>
             <img src={check} />
             <span>Digite o ID completo do pedido</span>
-              <InputError
-              $error={!!error}
-            >
-              <img src={imgError} className='img-error'/>  {error}
+            <InputError $error={!!error}>
+              <img src={imgError} className="img-error" /> {error}
             </InputError>
           </CheckLine>
 
           {/* Botão type="submit" ativa Enter */}
-          <SubmitButton type="submit">
+          <SubmitButton
+            as="a"
+            href="https://totalconecta.totalexpress.com.br/rastreamento?codigo&op=BUSCAR&language=pt-br"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <img src={glass} />
             Consultar Pedido
             <img src={glass} />
@@ -73,5 +79,5 @@ export default function TrackOrderPage() {
         </Card>
       </form>
     </Wrapper>
-  );
+  )
 }

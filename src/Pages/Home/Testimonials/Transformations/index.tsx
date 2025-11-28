@@ -1,8 +1,14 @@
 import { useRef, useState } from 'react'
 import { BtnWraper, CardsWrapper, Subtitle, Title } from './styles'
 import video1 from '@/assets/videos/test1.mp4'
-import bef1 from '@/assets/imgs/bef1.jpeg'
-import after1 from '@/assets/imgs/after1.jpeg'
+import video3 from '@/assets/videos/test1.mp4'
+import video2 from '@/assets/videos/test2.mp4'
+import bef1 from '@/assets/imgs/bef1.png'
+import after1 from '@/assets/imgs/after1.png'
+import bef2 from '@/assets/imgs/bef2.png'
+import after2 from '@/assets/imgs/after2.png'
+import bef3 from '@/assets/imgs/bef3.png'
+import after3 from '@/assets/imgs/after3.png'
 import VideoCard from './VideoCard'
 import BeforeAfterCard from './BeforeAfterCard'
 import { MainButton } from '@/components'
@@ -40,20 +46,25 @@ const depoimentos: Depoimento[] = [
   },
   {
     isVideo: true,
-    videoUrl: video1,
-    text: 'Notei muita diferença no meu cabelo, na minha pele e na minha unha',
+    videoUrl: video2,
+    text: 'É um composto vitamínico bem completo e muito prático de tomar',
   },
   {
     isVideo: false,
-    before: bef1,
-    after: after1,
+    before: bef2,
+    after: after2,
     label: 'Unhas mais resistentes',
     time: '6 semanas',
   },
   {
+    isVideo: true,
+    videoUrl: video3,
+    text: 'Notei muita diferença no meu cabelo, na minha pele e na minha unha',
+  },
+  {
     isVideo: false,
-    before: bef1,
-    after: after1,
+    before: bef3,
+    after: after3,
     label: 'Unhas mais resistentes',
     time: '6 semanas',
   },

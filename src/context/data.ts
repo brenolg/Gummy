@@ -7,7 +7,7 @@ export const CartItemsData: CartItem[] = [
     productId: 'powergummy-1',
     image: one,
     title: 'ONE® - 90 gomas',
-    subtitle: 'Frutas vermelhas - 3 frascos',
+    subtitle: 'Frutas vermelhas',
     quantity: 0,
     unitPrice: 109.9,
     peso: 0.155,

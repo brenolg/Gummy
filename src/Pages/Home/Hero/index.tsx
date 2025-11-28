@@ -77,11 +77,12 @@ export default function Hero() {
               </Title>
 
               <BenefitsList>
-                <BenefitItem>💜 Sem açúcar, sem culpa</BenefitItem>
-                <BenefitItem>✨ Saúde e praticidade no dia a dia</BenefitItem>
-                <BenefitItem>🌱 Fórmula com minerais essenciais</BenefitItem>
-                <BenefitItem>🍇 Sabor irresistível de frutas vermelhas</BenefitItem>
-                <BenefitItem>⚡ Ácido Hialurônico + 8 Vitaminas</BenefitItem>
+                <BenefitItem>💜 Novo padrão de suplementação em gomas</BenefitItem>
+                <BenefitItem>⚡ Ácido Hialurônico + Biotina + 7 Vitaminas</BenefitItem>
+                <BenefitItem>💎 Nutrição avançada com ativos premium</BenefitItem>
+                <BenefitItem>🌱 Fórmula limpa, inteligente e resultado real</BenefitItem>
+                <BenefitItem>✨ Simples na rotina. Poderosa no efeito</BenefitItem>
+                <BenefitItem>🏆 Delicioso. Zero açúcar. Zero desculpas </BenefitItem>
               </BenefitsList>
             </LeftContent>
 
