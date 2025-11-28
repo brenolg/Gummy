@@ -40,7 +40,7 @@ export default function Home() {
           `/public/banner?platform=${isMobile ? 'mobile' : 'desktop'}`,
           'GET'
         )
-        console.log(data)
+        console.log('BANNER', data)
         setBanerData(data as BannerData[])
       } finally {
         setLoading(false)

@@ -1,44 +1,42 @@
-import { useEffect, useMemo, useState } from "react";
-import styled from "styled-components";
+import { useEffect, useMemo, useState } from 'react'
+import styled from 'styled-components'
 
 type BannerData = {
-  imageUrl: string;
-  position: number;
-};
+  imageUrl: string
+  position: number
+}
 
 type RotatingBannerProps = {
-  banners: BannerData[];
-};
+  banners: BannerData[]
+}
 
 export default function RotatingBanner({ banners }: RotatingBannerProps) {
   // Ordena pelo position (1, 2, 3...)
   const sortedBanners = useMemo(
     () => [...banners].sort((a, b) => a.position - b.position),
     [banners]
-  );
+  )
 
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(0)
 
   // Quando mudar a lista, volta pro primeiro
   useEffect(() => {
-    if (!sortedBanners.length) return;
-    setCurrentIndex(0);
-  }, [sortedBanners.length]);
+    if (!sortedBanners.length) return
+    setCurrentIndex(0)
+  }, [sortedBanners.length])
 
   // Troca de banner a cada 3s
   useEffect(() => {
-    if (!sortedBanners.length) return;
+    if (!sortedBanners.length) return
 
     const interval = setInterval(() => {
-      setCurrentIndex((prev) =>
-        prev + 1 < sortedBanners.length ? prev + 1 : 0
-      );
-    }, 6000);
+      setCurrentIndex((prev) => (prev + 1 < sortedBanners.length ? prev + 1 : 0))
+    }, 6000)
 
-    return () => clearInterval(interval);
-  }, [sortedBanners.length]);
+    return () => clearInterval(interval)
+  }, [sortedBanners.length])
 
-  if (!sortedBanners.length) return null;
+  if (!sortedBanners.length) return null
 
   return (
     <BannerWrapper>
@@ -51,7 +49,7 @@ export default function RotatingBanner({ banners }: RotatingBannerProps) {
         />
       ))}
     </BannerWrapper>
-  );
+  )
 }
 
 /* ---------- STYLES ---------- */
@@ -63,7 +61,11 @@ const BannerWrapper = styled.div`
   max-width: 100%;
   overflow: hidden;
   aspect-ratio: 1440 / 800;
-`;
+  @media (max-width: 640px) {
+    aspect-ratio: 435 / 780; /* ou o ratio real da sua arte mobile */
+    margin-top: -80px;
+  }
+`
 
 const BannerImage = styled.img<{ $active: boolean }>`
   position: absolute;
@@ -74,4 +76,4 @@ const BannerImage = styled.img<{ $active: boolean }>`
 
   opacity: ${({ $active }) => ($active ? 1 : 0)};
   transition: opacity 0.6s ease-in-out;
-`;
+`
