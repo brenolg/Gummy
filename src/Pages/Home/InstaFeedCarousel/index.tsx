@@ -75,7 +75,6 @@ export default function InstaFeedCarousel() {
 
     load()
   }, [])
-  console.log('items:', items)
 
   useEffect(() => {
     setIndex(0)

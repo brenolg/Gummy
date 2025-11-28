@@ -149,7 +149,7 @@ export default function PaymentCardForm() {
           installmentValue: Number((Number(formData.total) / Number(data.installments)).toFixed(2)),
         }),
       }
-      console.log('body', body)
+      console.log('body create order', body)
       const res: any = await fetcher('/public/create-order', 'POST', { body })
 
       if (paymentMethod === 'PIX') {

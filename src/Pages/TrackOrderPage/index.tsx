@@ -28,8 +28,6 @@ export default function TrackOrderPage() {
       setError('Digite o ID do pedido.')
       return
     }
-
-    console.log('Pedido enviado:', orderId)
   }
 
   return (
