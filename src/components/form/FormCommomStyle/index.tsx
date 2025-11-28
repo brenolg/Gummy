@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 import { colors, typography } from '../../../styles/themeUtils'
 
-
 interface PlaceholderProps {
   $isFocusedOrValid: boolean
   isSearchable?: boolean
@@ -20,14 +19,13 @@ export const InputContainer = styled.div<{
   input:-webkit-autofill:hover,
   input:-webkit-autofill:focus,
   input:-webkit-autofill:active {
-    -webkit-box-shadow: 0 0 0 30px #FFFFFF inset !important;
+    -webkit-box-shadow: 0 0 0 30px #ffffff inset !important;
   }
 `
 
 export const Placeholder = styled.span<PlaceholderProps>`
   position: absolute;
-  left: ${(props: PlaceholderProps) =>
-    props.isSearchable ? '38.5px' : '10px'};
+  left: ${(props: PlaceholderProps) => (props.isSearchable ? '38.5px' : '10px')};
   top: ${(props: PlaceholderProps) => (props.$isFocusedOrValid ? 0 : '50%')};
   transform: translateY(-50%);
   z-index: 2;
@@ -36,20 +34,19 @@ export const Placeholder = styled.span<PlaceholderProps>`
   border-radius: 10px;
   pointer-events: none;
   transition: all 0.2s ease-out;
-  
-  background: ${t => colors(t).neutral.white0};
-  
-  ${t => typography(t).input};
+
+  background: ${(t) => colors(t).neutral.white0};
+
+  ${(t) => typography(t).input};
   ${(props) => props.$isDisabled && 'color: #A3A3A3 ;'}
   .asterisk {
-    color: var(--Color-Semantic-Error-Error, #D61212);
+    color: var(--Color-Semantic-Error-Error, #d61212);
     font-family: Inter;
     font-size: 12px;
     font-style: normal;
     font-weight: 600;
     line-height: normal;
   }
-
 `
 interface IStyleProps {
   $error: boolean
@@ -72,9 +69,10 @@ export const InputError = styled.div<IStyleProps>`
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  color: var(--Vermelho-Alerta, #F00);
+  color: var(--Vermelho-Alerta, #f00);
   font-family: Inter;
   font-size: 10px;
+  width: 100%;
   font-style: normal;
   font-weight: 500;
   line-height: normal;
@@ -82,10 +80,12 @@ export const InputError = styled.div<IStyleProps>`
   padding: 2px 4px;
   align-items: center;
   gap: 4px;
-  align-self: stretch;
+
+  white-space: normal;
+  word-break: break-word; /* força quebra dentro da palavra */
+  overflow-wrap: anywhere;
   .img-error {
     width: 12px;
     height: 12px;
   }
 `
-

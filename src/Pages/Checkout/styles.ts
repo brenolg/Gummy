@@ -20,6 +20,11 @@ export const FormContainer = styled(DividedContainer)`
   background: ${(t) => colors(t).neutral.white0};
   @media (max-width: 740px) {
     margin: auto;
+    width: 100%;
+    max-width: 430px;
+    padding: 0;
+    padding: 24px;
+    padding-top: 30px;
   }
 `
 
