@@ -1,5 +1,3 @@
-import bottleImg from '@/assets/imgs/Embalagem frente (1).svg'
-import bottleImgHover from '@/assets/imgs/Embalagem verso (1).svg'
 import seal from '@/assets/imgs/seal.svg'
 
 import { leftIngredients, rightIngredients } from './factory'
@@ -61,8 +59,16 @@ export default function Ingredients() {
 
             <BottleWrapper onClick={toggleBottle} $showHover={showHover}>
               <img src={seal} className="seal" />
-              <img className="bottle default" src={bottleImg} alt="Power Gummy" />
-              <img className="bottle hover" src={bottleImgHover} alt="Power Gummy hover" />
+              <img
+                className="bottle default"
+                src="https://firebasestorage.googleapis.com/v0/b/powergummy-prod.firebasestorage.app/o/EmbalagemFrente.svg?alt=media&token=e2d1f88a-d45b-4225-9bb2-5e0e4f8da40e"
+                alt="Power Gummy"
+              />
+              <img
+                className="bottle hover"
+                src="https://firebasestorage.googleapis.com/v0/b/powergummy-prod.firebasestorage.app/o/EmbalagemVerso.svg?alt=media&token=be370b4e-fe18-41b8-ad99-973878a58f13"
+                alt="Power Gummy hover"
+              />
               <BottomNote>
                 <h2>Sinergia inteligente de nutrientes</h2>
                 <p>
@@ -87,8 +93,16 @@ export default function Ingredients() {
         <Content>
           <BottleWrapper>
             <img src={seal} className="seal" />
-            <img className="bottle default" src={bottleImg} alt="Power Gummy" />
-            <img className="bottle hover" src={bottleImgHover} alt="Power Gummy hover" />
+            <img
+              className="bottle default"
+              src="https://firebasestorage.googleapis.com/v0/b/powergummy-prod.firebasestorage.app/o/EmbalagemFrente.svg?alt=media&token=e2d1f88a-d45b-4225-9bb2-5e0e4f8da40e"
+              alt="Power Gummy"
+            />
+            <img
+              className="bottle hover"
+              src="https://firebasestorage.googleapis.com/v0/b/powergummy-prod.firebasestorage.app/o/EmbalagemVerso.svg?alt=media&token=be370b4e-fe18-41b8-ad99-973878a58f13"
+              alt="Power Gummy hover"
+            />
             <BottomNote>
               <h2>Sinergia inteligente de nutrientes</h2>
               <p>

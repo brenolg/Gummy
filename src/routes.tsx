@@ -3,9 +3,10 @@ import Home from './Pages/Home'
 import About from './Pages/About'
 import Checkout from './Pages/Checkout'
 import TrackOrderPage from './Pages/TrackOrderPage'
+import PrivacyPolicy from './Pages/TermsAndPrivacy/PrivacyPolicy'
+import Terms from './Pages/TermsAndPrivacy/Terms'
 
 export default function AppRoutes() {
-
   return (
     <BrowserRouter>
       <Routes>
@@ -13,6 +14,8 @@ export default function AppRoutes() {
         <Route path="/Power-Gummy" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/checkout" element={<Checkout />} />
+        <Route path="/privacy" element={<PrivacyPolicy />} />
+        <Route path="/terms" element={<Terms />} />
         <Route path="/track" element={<TrackOrderPage />} />
       </Routes>
     </BrowserRouter>

@@ -1,14 +1,6 @@
 import { useRef, useState } from 'react'
 import { BtnWraper, CardsWrapper, Subtitle, Title } from './styles'
-import video1 from '@/assets/videos/test1.mp4'
-import video3 from '@/assets/videos/test1.mp4'
-import video2 from '@/assets/videos/test2.mp4'
-import bef1 from '@/assets/imgs/bef1.png'
-import after1 from '@/assets/imgs/after1.png'
-import bef2 from '@/assets/imgs/bef2.png'
-import after2 from '@/assets/imgs/after2.png'
-import bef3 from '@/assets/imgs/bef3.png'
-import after3 from '@/assets/imgs/after3.png'
+
 import VideoCard from './VideoCard'
 import BeforeAfterCard from './BeforeAfterCard'
 import { MainButton } from '@/components'
@@ -34,37 +26,46 @@ type Depoimento = DepVideo | DepBeforeAfter
 const depoimentos: Depoimento[] = [
   {
     isVideo: true,
-    videoUrl: video1,
+    videoUrl:
+      'https://firebasestorage.googleapis.com/v0/b/powergummy-prod.firebasestorage.app/o/test1.mp4?alt=media&token=6bd3b06e-fccf-4204-a6a2-5e71fa00a715',
     text: 'Notei muita diferença no meu cabelo, na minha pele e na minha unha',
   },
   {
     isVideo: false,
-    before: bef1,
-    after: after1,
+    before:
+      'https://firebasestorage.googleapis.com/v0/b/powergummy-prod.firebasestorage.app/o/bef1.png?alt=media&token=c2558797-b82c-48a1-b47b-696ad5895977',
+    after:
+      'https://firebasestorage.googleapis.com/v0/b/powergummy-prod.firebasestorage.app/o/after1.png?alt=media&token=33df9dcd-fbd5-43e5-9bd6-37d28b8daa86',
     label: 'Unhas mais resistentes',
     time: '6 semanas',
   },
   {
     isVideo: true,
-    videoUrl: video2,
+    videoUrl:
+      'https://firebasestorage.googleapis.com/v0/b/powergummy-prod.firebasestorage.app/o/test2.mp4?alt=media&token=c0563839-6018-4585-b63b-5c41f4f66c4e',
     text: 'É um composto vitamínico bem completo e muito prático de tomar',
   },
   {
     isVideo: false,
-    before: bef2,
-    after: after2,
+    before:
+      'https://firebasestorage.googleapis.com/v0/b/powergummy-prod.firebasestorage.app/o/bef2.png?alt=media&token=43d9cba5-09de-4b99-8d79-0731716062a4',
+    after:
+      'https://firebasestorage.googleapis.com/v0/b/powergummy-prod.firebasestorage.app/o/after2.png?alt=media&token=265a1f61-176c-4c75-b27f-9d6e7db7a816',
     label: 'Unhas mais resistentes',
     time: '6 semanas',
   },
   {
     isVideo: true,
-    videoUrl: video3,
+    videoUrl:
+      'https://firebasestorage.googleapis.com/v0/b/powergummy-prod.firebasestorage.app/o/test1.mp4?alt=media&token=6bd3b06e-fccf-4204-a6a2-5e71fa00a715',
     text: 'Notei muita diferença no meu cabelo, na minha pele e na minha unha',
   },
   {
     isVideo: false,
-    before: bef3,
-    after: after3,
+    before:
+      'https://firebasestorage.googleapis.com/v0/b/powergummy-prod.firebasestorage.app/o/bef3.png?alt=media&token=7ed0ff8a-a009-4f05-8629-930d8e599c62',
+    after:
+      'https://firebasestorage.googleapis.com/v0/b/powergummy-prod.firebasestorage.app/o/after3.png?alt=media&token=b8700567-31e0-470d-9a0f-82486e55fb71',
     label: 'Unhas mais resistentes',
     time: '6 semanas',
   },

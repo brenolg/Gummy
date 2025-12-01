@@ -1,38 +1,37 @@
 // styles.ts
-import styled, { keyframes } from "styled-components";
+import styled, { keyframes } from 'styled-components'
 
-const loopRight = keyframes`
-  0%   { transform: translateX(-50%); }
-  100% { transform: translateX(0); }
-`;
-
+const loopLeft = keyframes`
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+`
 export const Bar = styled.div`
   width: 100%;
   overflow: hidden;
   background: ${({ theme }) => theme.colors.roxo0};
   padding: 24px 0;
   position: relative;
-`;
+`
 
 export const Scroller = styled.div`
   display: flex;
-  width: max-content;      
+  width: max-content;
   will-change: transform;
-  animation: ${loopRight} 28s linear infinite;
-  gap: 0;                  
-`;
+  animation: ${loopLeft} 28s linear infinite;
+  gap: 0;
+`
 
 export const Content = styled.div`
   display: flex;
   white-space: nowrap;
   min-width: max-content;
-  flex-shrink: 0;        
-`;
+  flex-shrink: 0;
+`
 
 export const Item = styled.div`
   display: inline-flex;
   align-items: center;
-  margin-right: 64px;     
+  margin-right: 64px;
   user-select: none;
 
   img {
@@ -50,7 +49,7 @@ export const Item = styled.div`
 
   span {
     text-align: center;
-    font-family: "Nunito Sans";
+    font-family: 'Nunito Sans';
     font-size: 12px;
     font-style: normal;
     font-weight: 800;
@@ -62,4 +61,4 @@ export const Item = styled.div`
   .light {
     font-weight: 400;
   }
-`;
+`

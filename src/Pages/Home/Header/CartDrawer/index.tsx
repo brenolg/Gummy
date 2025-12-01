@@ -47,10 +47,10 @@ export default function CartDrawer() {
 
   function handleDescriptionnTxt(id: string) {
     if (isMobile) {
-      if (id === 'powergum-1') return 'Power Gummy® - 30 gomas de 3,8g sabor fru...'
+      if (id === 'powergummy-1') return 'Power Gummy® - 30 gomas de 3,8g sabor fru...'
       return 'Kit 3 Power Gummy® - 90 gomas gomas de sabor frutas v...'
     }
-    if (id === 'powergum-1') return 'Power Gummy® - 30 gomas de 3,8g sabor frutas vermelhas'
+    if (id === 'powergummy-1') return 'Power Gummy® - 30 gomas de 3,8g sabor frutas vermelhas'
     return 'Kit 3 Power Gummy® - 90 gomas gomas de 3,8g sabor frutas vermelhas'
   }
 

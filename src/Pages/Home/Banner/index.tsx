@@ -56,14 +56,12 @@ export default function RotatingBanner({ banners }: RotatingBannerProps) {
 
 const BannerWrapper = styled.div`
   position: relative;
-  margin-top: -88px;
   width: 100%;
   max-width: 100%;
   overflow: hidden;
-  aspect-ratio: 1440 / 800;
+  aspect-ratio: 1440 / 700;
   @media (max-width: 640px) {
-    aspect-ratio: 435 / 780; /* ou o ratio real da sua arte mobile */
-    margin-top: -80px;
+    aspect-ratio: 435 / 620; /* ou o ratio real da sua arte mobile */
   }
 `
 

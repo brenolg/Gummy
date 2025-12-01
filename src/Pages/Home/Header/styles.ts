@@ -9,8 +9,8 @@ export const Container = styled.header`
   height: 88px;
   padding: 12px 80px;
   @media (max-width: 650px) {
-    padding: 12px 24px;
-    height: 80px;
+    padding: 2px 24px;
+    height: 64px;
   }
 `
 
@@ -25,6 +25,10 @@ export const Content = styled.div`
 export const Logo = styled.img`
   height: 64px;
   width: 93px;
+  @media (max-width: 650px) {
+    width: 81px;
+    height: 56px;
+  }
 `
 
 export const Nav = styled.nav`
@@ -36,6 +40,8 @@ export const Nav = styled.nav`
   padding: 0 17.78px;
   @media (max-width: 650px) {
     padding: 0;
+    height: 56px;
+    padding: 2px 24px;
   }
   @media (max-width: 400px) {
     display: none;

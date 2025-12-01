@@ -1,6 +1,5 @@
 import bottleImg from '@/assets/imgs/heroBottle.svg'
 import fruitsImg from '@/assets/imgs/fruits.svg'
-import womanImg from '@/assets/imgs/heroWoman.svg'
 import fruitsM from '@/assets/imgs/fruitsM.svg'
 
 import {
@@ -38,16 +37,17 @@ export default function Hero() {
             <div className="card-conteiner">
               <LeftContent>
                 <Title>
-                  Beleza que <br />
-                  <span className="highlight">vem de dentro!</span>
+                  O FUTURO DAS <br />
+                  <span className="highlight">VITAMINAS JÁ COMEÇOU!</span>
                 </Title>
 
                 <BenefitsList>
-                  <BenefitItem>💜 Sem açúcar, sem culpa</BenefitItem>
-                  <BenefitItem>✨ Saúde e praticidade no dia a dia</BenefitItem>
-                  <BenefitItem>🌱 Fórmula com minerais essenciais</BenefitItem>
-                  <BenefitItem>🍇 Sabor irresistível de frutas vermelhas</BenefitItem>
-                  <BenefitItem>⚡ Ácido Hialurônico + 8 Vitaminas</BenefitItem>
+                  <BenefitItem>💜 Novo padrão de suplementação em gomas ✨</BenefitItem>
+                  <BenefitItem>⚡ Ácido Hialurônico + Biotina + 7 Vitaminas</BenefitItem>
+                  <BenefitItem>💎 Nutrição avançada com ativos premium</BenefitItem>
+                  <BenefitItem>🌱 Fórmula limpa, inteligente com resultado real</BenefitItem>
+                  <BenefitItem>✨ Simples na rotina. Poderosa no efeito</BenefitItem>
+                  <BenefitItem>🏆 Sabor delicioso. Zero açúcar. Zero desculpas </BenefitItem>
                 </BenefitsList>
               </LeftContent>
 
@@ -64,7 +64,10 @@ export default function Hero() {
             Comprar agora
           </MainButton>
 
-          <WomanImage src={womanImg} alt="Mulher sorrindo" />
+          <WomanImage
+            src="https://firebasestorage.googleapis.com/v0/b/powergummy-prod.firebasestorage.app/o/heroWoman.svg?alt=media&token=9d79efc0-9b34-4442-9074-39b93d2e414b"
+            alt="Mulher sorrindo"
+          />
         </>
       )}
       {isMobile && (
@@ -77,12 +80,12 @@ export default function Hero() {
               </Title>
 
               <BenefitsList>
-                <BenefitItem>💜 Novo padrão de suplementação em gomas</BenefitItem>
+                <BenefitItem>💜 Novo padrão de suplementação em gomas ✨</BenefitItem>
                 <BenefitItem>⚡ Ácido Hialurônico + Biotina + 7 Vitaminas</BenefitItem>
                 <BenefitItem>💎 Nutrição avançada com ativos premium</BenefitItem>
-                <BenefitItem>🌱 Fórmula limpa, inteligente e resultado real</BenefitItem>
+                <BenefitItem>🌱 Fórmula limpa, inteligente com resultado real</BenefitItem>
                 <BenefitItem>✨ Simples na rotina. Poderosa no efeito</BenefitItem>
-                <BenefitItem>🏆 Delicioso. Zero açúcar. Zero desculpas </BenefitItem>
+                <BenefitItem>🏆 Sabor delicioso. Zero açúcar. Zero desculpas </BenefitItem>
               </BenefitsList>
             </LeftContent>
 
