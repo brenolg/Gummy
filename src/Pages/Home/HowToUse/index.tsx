@@ -22,7 +22,7 @@ export default function HowToUse() {
           <li>Ideal para o life style moderno</li>
         </List>
 
-        <MainButton maxW={350} onClick={goToCheckout}>
+        <MainButton maxW={350} onClick={goToCheckout} golden>
           Quero minha Power Gummy
         </MainButton>
         <BearImage
@@ -32,7 +32,10 @@ export default function HowToUse() {
       </LeftBox>
 
       <VideoBox>
-        <video src="/videos/tutorial.mp4" controls />
+        <video
+          src="https://firebasestorage.googleapis.com/v0/b/powergummy-prod.firebasestorage.app/o/howToUse.mp4?alt=media&token=68125583-25d5-4aa8-8010-9a0a03bc3c6e"
+          controls
+        />
       </VideoBox>
     </Wrapper>
   )

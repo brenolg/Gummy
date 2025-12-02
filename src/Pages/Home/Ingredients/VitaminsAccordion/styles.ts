@@ -33,7 +33,7 @@ export const ItemHeader = styled.button`
 export const ItemTitle = styled.span<{ $open: boolean }>`
   color: var(--roxo-700, #502665);
   font-family: 'Nunito Sans';
-  font-size: 20px;
+  font-size: 16px;
   font-style: normal;
   font-weight: 700;
   line-height: 120%; /* 24px */
@@ -71,7 +71,7 @@ export const ItemBody = styled.div<{ $open: boolean }>`
   p {
     color: var(--roxo-700, #502665);
     font-family: 'Nunito Sans';
-    font-size: 16px;
+    font-size: 14px;
     font-style: normal;
     font-weight: 400;
     line-height: 120%; /* 19.2px */

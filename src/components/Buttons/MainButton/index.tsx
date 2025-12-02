@@ -1,37 +1,44 @@
-import React from "react";
-import { StyledMainButton, Spinner, Label } from "./styles";
+import React from 'react'
+import { StyledMainButton, Spinner, Label } from './styles'
 
 type MainButtonProps = {
-  type?: "button" | "submit" | "reset";
-  onClick?: () => void;
-  children: React.ReactNode; // texto/label
-  loading?: boolean;
-  disabled?: boolean;
-  maxW?: number; 
-};
+  type?: 'button' | 'submit' | 'reset'
+  onClick?: () => void
+  children: React.ReactNode // texto/label
+  loading?: boolean
+  disabled?: boolean
+  maxW?: number
+  golden?: boolean
+}
 
 export default function MainButton({
-  type = "button",
+  type = 'button',
   onClick,
   children,
   loading = false,
   disabled = false,
-  maxW, 
+  maxW,
+  golden = false,
 }: MainButtonProps) {
-  const isdisabled = disabled || loading;
+  const isdisabled = disabled || loading
 
   return (
     <StyledMainButton
       type={type}
       onClick={onClick}
       disabled={isdisabled}
-      $maxW={maxW} 
+      $maxW={maxW}
       aria-busy={loading}
       aria-live="polite"
       aria-disabled={isdisabled}
+      $golden={golden}
     >
       <Label $hidden={loading}>{children}</Label>
-      {loading && <div className="loading-container"><Spinner aria-hidden="true" /></div>}
+      {loading && (
+        <div className="loading-container">
+          <Spinner aria-hidden="true" />
+        </div>
+      )}
     </StyledMainButton>
-  );
+  )
 }

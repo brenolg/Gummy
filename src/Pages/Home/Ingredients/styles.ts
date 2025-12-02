@@ -183,7 +183,7 @@ export const BottleWrapper = styled.div<{ $showHover?: boolean }>`
     margin: auto;
     gap: 0;
     .bottle {
-      max-width: 382px;
+      max-width: 320px;
     }
     .seal {
       bottom: 145px;
@@ -240,7 +240,7 @@ export const BottomNote = styled.div`
   @media (max-width: 820px) {
     width: 100%;
     h2 {
-      font-size: 22px;
+      font-size: 18px;
     }
     p {
       font-size: 13px;

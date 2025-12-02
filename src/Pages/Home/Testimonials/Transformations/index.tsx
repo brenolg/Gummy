@@ -55,12 +55,6 @@ const depoimentos: Depoimento[] = [
     time: '6 semanas',
   },
   {
-    isVideo: true,
-    videoUrl:
-      'https://firebasestorage.googleapis.com/v0/b/powergummy-prod.firebasestorage.app/o/test1.mp4?alt=media&token=6bd3b06e-fccf-4204-a6a2-5e71fa00a715',
-    text: 'Notei muita diferença no meu cabelo, na minha pele e na minha unha',
-  },
-  {
     isVideo: false,
     before:
       'https://firebasestorage.googleapis.com/v0/b/powergummy-prod.firebasestorage.app/o/bef3.png?alt=media&token=7ed0ff8a-a009-4f05-8629-930d8e599c62',

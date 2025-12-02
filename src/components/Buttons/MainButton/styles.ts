@@ -1,6 +1,6 @@
 import styled, { keyframes } from 'styled-components'
 
-export const StyledMainButton = styled.button<{ $maxW?: number }>`
+export const StyledMainButton = styled.button<{ $maxW?: number; $golden?: boolean }>`
   outline: none;
   height: 68px;
   width: 100%;
@@ -10,11 +10,10 @@ export const StyledMainButton = styled.button<{ $maxW?: number }>`
   place-items: center;
   color: ${({ theme }) => theme.colors.neutral.white0};
   position: relative;
-  background: linear-gradient(
-    90deg,
-    ${({ theme }) => theme.colors.roxo700} 0%,
-    ${({ theme }) => theme.colors.roxo500} 100%
-  );
+  background: ${({ $golden, theme }) =>
+    $golden
+      ? `linear-gradient(90deg, var(--dourado-200, #BA7E1B) 0%, var(--dourado-300, #5B4112) 100%)`
+      : `linear-gradient(90deg, ${theme.colors.roxo700} 0%, ${theme.colors.roxo500} 100%)`};
   text-align: center;
   font-family: 'Nunito Sans';
   font-size: 19px;

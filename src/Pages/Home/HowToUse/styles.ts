@@ -2,9 +2,10 @@ import styled from 'styled-components'
 
 export const Wrapper = styled.div`
   width: 100%;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 80px;
   align-items: center;
   justify-items: center;
   padding: 118px 123px 95px;
@@ -23,10 +24,11 @@ export const Wrapper = styled.div`
 export const LeftBox = styled.div`
   position: relative;
   border-radius: 40px;
+  max-width: 460px;
   background:
     linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.2) 100%), var(--roxo-700, #502665);
   width: 100%;
-  max-width: 592px; /* limite máximo */
+
   padding-left: 52px;
   padding-top: 42px;
   padding-bottom: 25px;
@@ -50,7 +52,7 @@ export const Title = styled.h3`
   line-height: 120%; /* 40.8px */
   margin-bottom: 8px;
   @media (max-width: 900px) {
-    font-size: 28px;
+    font-size: 22px;
     margin-bottom: 16px;
   }
 `
@@ -81,15 +83,14 @@ export const List = styled.ul`
   }
   @media (max-width: 900px) {
     li {
-      font-size: 18px;
+      font-size: 16px;
     }
   }
 `
 
 export const VideoBox = styled.div`
-  width: 100%;
-  max-width: 592px;
-  height: 318px;
+  width: 258.797px;
+  height: 460px;
 
   background: #f4f3f6;
   border-radius: 40px;

@@ -30,7 +30,8 @@ export const HeaderText = styled.p`
     max-width: 70%;
   }
   @media (max-width: 900px) {
-    font-size: 28px;
+    font-size: 24px;
+    line-height: 120%;
     max-width: 60%;
     padding-left: 24px;
   }
@@ -59,7 +60,7 @@ export const SubText = styled.p`
     flex-direction: column;
     font-size: 20px;
     strong {
-      font-size: 28px;
+      font-size: 24px;
     }
   }
 `

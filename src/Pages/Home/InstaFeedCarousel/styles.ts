@@ -72,7 +72,7 @@ export const Title = styled.h3`
   line-height: normal;
   padding-bottom: 7px;
   @media (max-width: 900px) {
-    font-size: 20px;
+    font-size: 18px;
     padding-bottom: 0;
   }
 `
@@ -177,7 +177,7 @@ export const Controls = styled.div`
   margin-top: 12px;
   justify-content: flex-end;
   @media (max-width: 900px) {
-    font-size: 20px;
+    font-size: 18px;
     margin-top: auto;
   }
 `
