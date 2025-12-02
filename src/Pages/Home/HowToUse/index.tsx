@@ -1,6 +1,5 @@
 import { Wrapper, LeftBox, Title, List, VideoBox, BearImage } from './styles'
 
-import bear from '@/assets/imgs/bearHTU.svg'
 import { MainButton } from '@/components'
 import { useNavigate } from 'react-router-dom'
 
@@ -26,7 +25,10 @@ export default function HowToUse() {
         <MainButton maxW={350} onClick={goToCheckout}>
           Quero minha Power Gummy
         </MainButton>
-        <BearImage src={bear} alt="gummy" />
+        <BearImage
+          src="https://firebasestorage.googleapis.com/v0/b/powergummy-prod.firebasestorage.app/o/bearHTU.png?alt=media&token=c5258e74-dad0-4395-9862-7593044dc469"
+          alt="gummy"
+        />
       </LeftBox>
 
       <VideoBox>

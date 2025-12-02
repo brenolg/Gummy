@@ -37,7 +37,7 @@ const Header = styled.button<{ $open: boolean }>`
   justify-content: space-between;
   gap: 16px;
   @media (max-width: 900px) {
-    font-size: 16px;
+    font-size: 14px;
     padding: 24px 0px;
   }
 `
@@ -81,7 +81,7 @@ const Body = styled.div<{ $open: boolean; $height: number }>`
   }
   @media (max-width: 900px) {
     > div {
-      font-size: 16px;
+      font-size: 12px;
       padding-bottom: 24px;
     }
   }

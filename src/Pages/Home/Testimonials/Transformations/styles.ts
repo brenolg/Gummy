@@ -24,7 +24,7 @@ export const CardsWrapper = styled.div<{ $isDragging: boolean }>`
   @media (max-width: 900px) {
     padding-right: 0;
     padding-left: 0;
-    padding-bottom: 90px;
+    padding-bottom: 60px;
   }
 `
 

@@ -17,7 +17,7 @@ export const Wrapper = styled.section`
   justify-content: center;
   flex-wrap: wrap;
   @media (max-width: 1100px) {
-    padding: 40px 24px;
+    padding: 8px 24px 24px 24px;
   }
   @media (max-width: 900px) {
     flex-direction: column;
@@ -80,13 +80,17 @@ export const AsideCard = styled.aside`
   @media (max-width: 900px) {
     max-width: 100%;
     padding: 0;
+    .faqTag {
+      margin-bottom: 8px;
+    }
     .faqFirstDescription {
       margin-bottom: 0;
-      font-size: 16px;
+      font-size: 14px;
     }
     .faqTitle {
-      font-size: 24px;
+      font-size: 20px;
       line-height: 24px;
+      margin-bottom: 8px;
     }
   }
 `
@@ -188,5 +192,6 @@ export const Panel = styled.div`
   max-width: 690px;
   @media (max-width: 900px) {
     max-width: 100%;
+    padding: 8px 24px 24px 24px;
   }
 `

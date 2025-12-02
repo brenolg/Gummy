@@ -90,7 +90,7 @@ export default function FAQ({ items }: FAQProps) {
             rel="noopener noreferrer"
           >
             <img src={instaIcon} />
-            ENTRAR EM CONTATO
+            ENTRE EM CONTATO
           </ContactBtn>
         </FaqCard>
       )}

@@ -61,7 +61,7 @@ export default function Ingredients() {
               <img src={seal} className="seal" />
               <img
                 className="bottle default"
-                src="https://firebasestorage.googleapis.com/v0/b/powergummy-prod.firebasestorage.app/o/EmbalagemFrente.svg?alt=media&token=e2d1f88a-d45b-4225-9bb2-5e0e4f8da40e"
+                src="https://firebasestorage.googleapis.com/v0/b/powergummy-prod.firebasestorage.app/o/EmbalagemFrente.png?alt=media&token=56f24118-8c1c-4d48-b3d8-db7b69db0a09"
                 alt="Power Gummy"
               />
               <img
@@ -95,7 +95,7 @@ export default function Ingredients() {
             <img src={seal} className="seal" />
             <img
               className="bottle default"
-              src="https://firebasestorage.googleapis.com/v0/b/powergummy-prod.firebasestorage.app/o/EmbalagemFrente.svg?alt=media&token=e2d1f88a-d45b-4225-9bb2-5e0e4f8da40e"
+              src="https://firebasestorage.googleapis.com/v0/b/powergummy-prod.firebasestorage.app/o/EmbalagemFrente.png?alt=media&token=56f24118-8c1c-4d48-b3d8-db7b69db0a09"
               alt="Power Gummy"
             />
             <img

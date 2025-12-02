@@ -121,6 +121,37 @@ export default function InstaFeedCarousel() {
     setIsDragging(false)
   }
 
+  function handleTouchStart(e: React.TouchEvent) {
+    setIsDragging(true)
+    setMoved(false)
+    setStartX(e.touches[0].clientX)
+  }
+
+  function handleTouchMove(e: React.TouchEvent) {
+    if (!isDragging) return
+
+    const diff = e.touches[0].clientX - startX
+    if (Math.abs(diff) > 5) setMoved(true)
+
+    const cardWidth = 352 + 40
+
+    if (Math.abs(diff) > cardWidth / 3) {
+      if (diff < 0 && index < totalPages) {
+        setIndex((idx) => idx + 1)
+        setStartX(e.touches[0].clientX)
+      }
+
+      if (diff > 0 && index > 0) {
+        setIndex((idx) => idx - 1)
+        setStartX(e.touches[0].clientX)
+      }
+    }
+  }
+
+  function handleTouchEnd() {
+    setIsDragging(false)
+  }
+
   return (
     <Section>
       <Header>
@@ -132,9 +163,8 @@ export default function InstaFeedCarousel() {
         <div className="mobileTitleContainer">
           <div className="logo-container">
             <GoldenLogo src={goldenInstaLogo} />
-            <InstaTxt src={instaTxt} />
+            <Title>@powergummybr</Title>
           </div>
-          <Title>@powergummybr</Title>
         </div>
 
         <Controls>
@@ -161,6 +191,9 @@ export default function InstaFeedCarousel() {
         onMouseMove={handleMouseMove}
         onMouseUp={handleMouseUp}
         onMouseLeave={handleMouseLeave}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
       >
         <Track $index={index}>
           {items.map((p) => (
@@ -173,7 +206,13 @@ export default function InstaFeedCarousel() {
                 }
               }}
             >
-              <div className="cardHeader">
+              <a
+                className="cardHeader"
+                href={p.permalink}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={(e) => moved && e.preventDefault()}
+              >
                 <div className="fistContainer">
                   <img className="logo" src={logoRound} />
                   <p className="txt">powergummybr</p>
@@ -186,7 +225,7 @@ export default function InstaFeedCarousel() {
                 >
                   <img src={dots} onClickCapture={(e) => moved && e.preventDefault()} />
                 </a>
-              </div>
+              </a>
               <ThumbContainer>
                 <Thumb
                   onClickCapture={(e) => {

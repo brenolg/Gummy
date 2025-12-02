@@ -115,6 +115,12 @@ export const Card = styled.div<{ $isFirst?: boolean; $isLast?: boolean }>`
   @media (max-width: 900px) {
     margin-left: 0;
     margin-right: 0;
+    padding: 24px;
+    width: 250px;
+    height: 251px;
+    flex: 0 0 250px;
+    margin-left: ${({ $isFirst }) => ($isFirst ? '0px' : '0')};
+    margin-right: ${({ $isLast }) => ($isLast ? '0px' : '0')};
   }
 `
 
@@ -130,6 +136,9 @@ export const Stars = styled.div`
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   margin-bottom: 12px;
+  @media (max-width: 900px) {
+    font-size: 14px;
+  }
 `
 
 export const Name = styled.h4`
@@ -140,6 +149,9 @@ export const Name = styled.h4`
   font-weight: 700;
   line-height: var(--line-height-25, 25px); /* 138.889% */
   margin-bottom: 12px;
+  @media (max-width: 900px) {
+    font-size: 15px;
+  }
 `
 
 export const Text = styled.p`
@@ -150,4 +162,7 @@ export const Text = styled.p`
   font-style: normal;
   font-weight: 700;
   line-height: 150%; /* 27px */
+  @media (max-width: 900px) {
+    font-size: 14px;
+  }
 `

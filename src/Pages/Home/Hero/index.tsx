@@ -1,6 +1,5 @@
-import bottleImg from '@/assets/imgs/heroBottle.svg'
-import fruitsImg from '@/assets/imgs/fruits.svg'
-import fruitsM from '@/assets/imgs/fruitsM.svg'
+import fruitsImg from '@/assets/imgs/fruit.png'
+import fruitsM from '@/assets/imgs/fruitsM.png'
 
 import {
   Section,
@@ -11,7 +10,6 @@ import {
   BenefitItem,
   BottleWrapper,
   BottleImage,
-  FruitsImage,
   WomanImage,
   FruitMobile,
 } from './styles'
@@ -26,7 +24,7 @@ export default function Hero() {
   }
 
   const isMobile = useMediaQuery({
-    query: '(max-width: 1150px)',
+    query: '(max-width: 880px)',
   })
 
   return (
@@ -34,53 +32,14 @@ export default function Hero() {
       {!isMobile && (
         <>
           <Card>
-            <div className="card-conteiner">
-              <LeftContent>
-                <Title>
-                  O FUTURO DAS <br />
-                  <span className="highlight">VITAMINAS JÁ COMEÇOU!</span>
-                </Title>
-
-                <BenefitsList>
-                  <BenefitItem>💜 Novo padrão de suplementação em gomas ✨</BenefitItem>
-                  <BenefitItem>⚡ Ácido Hialurônico + Biotina + 7 Vitaminas</BenefitItem>
-                  <BenefitItem>💎 Nutrição avançada com ativos premium</BenefitItem>
-                  <BenefitItem>🌱 Fórmula limpa, inteligente com resultado real</BenefitItem>
-                  <BenefitItem>✨ Simples na rotina. Poderosa no efeito</BenefitItem>
-                  <BenefitItem>🏆 Sabor delicioso. Zero açúcar. Zero desculpas </BenefitItem>
-                </BenefitsList>
-              </LeftContent>
-
-              <BottleWrapper>
-                <BottleImage src={bottleImg} alt="Power Gummy Cabelo, Pele & Unha" />
-              </BottleWrapper>
-
-              <FruitsImage $img={fruitsImg} />
-            </div>
-            <div className="line" />
-          </Card>
-
-          <MainButton type="button" onClick={goToCheckout} maxW={456}>
-            Comprar agora
-          </MainButton>
-
-          <WomanImage
-            src="https://firebasestorage.googleapis.com/v0/b/powergummy-prod.firebasestorage.app/o/heroWoman.svg?alt=media&token=9d79efc0-9b34-4442-9074-39b93d2e414b"
-            alt="Mulher sorrindo"
-          />
-        </>
-      )}
-      {isMobile && (
-        <>
-          <Card>
             <LeftContent>
               <Title>
-                Beleza que <br />
-                <span className="highlight">vem de dentro!</span>
+                O FUTURO DAS <br />
+                <span className="highlight">VITAMINAS JÁ COMEÇOU!</span>
               </Title>
 
               <BenefitsList>
-                <BenefitItem>💜 Novo padrão de suplementação em gomas ✨</BenefitItem>
+                <BenefitItem>💜 Novo padrão de suplementação em gomas </BenefitItem>
                 <BenefitItem>⚡ Ácido Hialurônico + Biotina + 7 Vitaminas</BenefitItem>
                 <BenefitItem>💎 Nutrição avançada com ativos premium</BenefitItem>
                 <BenefitItem>🌱 Fórmula limpa, inteligente com resultado real</BenefitItem>
@@ -90,7 +49,50 @@ export default function Hero() {
             </LeftContent>
 
             <BottleWrapper>
-              <BottleImage src={bottleImg} alt="Power Gummy Cabelo, Pele & Unha" />
+              <BottleImage
+                src="https://firebasestorage.googleapis.com/v0/b/powergummy-prod.firebasestorage.app/o/heroBotle.png?alt=media&token=fdc7f200-161b-4313-8db1-945762acf48d"
+                alt="Power Gummy Cabelo, Pele & Unha"
+              />
+            </BottleWrapper>
+
+            <div className="line" />
+            <FruitMobile src={fruitsImg} />
+          </Card>
+
+          <MainButton type="button" onClick={goToCheckout} maxW={456}>
+            Comprar agora
+          </MainButton>
+
+          <WomanImage
+            src="https://firebasestorage.googleapis.com/v0/b/powergummy-prod.firebasestorage.app/o/heroWomam.png?alt=media&token=ab75124a-8d53-4cfe-91dc-9fec72b2f069"
+            alt="Mulher sorrindo"
+          />
+        </>
+      )}
+      {isMobile && (
+        <>
+          <Card>
+            <LeftContent>
+              <Title>
+                O FUTURO DAS <br />
+                <span className="highlight">VITAMINAS JÁ COMEÇOU!</span>
+              </Title>
+
+              <BenefitsList>
+                <BenefitItem>💜 Novo padrão de suplementação em gomas </BenefitItem>
+                <BenefitItem>⚡ Ácido Hialurônico + Biotina + 7 Vitaminas</BenefitItem>
+                <BenefitItem>💎 Nutrição avançada com ativos premium</BenefitItem>
+                <BenefitItem>🌱 Fórmula limpa, inteligente com resultado real</BenefitItem>
+                <BenefitItem>✨ Simples na rotina. Poderosa no efeito</BenefitItem>
+                <BenefitItem>🏆 Sabor delicioso. Zero açúcar. Zero desculpas </BenefitItem>
+              </BenefitsList>
+            </LeftContent>
+
+            <BottleWrapper>
+              <BottleImage
+                src="https://firebasestorage.googleapis.com/v0/b/powergummy-prod.firebasestorage.app/o/heroBotle.png?alt=media&token=fdc7f200-161b-4313-8db1-945762acf48d"
+                alt="Power Gummy Cabelo, Pele & Unha"
+              />
             </BottleWrapper>
 
             <FruitMobile src={fruitsM} />

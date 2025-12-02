@@ -15,7 +15,6 @@ import check from '@/assets/icons/check-circleB.svg'
 import power from '@/assets/icons/powerB.svg'
 import { MainButton } from '@/components'
 import { useNavigate } from 'react-router-dom'
-import handImg from '@/assets/imgs/hand.svg'
 
 export default function BenefitsSection() {
   const navigate = useNavigate()
@@ -59,7 +58,7 @@ export default function BenefitsSection() {
         </MainButton>
       </CenterWrapper>
 
-      <Hand src={handImg} />
+      <Hand src="https://firebasestorage.googleapis.com/v0/b/powergummy-prod.firebasestorage.app/o/hand.png?alt=media&token=43f6ff79-c1a3-464d-bce3-832bb2dd8544" />
     </Container>
   )
 }

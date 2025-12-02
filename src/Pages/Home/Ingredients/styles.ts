@@ -1,11 +1,10 @@
 import styled from 'styled-components'
-import ingredientsBg from '@/assets/imgs/ingredientsBg.svg'
 
 export const Section = styled.section`
   width: 100%;
   display: flex;
   justify-content: center;
-  background-image: url(${ingredientsBg});
+  background-image: url('https://firebasestorage.googleapis.com/v0/b/powergummy-prod.firebasestorage.app/o/ingredientsBg.png?alt=media&token=5a81f3fa-dbf9-485d-aef2-9eac024d5df9');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;

@@ -34,7 +34,6 @@ export const Header = styled.header`
     .logo-container {
       display: flex;
       flex-direction: row;
-      padding-bottom: 22px;
     }
     .mobileTitleContainer {
       display: flex;
@@ -87,6 +86,7 @@ export const Rail = styled.div`
   }
   @media (max-width: 900px) {
     margin-left: 25px;
+    touch-action: pan-y;
   }
 `
 
@@ -96,6 +96,9 @@ export const Track = styled.div<{ $index: number }>`
   gap: 40px;
   transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
   transform: translateX(${(p) => `calc(${p.$index} * (352px + 40px) * -1)`});
+  @media (max-width: 900px) {
+    gap: 24px;
+  }
 `
 
 export const Card = styled.div`
@@ -109,6 +112,7 @@ export const Card = styled.div`
     padding-left: 16px;
     padding-right: 16px;
     display: flex;
+    align-items: center;
     justify-content: space-between;
     .fistContainer {
       display: flex;
@@ -125,11 +129,17 @@ export const Card = styled.div`
       font-style: normal;
       font-weight: 700;
       line-height: normal;
+      align-items: center;
+      display: flex;
+      align-items: center;
     }
     .dots {
       display: flex;
       align-items: center;
     }
+  }
+  @media (max-width: 900px) {
+    width: 220px;
   }
 `
 
@@ -141,6 +151,10 @@ export const ThumbContainer = styled.article`
   overflow: hidden;
   height: 469.083px;
   width: 352px;
+  @media (max-width: 900px) {
+    width: 220px;
+    height: 293.1769714355469px;
+  }
 `
 
 export const Thumb = styled.div`

@@ -23,34 +23,34 @@ export const Card = styled.div`
   padding-top: 52px;
   min-height: 521px;
   position: relative;
-  .card-conteiner {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    width: 100%;
-    margin-bottom: 32px;
-    min-height: 374px;
-  }
+
   .line {
     height: 10px;
     border-radius: 5px;
+    margin-top: 32px;
     background: ${({ theme }) => theme.colors.roxo700};
+  }
+  @media (max-width: 850px) {
+    padding-top: 0;
   }
 `
 
 export const LeftContent = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 42px 182px 54px 52px;
-  border-top-left-radius: 40px;
-  border-bottom-left-radius: 40px;
+  padding: 42px 55% 54px 52px;
+  border-radius: 40px;
   width: 100%;
   color: ${({ theme }) => theme.colors.neutral.white0};
   background:
     linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.2) 100%),
     ${({ theme }) => theme.colors.roxo700};
   height: fit-content;
+  @media (max-width: 1350px) {
+    padding: 42px 30% 54px 52px;
+  }
 
-  @media (max-width: 1150px) {
+  @media (max-width: 850px) {
     padding: 32px 24px;
     border-radius: 24px;
     justify-content: flex-start;
@@ -63,7 +63,7 @@ export const LeftContent = styled.div`
 export const Title = styled.h1`
   color: ${({ theme }) => theme.colors.roxo0};
   font-family: 'Nunito Sans';
-  font-size: 34px;
+  font-size: 30px;
   font-style: normal;
   font-weight: 600;
   line-height: 120%;
@@ -71,10 +71,10 @@ export const Title = styled.h1`
   .highlight {
     font-weight: 800;
   }
-  @media (max-width: 1150px) {
+  @media (max-width: 850px) {
     text-align: center;
+    font-size: 24px;
     width: 100%;
-    font-size: 26px;
   }
   @media (max-width: 500px) {
     text-align: left;
@@ -93,12 +93,12 @@ export const BenefitsList = styled.ul`
 export const BenefitItem = styled.li`
   color: ${({ theme }) => theme.colors.roxo0};
   font-family: 'Nunito Sans';
-  font-size: 20px;
+  font-size: 18px;
   font-style: normal;
   font-weight: 400;
   line-height: 180%; /* 36px */
-  @media (max-width: 1150px) {
-    font-size: 16px;
+  @media (max-width: 850px) {
+    font-size: 14px;
     text-align: center;
   }
   @media (max-width: 500px) {
@@ -115,7 +115,12 @@ export const BottleWrapper = styled.div`
   left: 50%;
   transform: translate(-50%);
   z-index: 2;
-  @media (max-width: 1150px) {
+  @media (max-width: 1350px) {
+    left: 70%;
+    width: 500px;
+    transform: translate(-50%);
+  }
+  @media (max-width: 850px) {
     width: 222px;
     height: 300px;
     transform: none;
@@ -128,7 +133,7 @@ export const BottleWrapper = styled.div`
 export const BottleImage = styled.img`
   width: 438px;
   height: 521px;
-  @media (max-width: 1150px) {
+  @media (max-width: 850px) {
     width: 222px;
     height: 300px;
     aspect-ratio: 37/50;
@@ -154,9 +159,24 @@ export const FruitsImage = styled.div<{ $img: string }>`
 `
 export const FruitMobile = styled.img`
   position: absolute;
-  width: calc(445px -25px);
-  height: 273px;
-  bottom: -5px;
+  bottom: 18%;
+  right: 0;
+
+  @media (max-width: 1350px) {
+    bottom: 18%;
+    right: -200px;
+  }
+
+  @media (max-width: 850px) {
+    height: 273px;
+
+    left: 0;
+    right: auto;
+    bottom: -10px;
+
+    object-fit: contain;
+    pointer-events: none;
+  }
 `
 export const WomanImage = styled.img`
   position: absolute;
@@ -165,4 +185,7 @@ export const WomanImage = styled.img`
   width: 30%;
   flex-shrink: 0;
   aspect-ratio: 1/1;
+  @media (max-width: 1150px) {
+    display: none;
+  }
 `
