@@ -72,11 +72,15 @@ const Video = styled.video`
 
 const Card = styled.div`
   width: 258.797px;
-  height: 460px;
+  height: 452px;
   border-radius: 24px;
   overflow: hidden;
   position: relative;
   cursor: pointer;
+  @media (max-width: 900px) {
+    width: 258px;
+    height: 372px;
+  }
 `
 
 const Overlay = styled.div`

@@ -1,106 +1,121 @@
 import styled from 'styled-components'
 
 export const Card = styled.div`
-  width: 305.765625px;
-  height: 460px;
-  border-radius: 16px;
-  background: #b2872e33;
-  padding: 4px;
-  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
-`
-
-export const ImageContainer = styled.div`
-  position: relative;
-  width: 100%;
+  width: 305px;
+  padding: 6px;
   height: 452px;
-  overflow: hidden;
+  background: #b2872e33;
+  border-radius: 16px;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.25);
+  position: relative;
+
+  /* ✨ FORÇA CLIP NAS CAMADAS INTERNAS DA LIB */
+  .__react-compare-image__,
+  .__react-compare-image__container,
+  .__react-compare-image__image,
+  .__react-compare-image__left-image,
+  .__react-compare-image__right-image {
+    border-radius: 12px !important;
+    overflow: hidden !important;
+  }
+  @media (max-width: 900px) {
+    width: 258px;
+    height: 372px;
+  }
+`
+
+export const ImageArea = styled.div`
+  width: 100%;
+  height: 440px;
   border-radius: 12px;
-`
-
-export const BaseImage = styled.img`
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  -webkit-user-drag: none;
-  user-drag: none;
-  user-select: none;
-  -webkit-touch-callout: none;
-`
-
-export const OverlayImageWrapper = styled.div`
-  position: absolute;
-  inset: 0;
   overflow: hidden;
-  transition: width 0.05s linear;
+  position: relative;
+  /* 🔥 O PULO DO GATO */
+  .__react-compare-image__ {
+    width: 100% !important;
+    height: 100% !important;
+    position: relative !important;
+  }
+
+  .__react-compare-image__container {
+    width: 100% !important;
+    height: 100% !important;
+  }
+
+  .__react-compare-image__image,
+  img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover;
+  }
+  @media (max-width: 900px) {
+    height: 360px;
+  }
 `
 
-export const OverlayImage = styled.img`
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  -webkit-user-drag: none;
-  user-drag: none;
-  user-select: none;
-  -webkit-touch-callout: none;
-`
-
-export const Handle = styled.img`
-  position: absolute;
-  top: 50%;
-  transform: translate(-50%, -50%);
+export const CustomHandle = styled.div`
   width: 40px;
   height: 40px;
-  cursor: grab;
-  /* 👇 ESSENCIAIS PARA BLOQUEAR SWIPE DO CARROSSEL */
-  touch-action: none;
-  -webkit-user-drag: none;
-  user-select: none;
-  pointer-events: auto;
-`
-export const LabelsRow = styled.div`
-  position: absolute;
-  top: 8px;
-  left: 0;
-  right: 0;
-  padding: 0 8px;
-  display: flex;
-  justify-content: space-between;
-  z-index: 4;
-  pointer-events: none;
-`
 
-export const Label = styled.img`
-  margin: 10px 14px 0 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  touch-action: none;
+  pointer-events: auto;
+
+  img {
+    width: 100%;
+    height: auto;
+    pointer-events: none;
+    user-select: none;
+    -webkit-user-drag: none;
+  }
 `
 
 export const Content = styled.div`
-  margin-top: 8px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: -48px; /* ajusta conforme o tamanho do texto */
   text-align: center;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  @media (max-width: 900px) {
+    bottom: -40px;
+  }
 `
 
 export const Title = styled.p`
   color: var(--roxo-700, #502665);
+  text-align: center;
   font-family: Montserrat;
   font-size: 16px;
+  font-style: normal;
   font-weight: 700;
-  line-height: 24px;
+  /* 150% */
+  @media (max-width: 900px) {
+    font-size: 12px;
+  }
 `
 
 export const Footer = styled.div`
   display: flex;
-  align-items: center;
   justify-content: center;
-  gap: 6px;
+  align-items: center;
+  gap: 4px;
 `
 
-export const FooterIcon = styled.img`
-  margin-left: 6px;
+export const Icon = styled.img`
+  width: 14px;
 `
 
 export const FooterText = styled.span`
   color: var(--roxo-700, #502665);
+  text-align: center;
   font-family: Montserrat;
-  font-size: 16px;
+  font-size: 12px;
+  font-style: normal;
   font-weight: 500;
-  line-height: 24px;
 `

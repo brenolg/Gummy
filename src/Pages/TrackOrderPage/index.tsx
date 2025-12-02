@@ -12,7 +12,7 @@ import {
   InputError,
 } from './styles'
 
-import logo from '@/assets/imgs/logo.svg'
+import logo from '@/assets/imgs/logo.png'
 import check from '@/assets/icons/check.svg'
 import glass from '@/assets/icons/magnifyingGlass.svg'
 import imgError from '@/assets/icons/error.svg'

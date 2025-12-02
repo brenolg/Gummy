@@ -23,11 +23,13 @@ export const Content = styled.div`
 `
 
 export const Logo = styled.img`
-  height: 64px;
-  width: 93px;
+  width: 72px;
+  height: 48px;
+  aspect-ratio: 3/2;
   @media (max-width: 650px) {
-    width: 81px;
-    height: 56px;
+    width: 72px;
+    height: 48px;
+    aspect-ratio: 3/2;
   }
 `
 
