@@ -106,40 +106,27 @@ export const Card = styled.article`
   display: flex;
   flex-direction: column;
   border-radius: 24px;
+  border: none;
   @media (max-width: 750px) {
     width: 250px;
     height: 344px;
   }
 `
 
-export const FeaturedImage = styled.div<{ $img: string; $width?: number }>`
-  width: ${({ $width }) => ($width ? `${$width}px` : '100%')};
+export const FeaturedImage = styled.img`
   height: 100%;
   position: absolute;
   top: 0;
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-image: url(${({ $img }) => $img});
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
 `
 
-export const BackImage = styled.div<{ $img: string; $width?: number }>`
-  width: ${({ $width }) => ($width ? `${$width}px` : '100%')};
+export const BackImage = styled.img`
   height: 100%;
   position: absolute;
   top: 0;
   opacity: 0;
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
+
   transition: all 0.3s ease;
-  background-image: url(${({ $img }) => $img});
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
+
   z-index: 1;
   &&:hover {
     opacity: 1;

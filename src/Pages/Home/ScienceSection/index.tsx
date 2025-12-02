@@ -90,18 +90,36 @@ export default function ScienceSection() {
         {!isMobile && (
           <CardsGrid>
             <Card>
-              <FeaturedImage $img="https://firebasestorage.googleapis.com/v0/b/powergummy-prod.firebasestorage.app/o/hairGirl.png?alt=media&token=9b51869a-1dd5-4cac-8693-5de57c0803fc" />
-              <BackImage $img="https://firebasestorage.googleapis.com/v0/b/powergummy-prod.firebasestorage.app/o/hairB.png?alt=media&token=9cf73e62-3466-4957-92c7-e38dd6454770" />
+              <FeaturedImage
+                src="https://firebasestorage.googleapis.com/v0/b/powergummy-prod.firebasestorage.app/o/hairGirl.png?alt=media&token=9b51869a-1dd5-4cac-8693-5de57c0803fc"
+                loading="eager"
+              />
+              <BackImage
+                src="https://firebasestorage.googleapis.com/v0/b/powergummy-prod.firebasestorage.app/o/hairB.png?alt=media&token=9cf73e62-3466-4957-92c7-e38dd6454770"
+                loading="eager"
+              />
             </Card>
 
             <Card>
-              <FeaturedImage $img="https://firebasestorage.googleapis.com/v0/b/powergummy-prod.firebasestorage.app/o/nails.png?alt=media&token=7297b79f-c7d7-4656-8163-adbb2f1b1dc6" />
-              <BackImage $img="https://firebasestorage.googleapis.com/v0/b/powergummy-prod.firebasestorage.app/o/nailsB.png?alt=media&token=c1333ed2-6bbb-46d5-960a-467d8c34a232" />
+              <FeaturedImage
+                src="https://firebasestorage.googleapis.com/v0/b/powergummy-prod.firebasestorage.app/o/nails.png?alt=media&token=7297b79f-c7d7-4656-8163-adbb2f1b1dc6"
+                loading="eager"
+              />
+              <BackImage
+                src="https://firebasestorage.googleapis.com/v0/b/powergummy-prod.firebasestorage.app/o/nailsB.png?alt=media&token=c1333ed2-6bbb-46d5-960a-467d8c34a232"
+                loading="eager"
+              />
             </Card>
 
             <Card>
-              <FeaturedImage $img="https://firebasestorage.googleapis.com/v0/b/powergummy-prod.firebasestorage.app/o/skin.png?alt=media&token=dd03b2cf-fa42-4cd0-8003-734515dd25b7" />
-              <BackImage $img="https://firebasestorage.googleapis.com/v0/b/powergummy-prod.firebasestorage.app/o/skinB.png?alt=media&token=66a9de4e-0c2b-45bd-a48f-b9af3408f0bf" />
+              <FeaturedImage
+                src="https://firebasestorage.googleapis.com/v0/b/powergummy-prod.firebasestorage.app/o/skin.png?alt=media&token=dd03b2cf-fa42-4cd0-8003-734515dd25b7"
+                loading="eager"
+              />
+              <BackImage
+                src="https://firebasestorage.googleapis.com/v0/b/powergummy-prod.firebasestorage.app/o/skinB.png?alt=media&token=66a9de4e-0c2b-45bd-a48f-b9af3408f0bf"
+                loading="eager"
+              />
             </Card>
           </CardsGrid>
         )}
@@ -118,18 +136,36 @@ export default function ScienceSection() {
             onTouchEnd={handleTouchEnd}
           >
             <Card>
-              <FeaturedImage $img="https://firebasestorage.googleapis.com/v0/b/powergummy-prod.firebasestorage.app/o/hairGirl.png?alt=media&token=9b51869a-1dd5-4cac-8693-5de57c0803fc" />
-              <BackImage $img="https://firebasestorage.googleapis.com/v0/b/powergummy-prod.firebasestorage.app/o/hairB.png?alt=media&token=9cf73e62-3466-4957-92c7-e38dd6454770" />
+              <FeaturedImage
+                src="https://firebasestorage.googleapis.com/v0/b/powergummy-prod.firebasestorage.app/o/hairGirl.png?alt=media&token=9b51869a-1dd5-4cac-8693-5de57c0803fc"
+                loading="eager"
+              />
+              <BackImage
+                src="https://firebasestorage.googleapis.com/v0/b/powergummy-prod.firebasestorage.app/o/hairB.png?alt=media&token=9cf73e62-3466-4957-92c7-e38dd6454770"
+                loading="eager"
+              />
             </Card>
 
             <Card>
-              <FeaturedImage $img="https://firebasestorage.googleapis.com/v0/b/powergummy-prod.firebasestorage.app/o/nails.png?alt=media&token=7297b79f-c7d7-4656-8163-adbb2f1b1dc6" />
-              <BackImage $img="https://firebasestorage.googleapis.com/v0/b/powergummy-prod.firebasestorage.app/o/nailsB.png?alt=media&token=c1333ed2-6bbb-46d5-960a-467d8c34a232" />
+              <FeaturedImage
+                src="https://firebasestorage.googleapis.com/v0/b/powergummy-prod.firebasestorage.app/o/nails.png?alt=media&token=7297b79f-c7d7-4656-8163-adbb2f1b1dc6"
+                loading="eager"
+              />
+              <BackImage
+                src="https://firebasestorage.googleapis.com/v0/b/powergummy-prod.firebasestorage.app/o/nailsB.png?alt=media&token=c1333ed2-6bbb-46d5-960a-467d8c34a232"
+                loading="eager"
+              />
             </Card>
 
             <Card>
-              <FeaturedImage $img="https://firebasestorage.googleapis.com/v0/b/powergummy-prod.firebasestorage.app/o/skin.png?alt=media&token=dd03b2cf-fa42-4cd0-8003-734515dd25b7" />
-              <BackImage $img="https://firebasestorage.googleapis.com/v0/b/powergummy-prod.firebasestorage.app/o/skinB.png?alt=media&token=66a9de4e-0c2b-45bd-a48f-b9af3408f0bf" />
+              <FeaturedImage
+                src="https://firebasestorage.googleapis.com/v0/b/powergummy-prod.firebasestorage.app/o/skin.png?alt=media&token=dd03b2cf-fa42-4cd0-8003-734515dd25b7"
+                loading="eager"
+              />
+              <BackImage
+                src="https://firebasestorage.googleapis.com/v0/b/powergummy-prod.firebasestorage.app/o/skinB.png?alt=media&token=66a9de4e-0c2b-45bd-a48f-b9af3408f0bf"
+                loading="eager"
+              />
             </Card>
           </CardsWrapper>
         )}

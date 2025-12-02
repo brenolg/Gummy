@@ -14,7 +14,7 @@ import {
   Title,
 } from './styles'
 import { MainButton } from '@/components'
-import logo from '@/assets/imgs/logo.svg'
+import logo from '@/assets/imgs/logo.png'
 import instaW from '@/assets/icons/instaWhite.svg'
 import IKIGAI from '@/assets/icons/IKIGAI.svg'
 import defaultScrollProps from '@/utils/defaultScrollProps'
@@ -44,7 +44,7 @@ export default function Footer() {
       <Content>
         {/* COLUNA 1 – LOGO + TEXTO */}
         <Column className="center-mobile">
-          <Logo src={logo} alt="Logo" />
+          <Logo src={logo} alt="Logo" loading="eager" />
 
           <Description>
             Somos uma revolução em gomas de beleza, transformando ciência em experiência, rotina em

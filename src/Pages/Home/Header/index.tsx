@@ -1,4 +1,4 @@
-import logo from '@/assets/imgs/logo.svg'
+import logo from '@/assets/imgs/logo.png'
 import { BuyButton, Container, Content, Logo, Nav, NavItem, RightArea } from './styles'
 import CartDrawer from './CartDrawer'
 import { useNavigate } from 'react-router-dom'
@@ -27,7 +27,7 @@ export default function Header() {
       <Content>
         {isMobile && <MobileMenu />}
 
-        <Logo src={logo} alt="Logo" />
+        <Logo src={logo} alt="Logo" loading="eager" />
 
         <Nav>
           {!isMobile && (
