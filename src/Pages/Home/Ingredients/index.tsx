@@ -58,17 +58,19 @@ export default function Ingredients() {
             </Column>
 
             <BottleWrapper onClick={toggleBottle} $showHover={showHover}>
-              <img src={seal} className="seal" />
-              <img
-                className="bottle default"
-                src="https://firebasestorage.googleapis.com/v0/b/powergummy-prod.firebasestorage.app/o/EmbalagemFrente.png?alt=media&token=56f24118-8c1c-4d48-b3d8-db7b69db0a09"
-                alt="Power Gummy"
-              />
-              <img
-                className="bottle hover"
-                src="https://firebasestorage.googleapis.com/v0/b/powergummy-prod.firebasestorage.app/o/EmbalagemVerso.svg?alt=media&token=be370b4e-fe18-41b8-ad99-973878a58f13"
-                alt="Power Gummy hover"
-              />
+              <div className="relative">
+                <img src={seal} className="seal" />
+                <img
+                  className="bottle default"
+                  src="https://firebasestorage.googleapis.com/v0/b/powergummy-prod.firebasestorage.app/o/EmbalagemFrente.png?alt=media&token=56f24118-8c1c-4d48-b3d8-db7b69db0a09"
+                  alt="Power Gummy"
+                />
+                <img
+                  className="bottle hover"
+                  src="https://firebasestorage.googleapis.com/v0/b/powergummy-prod.firebasestorage.app/o/EmbalagemVerso.svg?alt=media&token=be370b4e-fe18-41b8-ad99-973878a58f13"
+                  alt="Power Gummy hover"
+                />
+              </div>
               <BottomNote>
                 <h2>Sinergia inteligente de nutrientes</h2>
                 <p>
@@ -92,17 +94,19 @@ export default function Ingredients() {
       {isMobile && (
         <Content>
           <BottleWrapper>
-            <img src={seal} className="seal" />
-            <img
-              className="bottle default"
-              src="https://firebasestorage.googleapis.com/v0/b/powergummy-prod.firebasestorage.app/o/EmbalagemFrente.png?alt=media&token=56f24118-8c1c-4d48-b3d8-db7b69db0a09"
-              alt="Power Gummy"
-            />
-            <img
-              className="bottle hover"
-              src="https://firebasestorage.googleapis.com/v0/b/powergummy-prod.firebasestorage.app/o/EmbalagemVerso.svg?alt=media&token=be370b4e-fe18-41b8-ad99-973878a58f13"
-              alt="Power Gummy hover"
-            />
+            <div className="relative">
+              <img src={seal} className="seal" />
+              <img
+                className="bottle default"
+                src="https://firebasestorage.googleapis.com/v0/b/powergummy-prod.firebasestorage.app/o/EmbalagemFrente.png?alt=media&token=56f24118-8c1c-4d48-b3d8-db7b69db0a09"
+                alt="Power Gummy"
+              />
+              <img
+                className="bottle hover"
+                src="https://firebasestorage.googleapis.com/v0/b/powergummy-prod.firebasestorage.app/o/EmbalagemVerso.svg?alt=media&token=be370b4e-fe18-41b8-ad99-973878a58f13"
+                alt="Power Gummy hover"
+              />
+            </div>
             <BottomNote>
               <h2>Sinergia inteligente de nutrientes</h2>
               <p>

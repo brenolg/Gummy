@@ -4,7 +4,7 @@ import ChevronIcon from '@/assets/icons/chevronFaq.svg'
 
 const Item = styled.div`
   background: transparent;
-  border-bottom: 1px solid #fdfbfe;
+  border-bottom: 1px solid #fdfbfe14;
   width: 100%;
   &:last-of-type {
     border-bottom: none;

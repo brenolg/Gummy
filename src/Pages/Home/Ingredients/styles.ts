@@ -138,6 +138,12 @@ export const BottleWrapper = styled.div<{ $showHover?: boolean }>`
       transform 0.25s ease;
     cursor: pointer;
   }
+  .relative {
+    display: flex;
+    justify-content: center;
+    width: fit-content;
+    position: relative;
+  }
 
   /* hover image */
   .bottle.hover {
@@ -165,17 +171,9 @@ export const BottleWrapper = styled.div<{ $showHover?: boolean }>`
   }
   .seal {
     position: absolute;
-    bottom: 62px;
-    right: -25px;
+    bottom: -35px;
+    right: -35px;
     z-index: 5;
-  }
-
-  @media (max-width: 1150px) {
-    .seal {
-      bottom: 132px;
-      right: -25px;
-      z-index: 5;
-    }
   }
 
   @media (max-width: 820px) {
@@ -183,11 +181,12 @@ export const BottleWrapper = styled.div<{ $showHover?: boolean }>`
     margin: auto;
     gap: 0;
     .bottle {
-      max-width: 320px;
+      max-width: 50%;
     }
     .seal {
-      bottom: 145px;
-      right: -20px;
+      max-width: 20%;
+      bottom: -10px;
+      right: 55px;
     }
   }
 `

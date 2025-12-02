@@ -28,6 +28,7 @@ export const StyledMainButton = styled.button<{ $maxW?: number; $golden?: boolea
   }
   @media (max-width: 650px) {
     height: 58px;
+    font-size: 16px;
   }
 `
 

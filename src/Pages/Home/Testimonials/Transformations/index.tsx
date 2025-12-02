@@ -25,26 +25,21 @@ type Depoimento = DepVideo | DepBeforeAfter
 
 const depoimentos: Depoimento[] = [
   {
-    isVideo: true,
-    videoUrl:
-      'https://firebasestorage.googleapis.com/v0/b/powergummy-prod.firebasestorage.app/o/test1.mp4?alt=media&token=6bd3b06e-fccf-4204-a6a2-5e71fa00a715',
-    text: 'Notei muita diferença no meu cabelo, na minha pele e na minha unha',
-  },
-  {
     isVideo: false,
     before:
       'https://firebasestorage.googleapis.com/v0/b/powergummy-prod.firebasestorage.app/o/bef1.png?alt=media&token=c2558797-b82c-48a1-b47b-696ad5895977',
     after:
       'https://firebasestorage.googleapis.com/v0/b/powergummy-prod.firebasestorage.app/o/after1.png?alt=media&token=33df9dcd-fbd5-43e5-9bd6-37d28b8daa86',
     label: 'Unhas mais resistentes',
-    time: '6 semanas',
+    time: '2 meses',
   },
   {
     isVideo: true,
     videoUrl:
-      'https://firebasestorage.googleapis.com/v0/b/powergummy-prod.firebasestorage.app/o/test2.mp4?alt=media&token=c0563839-6018-4585-b63b-5c41f4f66c4e',
+      'https://firebasestorage.googleapis.com/v0/b/powergummy-prod.firebasestorage.app/o/test1.mp4?alt=media&token=1c408299-5b61-46b9-99ea-69881844ac2a',
     text: 'É um composto vitamínico bem completo e muito prático de tomar',
   },
+
   {
     isVideo: false,
     before:
@@ -52,7 +47,13 @@ const depoimentos: Depoimento[] = [
     after:
       'https://firebasestorage.googleapis.com/v0/b/powergummy-prod.firebasestorage.app/o/after2.png?alt=media&token=265a1f61-176c-4c75-b27f-9d6e7db7a816',
     label: 'Unhas mais resistentes',
-    time: '6 semanas',
+    time: '2 meses',
+  },
+  {
+    isVideo: true,
+    videoUrl:
+      'https://firebasestorage.googleapis.com/v0/b/powergummy-prod.firebasestorage.app/o/test2.mp4?alt=media&token=f11c4134-dccc-4c5e-99c4-70019ca5bef0',
+    text: 'Eu tinha muita queda de cabelo e nada resolvia',
   },
   {
     isVideo: false,

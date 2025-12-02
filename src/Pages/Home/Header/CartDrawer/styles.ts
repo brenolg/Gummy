@@ -22,6 +22,12 @@ export const CartButton = styled.button`
     width: 30px;
     height: 31px;
   }
+  @media (max-width: 850px) {
+    img {
+      width: 24px;
+      height: 24px;
+    }
+  }
 `
 
 export const Overlay = styled.div`

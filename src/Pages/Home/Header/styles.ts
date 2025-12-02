@@ -10,7 +10,7 @@ export const Container = styled.header`
   padding: 12px 80px;
   @media (max-width: 650px) {
     padding: 2px 24px;
-    height: 64px;
+    height: 60px;
   }
 `
 
@@ -41,9 +41,8 @@ export const Nav = styled.nav`
   @media (max-width: 650px) {
     padding: 0;
     height: 56px;
-    padding: 2px 24px;
   }
-  @media (max-width: 400px) {
+  @media (max-width: 390px) {
     display: none;
   }
 `
@@ -95,7 +94,7 @@ export const BuyButton = styled.button`
     opacity: 0.9;
   }
 
-  @media (max-width: 400px) {
+  @media (max-width: 390px) {
     display: none;
   }
 `

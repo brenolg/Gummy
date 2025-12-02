@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { AccordionWrapper, Item, ItemHeader, ItemTitle, Arrow, ItemBody } from './styles'
-import { leftIngredients, rightIngredients } from '../factory'
+import { leftIngredients, rightIngredients, acid } from '../factory'
 
 type VitaminItem = {
   title?: string
@@ -8,7 +8,7 @@ type VitaminItem = {
   subtitle: string
 }
 
-const vitamins: VitaminItem[] = [...leftIngredients, ...rightIngredients]
+const vitamins: VitaminItem[] = [...acid, ...leftIngredients, ...rightIngredients]
 
 export default function VitaminsAccordion() {
   const [openId, setOpenId] = useState<string | null>(vitamins[0]?.subtitle ?? null)

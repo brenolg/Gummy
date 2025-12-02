@@ -11,6 +11,10 @@ export const Bar = styled.div`
   background: ${({ theme }) => theme.colors.roxo0};
   padding: 24px 0;
   position: relative;
+
+  @media (max-width: 900px) {
+    padding: 16px 0;
+  }
 `
 
 export const Scroller = styled.div`
@@ -60,5 +64,17 @@ export const Item = styled.div`
   }
   .light {
     font-weight: 400;
+  }
+
+  @media (max-width: 900px) {
+    margin-right: 24px;
+    span {
+      font-size: 10px;
+    }
+    img {
+      width: 24px;
+      height: 24px;
+      margin-right: 12px;
+    }
   }
 `

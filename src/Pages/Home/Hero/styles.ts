@@ -51,7 +51,7 @@ export const LeftContent = styled.div`
   }
 
   @media (max-width: 850px) {
-    padding: 32px 24px;
+    padding: 24px;
     border-radius: 24px;
     justify-content: flex-start;
     align-items: center;
@@ -73,7 +73,7 @@ export const Title = styled.h1`
   }
   @media (max-width: 850px) {
     text-align: center;
-    font-size: 24px;
+    font-size: 22px;
     width: 100%;
   }
   @media (max-width: 500px) {
@@ -98,7 +98,7 @@ export const BenefitItem = styled.li`
   font-weight: 400;
   line-height: 180%; /* 36px */
   @media (max-width: 850px) {
-    font-size: 14px;
+    font-size: 12px;
     text-align: center;
   }
   @media (max-width: 500px) {
@@ -126,7 +126,7 @@ export const BottleWrapper = styled.div`
     transform: none;
     top: auto;
     left: calc(100% - 200px);
-    bottom: -60px;
+    bottom: -35px;
   }
 `
 

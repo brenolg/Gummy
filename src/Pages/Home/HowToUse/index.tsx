@@ -23,7 +23,7 @@ export default function HowToUse() {
         </List>
 
         <MainButton maxW={350} onClick={goToCheckout} golden>
-          Quero minha Power Gummy
+          QUERO GARANTIR AGORA
         </MainButton>
         <BearImage
           src="https://firebasestorage.googleapis.com/v0/b/powergummy-prod.firebasestorage.app/o/bearHTU.png?alt=media&token=c5258e74-dad0-4395-9862-7593044dc469"
