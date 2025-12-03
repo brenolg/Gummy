@@ -56,7 +56,7 @@ export const CustomHandle = styled.div`
   align-items: center;
   justify-content: center;
 
-  touch-action: none;
+  touch-action: pan-x !important;
   cursor: grab;
 
   img {

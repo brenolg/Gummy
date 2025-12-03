@@ -67,6 +67,7 @@ const depoimentos: Depoimento[] = [
 ]
 
 export default function Transformations() {
+  const [lockCarousel, setLockCarousel] = useState(false)
   const navigate = useNavigate()
   const sliderRef = useRef<HTMLDivElement | null>(null)
   const [isDragging, setIsDragging] = useState(false)
@@ -79,6 +80,7 @@ export default function Transformations() {
 
   const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!sliderRef.current) return
+    if (lockCarousel) return
     setIsDragging(true)
     const slider = sliderRef.current
     startXRef.current = e.pageX - slider.offsetLeft
@@ -90,6 +92,7 @@ export default function Transformations() {
   }
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (lockCarousel) return
     if (!isDragging || !sliderRef.current) return
     e.preventDefault()
     const slider = sliderRef.current
@@ -100,6 +103,7 @@ export default function Transformations() {
 
   // touch (mobile) – opcional, mas deixa a experiência consistente
   const handleTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
+    if (lockCarousel) return
     if (!sliderRef.current) return
     setIsDragging(true)
     const slider = sliderRef.current
@@ -109,6 +113,7 @@ export default function Transformations() {
   }
 
   const handleTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
+    if (lockCarousel) return
     if (!isDragging || !sliderRef.current) return
     const slider = sliderRef.current
     const touch = e.touches[0]
@@ -151,6 +156,8 @@ export default function Transformations() {
               afterSrc={dep.after}
               title={dep.label}
               timeText={dep.time}
+              onDragCompareStart={() => setLockCarousel(true)}
+              onDragCompareEnd={() => setLockCarousel(false)}
             />
           )
         )}

@@ -8,9 +8,18 @@ type Props = {
   afterSrc: string
   title: string
   timeText?: string
+  onDragCompareStart?: () => void
+  onDragCompareEnd?: () => void
 }
 
-export default function BeforeAfterCard({ beforeSrc, afterSrc, title, timeText }: Props) {
+export default function BeforeAfterCard({
+  beforeSrc,
+  afterSrc,
+  title,
+  timeText,
+  onDragCompareStart,
+  onDragCompareEnd,
+}: Props) {
   return (
     <Card onTouchMove={(e) => e.preventDefault()} onWheel={(e) => e.preventDefault()}>
       <ImageArea>
@@ -21,13 +30,22 @@ export default function BeforeAfterCard({ beforeSrc, afterSrc, title, timeText }
           hover={false}
           handle={
             <CustomHandle
-              className="custom-handle-drag"
               onPointerDown={(e) => {
-                e.stopPropagation() // ✅ não deixa subir pro carousel
+                e.stopPropagation()
                 e.currentTarget.setPointerCapture(e.pointerId)
+                onDragCompareStart?.() // 🔒 trava carrossel
+              }}
+              onPointerMove={(e) => {
+                e.stopPropagation()
+                e.preventDefault()
               }}
               onPointerUp={(e) => {
+                e.stopPropagation()
                 e.currentTarget.releasePointerCapture(e.pointerId)
+                onDragCompareEnd?.() // 🔓 libera carrossel
+              }}
+              onPointerCancel={() => {
+                onDragCompareEnd?.()
               }}
             >
               <img src={handleImg} alt="arrastar" />
