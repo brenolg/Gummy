@@ -74,6 +74,9 @@ type CoreDataContextProps = {
 
   juros: number
   setJuros: React.Dispatch<React.SetStateAction<number>>
+
+  openCart: boolean
+  setOpenCart: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 export const CoreDataContext = createContext<CoreDataContextProps | undefined>(undefined)

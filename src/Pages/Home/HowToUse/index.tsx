@@ -1,15 +1,9 @@
 import { Wrapper, LeftBox, Title, List, VideoBox, BearImage } from './styles'
-
 import { MainButton } from '@/components'
-import { useNavigate } from 'react-router-dom'
+import defaultScrollProps from '@/utils/defaultScrollProps'
+import { scroller } from 'react-scroll'
 
 export default function HowToUse() {
-  const navigate = useNavigate()
-
-  function goToCheckout() {
-    navigate('/checkout')
-  }
-
   return (
     <Wrapper id="use">
       <LeftBox>
@@ -22,7 +16,13 @@ export default function HowToUse() {
           <li>Ideal para o life style moderno</li>
         </List>
 
-        <MainButton maxW={350} onClick={goToCheckout} golden>
+        <MainButton
+          maxW={350}
+          onClick={() => {
+            scroller.scrollTo('buy', defaultScrollProps)
+          }}
+          golden
+        >
           QUERO GARANTIR AGORA
         </MainButton>
         <BearImage

@@ -10,7 +10,12 @@ type Props = {
 export default function CardFeature({ img, text, subtext, alt }: Props) {
   return (
     <CardContainer>
-      <ImageSection src={img} style={{ backgroundImage: `url(${img})` }} alt={alt} />
+      <ImageSection
+        src={img}
+        style={{ backgroundImage: `url(${img})` }}
+        alt={alt}
+        loading="eager"
+      />
 
       <ContentSection>
         <TextContent>

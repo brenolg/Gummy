@@ -1,11 +1,11 @@
 import { useRef, useState } from 'react'
 import { BtnWraper, CardsWrapper, Subtitle, Title } from './styles'
-
 import VideoCard from './VideoCard'
 import BeforeAfterCard from './BeforeAfterCard'
 import { MainButton } from '@/components'
-import { useNavigate } from 'react-router-dom'
 import { useMediaQuery } from 'react-responsive'
+import { scroller } from 'react-scroll'
+import defaultScrollProps from '@/utils/defaultScrollProps'
 
 type DepVideo = {
   isVideo: true
@@ -68,15 +68,10 @@ const depoimentos: Depoimento[] = [
 
 export default function Transformations() {
   const [lockCarousel, setLockCarousel] = useState(false)
-  const navigate = useNavigate()
   const sliderRef = useRef<HTMLDivElement | null>(null)
   const [isDragging, setIsDragging] = useState(false)
   const startXRef = useRef(0)
   const scrollLeftRef = useRef(0)
-
-  function goToCheckout() {
-    navigate('/checkout')
-  }
 
   const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!sliderRef.current) return
@@ -163,7 +158,12 @@ export default function Transformations() {
         )}
       </CardsWrapper>
       <BtnWraper>
-        <MainButton maxW={659} onClick={goToCheckout}>
+        <MainButton
+          maxW={659}
+          onClick={() => {
+            scroller.scrollTo('buy', defaultScrollProps)
+          }}
+        >
           {isMobile ? 'COMECE JÁ SUA MUDANÇA' : 'GARANTIR MEU TRATAMENTO HOJE'}
         </MainButton>
       </BtnWraper>

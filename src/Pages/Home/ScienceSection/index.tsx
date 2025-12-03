@@ -14,19 +14,17 @@ import {
   BackImage,
   CardsWrapper,
 } from './styles'
-import { useNavigate } from 'react-router-dom'
 import { useMediaQuery } from 'react-responsive'
 import { useRef, useState } from 'react'
+import { scroller } from 'react-scroll'
+import defaultScrollProps from '@/utils/defaultScrollProps'
 
 export default function ScienceSection() {
   const sliderRef = useRef<HTMLDivElement | null>(null)
   const [isDragging, setIsDragging] = useState(false)
   const startXRef = useRef(0)
   const scrollLeftRef = useRef(0)
-  const navigate = useNavigate()
-  function goToCheckout() {
-    navigate('/checkout')
-  }
+
   const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!sliderRef.current) return
     setIsDragging(true)
@@ -170,7 +168,13 @@ export default function ScienceSection() {
           </CardsWrapper>
         )}
 
-        <MainButton type="button" onClick={goToCheckout} maxW={630}>
+        <MainButton
+          type="button"
+          onClick={() => {
+            scroller.scrollTo('buy', defaultScrollProps)
+          }}
+          maxW={630}
+        >
           QUERO GARANTIR O MEU AGORA
         </MainButton>
       </Content>

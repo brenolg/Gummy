@@ -21,7 +21,7 @@ function upsertCart(
 }
 
 export default function BuyContainer() {
-  const { setCart } = useCoreData()
+  const { setCart, setOpenCart } = useCoreData()
 
   const addToCart = (productId: CartItem['productId'], qty = 1) => {
     const prod = CartItemsData.find((p) => p.productId === productId)
@@ -29,6 +29,7 @@ export default function BuyContainer() {
 
     const { ...rest } = prod // remove quantity fixa do catálogo
     setCart((prev) => upsertCart(prev || [], rest, qty))
+    setOpenCart(true)
   }
 
   return (

@@ -1,5 +1,5 @@
 import { useCoreData } from '@/context/coreDataContext'
-import { useState } from 'react'
+
 import cartIcon from '@/assets/icons/cart.svg'
 import { useNavigate } from 'react-router-dom'
 import {
@@ -25,12 +25,12 @@ import { useFadeTransition } from './useFadeTransition'
 import emptyBag from '@/assets/icons/emptyBag.svg'
 
 export default function CartDrawer() {
-  const { cart } = useCoreData()
-  const [open, setOpen] = useState(false)
+  const { cart, openCart, setOpenCart } = useCoreData()
+
   const navigate = useNavigate()
 
   function toggleDrawer() {
-    setOpen(!open)
+    setOpenCart(!openCart)
   }
 
   const total = cart.reduce((acc, item) => acc + item.unitPrice * item.quantity, 0)
@@ -38,6 +38,7 @@ export default function CartDrawer() {
 
   function goToCheckout() {
     navigate('/checkout')
+    setOpenCart(false)
   }
 
   function handleDescriptionnTxt(id: string) {
@@ -58,10 +59,10 @@ export default function CartDrawer() {
       </CartButton>
 
       {/* ==== Overlay ==== */}
-      {open && <Overlay onClick={toggleDrawer} />}
+      {openCart && <Overlay onClick={toggleDrawer} />}
 
       {/* ==== Drawer ==== */}
-      <Drawer $open={open}>
+      <Drawer $open={openCart}>
         <Header>
           {cartCount > 0 ? (
             <p>

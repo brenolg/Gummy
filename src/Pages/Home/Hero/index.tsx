@@ -1,5 +1,7 @@
 import fruitsImg from '@/assets/imgs/fruit.png'
 import fruitsM from '@/assets/imgs/fruitsM.png'
+import defaultScrollProps from '@/utils/defaultScrollProps'
+import { scroller } from 'react-scroll'
 
 import {
   Section,
@@ -14,15 +16,9 @@ import {
   FruitMobile,
 } from './styles'
 import { MainButton } from '@/components'
-import { useNavigate } from 'react-router-dom'
 import { useMediaQuery } from 'react-responsive'
 
 export default function Hero() {
-  const navigate = useNavigate()
-  function goToCheckout() {
-    navigate('/checkout')
-  }
-
   const isMobile = useMediaQuery({
     query: '(max-width: 880px)',
   })
@@ -59,7 +55,13 @@ export default function Hero() {
             <FruitMobile src={fruitsImg} />
           </Card>
 
-          <MainButton type="button" onClick={goToCheckout} maxW={456}>
+          <MainButton
+            type="button"
+            maxW={456}
+            onClick={() => {
+              scroller.scrollTo('buy', defaultScrollProps)
+            }}
+          >
             Comprar agora
           </MainButton>
 

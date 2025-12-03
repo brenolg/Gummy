@@ -10,10 +10,6 @@ import MobileMenu from './MobileMenu'
 export default function Header() {
   const navigate = useNavigate()
 
-  function goToCheckout() {
-    navigate('/checkout')
-  }
-
   function goToTrack() {
     navigate('/track')
   }
@@ -53,9 +49,9 @@ export default function Header() {
               </button>
             </>
           )}
-          <BuyButton type="button" onClick={goToCheckout}>
-            COMPRAR
-          </BuyButton>
+          <Link to="buy" {...defaultScrollProps}>
+            <BuyButton type="button">COMPRAR</BuyButton>
+          </Link>
         </Nav>
 
         <RightArea>

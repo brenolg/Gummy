@@ -27,10 +27,6 @@ import { useMediaQuery } from 'react-responsive'
 export default function Footer() {
   const navigate = useNavigate()
 
-  function goToCheckout() {
-    navigate('/checkout')
-  }
-
   function goToTrack() {
     navigate('/track')
   }
@@ -80,9 +76,9 @@ export default function Footer() {
               <Link to="faq" {...defaultScrollProps}>
                 <LinkItem>DÚVIDAS FREQUENTES</LinkItem>
               </Link>
-              <button type="button" onClick={goToCheckout} className="buyButton">
+              <Link to="buy" {...defaultScrollProps}>
                 <LinkItem>COMPRAR</LinkItem>
-              </button>
+              </Link>
             </Column>
 
             {/* COLUNA 3 – CONTATO */}
@@ -139,9 +135,9 @@ export default function Footer() {
               <Link to="faq" {...defaultScrollProps}>
                 <LinkItem>DÚVIDAS FREQUENTES</LinkItem>
               </Link>
-              <button type="button" onClick={goToCheckout} className="buyButton">
+              <Link to="buy" {...defaultScrollProps}>
                 <LinkItem>COMPRAR</LinkItem>
-              </button>
+              </Link>
             </Column>
 
             {/* COLUNA 3 – CONTATO */}

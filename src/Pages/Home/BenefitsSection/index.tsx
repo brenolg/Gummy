@@ -14,14 +14,10 @@ import {
 import check from '@/assets/icons/check-circleB.svg'
 import power from '@/assets/icons/powerB.svg'
 import { MainButton } from '@/components'
-import { useNavigate } from 'react-router-dom'
+import defaultScrollProps from '@/utils/defaultScrollProps'
+import { scroller } from 'react-scroll'
 
 export default function BenefitsSection() {
-  const navigate = useNavigate()
-
-  function goToCheckout() {
-    navigate('/checkout')
-  }
   return (
     <Container id="beneficios">
       <HeaderText>
@@ -53,7 +49,12 @@ export default function BenefitsSection() {
         <CareTxt>PowerGummy: o cuidado que tira você da frustração e entrega resultado.</CareTxt>
         <HairTxt>Cabelo, pele e unhas do jeito que você sempre sonhou.</HairTxt>
 
-        <MainButton maxW={579} onClick={goToCheckout}>
+        <MainButton
+          maxW={579}
+          onClick={() => {
+            scroller.scrollTo('buy', defaultScrollProps)
+          }}
+        >
           COMECE JÁ SUA MUDANÇA
         </MainButton>
       </CenterWrapper>
