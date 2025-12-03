@@ -99,7 +99,7 @@ export const Card = styled.div<{ $isFirst?: boolean; $isLast?: boolean }>`
   justify-content: flex-start;
   align-items: flex-start;
   width: 370px;
-  height: 310px;
+  height: 300px;
   padding: 40px;
   padding-bottom: 0;
   border-radius: 16px;
@@ -117,7 +117,7 @@ export const Card = styled.div<{ $isFirst?: boolean; $isLast?: boolean }>`
     margin-right: 0;
     padding: 24px;
     width: 250px;
-    height: 251px;
+    height: 250px;
     flex: 0 0 250px;
     margin-left: ${({ $isFirst }) => ($isFirst ? '0px' : '0')};
     margin-right: ${({ $isLast }) => ($isLast ? '0px' : '0')};
@@ -167,7 +167,17 @@ export const Text = styled.p`
   font-style: normal;
   font-weight: 700;
   line-height: 150%; /* 27px */
+  display: -webkit-box;
+  -webkit-line-clamp: 5; /* quantidade de linhas exibidas */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
   @media (max-width: 900px) {
-    font-size: 14px;
+    font-size: 12px;
+    line-height: 130%;
+    display: block;
+    overflow: visible;
+    -webkit-line-clamp: unset;
+    -webkit-box-orient: unset;
   }
 `

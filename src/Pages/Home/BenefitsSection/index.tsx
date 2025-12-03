@@ -30,11 +30,11 @@ export default function BenefitsSection() {
 
       <PurposeTitle>
         <img src={check} />
-        Nascemos de um propósito!
+        Uma fórmula avançada, precisa e revolucionária
       </PurposeTitle>
 
       <ScienceText>
-        Criada com ingredientes puros e inteligentes para
+        Ingredientes puros e inteligentes para
         <strong>resultados rápidos, visíveis e consistentes</strong>
       </ScienceText>
 

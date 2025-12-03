@@ -17,6 +17,11 @@ export const GlobalStyle = createGlobalStyle`
   html, body {
     scrollbar-gutter: stable;
   }
+  html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
 
   body {
     -webkit-font-smoothing: antialiased;
