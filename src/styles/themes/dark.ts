@@ -1,7 +1,7 @@
-import { css } from "styled-components";
+import { css } from 'styled-components'
 
 export const darkTheme = {
-   colors: {
+  colors: {
     neutral: {
       black700: '#424242',
       grey800: '#292929',
@@ -9,12 +9,12 @@ export const darkTheme = {
       grey600: '#525252',
       grey500: '#CCCCCC',
       grey400: '#A3A3A3',
-      white0: '#FFFFFF'
+      white0: '#FFFFFF',
     },
     roxo900: '#2C1830',
     roxo700: '#502665',
     roxo800: '#3F2049',
-    roxo500:'#7D37A1',
+    roxo500: '#7D37A1',
     roxo200: '#B575D6',
     roxo25: '#EBD7F5',
     roxo0: '#FDFBFE',
@@ -31,5 +31,4 @@ export const darkTheme = {
       vertical-align: middle;
     `,
   },
-
 }
