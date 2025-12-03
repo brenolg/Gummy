@@ -60,7 +60,7 @@ export const SubText = styled.p`
     flex-direction: column;
     font-size: 20px;
     strong {
-      font-size: 24px;
+      font-size: 18px;
     }
   }
 `
@@ -78,6 +78,12 @@ export const PurposeTitle = styled.h3`
   margin-bottom: 40px;
   @media (max-width: 900px) {
     padding-left: 24px;
+    font-size: 14px;
+    gap: 8px;
+    img {
+      width: 16px;
+      width: 16px;
+    }
   }
 `
 
@@ -103,9 +109,9 @@ export const ScienceText = styled.p`
   @media (max-width: 900px) {
     padding-left: 24px;
     padding-right: 24px;
-    font-size: 18px;
+    font-size: 16px;
     strong {
-      font-size: 18px;
+      font-size: 16px;
     }
   }
 `
@@ -134,6 +140,11 @@ export const TransformatioTxt = styled.div`
   margin-bottom: 24px;
   @media (max-width: 900px) {
     gap: 8px;
+    font-size: 14px;
+    img {
+      width: 16px;
+      width: 16px;
+    }
   }
 `
 
@@ -159,9 +170,8 @@ export const HairTxt = styled.div`
   line-height: 150%;
   margin-bottom: 40px;
   @media (max-width: 900px) {
-    font-size: 24px;
-    padding-left: 24px;
-    padding-right: 24px;
+    font-size: 20px;
+
     text-align: center;
     margin-bottom: 24px;
   }

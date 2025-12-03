@@ -5,7 +5,7 @@ export const CartItemsData: CartItem[] = [
     productId: 'powergummy-1',
     image:
       'https://firebasestorage.googleapis.com/v0/b/powergummy-prod.firebasestorage.app/o/EmbalagemFrente.png?alt=media&token=56f24118-8c1c-4d48-b3d8-db7b69db0a09',
-    title: 'ONE® - 90 gomas',
+    title: 'Power Gummy® - 30 gomas de 3,8g',
     subtitle: 'Frutas vermelhas',
     quantity: 0,
     unitPrice: 109.9,

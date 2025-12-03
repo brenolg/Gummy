@@ -121,6 +121,9 @@ export const Card = styled.div<{ $isFirst?: boolean; $isLast?: boolean }>`
     flex: 0 0 250px;
     margin-left: ${({ $isFirst }) => ($isFirst ? '0px' : '0')};
     margin-right: ${({ $isLast }) => ($isLast ? '0px' : '0')};
+    .line {
+      margin-bottom: 8px;
+    }
   }
 `
 
@@ -138,6 +141,7 @@ export const Stars = styled.div`
   margin-bottom: 12px;
   @media (max-width: 900px) {
     font-size: 14px;
+    margin-bottom: 4px;
   }
 `
 
@@ -150,7 +154,8 @@ export const Name = styled.h4`
   line-height: var(--line-height-25, 25px); /* 138.889% */
   margin-bottom: 12px;
   @media (max-width: 900px) {
-    font-size: 15px;
+    font-size: 14px;
+    margin-bottom: 4px;
   }
 `
 

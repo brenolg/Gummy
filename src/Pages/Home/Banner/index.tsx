@@ -59,7 +59,7 @@ const BannerWrapper = styled.div`
   width: 100%;
   max-width: 100%;
   overflow: hidden;
-  aspect-ratio: 1440 / 700;
+  aspect-ratio: 1440 / 680;
   @media (max-width: 640px) {
     aspect-ratio: 435 / 620; /* ou o ratio real da sua arte mobile */
   }

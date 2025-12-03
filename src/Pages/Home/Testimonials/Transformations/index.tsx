@@ -27,9 +27,9 @@ const depoimentos: Depoimento[] = [
   {
     isVideo: false,
     before:
-      'https://firebasestorage.googleapis.com/v0/b/powergummy-prod.firebasestorage.app/o/bef1.png?alt=media&token=c2558797-b82c-48a1-b47b-696ad5895977',
+      'https://firebasestorage.googleapis.com/v0/b/powergummy-prod.firebasestorage.app/o/bef1.png?alt=media&token=9984cc7a-3e87-4555-92d3-a85b0d9d81b8',
     after:
-      'https://firebasestorage.googleapis.com/v0/b/powergummy-prod.firebasestorage.app/o/after1.png?alt=media&token=33df9dcd-fbd5-43e5-9bd6-37d28b8daa86',
+      'https://firebasestorage.googleapis.com/v0/b/powergummy-prod.firebasestorage.app/o/after1.png?alt=media&token=3df2fa4b-b328-4e24-b782-7817dd8d6d23',
     label: 'Unhas mais resistentes',
     time: '2 meses',
   },
@@ -42,9 +42,9 @@ const depoimentos: Depoimento[] = [
   {
     isVideo: false,
     before:
-      'https://firebasestorage.googleapis.com/v0/b/powergummy-prod.firebasestorage.app/o/bef3.png?alt=media&token=7ed0ff8a-a009-4f05-8629-930d8e599c62',
+      'https://firebasestorage.googleapis.com/v0/b/powergummy-prod.firebasestorage.app/o/bef3.png?alt=media&token=10226fb7-1beb-499a-866e-eda5f70990e8',
     after:
-      'https://firebasestorage.googleapis.com/v0/b/powergummy-prod.firebasestorage.app/o/after3.png?alt=media&token=b8700567-31e0-470d-9a0f-82486e55fb71',
+      'https://firebasestorage.googleapis.com/v0/b/powergummy-prod.firebasestorage.app/o/after3.png?alt=media&token=582f7d2d-a366-4618-9b08-b0ae790a3c7f',
     label: 'Cabelos Fortes',
     time: '3 mese',
   },
@@ -58,9 +58,9 @@ const depoimentos: Depoimento[] = [
   {
     isVideo: false,
     before:
-      'https://firebasestorage.googleapis.com/v0/b/powergummy-prod.firebasestorage.app/o/bef2.png?alt=media&token=43d9cba5-09de-4b99-8d79-0731716062a4',
+      'https://firebasestorage.googleapis.com/v0/b/powergummy-prod.firebasestorage.app/o/bef2.png?alt=media&token=36503031-1b10-4029-b3a1-4ecfa674808b',
     after:
-      'https://firebasestorage.googleapis.com/v0/b/powergummy-prod.firebasestorage.app/o/after2.png?alt=media&token=265a1f61-176c-4c75-b27f-9d6e7db7a816',
+      'https://firebasestorage.googleapis.com/v0/b/powergummy-prod.firebasestorage.app/o/after2.png?alt=media&token=4cb88c40-88ce-461b-84d2-c6ff591ec732',
     label: 'Unhas mais resistentes',
     time: '2 meses',
   },

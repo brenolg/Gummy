@@ -121,8 +121,8 @@ export const BottleWrapper = styled.div`
     transform: translate(-50%);
   }
   @media (max-width: 850px) {
-    width: 222px;
-    height: 300px;
+    width: 240.857px;
+    height: 284.702px;
     transform: none;
     top: auto;
     left: calc(100% - 200px);
@@ -134,9 +134,8 @@ export const BottleImage = styled.img`
   width: 438px;
   height: 521px;
   @media (max-width: 850px) {
-    width: 222px;
-    height: 300px;
-    aspect-ratio: 37/50;
+    width: 100%;
+    height: 100%;
   }
 `
 

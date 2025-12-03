@@ -23,7 +23,6 @@ import { QuantitySelector } from './QuantitySelector'
 import eBookImg from '@/assets/imgs/EBook.png'
 import { useFadeTransition } from './useFadeTransition'
 import emptyBag from '@/assets/icons/emptyBag.svg'
-import { useMediaQuery } from 'react-responsive'
 
 export default function CartDrawer() {
   const { cart } = useCoreData()
@@ -34,10 +33,6 @@ export default function CartDrawer() {
     setOpen(!open)
   }
 
-  const isMobile = useMediaQuery({
-    query: '(max-width: 450px)',
-  })
-
   const total = cart.reduce((acc, item) => acc + item.unitPrice * item.quantity, 0)
   const cartCount = cart.reduce((acc, item) => acc + (item.quantity || 0), 0)
 
@@ -46,12 +41,8 @@ export default function CartDrawer() {
   }
 
   function handleDescriptionnTxt(id: string) {
-    if (isMobile) {
-      if (id === 'powergummy-1') return 'Power Gummy® - 30 gomas de 3,8g sabor fru...'
-      return 'Kit 3 Power Gummy® - 90 gomas gomas de sabor frutas v...'
-    }
     if (id === 'powergummy-1') return 'Power Gummy® - 30 gomas de 3,8g sabor frutas vermelhas'
-    return 'Kit 3 Power Gummy® - 90 gomas gomas de 3,8g sabor frutas vermelhas'
+    return 'Kit 3 Power Gummy® - 90 gomas de sabor frutas vermelhas'
   }
 
   const hasKit3MoreThanOne = cart.some(

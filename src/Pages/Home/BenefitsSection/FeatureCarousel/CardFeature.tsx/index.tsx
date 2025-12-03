@@ -1,35 +1,23 @@
-import { 
-  CardContainer,
-  ImageSection,
-  ContentSection,
-  IconWrapper,
-  TextContent,
-  Title,
-  Subtext
-} from "./styles";
+import { CardContainer, ImageSection, ContentSection, TextContent, Title, Subtext } from './styles'
 
 type Props = {
-  img: string;
-  icon: string;
-  text: string;
-  subtext: string;
-};
+  img: string
+  text: string
+  subtext: string
+  alt: string
+}
 
-export default function CardFeature({ img, icon, text, subtext }: Props) {
+export default function CardFeature({ img, text, subtext, alt }: Props) {
   return (
     <CardContainer>
-      <ImageSection style={{ backgroundImage: `url(${img})` }} />
+      <ImageSection src={img} style={{ backgroundImage: `url(${img})` }} alt={alt} />
 
       <ContentSection>
-        <IconWrapper>
-          <img src={icon} alt="icon" />
-        </IconWrapper>
-
         <TextContent>
           <Title>{text}</Title>
           <Subtext>{subtext}</Subtext>
         </TextContent>
       </ContentSection>
     </CardContainer>
-  );
+  )
 }
