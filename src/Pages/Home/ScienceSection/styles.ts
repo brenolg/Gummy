@@ -12,7 +12,7 @@ export const Section = styled.section`
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  @media (max-width: 750px) {
+  @media (max-width: 950px) {
     padding: 24px;
     padding-top: 72px;
     padding-bottom: 56px;
