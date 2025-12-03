@@ -12,7 +12,7 @@ type Props = {
 
 export default function BeforeAfterCard({ beforeSrc, afterSrc, title, timeText }: Props) {
   return (
-    <Card>
+    <Card onTouchMove={(e) => e.preventDefault()} onWheel={(e) => e.preventDefault()}>
       <ImageArea>
         <ReactCompareImage
           leftImage={beforeSrc}
@@ -21,9 +21,14 @@ export default function BeforeAfterCard({ beforeSrc, afterSrc, title, timeText }
           hover={false}
           handle={
             <CustomHandle
-              onMouseDown={(e) => e.stopPropagation()}
-              onTouchStart={(e) => e.stopPropagation()}
-              onTouchMove={(e) => e.stopPropagation()}
+              className="custom-handle-drag"
+              onPointerDown={(e) => {
+                e.stopPropagation() // ✅ não deixa subir pro carousel
+                e.currentTarget.setPointerCapture(e.pointerId)
+              }}
+              onPointerUp={(e) => {
+                e.currentTarget.releasePointerCapture(e.pointerId)
+              }}
             >
               <img src={handleImg} alt="arrastar" />
             </CustomHandle>

@@ -9,6 +9,9 @@ export const Card = styled.div`
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.25);
   position: relative;
 
+  touch-action: none; /* ✅ BLOQUEIA SCROLL E SWIPE NO CARD */
+  overscroll-behavior: contain; /* ✅ NÃO DEIXA PROPAGAR */
+
   /* ✨ FORÇA CLIP NAS CAMADAS INTERNAS DA LIB */
   .__react-compare-image__,
   .__react-compare-image__container,
@@ -18,6 +21,13 @@ export const Card = styled.div`
     border-radius: 12px !important;
     overflow: hidden !important;
   }
+
+  /* ✅ libera somente o handle */
+  .__react-compare-image__handle,
+  .custom-handle-drag {
+    pointer-events: auto !important;
+  }
+
   @media (max-width: 900px) {
     width: 258px;
     height: 372px;
@@ -30,24 +40,10 @@ export const ImageArea = styled.div`
   border-radius: 12px;
   overflow: hidden;
   position: relative;
-  /* 🔥 O PULO DO GATO */
-  .__react-compare-image__ {
-    width: 100% !important;
-    height: 100% !important;
-    position: relative !important;
-  }
 
-  .__react-compare-image__container {
-    width: 100% !important;
-    height: 100% !important;
-  }
+  touch-action: none; /* ✅ bloqueia swipe e conflito */
+  user-select: none;
 
-  .__react-compare-image__image,
-  img {
-    width: 100% !important;
-    height: 100% !important;
-    object-fit: cover;
-  }
   @media (max-width: 900px) {
     height: 360px;
   }
@@ -56,16 +52,14 @@ export const ImageArea = styled.div`
 export const CustomHandle = styled.div`
   width: 40px;
   height: 40px;
-
   display: flex;
   align-items: center;
   justify-content: center;
+
   touch-action: none;
-  pointer-events: auto;
+  cursor: grab;
 
   img {
-    width: 100%;
-    height: auto;
     pointer-events: none;
     user-select: none;
     -webkit-user-drag: none;

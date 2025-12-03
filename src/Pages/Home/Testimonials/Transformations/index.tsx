@@ -39,16 +39,16 @@ const depoimentos: Depoimento[] = [
       'https://firebasestorage.googleapis.com/v0/b/powergummy-prod.firebasestorage.app/o/test1.mp4?alt=media&token=1c408299-5b61-46b9-99ea-69881844ac2a',
     text: 'É um composto vitamínico bem completo e muito prático de tomar',
   },
-
   {
     isVideo: false,
     before:
-      'https://firebasestorage.googleapis.com/v0/b/powergummy-prod.firebasestorage.app/o/bef2.png?alt=media&token=43d9cba5-09de-4b99-8d79-0731716062a4',
+      'https://firebasestorage.googleapis.com/v0/b/powergummy-prod.firebasestorage.app/o/bef3.png?alt=media&token=7ed0ff8a-a009-4f05-8629-930d8e599c62',
     after:
-      'https://firebasestorage.googleapis.com/v0/b/powergummy-prod.firebasestorage.app/o/after2.png?alt=media&token=265a1f61-176c-4c75-b27f-9d6e7db7a816',
-    label: 'Unhas mais resistentes',
-    time: '2 meses',
+      'https://firebasestorage.googleapis.com/v0/b/powergummy-prod.firebasestorage.app/o/after3.png?alt=media&token=b8700567-31e0-470d-9a0f-82486e55fb71',
+    label: 'Cabelos Fortes',
+    time: '3 mese',
   },
+
   {
     isVideo: true,
     videoUrl:
@@ -58,11 +58,11 @@ const depoimentos: Depoimento[] = [
   {
     isVideo: false,
     before:
-      'https://firebasestorage.googleapis.com/v0/b/powergummy-prod.firebasestorage.app/o/bef3.png?alt=media&token=7ed0ff8a-a009-4f05-8629-930d8e599c62',
+      'https://firebasestorage.googleapis.com/v0/b/powergummy-prod.firebasestorage.app/o/bef2.png?alt=media&token=43d9cba5-09de-4b99-8d79-0731716062a4',
     after:
-      'https://firebasestorage.googleapis.com/v0/b/powergummy-prod.firebasestorage.app/o/after3.png?alt=media&token=b8700567-31e0-470d-9a0f-82486e55fb71',
+      'https://firebasestorage.googleapis.com/v0/b/powergummy-prod.firebasestorage.app/o/after2.png?alt=media&token=265a1f61-176c-4c75-b27f-9d6e7db7a816',
     label: 'Unhas mais resistentes',
-    time: '6 semanas',
+    time: '2 meses',
   },
 ]
 
