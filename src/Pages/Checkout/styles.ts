@@ -4,6 +4,8 @@ import { colors } from '../../styles/themeUtils'
 export const MainContainer = styled.div`
   background: ${(t) => colors(t).neutral.white0};
   display: flex;
+  overflow-x: hidden;
+  max-width: 100%;
   @media (max-width: 740px) {
     flex-direction: column-reverse;
   }

@@ -2,8 +2,15 @@ import styled from 'styled-components'
 
 export const Container = styled.main`
   display: flex;
-  padding: 80px 80px 156px 80px;
+  padding: 80px;
   flex-direction: column;
+  @media (max-width: 900px) {
+    padding: 41px 24px;
+  }
+`
+export const PageWrapper = styled.div`
+  overflow-x: hidden;
+  max-width: 100%;
 `
 
 export const Title = styled.h1`
@@ -14,6 +21,9 @@ export const Title = styled.h1`
   font-weight: 600;
   line-height: 120%; /* 28.8px */
   margin-bottom: 12px;
+  @media (max-width: 900px) {
+    font-size: 20px;
+  }
 `
 
 export const SectionTitle = styled.h2`
@@ -25,6 +35,10 @@ export const SectionTitle = styled.h2`
   line-height: 120%;
   margin-top: 24px;
   margin-bottom: 12px;
+  @media (max-width: 900px) {
+    font-size: 14px;
+    margin-top: 12px;
+  }
 `
 
 export const Text = styled.p`
@@ -35,11 +49,9 @@ export const Text = styled.p`
   font-weight: 400;
   line-height: 120%;
   margin-bottom: 12px;
-`
-
-export const Highlight = styled.span`
-  font-weight: 700;
-  color: #662f82;
+  @media (max-width: 900px) {
+    font-size: 14px;
+  }
 `
 
 export const List = styled.ul`
@@ -68,5 +80,8 @@ export const ListItem = styled.li`
     flex-shrink: 0;
     margin-right: 4px;
     margin-top: 2px;
+  }
+  @media (max-width: 900px) {
+    font-size: 14px;
   }
 `

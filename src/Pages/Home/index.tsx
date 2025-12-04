@@ -2,7 +2,7 @@ import BuyContainer from './BuyContainer'
 import Header from './Header'
 import InfoCarousel from './InfoCarousel'
 import InstaFeedCarousel from './InstaFeedCarousel'
-import { Spinner } from './styles'
+import { PageWrapper, Spinner } from './styles'
 import FAQ from './FAQ'
 import { faqData } from './FAQ/factory'
 import Ingredients from './Ingredients'
@@ -67,7 +67,7 @@ export default function Home() {
   }
 
   return (
-    <div>
+    <PageWrapper>
       <Header />
       {banerData && <RotatingBanner banners={banerData} />}
       <InfoCarousel />
@@ -81,6 +81,6 @@ export default function Home() {
       <InstaFeedCarousel />
       <FAQ items={faqData} contactCtaHref="/contato" />
       <Footer />
-    </div>
+    </PageWrapper>
   )
 }

@@ -17,8 +17,6 @@ import { MainButton } from '@/components'
 import logo from '@/assets/imgs/logo.png'
 import instaW from '@/assets/icons/instaWhite.svg'
 import IKIGAI from '@/assets/icons/IKIGAI.svg'
-import defaultScrollProps from '@/utils/defaultScrollProps'
-import { Link } from 'react-scroll'
 import { useNavigate } from 'react-router-dom'
 import insta from '@/assets/icons/instaG.svg'
 import email from '@/assets/icons/mailG.svg'
@@ -63,32 +61,6 @@ export default function Footer() {
 
         {!isMobile && (
           <>
-            {/* COLUNA 2 – MAPA DO SITE */}
-            <Column $gap={16}>
-              <Title>MAPA DO SITE</Title>
-              <Link to="science" {...defaultScrollProps}>
-                <LinkItem>CABELO, PELE & UNHA</LinkItem>
-              </Link>
-              <Link to="ingredients" {...defaultScrollProps}>
-                <LinkItem>FÓRMULA</LinkItem>
-              </Link>
-              <Link to="beneficios" {...defaultScrollProps}>
-                <LinkItem>BENEFÍCIOS</LinkItem>
-              </Link>
-              <Link to="use" {...defaultScrollProps}>
-                <LinkItem>COMO USAR</LinkItem>
-              </Link>
-              <Link to="depoimentos" {...defaultScrollProps}>
-                <LinkItem>DEPOIMENTOS</LinkItem>
-              </Link>
-              <Link to="faq" {...defaultScrollProps}>
-                <LinkItem>DÚVIDAS FREQUENTES</LinkItem>
-              </Link>
-              <Link to="buy" {...defaultScrollProps}>
-                <LinkItem>COMPRAR</LinkItem>
-              </Link>
-            </Column>
-
             {/* COLUNA 3 – CONTATO */}
 
             <Column $gap={16}>
@@ -126,32 +98,6 @@ export default function Footer() {
 
         {isMobile && (
           <div className="colum-container">
-            {/* COLUNA 2 – MAPA DO SITE */}
-            <Column $gap={16}>
-              <Title>MAPA DO SITE</Title>
-              <Link to="science" {...defaultScrollProps}>
-                <LinkItem>CABELO, PELE & UNHA</LinkItem>
-              </Link>
-              <Link to="ingredients" {...defaultScrollProps}>
-                <LinkItem>FÓRMULA</LinkItem>
-              </Link>
-              <Link to="beneficios" {...defaultScrollProps}>
-                <LinkItem>BENEFÍCIOS</LinkItem>
-              </Link>
-              <Link to="use" {...defaultScrollProps}>
-                <LinkItem>COMO USAR</LinkItem>
-              </Link>
-              <Link to="depoimentos" {...defaultScrollProps}>
-                <LinkItem>DEPOIMENTOS</LinkItem>
-              </Link>
-              <Link to="faq" {...defaultScrollProps}>
-                <LinkItem>DÚVIDAS FREQUENTES</LinkItem>
-              </Link>
-              <Link to="buy" {...defaultScrollProps}>
-                <LinkItem>COMPRAR</LinkItem>
-              </Link>
-            </Column>
-
             {/* COLUNA 3 – CONTATO */}
             <Column $gap={16}>
               <Title>CONTATO</Title>
@@ -198,6 +144,7 @@ export default function Footer() {
           >
             <MainButton>FALAR COM SUPORTE</MainButton>
           </a>
+
           <Guarantee>Garantia Power Gummy</Guarantee>
         </Column>
       </Content>
