@@ -1,6 +1,6 @@
 import logo from '@/assets/imgs/logo.png'
 import { BuyButton, Container, Content, Logo, Nav, RightArea } from './styles'
-import CartDrawer from './CartDrawer'
+import CartDrawer from '@/Pages/Home/Header/CartDrawer'
 import { useNavigate } from 'react-router-dom'
 
 export default function SimpleHeader() {

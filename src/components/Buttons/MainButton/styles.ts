@@ -1,6 +1,10 @@
 import styled from 'styled-components'
 
-export const StyledMainButton = styled.button<{ $maxW?: number; $golden?: boolean }>`
+export const StyledMainButton = styled.button<{
+  $maxW?: number
+  $golden?: boolean
+  $font?: number
+}>`
   outline: none;
   height: 68px;
   width: 100%;
@@ -16,7 +20,7 @@ export const StyledMainButton = styled.button<{ $maxW?: number; $golden?: boolea
       : `linear-gradient(90deg, ${theme.colors.roxo700} 0%, ${theme.colors.roxo500} 100%)`};
   text-align: center;
   font-family: 'Nunito Sans';
-  font-size: 19px;
+  font-size: ${({ $font }) => ($font ? `${$font}px` : '18px')};
   font-weight: 800;
   .loading-container {
     position: absolute;

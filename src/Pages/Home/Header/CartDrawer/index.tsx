@@ -119,7 +119,7 @@ export default function CartDrawer() {
                 <span className="total">Total:</span>
                 <strong>R$ {total.toFixed(2)}</strong>
               </div>
-              <MainButton type="button" onClick={goToCheckout}>
+              <MainButton type="button" onClick={goToCheckout} font={16}>
                 Finalizar Compra
               </MainButton>
             </Footer>

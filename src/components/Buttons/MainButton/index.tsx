@@ -10,6 +10,7 @@ type MainButtonProps = {
   disabled?: boolean
   maxW?: number
   golden?: boolean
+  font?: number
 }
 
 export default function MainButton({
@@ -20,6 +21,7 @@ export default function MainButton({
   disabled = false,
   maxW,
   golden = false,
+  font = 18,
 }: MainButtonProps) {
   const isdisabled = disabled || loading
 
@@ -33,6 +35,7 @@ export default function MainButton({
       aria-live="polite"
       aria-disabled={isdisabled}
       $golden={golden}
+      $font={font}
     >
       <Label $hidden={loading}>{children}</Label>
       {loading && (

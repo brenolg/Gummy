@@ -11,6 +11,5 @@ export const FirstBanner = styled(Banner)`
 `
 
 export const PageWrapper = styled.div`
-  overflow-x: hidden;
   max-width: 100%;
 `

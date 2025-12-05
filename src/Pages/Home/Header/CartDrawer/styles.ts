@@ -65,7 +65,7 @@ export const Header = styled.div`
   p {
     color: ${({ theme }) => theme.colors.roxo900};
     font-family: 'Nunito Sans';
-    font-size: 24px;
+    font-size: 20px;
     font-style: normal;
     font-weight: 500;
     line-height: 24px; /* 100% */
@@ -104,7 +104,7 @@ export const ShippingContainer = styled.div`
   p {
     color: ${({ theme }) => theme.colors.roxo700};
     font-family: 'Nunito Sans';
-    font-size: 14px;
+    font-size: 12px;
     font-style: normal;
     font-weight: 500;
     line-height: 24px;
@@ -119,9 +119,9 @@ export const ShippingContainer = styled.div`
 `
 
 export const ImageContainer = styled.div<{ $img: string }>`
-  width: 104px;
-  height: 104px;
-  min-width: 104px;
+  width: 72px;
+  height: 72px;
+  min-width: 72px;
   border-radius: 8px;
   background: url(${({ $img }) => $img}) no-repeat;
   background-size: contain;
@@ -188,7 +188,8 @@ export const Item = styled.div`
   @media (max-width: 850px) {
     padding: 0 24px;
     .title {
-      font-size: 16px;
+      font-size: 12px;
+      line-height: 130%;
     }
   }
 
@@ -282,7 +283,7 @@ export const Footer = styled.div`
   .total {
     color: 1px solid ${({ theme }) => theme.colors.roxo900};
     font-family: Inter;
-    font-size: 20px;
+    font-size: 18px;
     font-style: normal;
     font-weight: 500;
     line-height: 24px; /* 120% */
@@ -291,7 +292,7 @@ export const Footer = styled.div`
     color: ${({ theme }) => theme.colors.roxo900};
     text-align: right;
     font-family: Inter;
-    font-size: 20px;
+    font-size: 18px;
     font-style: normal;
     font-weight: 700;
     line-height: 24px; /* 120% */
