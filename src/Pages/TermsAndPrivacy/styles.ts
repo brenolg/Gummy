@@ -8,10 +8,6 @@ export const Container = styled.main`
     padding: 41px 24px;
   }
 `
-export const PageWrapper = styled.div`
-  overflow-x: hidden;
-  max-width: 100%;
-`
 
 export const Title = styled.h1`
   color: var(--dourado-200, #ba7e1b);

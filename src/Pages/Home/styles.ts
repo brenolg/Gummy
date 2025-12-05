@@ -9,7 +9,3 @@ export const Banner = styled.img`
 export const FirstBanner = styled(Banner)`
   margin-top: -88px;
 `
-
-export const PageWrapper = styled.div`
-  max-width: 100%;
-`

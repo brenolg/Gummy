@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import Header from '@/components/SimpleHeader'
-import { PageWrapper } from './styles'
+import { PageWrapper } from '@/styles/PageWrapper'
 import TrackForm from './TrackForm'
 import TrackingResult from './TrackingResult'
 

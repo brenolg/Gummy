@@ -1,7 +1,7 @@
 import Header from '@/components/SimpleHeader'
-import { Container, Title, Text, SectionTitle, List, ListItem, PageWrapper } from './styles'
+import { Container, Title, Text, SectionTitle, List, ListItem } from './styles'
 import Footer from '@/components/SimpleFooter'
-
+import { PageWrapper } from '@/styles/PageWrapper'
 export default function Terms() {
   return (
     <PageWrapper>

@@ -1,7 +1,7 @@
 import Footer from '@/components/SimpleFooter'
-import { Container, Title, Text, SectionTitle, List, ListItem, PageWrapper } from './styles'
+import { Container, Title, Text, SectionTitle, List, ListItem } from './styles'
 import Header from '@/components/SimpleHeader'
-
+import { PageWrapper } from '@/styles/PageWrapper'
 export default function PrivacyPolicy() {
   return (
     <PageWrapper>
