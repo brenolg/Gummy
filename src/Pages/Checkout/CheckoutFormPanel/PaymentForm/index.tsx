@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useCoreData } from '@/context/coreDataContext'
 import { Divider, MInput, Select, MainButton } from '@/components'
 import PaymentMethodSelector from '../PaymentMethodSelector'

@@ -1,4 +1,5 @@
-import { formatDateBRMinutes } from '@/utils/helper'
+import { formatDateBR, formatDateBRMinutes } from '@/utils/helper'
+
 import {
   Container,
   HeaderBox,
@@ -49,7 +50,7 @@ export default function TrackingDetails({
           <CodeMuted>Código de rastreamento — AWB</CodeMuted>
           <TrackingCode style={{ marginBottom: '8px' }}>{trackingCode}</TrackingCode>
           <CodeMuted>Previsão de entrega</CodeMuted>
-          <TrackingCode>{`${estimatedDeliveryDate}`}</TrackingCode>
+          <TrackingCode>{`${formatDateBR(estimatedDeliveryDate)}`}</TrackingCode>
           <CodeMuted>Status atual</CodeMuted>
           <TrackingCode>{`${currentStatus}`}</TrackingCode>
         </HeaderLeft>

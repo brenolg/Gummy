@@ -1,4 +1,4 @@
-import styled, { keyframes } from 'styled-components'
+import styled from 'styled-components'
 
 export const StyledMainButton = styled.button<{ $maxW?: number; $golden?: boolean }>`
   outline: none;
@@ -30,19 +30,6 @@ export const StyledMainButton = styled.button<{ $maxW?: number; $golden?: boolea
     height: 58px;
     font-size: 16px;
   }
-`
-
-/* Spinner minimalista */
-const spin = keyframes` to { transform: rotate(360deg); }`
-
-export const Spinner = styled.span`
-  width: 24px;
-  height: 24px;
-  margin: auto;
-  border-radius: 50%;
-  border: 2px solid ${({ theme }) => theme.colors.neutral.white0};
-  border-right-color: transparent;
-  animation: ${spin} 0.7s linear infinite;
 `
 
 /* use opacity para não deslocar o layout */

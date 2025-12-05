@@ -11,30 +11,56 @@ import {
   InputError,
   Form,
 } from './styles'
-
 import logo from '@/assets/imgs/logo.png'
 import check from '@/assets/icons/check.svg'
 import arow from '@/assets/icons/arowLeft.svg'
 import glass from '@/assets/icons/magnifyingGlass.svg'
 import imgError from '@/assets/icons/error.svg'
+import LoadingBtn from '@/components/LoadingBtn'
+import { useFetch } from '@/hooks/useFetch'
 
 type TrackFormProps = {
   setTrackStatus: React.Dispatch<React.SetStateAction<number>>
+  setTrackData: React.Dispatch<React.SetStateAction<any>>
 }
 
-export default function TrackForm({ setTrackStatus }: TrackFormProps) {
+export default function TrackForm({ setTrackStatus, setTrackData }: TrackFormProps) {
   const [orderId, setOrderId] = useState('')
   const [error, setError] = useState('')
+  const [loading, setLoading] = useState(false)
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const { fetcher } = useFetch()
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault() // evita reload da página
     setError('')
 
     if (!orderId.trim()) {
-      setError('Digite o ID do pedido.')
+      setError('Digite o código de rastreio.')
       return
     }
-    setTrackStatus(1)
+
+    try {
+      setLoading(true)
+      const body = {
+        awb: orderId,
+      }
+      console.log(body)
+      const res: any = await fetcher('/public/track-order', 'POST', { body })
+
+      // ✅ Se quiser validar resposta:
+      if (!res || res.error) {
+        throw new Error(res?.message || 'Pedido não encontrado.')
+      }
+      setTrackData(res)
+      setTrackStatus(1)
+    } catch (err: any) {
+      console.error(err)
+
+      setError(err?.message || 'Erro ao consultar pedido. Verifique o código e tente novamente.')
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
@@ -68,9 +94,15 @@ export default function TrackForm({ setTrackStatus }: TrackFormProps) {
 
             {/* Botão type="submit" ativa Enter */}
             <SubmitButton>
-              <img src={glass} />
-              Consultar Pedido
-              <img src={arow} />
+              {loading ? (
+                <LoadingBtn />
+              ) : (
+                <>
+                  <img src={glass} />
+                  Consultar Pedido
+                  <img src={arow} />
+                </>
+              )}
             </SubmitButton>
           </Form>
         </Card>

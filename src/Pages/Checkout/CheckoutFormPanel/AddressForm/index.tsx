@@ -1,58 +1,65 @@
-import {MainButton, MInput} from '@/components'
+import { MainButton, MInput } from '@/components'
 import { InputContainer, TwoInputContainer } from '../styles'
 import { FormTitle } from '../styles'
-import { useCoreData } from '@/context/coreDataContext';
+import { useCoreData } from '@/context/coreDataContext'
 
-import { FormProvider, useForm, type Resolver } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { schema } from './schema';
-import { Warning } from './styles';
-import { useFetch } from '@/hooks/useFetch';
+import { FormProvider, useForm, type Resolver } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { schema } from './schema'
+import { Warning } from './styles'
+import { useFetch } from '@/hooks/useFetch'
+import { useEffect } from 'react'
 
 export type CheckoutFormData = {
-  postalCode: string;
-  address: string;
-  district: string;
-  addressComplement: string;
-  addressNumber: string;
-  city: string;
-  state: string;
-};
-
+  postalCode: string
+  address: string
+  district: string
+  addressComplement: string
+  addressNumber: string
+  city: string
+  state: string
+}
 
 export default function AddressForm() {
-  const {  cartStorage, setFormPostalCode , setFormData , formData, coupons, setFormStep} = useCoreData();
-  const { fetcher } = useFetch();
+  const { cartStorage, setFormPostalCode, setFormData, formData, coupons, setFormStep } =
+    useCoreData()
+  const { fetcher } = useFetch()
 
   const methods = useForm<CheckoutFormData>({
     resolver: yupResolver(schema) as Resolver<CheckoutFormData>,
-    defaultValues: { 
-      postalCode:'', address:'', district:'', addressComplement:'', addressNumber:'', city:'', state:'',
+    defaultValues: {
+      postalCode: '',
+      address: '',
+      district: '',
+      addressComplement: '',
+      addressNumber: '',
+      city: '',
+      state: '',
     },
     mode: 'onBlur',
-    reValidateMode: 'onBlur'
-  });
-  
+    reValidateMode: 'onBlur',
+  })
+
   const handleStep = async () => {
-    const isValid = await methods.trigger(); // valida todos os campos
+    const isValid = await methods.trigger() // valida todos os campos
 
     if (!isValid) {
-      return; // impede avanço
+      return // impede avanço
     }
 
-    const data = methods.getValues();
+    const data = methods.getValues()
 
-    const coupom =coupons[0]
+    const coupom = coupons[0]
     if (formData.advertisement) {
       const body = {
         email: formData.email,
-        phone: formData.phone ,
+        phone: formData.phone,
         name: formData.name,
         ...(coupom && {
           coupom: {
             code: coupom.code,
             discountValue: coupom.discount,
-          }
+          },
         }),
         address: {
           cep: data.postalCode,
@@ -62,94 +69,132 @@ export default function AddressForm() {
           city: data.city,
           state: data.state,
         },
-        
+
         cartItems: cartStorage,
       }
 
-      fetcher(
-        "/public/capture-lead",
-        "POST",
-        { body }
-      );
+      fetcher('/public/capture-lead', 'POST', { body })
     }
 
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      ...data
-    }));
-    
-    setFormStep(2); 
-  };
-  
+      ...data,
+    }))
+
+    setFormStep(2)
+  }
 
   const handleCepBlur = async () => {
-  const postalCode = methods.getValues("postalCode");
-  if (!postalCode) return;
+    const postalCode = methods.getValues('postalCode')
+    if (!postalCode) return
 
-  // se você está usando máscara "99999-999", aqui ainda vem com hífen
-  const cleanCEP = postalCode.replace(/\D/g, "");
+    // se você está usando máscara "99999-999", aqui ainda vem com hífen
+    const cleanCEP = postalCode.replace(/\D/g, '')
 
-  // só chama API se tiver 8 dígitos
-  if (cleanCEP.length !== 8) return;
+    // só chama API se tiver 8 dígitos
+    if (cleanCEP.length !== 8) return
 
-  try {
-    const res = await fetch(`https://viacep.com.br/ws/${cleanCEP}/json/`);
-    const data = await res.json();
+    try {
+      const res = await fetch(`https://viacep.com.br/ws/${cleanCEP}/json/`)
+      const data = await res.json()
 
-    if (data.erro) {
-      methods.setError("postalCode", {
-        type: "manual",
-        message: "CEP não encontrado. Verifique e tente novamente.",
-      });
-      return;
+      if (data.erro) {
+        methods.setError('postalCode', {
+          type: 'manual',
+          message: 'CEP não encontrado. Verifique e tente novamente.',
+        })
+        return
+      }
+
+      methods.clearErrors('postalCode')
+
+      setFormPostalCode(postalCode)
+    } catch (error) {
+      console.error('Erro ao buscar CEP:', error)
+      methods.setError('postalCode', {
+        type: 'manual',
+        message: 'CEP não encontrado. Verifique e tente novamente.',
+      })
+    }
+  }
+
+  const cep = methods.watch('postalCode')
+
+  useEffect(() => {
+    const cleanCEP = cep?.replace(/\D/g, '')
+
+    if (!cleanCEP || cleanCEP.length !== 8) return
+
+    const fetchAddress = async () => {
+      try {
+        const res = await fetch(`https://viacep.com.br/ws/${cleanCEP}/json/`)
+        const data = await res.json()
+
+        if (data.erro) {
+          methods.setError('postalCode', {
+            type: 'manual',
+            message: 'CEP não encontrado. Verifique e tente novamente.',
+          })
+          return
+        }
+
+        methods.clearErrors('postalCode')
+        methods.setValue('address', data.logradouro || '')
+        methods.setValue('district', data.bairro || '')
+        methods.setValue('addressComplement', data.complemento || '')
+        methods.setValue('city', data.localidade || '')
+        methods.setValue('state', data.uf || '')
+
+        setFormPostalCode(cep)
+      } catch (error) {
+        console.error('Erro ao buscar CEP:', error)
+        methods.setError('postalCode', {
+          type: 'manual',
+          message: 'Erro ao buscar CEP. Tente novamente.',
+        })
+      }
     }
 
-    methods.clearErrors("postalCode");
-
-    methods.setValue("address", data.logradouro || "");
-    methods.setValue("district", data.bairro || "");
-    methods.setValue("addressComplement", data.complemento || "");
-    methods.setValue("city", data.localidade || "");
-    methods.setValue("state", data.uf || "");
-
-    setFormPostalCode(postalCode);
-  } catch (error) {
-    console.error("Erro ao buscar CEP:", error);
-    methods.setError("postalCode", {
-      type: "manual",
-      message: "CEP não encontrado. Verifique e tente novamente.",
-    });
-  }
-};
+    fetchAddress()
+  }, [cep])
 
   return (
     <FormProvider {...methods}>
       <form
         id="checkout-form"
-        onSubmit={methods.handleSubmit(handleStep)}  // <-- CERTO
+        onSubmit={methods.handleSubmit(handleStep)} // <-- CERTO
         onKeyDown={(e) => {
-          if (e.key === "Enter") {
-            e.preventDefault();
+          if (e.key === 'Enter') {
+            e.preventDefault()
           }
         }}
       >
         <InputContainer>
           <FormTitle>Endereço</FormTitle>
-          <MInput name="postalCode"   type="cep"    placeholder="CEP"       hasAsterisk mb={24}   onBlur={handleCepBlur}
+          <MInput
+            name="postalCode"
+            type="cep"
+            placeholder="CEP"
+            hasAsterisk
+            mb={24}
+            onBlur={handleCepBlur}
           />
-          <MInput name="address"   type="text"   placeholder="Endereço" disabled   mb={24} />
-          <MInput name="district"  type="text"   placeholder="Bairro" disabled    mb={24}/>
+          <MInput name="address" type="text" placeholder="Endereço" disabled mb={24} />
+          <MInput name="district" type="text" placeholder="Bairro" disabled mb={24} />
           <TwoInputContainer>
-            <MInput name="addressComplement" type="text"  placeholder="Complemento"  hasAsterisk/>
-            <MInput name="addressNumber"    type="text" placeholder="Número"    hasAsterisk mb={24}/>
+            <MInput name="addressComplement" type="text" placeholder="Complemento" hasAsterisk />
+            <MInput name="addressNumber" type="text" placeholder="Número" hasAsterisk mb={24} />
           </TwoInputContainer>
           <TwoInputContainer>
-            <MInput name="city"   disabled    type="text"   placeholder="Cidade"    mb={24}/>
-            <MInput name="state"  disabled    type="text"   placeholder="Estado"     />
+            <MInput name="city" disabled type="text" placeholder="Cidade" mb={24} />
+            <MInput name="state" disabled type="text" placeholder="Estado" />
           </TwoInputContainer>
         </InputContainer>
-        
-        <Warning>⚠️ Certifique-se de que o endereço está completo e correto para garantir a entrega do seu pedido.</Warning>
+
+        <Warning>
+          ⚠️ Certifique-se de que o endereço está completo e correto para garantir a entrega do seu
+          pedido.
+        </Warning>
 
         <MainButton type="submit" onClick={handleStep}>
           Avançar

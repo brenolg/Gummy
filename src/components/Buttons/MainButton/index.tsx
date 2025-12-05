@@ -1,5 +1,6 @@
 import React from 'react'
-import { StyledMainButton, Spinner, Label } from './styles'
+import { StyledMainButton, Label } from './styles'
+import LoadingBtn from '@/components/LoadingBtn'
 
 type MainButtonProps = {
   type?: 'button' | 'submit' | 'reset'
@@ -36,7 +37,7 @@ export default function MainButton({
       <Label $hidden={loading}>{children}</Label>
       {loading && (
         <div className="loading-container">
-          <Spinner aria-hidden="true" />
+          <LoadingBtn />
         </div>
       )}
     </StyledMainButton>

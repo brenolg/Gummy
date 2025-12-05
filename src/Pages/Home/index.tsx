@@ -2,7 +2,7 @@ import BuyContainer from './BuyContainer'
 import Header from './Header'
 import InfoCarousel from './InfoCarousel'
 import InstaFeedCarousel from './InstaFeedCarousel'
-import { PageWrapper, Spinner } from './styles'
+import { PageWrapper } from './styles'
 import FAQ from './FAQ'
 import { faqData } from './FAQ/factory'
 import Ingredients from './Ingredients'
@@ -16,6 +16,7 @@ import { useFetch } from '@/hooks/useFetch'
 import { useEffect, useState } from 'react'
 import RotatingBanner from './Banner'
 import { useMediaQuery } from 'react-responsive'
+import PageLoading from '@/components/PageLoading'
 
 type BannerData = {
   imageUrl: string
@@ -51,19 +52,7 @@ export default function Home() {
   }, [isMobile])
 
   if (loading) {
-    return (
-      <div
-        style={{
-          width: '100%',
-          height: '100vh',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}
-      >
-        <Spinner />
-      </div>
-    )
+    return <PageLoading />
   }
 
   return (
