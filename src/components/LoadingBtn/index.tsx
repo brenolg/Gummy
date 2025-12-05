@@ -9,7 +9,7 @@ const spin = keyframes`
 
 const Icon = styled(AiOutlineLoading3Quarters)`
   animation: ${spin} 0.8s linear infinite;
-  font-size: 30px;
+  font-size: 25px;
   color: #fff;
 `
 
