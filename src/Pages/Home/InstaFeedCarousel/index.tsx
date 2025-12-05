@@ -217,14 +217,9 @@ export default function InstaFeedCarousel() {
                   <img className="logo" src={logoRound} />
                   <p className="txt">powergummybr</p>
                 </div>
-                <a
-                  className="dots"
-                  href={p.permalink}
-                  target="_blank"
-                  aria-label="Abrir no Instagram"
-                >
+                <div>
                   <img src={dots} onClickCapture={(e) => moved && e.preventDefault()} />
-                </a>
+                </div>
               </a>
               <ThumbContainer>
                 <Thumb
