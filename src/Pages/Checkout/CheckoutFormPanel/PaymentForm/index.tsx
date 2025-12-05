@@ -118,6 +118,9 @@ export default function PaymentCardForm() {
           email: formData.email,
           cpf: onlyDigits(data.cpf),
           phone: onlyDigits(String(formData.phone)),
+          postalCode: formData.postalCode,
+          addressNumber: formData.addressNumber,
+          addressComplement: formData.addressComplement,
         },
         ...(filteredCoupons.length > 0 && {
           coupon: filteredCoupons[0].code,
