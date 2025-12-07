@@ -49,7 +49,7 @@ export default function LoginPage() {
       }
 
       // ✅ Redirecionar depois do login
-      navigate('/sales')
+      navigate('/dashboard')
     } catch (err: any) {
       console.error(err)
       setError(err.message || 'Erro ao realizar login.')
