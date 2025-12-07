@@ -11,7 +11,9 @@ const Content = styled.main`
   flex: 1;
   margin-left: 90px; /* largura do sidebar */
   padding: 24px;
-  background: #f6f6fb;
+  padding-top: 80px;
+  padding-left: 56px;
+  background: #fdfdfd;
 `
 
 export default function AdminLayout() {

@@ -46,7 +46,10 @@ export function useFetch(baseUrl: string = BASE) {
         signal?: AbortSignal
       }
     ): Promise<T | undefined> => {
-      const { body, query, headers, token, signal } = opts || {}
+      const { body, query, headers, token: passedToken, signal } = opts || {}
+
+      const localToken = localStorage.getItem('powergummy.token')
+      const token = passedToken || localToken
 
       const url = joinUrl(baseUrl, path) + queryString(query)
 
