@@ -108,6 +108,11 @@ export default function SidebarMenu() {
     { route: '/banners', label: 'Banners', icon: banner },
   ]
 
+  const handleLogout = () => {
+    localStorage.removeItem('powergummy.token')
+    navigate('/')
+  }
+
   return (
     <Sidebar>
       <Logo src={logo} />
@@ -130,7 +135,7 @@ export default function SidebarMenu() {
         </MenuTop>
 
         <Item style={{ marginTop: 'auto' }}>
-          <img className="icon" onClick={() => navigate('/logout')} src={logOut} />
+          <img className="icon" onClick={handleLogout} src={logOut} />
           <button className="hoverBtn">
             <img src={logOut} className="icon" />
             Sair
