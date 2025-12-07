@@ -1,6 +1,7 @@
 import { Btn, Subtitle, Title } from './Styles'
 import plus from '@/assets/icons/plus.svg'
 import { Divider } from '@/components'
+import Modal from '@/components/Modal'
 import PageLoading from '@/components/PageLoading'
 import { useFetch } from '@/hooks/useFetch'
 import { useEffect, useState } from 'react'
@@ -9,6 +10,7 @@ export default function Cupons() {
   const { fetcher } = useFetch()
   const [loading, setLoading] = useState(true)
   const [data, setData] = useState()
+  const [open, setOpen] = useState(false)
 
   useEffect(() => {
     async function load() {
@@ -31,11 +33,16 @@ export default function Cupons() {
   ) : (
     <div>
       <Title>Gestão de Cupons</Title>
-      <Btn>
+      <Btn onClick={() => setOpen(true)}>
         <img src={plus} alt="Adicionar" /> Novo Cupom
       </Btn>
       <Divider mb={24} />
       <Subtitle>Cupons cadastrados</Subtitle>
+
+      <Modal open={open} onClose={() => setOpen(false)} maxWidth="754px">
+        <h2>Novo Cupom</h2>
+        <p>Aqui vão os campos do formulário…</p>
+      </Modal>
     </div>
   )
 }
