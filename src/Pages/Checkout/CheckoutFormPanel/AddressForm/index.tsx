@@ -179,14 +179,14 @@ export default function AddressForm() {
             mb={24}
             onBlur={handleCepBlur}
           />
-          <MInput name="address" type="text" placeholder="Endereço" disabled mb={24} />
-          <MInput name="district" type="text" placeholder="Bairro" disabled mb={24} />
+          <MInput name="address" type="text" placeholder="Endereço" hasAsterisk mb={26} />
+          <MInput name="district" type="text" placeholder="Bairro" hasAsterisk mb={26} />
           <TwoInputContainer>
             <MInput name="addressComplement" type="text" placeholder="Complemento" hasAsterisk />
-            <MInput name="addressNumber" type="text" placeholder="Número" hasAsterisk mb={24} />
+            <MInput name="addressNumber" type="text" placeholder="Número" hasAsterisk mb={26} />
           </TwoInputContainer>
           <TwoInputContainer>
-            <MInput name="city" disabled type="text" placeholder="Cidade" mb={24} />
+            <MInput name="city" disabled type="text" placeholder="Cidade" mb={26} />
             <MInput name="state" disabled type="text" placeholder="Estado" />
           </TwoInputContainer>
         </InputContainer>

@@ -48,6 +48,9 @@ export const getMaskConfig = (tp: string): MaskConfig => {
           },
         } as BlocksConfig,
       ],
+      nospace: [
+        /^[^\s]+$/, // regex que não permite espaços
+      ],
       money: [
         'R$ num',
         {
@@ -110,9 +113,7 @@ export const getMaskConfig = (tp: string): MaskConfig => {
 
   const [mask, blocks] = input as [string | undefined, BlocksConfig | undefined]
 
-  const unmask: 'typed' | false = ['number', 'money', 'jurosaa'].includes(tp)
-    ? 'typed'
-    : false
+  const unmask: 'typed' | false = ['number', 'money', 'jurosaa'].includes(tp) ? 'typed' : false
 
   return { mask, blocks, unmask }
 }

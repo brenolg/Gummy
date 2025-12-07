@@ -1,17 +1,17 @@
-import { colors, typography } from "@/styles/themeUtils";
-import styled from "styled-components";
+import { colors, typography } from '@/styles/themeUtils'
+import styled from 'styled-components'
 
 export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-`;
+`
 
 export const Row = styled.div`
   display: flex;
   gap: 10px;
   margin-bottom: 21px;
   position: relative;
-`;
+`
 
 export const Input = styled.input`
   transition: all 0.3s ease-out;
@@ -19,53 +19,57 @@ export const Input = styled.input`
   outline: none;
   width: 100%;
   padding: 14px 11px;
-  border: 1px solid ${t => colors(t).neutral.grey500};
+  border: 1px solid ${(t) => colors(t).neutral.grey500};
   box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.05);
-  color: ${t => colors(t).neutral.black700};
-  background: ${t => colors(t).neutral.white0};
+  color: ${(t) => colors(t).neutral.black700};
+  background: ${(t) => colors(t).neutral.white0};
   &:hover {
-    border: 1px solid var(--Roxo-25, #EBD7F5);
-    background: var(--Roxo-0, #FDFBFE);
+    border: 1px solid var(--Roxo-25, #ebd7f5);
+    background: var(--Roxo-0, #fdfbfe);
   }
   &:focus {
     border: 1px solid var(--roxo-700, #502665);
-    background: var(--Color-Neutral-White-0, #FFF);
+    background: var(--Color-Neutral-White-0, #fff);
   }
 
-  ${t => typography(t).input};
-`;
+  ${(t) => typography(t).input};
+`
 
 export const ApplyButton = styled.button`
   height: 50px;
+  width: 80px;
   display: flex;
-  padding: 14.5px 14px 15px 14px;
-  flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
+  justify-content: center;
   border-radius: 8px;
   transition: all ease 0.3s;
-  color: #FFF;
+  color: #fff;
   border-radius: 16px;
-  border: 1px solid #ECECEC;
-  background: linear-gradient(92deg, var(--roxo-700, #502665) 5.08%, var(--Roxo-500, #7D37A1) 102.77%);
-  color: #FFF;
+  border: 1px solid #ececec;
+  background: linear-gradient(
+    92deg,
+    var(--roxo-700, #502665) 5.08%,
+    var(--Roxo-500, #7d37a1) 102.77%
+  );
+  color: #fff;
   text-align: center;
-  font-family: "Nunito Sans";
+  font-family: 'Nunito Sans';
   font-size: 14px;
   font-weight: 700;
   cursor: pointer;
   &:disabled {
-    background: #D7CBEE;
-    box-shadow: 0 0 0 1px #ECD0DF inset;
+    background: #d7cbee;
+    box-shadow: 0 0 0 1px #ecd0df inset;
     cursor: not-allowed;
   }
-`;
+`
 
 export const Chips = styled.div`
   display: flex;
   gap: 21px;
   flex-wrap: wrap;
   margin-bottom: 21px;
-`;
+`
 
 export const Chip = styled.div`
   display: flex;
@@ -84,9 +88,9 @@ export const Chip = styled.div`
     font-weight: 500;
     line-height: 24px; /* 171.429% */
   }
-`;
+`
 
-export const Icon = styled.img``;
+export const Icon = styled.img``
 
 export const RemoveButton = styled.button`
   border: none;
@@ -94,7 +98,7 @@ export const RemoveButton = styled.button`
   font-size: 18px;
   cursor: pointer;
   color: #9a6a05;
-`;
+`
 
 interface IStyleProps {
   $error: boolean
@@ -116,7 +120,7 @@ export const InputError = styled.div<IStyleProps>`
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  color: var(--Vermelho-Alerta, #F00);
+  color: var(--Vermelho-Alerta, #f00);
   font-family: Inter;
   font-size: 10px;
   font-style: normal;
@@ -132,4 +136,3 @@ export const InputError = styled.div<IStyleProps>`
     height: 12px;
   }
 `
-

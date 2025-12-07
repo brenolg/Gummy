@@ -4,7 +4,7 @@ import PaymentMethodSelector from '../PaymentMethodSelector'
 import { InputContainer, TwoInputContainer, FormTitle } from '../styles'
 import { FormProvider, useForm, useWatch, type Resolver } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { schema } from './schema'
+import { schema, schemaPix } from './schema'
 import { useFetch } from '@/hooks/useFetch'
 import { onlyDigits } from '@/utils/helper'
 import { useEffect, useState } from 'react'
@@ -12,11 +12,11 @@ import { InputError } from '@/components/form/FormCommomStyle'
 import imgError from '@/assets/icons/error.svg'
 
 export type CheckoutFormData = {
-  cardNumber: string
-  expiry: string // MM/AA
-  cvv: string // 3–4 dígitos
-  holderName: string
-  installments: number
+  cardNumber?: string
+  expiry?: string // MM/AA
+  cvv?: string // 3–4 dígitos
+  holderName?: string
+  installments?: number
   cpf: string
 }
 
@@ -55,7 +55,7 @@ export default function PaymentCardForm() {
     resolver:
       paymentMethod === 'CREDIT_CARD'
         ? (yupResolver(schema) as Resolver<CheckoutFormData>)
-        : undefined, // <-- desliga toda validação quando for PIX
+        : (yupResolver(schemaPix) as Resolver<CheckoutFormData>), // <-- desliga toda validação quando for PIX
     defaultValues: {
       cardNumber: '',
       expiry: '',
@@ -110,8 +110,16 @@ export default function PaymentCardForm() {
       setError('')
       const filteredCoupons = coupons.filter((c) => c.code !== 'PIX05')
       const filteredItems = cartStorage.filter((item) => item.quantity > 0)
-      const [month, year2] = data.expiry.split('/')
-      const year4 = `20${year2}`
+
+      let month = ''
+      let year4 = ''
+
+      if (paymentMethod === 'CREDIT_CARD' && data.expiry) {
+        const [m, y] = data.expiry.split('/')
+        month = m
+        year4 = `20${y}`
+      }
+
       const body = {
         customerData: {
           name: formData.name,
@@ -135,7 +143,7 @@ export default function PaymentCardForm() {
         paymentMethod: paymentMethod,
         ...(paymentMethod === 'CREDIT_CARD' && {
           creditCard: {
-            holderName: data.holderName.toLocaleUpperCase(),
+            holderName: data.holderName?.toLocaleUpperCase(),
             number: onlyDigits(data.cardNumber),
             expiryMonth: month,
             expiryYear: year4,
@@ -215,17 +223,17 @@ export default function PaymentCardForm() {
                 hasAsterisk
                 mb={24}
               />
-              <MInput name="cpf" type="cpf" placeholder="CPF" hasAsterisk mb={24} />
+              <MInput name="cpf" type="cpf" placeholder="CPF" hasAsterisk mb={26} />
               <TwoInputContainer>
-                <MInput name="expiry" type="expiry" placeholder="Validade" hasAsterisk mb={24} />
-                <MInput name="cvv" type="cvv" placeholder="CVV" hasAsterisk mb={24} />
+                <MInput name="expiry" type="expiry" placeholder="Validade" hasAsterisk mb={26} />
+                <MInput name="cvv" type="cvv" placeholder="CVV" hasAsterisk mb={26} />
               </TwoInputContainer>
               <MInput
                 name="holderName"
                 type="text"
                 placeholder="Nome do titular do Cartão"
                 hasAsterisk
-                mb={24}
+                mb={26}
               />
               <Select
                 name="installments"
@@ -235,9 +243,12 @@ export default function PaymentCardForm() {
               />
             </>
           ) : (
-            <div className="pix-description">
-              Clique no botão de “Confirmar pagamento” para visualizar o QR Code de pagamento
-            </div>
+            <>
+              <MInput name="cpf" type="cpf" placeholder="CPF" hasAsterisk mb={26} />
+              <div className="pix-description">
+                Clique no botão de “Confirmar pagamento” para visualizar o QR Code de pagamento
+              </div>
+            </>
           )}
           <InputError $error={!!error}>
             <img src={imgError} className="img-error" /> {error}
