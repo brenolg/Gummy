@@ -11,7 +11,8 @@ import {
   MessageContainer,
 } from './styles'
 import { useFetch } from '@/hooks/useFetch'
-import { useState } from 'react'
+import { useState, type Dispatch, type SetStateAction } from 'react'
+import type { Coupon } from '../index'
 
 export type CreateCouponFormData = {
   code: string
@@ -39,7 +40,11 @@ const schema = yup.object({
   influencer: yup.string().optional(),
 })
 
-export default function CreateCouponForm() {
+type CreateCouponFormProps = {
+  setData: Dispatch<SetStateAction<Coupon[]>>
+}
+
+export default function CreateCouponForm({ setData }: CreateCouponFormProps) {
   const { fetcher } = useFetch()
   const [error, setError] = useState('')
   const [success, setSuccess] = useState('')
@@ -78,7 +83,21 @@ export default function CreateCouponForm() {
 
       console.log(res)
 
+      const newCoupon = {
+        id: data.code,
+        code: data.code,
+        percent: data.discount ?? 0,
+        active: true,
+        influencer: data.influencer || '',
+        createdAt: {
+          _seconds: Math.floor(Date.now() / 1000),
+          _nanoseconds: 0,
+        },
+      }
       setSuccess('Cupom criado com sucesso!')
+
+      setData((prev) => [newCoupon, ...prev])
+
       methods.reset()
     } catch (err: unknown) {
       let backendMessage = 'Erro inesperado.'

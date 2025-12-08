@@ -1,10 +1,10 @@
 import styled from 'styled-components'
 
 interface Style {
-  columnNumber: number
-  width?: any
-  columnsWidths?: number[]
-  columnGap?: number
+  $columnNumber: number
+  $width?: any
+  $columnsWidths?: number[]
+  $columnGap?: number
 }
 
 export const Table = styled.div`
@@ -15,10 +15,10 @@ export const Table = styled.div`
   background: #fff;
 `
 
-export const Header = styled.div<{ columnNumber: number }>`
+export const Header = styled.div<{ $columnNumber: number; $columnsWidths?: number[] }>`
   display: grid;
   grid-template-columns: ${(props: Style) => {
-    if (props.columnsWidths) return `${props.columnsWidths.join('px ')}px`
+    if (props.$columnsWidths) return `${props.$columnsWidths.join('px ')}px`
     return 'auto'
   }};
   background: #fafafa;
@@ -47,7 +47,7 @@ export const TableContent = styled.div<Style>`
   .table-row {
     display: grid;
     grid-template-columns: ${(props: Style) => {
-      if (props.columnsWidths) return `${props.columnsWidths.join('px ')}px`
+      if (props.$columnsWidths) return `${props.$columnsWidths.join('px ')}px`
       return 'auto'
     }};
     padding: 10px 16px;

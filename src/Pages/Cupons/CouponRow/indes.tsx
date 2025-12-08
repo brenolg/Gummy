@@ -6,6 +6,7 @@ type Coupon = {
   createdAt: {
     _seconds: number
   }
+  usageCount?: number
 }
 import editIcon from '@/assets/icons/edit.svg'
 import trash from '@/assets/icons/trash.svg'
@@ -21,11 +22,11 @@ interface CouponRowProps {
 export default function CouponRow({ item, index, onEdit, onDelete }: CouponRowProps) {
   const [showEdit, setShowEdit] = useState(false)
   return [
-    <div key={`code-${index}`} className="grid-index">
-      {index}
+    <div key={`index-${index}`} className="grid-index">
+      {index + 1}
     </div>,
 
-    <div key={`date-${index}`} className="grid-item">
+    <div key={`created-${index}`} className="grid-item">
       {new Date(item.createdAt._seconds * 1000).toLocaleDateString('pt-BR')}
     </div>,
 
@@ -33,12 +34,12 @@ export default function CouponRow({ item, index, onEdit, onDelete }: CouponRowPr
       {showEdit ? 'fake' : item.code || '-'}
     </div>,
 
-    <div key={`discount-${index}`} className="grid-item">
+    <div key={`percent-${index}`} className="grid-item">
       {showEdit ? 'fake' : item.percent != null ? `${item.percent}%` : '-'}
     </div>,
 
-    <div key={`discount-${index}`} className="grid-item">
-      0
+    <div key={`usageCount-${index}`} className="grid-item">
+      {item.usageCount != null ? `${item.usageCount}` : '0'}
     </div>,
 
     <div key={`influencer-${index}`} className="grid-item">

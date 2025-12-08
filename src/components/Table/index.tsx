@@ -1,23 +1,17 @@
-import { useState, useEffect } from 'react'
-import type { Dispatch, SetStateAction } from 'react'
 import { Header, TableContent, Footer, Table } from './styles'
 import bTable from '@/assets/icons/bTable.svg'
-
-interface TableRowData {
-  [key: string]: any
-}
+import type { Dispatch, SetStateAction, ReactNode } from 'react'
 
 interface IGridProps {
-  pageData: TableRowData[]
+  pageData: ReactNode[] // ✅
   header: string[]
   width?: number
-  filterData: TableRowData[]
+  filterData: unknown[]
   page: number
   setPage: Dispatch<SetStateAction<number>>
   columnsWidths?: number[]
   columnGap?: number
 }
-
 interface IGridItem {
   children: any
 }
@@ -33,7 +27,7 @@ function HeaderItem(props: IGridItem) {
 
 export default function DataGridDemo(props: IGridProps) {
   const { pageData, header, filterData, page, setPage, columnsWidths, columnGap } = props
-  const [firstItemPage, setFirstItemPage] = useState<number>(0)
+
   // Retirei a prop isFixed pois nao estava sendo utilizada
 
   const advanceTablePage = () => {
@@ -48,26 +42,29 @@ export default function DataGridDemo(props: IGridProps) {
     setPage((oldValue) => oldValue - 1)
   }
 
-  useEffect(() => {
-    setFirstItemPage(page * 10 - 10)
-  }, [filterData])
   // Seta o primeiro item do counter da pagina
 
   if (!filterData.length) return null
 
+  const pageSize = 10
+  const totalPages = Math.ceil(filterData.length / pageSize)
+  const total = filterData.length
+
+  const start = (page - 1) * pageSize + 1
+  const end = Math.min(page * pageSize, total)
   return (
     <Table>
-      <Header columnNumber={header.length} columnsWidths={columnsWidths}>
-        {header.map((title) => (
-          <HeaderItem>{title}</HeaderItem>
+      <Header $columnNumber={header.length} $columnsWidths={columnsWidths}>
+        {header.map((title, idx) => (
+          <HeaderItem key={title ?? idx}>{title}</HeaderItem>
         ))}
       </Header>
 
       <TableContent
         className="table-content"
-        columnNumber={header.length}
-        columnsWidths={columnsWidths}
-        columnGap={columnGap}
+        $columnNumber={header.length}
+        $columnsWidths={columnsWidths}
+        $columnGap={columnGap}
       >
         {pageData.map((row, rowIndex) => (
           <div className="table-row" key={rowIndex}>
@@ -80,9 +77,7 @@ export default function DataGridDemo(props: IGridProps) {
 
       <Footer>
         <div className="counter" data-testid={`itens-counter`}>
-          {`${firstItemPage > 0 ? `${firstItemPage + 1}` : '1'}-${
-            firstItemPage + 10 > filterData?.length ? pageData?.length : firstItemPage + 10
-          } de ${filterData?.length}`}
+          {`${start}–${end} de ${total}`}
         </div>
 
         <div className="right-container">
@@ -95,9 +90,7 @@ export default function DataGridDemo(props: IGridProps) {
               onClick={backTablePage}
               data-testid={`page-back-btn`}
             />
-            <span data-testid={`page-min-max-counter`}>{`${page}/${Math.ceil(
-              filterData.length / 10
-            )}`}</span>
+            <span data-testid={`page-min-max-counter`}>{`${page}/${totalPages}`}</span>
             <img
               className="table-chevron advance"
               alt="advance table page"

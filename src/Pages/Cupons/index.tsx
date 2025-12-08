@@ -9,10 +9,10 @@ import CreateCouponForm from './CreateCouponForm'
 import Table from '@/components/Table'
 import CouponRow from './CouponRow/indes'
 
-type Coupon = {
+export type Coupon = {
   id: string
   code: string
-  percent?: number
+  percent: number
   active: boolean
   influencer?: string
   createdAt: {
@@ -31,7 +31,7 @@ export default function Cupons() {
     async function load() {
       try {
         setLoading(true)
-        const res = await fetcher('/admin/coupons', 'GET')
+        const res = (await fetcher('/admin/coupons', 'GET')) as Coupon[]
         setData(res)
       } finally {
         setLoading(false)
@@ -83,6 +83,7 @@ export default function Cupons() {
 
       <Table
         header={header}
+        key={JSON.stringify(data)}
         page={page}
         columnsWidths={[40, 220, 200, 160, 140, 220, 140, 110]}
         setPage={setPage}
@@ -91,7 +92,7 @@ export default function Cupons() {
       />
 
       <Modal open={open} onClose={() => setOpen(false)} maxWidth="754px">
-        <CreateCouponForm />
+        <CreateCouponForm setData={setData} />
       </Modal>
     </div>
   )
