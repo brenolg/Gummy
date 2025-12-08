@@ -4,9 +4,10 @@ export const StyledMainButton = styled.button<{
   $maxW?: number
   $golden?: boolean
   $font?: number
+  $height?: number
 }>`
   outline: none;
-  height: 68px;
+  height: ${({ $height }) => ($height ? `${$height}px` : '68px')};
   width: 100%;
   border-radius: 16px;
   max-width: ${({ $maxW }) => ($maxW ? `${$maxW}px` : '100%')};

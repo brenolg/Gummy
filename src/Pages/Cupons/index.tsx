@@ -5,6 +5,7 @@ import Modal from '@/components/Modal'
 import PageLoading from '@/components/PageLoading'
 import { useFetch } from '@/hooks/useFetch'
 import { useEffect, useState } from 'react'
+import CreateCouponForm from './CreateCouponForm'
 
 export default function Cupons() {
   const { fetcher } = useFetch()
@@ -40,8 +41,7 @@ export default function Cupons() {
       <Subtitle>Cupons cadastrados</Subtitle>
 
       <Modal open={open} onClose={() => setOpen(false)} maxWidth="754px">
-        <h2>Novo Cupom</h2>
-        <p>Aqui vão os campos do formulário…</p>
+        <CreateCouponForm />
       </Modal>
     </div>
   )
