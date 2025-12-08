@@ -63,8 +63,8 @@ export default function CreateCouponForm() {
       setSuccess('')
 
       const body = {
-        code: data.code.toUpperCase().trim(),
-        discount: Number(data.discount),
+        code: data.code.trim(),
+        percent: Number(data.discount),
         influencer: data.influencer?.trim(),
       }
 
