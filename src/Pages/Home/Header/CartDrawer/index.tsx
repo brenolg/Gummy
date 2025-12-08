@@ -23,6 +23,7 @@ import { QuantitySelector } from './QuantitySelector'
 import eBookImg from '@/assets/imgs/EBook.png'
 import { useFadeTransition } from './useFadeTransition'
 import emptyBag from '@/assets/icons/emptyBag.svg'
+import { fmtBRL } from '@/utils/helper'
 
 export default function CartDrawer() {
   const { cart, openCart, setOpenCart } = useCoreData()
@@ -95,7 +96,7 @@ export default function CartDrawer() {
                     <p className="title">{handleDescriptionnTxt(item.productId)}</p>
 
                     <div className="price-container">
-                      <p className="price">R$ {item.unitPrice.toFixed(2)}</p>
+                      <p className="price">{fmtBRL(Number(item.unitPrice))}</p>
 
                       <QuantitySelector productId={item.productId} />
                     </div>
@@ -117,7 +118,7 @@ export default function CartDrawer() {
             <Footer>
               <div className="totalContainer">
                 <span className="total">Total:</span>
-                <strong>R$ {total.toFixed(2)}</strong>
+                <strong>{fmtBRL(total)}</strong>
               </div>
               <MainButton type="button" onClick={goToCheckout} font={16}>
                 Finalizar Compra
