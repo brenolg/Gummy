@@ -50,7 +50,8 @@ export const TableContent = styled.div<Style>`
       if (props.$columnsWidths) return `${props.$columnsWidths.join('px ')}px`
       return 'auto'
     }};
-    padding: 10px 16px;
+    padding: 0 16px;
+    height: 40px;
     border-bottom: 1px solid #eee;
     align-items: center;
   }

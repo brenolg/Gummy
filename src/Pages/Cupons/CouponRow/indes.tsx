@@ -1,16 +1,9 @@
-type Coupon = {
-  code: string
-  percent?: number
-  influencer?: string
-  active: boolean
-  createdAt: {
-    _seconds: number
-  }
-  usageCount?: number
-}
+// CouponRow.tsx
 import editIcon from '@/assets/icons/edit.svg'
 import trash from '@/assets/icons/trash.svg'
 import { useState } from 'react'
+import { FakeInput } from '@/components/form/FakeInput'
+import type { Coupon } from '..' // ajusta o caminho se o index estiver em outra pasta
 
 interface CouponRowProps {
   item: Coupon
@@ -21,6 +14,24 @@ interface CouponRowProps {
 
 export default function CouponRow({ item, index, onEdit, onDelete }: CouponRowProps) {
   const [showEdit, setShowEdit] = useState(false)
+
+  const [code, setCode] = useState(item.code)
+  const [percent, setPercent] = useState(item.percent?.toString() ?? '')
+  const [influencer, setInfluencer] = useState(item.influencer ?? '')
+
+  const handleConfirm = () => {
+    const edited: Coupon = {
+      ...item, // mantém id, active, createdAt, usageCount
+      code,
+      percent: percent ? Number(percent) : item.percent,
+      influencer: influencer || undefined,
+    }
+    console.log('EDITED', edited)
+
+    onEdit(edited)
+    setShowEdit(false)
+  }
+
   return [
     <div key={`index-${index}`} className="grid-index">
       {index + 1}
@@ -31,11 +42,17 @@ export default function CouponRow({ item, index, onEdit, onDelete }: CouponRowPr
     </div>,
 
     <div key={`code-${index}`} className="grid-item">
-      {showEdit ? 'fake' : item.code || '-'}
+      {showEdit ? <FakeInput value={code} onChange={setCode} /> : item.code || '-'}
     </div>,
 
     <div key={`percent-${index}`} className="grid-item">
-      {showEdit ? 'fake' : item.percent != null ? `${item.percent}%` : '-'}
+      {showEdit ? (
+        <FakeInput type="number" value={percent} onChange={setPercent} />
+      ) : item.percent != null ? (
+        `${item.percent}%`
+      ) : (
+        '-'
+      )}
     </div>,
 
     <div key={`usageCount-${index}`} className="grid-item">
@@ -43,7 +60,11 @@ export default function CouponRow({ item, index, onEdit, onDelete }: CouponRowPr
     </div>,
 
     <div key={`influencer-${index}`} className="grid-item">
-      {showEdit ? 'fake' : item.influencer || '-'}
+      {showEdit ? (
+        <FakeInput value={influencer} onChange={setInfluencer} />
+      ) : (
+        item.influencer || '-'
+      )}
     </div>,
 
     <div key={`status-${index}`} className="grid-item">
@@ -65,21 +86,11 @@ export default function CouponRow({ item, index, onEdit, onDelete }: CouponRowPr
     <div key={`actions-${index}`} className="grid-action-area">
       <div className="grid-action-btn">
         {showEdit ? (
-          <button
-            onClick={() => {
-              setShowEdit(false)
-              onEdit(item)
-            }}
-          >
+          <button type="button" onClick={handleConfirm}>
             OK
           </button>
         ) : (
-          <img
-            src={editIcon}
-            onClick={() => {
-              setShowEdit(true)
-            }}
-          />
+          <img src={editIcon} onClick={() => setShowEdit(true)} style={{ cursor: 'pointer' }} />
         )}
       </div>
       <button type="button" className="grid-action-btn" onClick={() => onDelete(item)}>

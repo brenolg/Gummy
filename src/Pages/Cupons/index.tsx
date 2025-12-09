@@ -1,3 +1,4 @@
+// Cupons.tsx
 import { Btn, Subtitle, Title } from './Styles'
 import plus from '@/assets/icons/plus.svg'
 import { Divider } from '@/components'
@@ -18,6 +19,7 @@ export type Coupon = {
   createdAt: {
     _seconds: number
   }
+  usageCount?: number
 }
 
 export default function Cupons() {
@@ -39,7 +41,7 @@ export default function Cupons() {
     }
 
     load()
-  }, [])
+  }, [fetcher])
 
   const pageSize = 10
   const pageData = data.slice((page - 1) * pageSize, page * pageSize)
@@ -55,19 +57,58 @@ export default function Cupons() {
     'ação',
   ]
 
+  // PATCH /admin/coupon/{COUPON_ID}
+  async function handleEditCoupon(edited: Coupon) {
+    try {
+      const body = {
+        active: edited.active,
+        code: edited.code,
+        percent: edited.percent,
+        influencer: edited.influencer ?? '', // ✅ sempre manda string
+      }
+
+      console.log('PATCH id:', edited.id)
+      console.log('BODY PATCH', body)
+
+      await fetcher(`/admin/coupon/${edited.id}`, 'PATCH', { body })
+
+      setData((prev) =>
+        prev.map((coupon) => (coupon.id === edited.id ? { ...coupon, ...edited } : coupon))
+      )
+    } catch (err) {
+      console.error('Erro ao atualizar cupom', err)
+      alert('Não foi possível atualizar o cupom. Tente novamente. ')
+    }
+  }
+
+  async function handleDeleteCoupon(item: Coupon) {
+    try {
+      console.log('DELETE id:', item.id)
+
+      await fetcher(`/admin/coupons/${item.id}`, 'DELETE')
+
+      // remove da tela após sucesso
+      setData((prev) => prev.filter((coupon) => coupon.id !== item.id))
+    } catch (err) {
+      console.error('Erro ao excluir cupom', err)
+      alert('Não foi possível excluir o cupom.')
+    }
+  }
+
   function tableRows(coupons: Coupon[]) {
     if (!coupons) return []
 
     return coupons.map((item, i) => (
       <CouponRow
-        key={item.code}
+        key={item.id}
         item={item}
         index={i}
-        onEdit={(item) => console.log('Editar', item)}
-        onDelete={(item) => console.log('Deletar', item)}
+        onEdit={handleEditCoupon}
+        onDelete={handleDeleteCoupon}
       />
     ))
   }
+
   return loading ? (
     <PageLoading />
   ) : (
