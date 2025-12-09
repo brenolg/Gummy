@@ -138,6 +138,7 @@ export const SmallText = styled.p`
   font-weight: 400;
   line-height: 17.6px; /* 110% */
   letter-spacing: 0.6px;
+  text-align: left;
 `
 
 export const Guarantee = styled.p`
