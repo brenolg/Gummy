@@ -11,7 +11,7 @@ const Content = styled.main`
   flex: 1;
   margin-left: 90px; /* largura do sidebar */
   padding: 24px;
-  padding-top: 80px;
+  padding-top: 56px;
   padding-left: 56px;
   background: #fdfdfd;
 `

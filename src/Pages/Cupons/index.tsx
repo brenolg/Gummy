@@ -1,5 +1,5 @@
 // Cupons.tsx
-import { Btn, Subtitle, Title } from './Styles'
+import { Btn, Subtitle, TableContainer, Title } from './Styles'
 import plus from '@/assets/icons/plus.svg'
 import { Divider } from '@/components'
 import Modal from '@/components/Modal'
@@ -114,26 +114,26 @@ export default function Cupons() {
   ) : (
     <div>
       <Title>Gestão de Cupons</Title>
-
       <Btn onClick={() => setOpen(true)}>
         <img src={plus} alt="Adicionar" /> Novo Cupom
       </Btn>
-
       <Divider mb={24} />
       <Subtitle>Cupons cadastrados</Subtitle>
 
-      <Table
-        header={header}
-        key={JSON.stringify(data)}
-        page={page}
-        columnsWidths={[40, 220, 200, 160, 140, 220, 140, 110]}
-        setPage={setPage}
-        filterData={data}
-        pageData={tableRows(pageData)}
-      />
+      <TableContainer>
+        <Table
+          header={header}
+          key={JSON.stringify(data)}
+          page={page}
+          columnsWidths={[40, 220, 200, 160, 140, 220, 140, 110]}
+          setPage={setPage}
+          filterData={data}
+          pageData={tableRows(pageData)}
+        />
+      </TableContainer>
 
       <Modal open={open} onClose={() => setOpen(false)} maxWidth="754px">
-        <CreateCouponForm setData={setData} />
+        <CreateCouponForm setData={setData} setOpen={setOpen} />
       </Modal>
     </div>
   )

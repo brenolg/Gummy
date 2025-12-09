@@ -8,9 +8,10 @@ interface Style {
 }
 
 export const Table = styled.div`
-  width: 100%;
+  width: 1238px;
   max-width: 1238px;
   border-radius: 12px;
+  margin-right: 24px;
   border: 1px solid #eeeeee;
   background: #fff;
 `
@@ -83,7 +84,7 @@ export const TableContent = styled.div<Style>`
   .grid-action-area {
     display: flex;
     gap: 16px;
-    width: 204px;
+    width: 110px;
   }
   .grid-action-btn {
     width: 16px;

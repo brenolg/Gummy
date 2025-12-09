@@ -49,9 +49,10 @@ const schema = yup.object({
 
 type CreateCouponFormProps = {
   setData: Dispatch<SetStateAction<Coupon[]>>
+  setOpen: Dispatch<SetStateAction<boolean>>
 }
 
-export default function CreateCouponForm({ setData }: CreateCouponFormProps) {
+export default function CreateCouponForm({ setData, setOpen }: CreateCouponFormProps) {
   const { fetcher } = useFetch()
   const [error, setError] = useState('')
   const [success, setSuccess] = useState('')
@@ -104,7 +105,7 @@ export default function CreateCouponForm({ setData }: CreateCouponFormProps) {
       setSuccess('Cupom criado com sucesso!')
 
       setData((prev) => [newCoupon, ...prev])
-
+      setOpen(false)
       methods.reset()
     } catch (err: unknown) {
       let backendMessage = 'Erro inesperado.'
@@ -155,7 +156,7 @@ export default function CreateCouponForm({ setData }: CreateCouponFormProps) {
           {/* ------------------
               INFLUENCER
           ------------------*/}
-          <FormSubtitle>Influencer</FormSubtitle>
+          <FormSubtitle>Contexto</FormSubtitle>
           <TwoInputContainer>
             <MInput name="influencer" type="text" placeholder="Nome completo" />
           </TwoInputContainer>
