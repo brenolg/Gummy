@@ -33,6 +33,13 @@ const schema = yup.object({
   code: yup.string().required('Código é obrigatório'),
   discount: yup
     .number()
+    .transform((value, originalValue) => {
+      if (typeof originalValue === 'string') {
+        const normalized = originalValue.replace(',', '.')
+        return Number(normalized)
+      }
+      return value
+    })
     .typeError('Informe um valor válido')
     .required('Desconto obrigatório')
     .positive('O valor precisa ser positivo')
@@ -138,7 +145,7 @@ export default function CreateCouponForm({ setData }: CreateCouponFormProps) {
 
             <MInput
               name="discount"
-              type="number"
+              type="numberCents"
               placeholder="Valor do desconto"
               hasAsterisk
               mb={24}

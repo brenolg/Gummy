@@ -68,6 +68,23 @@ export const getMaskConfig = (tp: string): MaskConfig => {
           },
         } as BlocksConfig,
       ],
+      numberCents: [
+        'num',
+        {
+          num: {
+            mask: Number,
+            radix: ',',
+            mapToRadix: [',', '.'], // ✅ aceita vírgula e ponto
+            scale: 2, // ✅ permite centavos
+            signed: false,
+            thousandsSeparator: '.', // ✅ opcional
+            padFractionalZeros: false,
+            normalizeZeros: true,
+            min: 0,
+            max: Number.MAX_SAFE_INTEGER,
+          },
+        } as BlocksConfig,
+      ],
       cpf: ['000.000.000-00'],
       rg: ['00.000.000-00'],
       cnpj: ['00.000.000/0000-00'],

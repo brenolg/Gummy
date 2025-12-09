@@ -154,7 +154,7 @@ export default function OrderSummary({ couponMode = 'sum' }: Props) {
         <Row>
           <Label>Cupom de desconto aplicado</Label>
           <DiscountValue>
-            -{fmtBRL(couponsAmount)} <small>({Math.round(couponsPct)}%)</small>
+            -{fmtBRL(couponsAmount)} <small>({couponsPct}%)</small>
           </DiscountValue>
         </Row>
       ) : null}
