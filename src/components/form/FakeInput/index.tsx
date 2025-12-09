@@ -2,7 +2,7 @@
 import type { FC } from 'react'
 import { StyledInput, StyledMaskInput } from './styles'
 
-type MaskType = 'cpf' | 'cnpj' | 'phone' | 'cep' | 'number' | 'text'
+type MaskType = 'cpf' | 'cnpj' | 'phone' | 'cep' | 'number' | 'text' | 'numberCents'
 
 interface FakeInputProps {
   value: string
@@ -29,6 +29,19 @@ const getMaskByType = (type?: MaskType) => {
         scale: 2,
         thousandsSeparator: '.',
         radix: ',',
+      }
+    case 'numberCents':
+      return {
+        mask: Number,
+        scale: 2,
+        radix: ',',
+        mapToRadix: [',', '.'], // ✅ aceita vírgula e ponto
+        thousandsSeparator: '.', // ✅ milhar
+        signed: false,
+        padFractionalZeros: false,
+        normalizeZeros: true,
+        min: 0,
+        max: Number.MAX_SAFE_INTEGER,
       }
     default:
       return null
@@ -64,7 +77,7 @@ export const FakeInput: FC<FakeInputProps> = ({
       name={name}
       placeholder={placeholder}
       disabled={disabled}
-      overwrite
+      unmask="typed"
       onAccept={(value) => onChange(String(value))}
     />
   )

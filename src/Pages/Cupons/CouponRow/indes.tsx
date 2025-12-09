@@ -4,6 +4,7 @@ import trash from '@/assets/icons/trash.svg'
 import { useState } from 'react'
 import { FakeInput } from '@/components/form/FakeInput'
 import type { Coupon } from '..' // ajusta o caminho se o index estiver em outra pasta
+import { StatusValue, StatusMenu, StatusArrow, StatusOption, StatusDropdown } from './styles'
 
 interface CouponRowProps {
   item: Coupon
@@ -14,10 +15,12 @@ interface CouponRowProps {
 
 export default function CouponRow({ item, index, onEdit, onDelete }: CouponRowProps) {
   const [showEdit, setShowEdit] = useState(false)
+  const [openStatus, setOpenStatus] = useState(false)
 
   const [code, setCode] = useState(item.code)
   const [percent, setPercent] = useState(item.percent?.toString() ?? '')
   const [influencer, setInfluencer] = useState(item.influencer ?? '')
+  const [active, setActive] = useState(item.active)
 
   const handleConfirm = () => {
     const edited: Coupon = {
@@ -25,6 +28,7 @@ export default function CouponRow({ item, index, onEdit, onDelete }: CouponRowPr
       code,
       percent: percent ? Number(percent) : item.percent,
       influencer: influencer || undefined,
+      active,
     }
     console.log('EDITED', edited)
 
@@ -47,7 +51,7 @@ export default function CouponRow({ item, index, onEdit, onDelete }: CouponRowPr
 
     <div key={`percent-${index}`} className="grid-item">
       {showEdit ? (
-        <FakeInput type="number" value={percent} onChange={setPercent} />
+        <FakeInput type="numberCents" value={percent} onChange={setPercent} />
       ) : item.percent != null ? (
         `${item.percent}%`
       ) : (
@@ -68,19 +72,40 @@ export default function CouponRow({ item, index, onEdit, onDelete }: CouponRowPr
     </div>,
 
     <div key={`status-${index}`} className="grid-item">
-      <span
-        style={{
-          padding: '5px 10px',
-          borderRadius: '8px',
-          width: '92px',
-          fontSize: '12px',
-          fontWeight: 600,
-          color: item.active ? '#2ecc71' : '#e74c3c',
-          background: item.active ? '#e9f9f0' : '#fdeaea',
-        }}
-      >
-        {item.active ? 'Ativo' : 'Inativo'}
-      </span>
+      {showEdit ? (
+        <div style={{ position: 'relative' }}>
+          <StatusDropdown active={active} onClick={() => setOpenStatus(!openStatus)}>
+            {active ? 'Ativo' : 'Inativo'}
+            <StatusArrow active={active} />
+          </StatusDropdown>
+
+          {openStatus && (
+            <StatusMenu>
+              <StatusOption
+                isActive={active}
+                onClick={() => {
+                  setActive(true)
+                  setOpenStatus(false)
+                }}
+              >
+                Ativo
+              </StatusOption>
+
+              <StatusOption
+                isActive={!active}
+                onClick={() => {
+                  setActive(false)
+                  setOpenStatus(false)
+                }}
+              >
+                Inativo
+              </StatusOption>
+            </StatusMenu>
+          )}
+        </div>
+      ) : (
+        <StatusValue active={item.active}>{item.active ? 'Ativo' : 'Inativo'}</StatusValue>
+      )}
     </div>,
 
     <div key={`actions-${index}`} className="grid-action-area">
