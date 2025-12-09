@@ -62,7 +62,9 @@ export const Input = styled.input`
 
   background-color: transparent !important;
   background: transparent !important;
-
+  &::placeholder {
+    color: #ffffff;
+  }
   /* Remove fundo automático do browser */
   -webkit-appearance: none;
   appearance: none;
