@@ -5,6 +5,7 @@ interface Style {
   $width?: any
   $columnsWidths?: number[]
   $columnGap?: number
+  $rowHight?: number
 }
 
 export const Table = styled.div<{ $width: number }>`
@@ -52,7 +53,7 @@ export const TableContent = styled.div<Style>`
         ? props.$columnsWidths.map((w) => `minmax(0, ${w}px)`).join(' ')
         : 'repeat(' + props.$columnNumber + ', minmax(0, 1fr))'};
     padding: 0 16px;
-    height: 40px;
+    height: ${(props) => props.$rowHight ?? 40}px;
     border-bottom: 1px solid #eee;
     align-items: center;
   }

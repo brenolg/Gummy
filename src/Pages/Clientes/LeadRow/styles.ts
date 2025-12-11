@@ -26,15 +26,17 @@ export const StatusBadge = styled.div<{ $status: string }>`
 
   background: ${({ $status }) => ($status === 'PENDING' ? '#D61212' : '#502665')};
 `
-export const ImageContainer = styled.div<{ $img: string }>`
+export const ImageContainer = styled.div<{ $img: string; $isGold?: boolean }>`
   border-radius: 12px;
   border: 2px solid #fff;
   border-radius: 12px;
-  height: 64px;
-  width: 64px;
+  height: 48px;
+  width: 48px;
   border: 2px solid #fff;
   position: relative;
-  background: url(${({ $img }) => $img}) #ebd7f5 3.589px 10px / 88.783% 71.538% no-repeat;
+  background: ${({ $img, $isGold }) =>
+    `url(${$img}) ${$isGold ? 'rgba(186, 126, 27, 0.80)' : '#ebd7f5'} 3.589px 10px / 88.783% 71.538% no-repeat`};
+
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
@@ -59,4 +61,44 @@ export const QuantityBadge = styled.div`
   font-weight: 700;
   line-height: 18px;
   z-index: 1;
+`
+
+export const Images = styled.div`
+  display: flex;
+  gap: 7px;
+  align-items: center;
+  height: 72px;
+`
+export const FunnelCard = styled.div<{ $step: string }>`
+  display: flex;
+  width: 104px;
+  height: 30px;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-feature-settings:
+    'liga' off,
+    'clig' off;
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 14px; /* 100% */
+  border-radius: 4px;
+  color: ${({ $step }) => ($step === 'COMPRA' ? '#FFF' : '#502665')};
+
+  background: ${({ $step }) => {
+    switch ($step) {
+      case 'CONTATO':
+        return 'rgba(80, 38, 101, 0.08)'
+      case 'ENDERECO':
+        return 'rgba(80, 38, 101, 0.16)'
+      case '3. Pagamento':
+        return 'rgba(80, 38, 101, 0.24)'
+      case 'COMPRA':
+        return '#502665'
+      default:
+        return 'rgba(80, 38, 101, 0.18)'
+    }
+  }};
 `

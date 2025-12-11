@@ -11,6 +11,7 @@ interface IGridProps {
   setPage: Dispatch<SetStateAction<number>>
   columnsWidths?: number[]
   columnGap?: number
+  rowHight?: number
 }
 interface IGridItem {
   children: any
@@ -26,7 +27,8 @@ function HeaderItem(props: IGridItem) {
 } // Renderiza os itens do header da tabela
 
 export default function DataGridDemo(props: IGridProps) {
-  const { pageData, header, filterData, page, setPage, columnsWidths, columnGap, width } = props
+  const { pageData, header, filterData, page, setPage, columnsWidths, columnGap, width, rowHight } =
+    props
 
   // Retirei a prop isFixed pois nao estava sendo utilizada
 
@@ -61,6 +63,7 @@ export default function DataGridDemo(props: IGridProps) {
       </Header>
 
       <TableContent
+        $rowHight={rowHight}
         className="table-content"
         $columnNumber={header.length}
         $columnsWidths={columnsWidths}

@@ -9,7 +9,7 @@ import LeadRow from './LeadRow'
 export default function Clients() {
   const { fetcher } = useFetch()
   const [loading, setLoading] = useState(true)
-  const [data, setData] = useState([])
+  const [data, setData] = useState<any[]>([])
   const [page, setPage] = useState(1)
   const [search, setSearch] = useState('')
 
@@ -18,7 +18,7 @@ export default function Clients() {
       try {
         setLoading(true)
         const res = await fetcher('/admin/leads', 'GET')
-        setData(res)
+        setData(res as any[])
       } finally {
         setLoading(false)
       }
@@ -40,10 +40,10 @@ export default function Clients() {
     'status DO pedido',
   ]
 
-  function tableRows(data) {
+  function tableRows(data: any) {
     if (!data) return []
 
-    return data.map((item, i) => <LeadRow key={item.id} item={item} index={i} />)
+    return data.map((item: any, i: number) => <LeadRow key={item.id} item={item} index={i} />)
   }
 
   const pageSize = 10
@@ -72,6 +72,7 @@ export default function Clients() {
           setPage={setPage}
           filterData={data}
           pageData={tableRows(pageData)}
+          rowHight={72}
         />
       </TableContainer>
     </div>

@@ -1,6 +1,13 @@
 import mail from '@/assets/icons/mailP.svg'
 import phone from '@/assets/icons/phoneP.svg'
-import { ContactContainer, ImageContainer, QuantityBadge, StatusBadge } from './styles'
+import {
+  ContactContainer,
+  FunnelCard,
+  ImageContainer,
+  Images,
+  QuantityBadge,
+  StatusBadge,
+} from './styles'
 import Tippy from '@tippyjs/react'
 import 'tippy.js/themes/light.css'
 import pIcon from '@/assets/icons/PIcon.svg'
@@ -12,6 +19,13 @@ function copyToClipboard(text?: string) {
   navigator.clipboard.writeText(text)
 }
 
+function resolveCardStatus(item: any) {
+  if (item.status !== 'PENDING') return 'COMPRA'
+  if (item.paymentMethod) return '3. Pagamento'
+  if (item.address?.city) return '2. Endereço'
+  return '1. Contato'
+}
+
 const productImages = {
   'powergum-kit-3':
     'https://firebasestorage.googleapis.com/v0/b/powergummy-prod.firebasestorage.app/o/trioGummy.png?alt=media&token=e6923e9e-0c14-4a45-8214-d444442ada88',
@@ -20,7 +34,15 @@ const productImages = {
     'https://firebasestorage.googleapis.com/v0/b/powergummy-prod.firebasestorage.app/o/EmbalagemFrente.png?alt=media&token=56f24118-8c1c-4d48-b3d8-db7b69db0a09',
 }
 
-export default function LeadRow({ item, index }) {
+type ProductId = keyof typeof productImages
+interface CartItem {
+  productId: ProductId
+  quantity: number
+}
+
+export default function LeadRow({ item, index }: { item: any; index: any }) {
+  const step = resolveCardStatus(item)
+
   return [
     <div key={`index-${index}`} className="grid-index">
       {index + 1}
@@ -76,14 +98,23 @@ export default function LeadRow({ item, index }) {
       </Tippy>
     </div>,
 
-    <div key={`product-${index}`} className="grid-item">
-      <ImageContainer $img={image}>
-        <QuantityBadge>{quantity}</QuantityBadge>
-      </ImageContainer>
+    <div key={`product-${index}`} className="grid-item products">
+      <Images>
+        {item.cartItems?.map((cartItem: CartItem, i: number) => {
+          const image = productImages[cartItem.productId]
+          const isGold = cartItem.productId === 'powergummy-1' // 👈 regra
+
+          return (
+            <ImageContainer key={i} $img={image} $isGold={!isGold}>
+              <QuantityBadge>{cartItem.quantity}</QuantityBadge>
+            </ImageContainer>
+          )
+        })}
+      </Images>
     </div>,
 
     <div key={`funil-${index}`} className="grid-item">
-      {index}
+      <FunnelCard $step={step}>{step}</FunnelCard>
     </div>,
 
     <Tippy content={item.coupon?.code ?? 'Sem copom'} theme="custom">
