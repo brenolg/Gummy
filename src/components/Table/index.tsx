@@ -46,8 +46,6 @@ export default function DataGridDemo(props: IGridProps) {
 
   // Seta o primeiro item do counter da pagina
 
-  if (!filterData.length) return null
-
   const pageSize = 10
   const totalPages = Math.ceil(filterData.length / pageSize)
   const total = filterData.length

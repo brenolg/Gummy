@@ -5,6 +5,7 @@ import { Container, Icon, Input, TableContainer, Title } from './styles'
 import glass from '@/assets/icons/glassP.svg'
 import Table from '@/components/Table'
 import LeadRow from './LeadRow'
+import { useMemo } from 'react'
 
 export default function Clients() {
   const { fetcher } = useFetch()
@@ -56,6 +57,28 @@ export default function Clients() {
     load()
   }, [fetcher])
 
+  const filteredData = useMemo(() => {
+    if (!search.trim()) return data
+
+    const value = search.trim().toLowerCase()
+
+    return data.filter((item) => {
+      // 1 — filtra por nome
+      const nameMatch = item.name?.toLowerCase().includes(value)
+
+      // 2 — filtra por cidade
+      const cityMatch = item.address?.city?.toLowerCase().includes(value)
+
+      // 3 — filtra por estado
+      const stateMatch = item.address?.state?.toLowerCase().includes(value)
+
+      // 4 — filtra por cupom (array)
+      const couponMatch = item.coupon?.some((c: any) => c.code.toLowerCase().includes(value))
+
+      return nameMatch || cityMatch || stateMatch || couponMatch
+    })
+  }, [search, data])
+
   const header = [
     '#',
     'Quando',
@@ -76,7 +99,6 @@ export default function Clients() {
   }
 
   const pageSize = 10
-  const pageData = data.slice((page - 1) * pageSize, page * pageSize)
   return loading ? (
     <PageLoading />
   ) : (
@@ -95,12 +117,12 @@ export default function Clients() {
         <Table
           width={1238}
           header={header}
-          key={JSON.stringify(data)}
+          key={JSON.stringify(filteredData)}
           page={page}
           columnsWidths={[40, 152, 160, 90, 120, 130, 130, 80, 110, 210]}
           setPage={setPage}
-          filterData={data}
-          pageData={tableRows(pageData)}
+          filterData={filteredData}
+          pageData={tableRows(filteredData.slice((page - 1) * pageSize, page * pageSize))}
           rowHight={72}
         />
       </TableContainer>
