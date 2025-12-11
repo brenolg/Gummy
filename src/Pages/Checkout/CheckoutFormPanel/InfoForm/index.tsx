@@ -15,7 +15,7 @@ export type CheckoutFormData = {
 }
 
 export default function InfoForm() {
-  const { setFormStep, setFormData } = useCoreData()
+  const { setFormStep, setFormData, coupons, formData, cartStorage } = useCoreData()
   const { fetcher } = useFetch()
 
   const methods = useForm<CheckoutFormData>({
@@ -40,14 +40,24 @@ export default function InfoForm() {
 
     const data = methods.getValues()
 
+    const coupom = await coupons[0]
     if (data.advertisement) {
       const body = {
         email: data.email,
         phone: data.phone,
         name: data.name,
+        total: formData.total,
+        cartItems: cartStorage,
+        ...(coupom && {
+          coupon: {
+            code: coupom.code,
+            discountValue: coupom.discount,
+          },
+        }),
       }
 
-      fetcher('/public/capture-lead', 'POST', { body })
+      const x = await fetcher('/public/capture-lead', 'POST', { body })
+      console.log('LEAD', x, body)
     }
 
     setFormData(data)

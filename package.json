@@ -15,6 +15,7 @@
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
     "@react-icons/all-files": "^4.1.0",
+    "@tippyjs/react": "^4.2.6",
     "axios": "^1.13.2",
     "icons": "^1.0.0",
     "imask": "^7.6.1",
@@ -28,6 +29,7 @@
     "react-router-dom": "^7.9.4",
     "react-scroll": "^1.9.3",
     "styled-components": "^6.1.19",
+    "tippy.js": "^6.3.7",
     "yup": "^1.7.1"
   },
   "devDependencies": {

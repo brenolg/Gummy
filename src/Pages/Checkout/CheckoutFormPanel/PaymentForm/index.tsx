@@ -93,6 +93,7 @@ export default function PaymentCardForm() {
   }, [installments, paymentMethod])
 
   const handleStep = async () => {
+    console.log(coupons)
     if (globalLoading) return
 
     if (paymentMethod !== 'PIX') {
@@ -167,6 +168,36 @@ export default function PaymentCardForm() {
       }
       console.log('body create order', body)
       const res: any = await fetcher('/public/create-order', 'POST', { body })
+
+      if (formData.advertisement) {
+        const coupom = coupons.find((c) => !c.code.startsWith('PIX'))
+        const body = {
+          email: formData.email,
+          phone: formData.phone,
+          name: formData.name,
+          total: formData.total,
+          ...(coupom && {
+            coupon: {
+              code: coupom.code,
+              discountValue: coupom.discount,
+            },
+          }),
+          address: {
+            cep: formData.postalCode,
+            street: formData.address,
+            number: formData.addressNumber,
+            neighborhood: formData.district,
+            city: formData.city,
+            state: formData.state,
+          },
+          document: data.cpf,
+          cartItems: cartStorage,
+          paymentMethod: paymentMethod,
+        }
+
+        const x = await fetcher('/public/capture-lead', 'POST', { body })
+        console.log('lead payform', x)
+      }
 
       if (paymentMethod === 'PIX') {
         setFormData((prev) => ({

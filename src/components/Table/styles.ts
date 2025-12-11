@@ -7,9 +7,9 @@ interface Style {
   $columnGap?: number
 }
 
-export const Table = styled.div`
-  width: 1238px;
-  max-width: 1238px;
+export const Table = styled.div<{ $width: number }>`
+  width: ${({ $width }) => $width}px;
+  max-width: ${({ $width }) => $width}px;
   border-radius: 12px;
   margin-right: 24px;
   border: 1px solid #eeeeee;
@@ -18,10 +18,10 @@ export const Table = styled.div`
 
 export const Header = styled.div<{ $columnNumber: number; $columnsWidths?: number[] }>`
   display: grid;
-  grid-template-columns: ${(props: Style) => {
-    if (props.$columnsWidths) return `${props.$columnsWidths.join('px ')}px`
-    return 'auto'
-  }};
+  grid-template-columns: ${(props) =>
+    props.$columnsWidths
+      ? props.$columnsWidths.map((w) => `minmax(0, ${w}px)`).join(' ')
+      : `repeat(${props.$columnNumber}, minmax(0, 1fr))`};
   background: #fafafa;
   padding: 12px 16px;
   color: var(--roxo-700, #502665);
@@ -47,10 +47,10 @@ export const TableContent = styled.div<Style>`
 
   .table-row {
     display: grid;
-    grid-template-columns: ${(props: Style) => {
-      if (props.$columnsWidths) return `${props.$columnsWidths.join('px ')}px`
-      return 'auto'
-    }};
+    grid-template-columns: ${(props) =>
+      props.$columnsWidths
+        ? props.$columnsWidths.map((w) => `minmax(0, ${w}px)`).join(' ')
+        : 'repeat(' + props.$columnNumber + ', minmax(0, 1fr))'};
     padding: 0 16px;
     height: 40px;
     border-bottom: 1px solid #eee;
@@ -80,7 +80,21 @@ export const TableContent = styled.div<Style>`
     font-weight: 400;
     line-height: 20px; /* 142.857% */
     letter-spacing: 0.28px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 0;
+    padding-right: 10px;
   }
+  .golden {
+    color: var(--dourado-200, #ba7e1b);
+    font-family: 'Nunito Sans';
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+  }
+
   .grid-action-area {
     display: flex;
     gap: 16px;

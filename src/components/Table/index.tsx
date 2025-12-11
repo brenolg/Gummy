@@ -5,7 +5,7 @@ import type { Dispatch, SetStateAction, ReactNode } from 'react'
 interface IGridProps {
   pageData: ReactNode[] // ✅
   header: string[]
-  width?: number
+  width: number
   filterData: unknown[]
   page: number
   setPage: Dispatch<SetStateAction<number>>
@@ -26,7 +26,7 @@ function HeaderItem(props: IGridItem) {
 } // Renderiza os itens do header da tabela
 
 export default function DataGridDemo(props: IGridProps) {
-  const { pageData, header, filterData, page, setPage, columnsWidths, columnGap } = props
+  const { pageData, header, filterData, page, setPage, columnsWidths, columnGap, width } = props
 
   // Retirei a prop isFixed pois nao estava sendo utilizada
 
@@ -53,7 +53,7 @@ export default function DataGridDemo(props: IGridProps) {
   const start = (page - 1) * pageSize + 1
   const end = Math.min(page * pageSize, total)
   return (
-    <Table>
+    <Table $width={width}>
       <Header $columnNumber={header.length} $columnsWidths={columnsWidths}>
         {header.map((title, idx) => (
           <HeaderItem key={title ?? idx}>{title}</HeaderItem>

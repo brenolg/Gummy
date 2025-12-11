@@ -8,7 +8,7 @@ import { useFetch } from '@/hooks/useFetch'
 import { useEffect, useState } from 'react'
 import CreateCouponForm from './CreateCouponForm'
 import Table from '@/components/Table'
-import CouponRow from './CouponRow/indes'
+import CouponRow from './CouponRow'
 
 export type Coupon = {
   id: string
@@ -122,6 +122,7 @@ export default function Cupons() {
 
       <TableContainer>
         <Table
+          width={1238}
           header={header}
           key={JSON.stringify(data)}
           page={page}

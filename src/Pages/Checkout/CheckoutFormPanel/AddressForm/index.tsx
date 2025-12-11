@@ -55,8 +55,9 @@ export default function AddressForm() {
         email: formData.email,
         phone: formData.phone,
         name: formData.name,
+        total: formData.total,
         ...(coupom && {
-          coupom: {
+          coupon: {
             code: coupom.code,
             discountValue: coupom.discount,
           },
@@ -69,7 +70,6 @@ export default function AddressForm() {
           city: data.city,
           state: data.state,
         },
-
         cartItems: cartStorage,
       }
 
