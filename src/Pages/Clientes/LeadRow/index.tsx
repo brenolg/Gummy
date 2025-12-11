@@ -117,11 +117,21 @@ export default function LeadRow({ item, index }: { item: any; index: any }) {
       <FunnelCard $step={step}>{step}</FunnelCard>
     </div>,
 
-    <Tippy content={item.coupon?.code ?? 'Sem copom'} theme="custom">
-      <div key={`cupom-${index}`} className="grid-item golden">
-        {item.coupon?.code ?? '-'}
-      </div>
-    </Tippy>,
+    <div
+      key={`cupom-${index}`}
+      className="grid-item golden"
+      style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}
+    >
+      {item.coupon?.length ? (
+        item.coupon.map((c: any, i: number) => (
+          <Tippy key={i} content={c.code} theme="custom">
+            <span>{c.code}</span>
+          </Tippy>
+        ))
+      ) : (
+        <span>-</span>
+      )}
+    </div>,
 
     <div key={`value-${index}`} className="grid-item golden">
       {fmtBRL(item.total)}

@@ -18,7 +18,36 @@ export default function Clients() {
       try {
         setLoading(true)
         const res = await fetcher('/admin/leads', 'GET')
-        setData(res as any[])
+
+        const pixCoupon = { code: 'PIX05', discountValue: 5 }
+
+        // Normaliza os dados
+        const normalized = (res as any[]).map((item) => {
+          let couponArray: any[] = []
+
+          // 1 — transforma em array
+          if (Array.isArray(item.coupon)) {
+            couponArray = item.coupon
+          } else if (item.coupon) {
+            couponArray = [item.coupon]
+          }
+
+          // 2 — adiciona cupom PIX se necessário
+          if (item.paymentMethod === 'PIX') {
+            // evita duplicar cupom PIX caso o backend já envie
+            const existsPix = couponArray.some((c) => c.code === 'PIX05')
+            if (!existsPix) {
+              couponArray.push(pixCoupon)
+            }
+          }
+
+          return {
+            ...item,
+            coupon: couponArray,
+          }
+        })
+        console.log(normalized)
+        setData(normalized)
       } finally {
         setLoading(false)
       }
