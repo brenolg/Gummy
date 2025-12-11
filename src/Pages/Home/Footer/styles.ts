@@ -175,7 +175,7 @@ export const LeftText = styled.p`
   line-height: 30px; /* 214.286% */
 `
 
-export const RightText = styled.p`
+export const RightText = styled.a`
   color: #fff;
   display: flex;
   gap: 8px;

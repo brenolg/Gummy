@@ -206,7 +206,7 @@ export default function Footer() {
       <BottomBar>
         <LeftText>Power Gummy | © Todos os direitos reservados</LeftText>
 
-        <RightText>
+        <RightText href="https://ikigaidesign.com.br/" target="_blank" rel="noopener noreferrer">
           Desenvolvido por <img src={IKIGAI} />
         </RightText>
       </BottomBar>
