@@ -59,9 +59,6 @@ export const TableContent = styled.div<Style>`
   }
 
   .table-cell {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
   }
   .grid-index {
     color: var(--roxo-700, #502665);
@@ -82,10 +79,13 @@ export const TableContent = styled.div<Style>`
     line-height: 20px; /* 142.857% */
     letter-spacing: 0.28px;
     white-space: nowrap;
-    overflow: hidden;
+
     text-overflow: ellipsis;
     min-width: 0;
     padding-right: 10px;
+  }
+  .hidden {
+    overflow: hidden;
   }
   .golden {
     color: var(--dourado-200, #ba7e1b);

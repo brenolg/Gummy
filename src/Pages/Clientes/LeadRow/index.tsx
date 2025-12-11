@@ -52,8 +52,8 @@ export default function LeadRow({ item, index }: { item: any; index: any }) {
       {new Date(item.createdAt).toLocaleDateString('pt-BR')}
     </div>,
 
-    <Tippy content={item.name} theme="custom">
-      <div key={`client-${index}`} className="grid-item max160">
+    <Tippy content={item.name} theme="custom hidden">
+      <div key={`client-${index}`} className="grid-item max160 hidden">
         {item.name}
       </div>
     </Tippy>,
@@ -81,7 +81,7 @@ export default function LeadRow({ item, index }: { item: any; index: any }) {
       </ContactContainer>
     </div>,
 
-    <div key={`local-${index}`} className="grid-item">
+    <div key={`local-${index}`} className="grid-item hidden">
       <Tippy
         content={
           item.address?.city || item.address?.state
@@ -90,7 +90,7 @@ export default function LeadRow({ item, index }: { item: any; index: any }) {
         }
         theme="custom"
       >
-        <div className="grid-item">
+        <div className="grid-item hidden">
           {item.address?.city || item.address?.state
             ? `${item.address?.city ?? ''}${item.address?.city && item.address?.state ? ', ' : ''}${item.address?.state ?? ''}`
             : '-'}
@@ -119,7 +119,7 @@ export default function LeadRow({ item, index }: { item: any; index: any }) {
 
     <div
       key={`cupom-${index}`}
-      className="grid-item golden"
+      className="grid-item golden hidden"
       style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}
     >
       {item.coupon?.length ? (

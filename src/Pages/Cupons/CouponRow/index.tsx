@@ -63,7 +63,7 @@ export default function CouponRow({ item, index, onEdit, onDelete }: CouponRowPr
       {item.usageCount != null ? `${item.usageCount}` : '0'}
     </div>,
 
-    <div key={`influencer-${index}`} className="grid-item">
+    <div key={`influencer-${index}`} className={`grid-item ${!showEdit ? 'hidden' : ''}`}>
       {showEdit ? (
         <FakeInput value={influencer} onChange={setInfluencer} />
       ) : (
