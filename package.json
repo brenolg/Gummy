@@ -28,6 +28,7 @@
     "react-responsive": "^10.0.1",
     "react-router-dom": "^7.9.4",
     "react-scroll": "^1.9.3",
+    "recharts": "^3.5.1",
     "styled-components": "^6.1.19",
     "tippy.js": "^6.3.7",
     "yup": "^1.7.1"
