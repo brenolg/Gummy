@@ -23,17 +23,21 @@ export default function CoreDataProvider({ children }: { children: ReactNode }) 
   const [openCart, setOpenCart] = useState(false)
 
   const CART_KEY = 'powergummy.cart'
-  // 🔹 Estado minimalista que VAI pro localStorage: só id + quantidade
+
+  // Minimal → armazenado no localStorage
   const [cartStorage, setCartStorage] = useState<MinimalCartItem[]>(() => {
     try {
       const stored = localStorage.getItem(CART_KEY)
-      return stored ? JSON.parse(stored) : []
+      const parsed = stored ? JSON.parse(stored) : []
+
+      // 🔥 Garantir que SEMPRE volte um array
+      return Array.isArray(parsed) ? parsed : []
     } catch {
       return []
     }
   })
 
-  // 🔹 Estado completo usado pela aplicação (não vai pro localStorage)
+  // Cart completo (usado internamente)
   const [cart, setCart] = useState<CartItem[]>(() => {
     if (!cartStorage.length) return []
     return cartStorage
@@ -45,22 +49,24 @@ export default function CoreDataProvider({ children }: { children: ReactNode }) 
       .filter(Boolean) as CartItem[]
   })
 
-  // Sempre que o cart COMPLETO mudar, atualiza o estado minimalista
+  // 🚀 Rehidrata cart toda vez que cartStorage muda
   useEffect(() => {
-    const minimal: MinimalCartItem[] = cart.map(({ productId, quantity }) => ({
-      productId,
-      quantity,
-    }))
-    setCartStorage(minimal)
-  }, [cart])
+    const full = cartStorage
+      .map((item) => {
+        const base = CartItemsData.find((p) => p.productId === item.productId)
+        if (!base) return null
+        return { ...base, quantity: item.quantity }
+      })
+      .filter(Boolean) as CartItem[]
 
-  // Sempre que o estado minimalista mudar, sincroniza no localStorage
+    setCart(full)
+  }, [cartStorage])
+
+  // 💾 Salva no localStorage SEM criar loop
   useEffect(() => {
     try {
       localStorage.setItem(CART_KEY, JSON.stringify(cartStorage))
-    } catch {
-      // ignora erros de storage (ex: modo privado)
-    }
+    } catch {}
   }, [cartStorage])
 
   return (
@@ -69,7 +75,7 @@ export default function CoreDataProvider({ children }: { children: ReactNode }) 
         paymentMethod,
         setPaymentMethod,
         cart,
-        setCart,
+        setCart, // ← você usa raramente (ex: limpar carrinho inteiro)
         coupons,
         setCoupons,
         formStep,
@@ -77,7 +83,7 @@ export default function CoreDataProvider({ children }: { children: ReactNode }) 
         formPostalCode,
         setFormPostalCode,
         cartStorage,
-        setCartStorage,
+        setCartStorage, // ← use SEMPRE esse para manipular carrinho
         globalLoading,
         setGlobalLoading,
         formData,
