@@ -213,9 +213,14 @@ export default function PaymentCardForm() {
         setFormStep('qrcode')
         return
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error('Erro ao criar pedido:', error)
-      setError('Não foi possível validar a compra. Verifique os dados e tente novamente.')
+
+      // tenta extrair mensagem do backend
+      const backendMessage =
+        error?.response?.data?.error || error?.response?.data?.message || error?.message
+
+      setError(backendMessage || 'Erro inesperado ao processar o pedido.')
       return
     } finally {
       setGlobalLoading(false)
