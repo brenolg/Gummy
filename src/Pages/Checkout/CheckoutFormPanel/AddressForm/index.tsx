@@ -69,6 +69,7 @@ export default function AddressForm() {
           neighborhood: data.district,
           city: data.city,
           state: data.state,
+          addressComplement: data.addressComplement,
         },
         cartItems: cartStorage,
       }

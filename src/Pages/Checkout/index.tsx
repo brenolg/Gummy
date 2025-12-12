@@ -28,11 +28,11 @@ export default function Checkout() {
 
     async function load() {
       try {
-        const data = await fetcher(`/public/recovery-cart/${id}`, 'GET')
+        const data = await fetcher<any>(`/public/recovery-cart/${id}`, 'GET')
         if (data.coupon) {
           const raw = Array.isArray(data.coupon) ? data.coupon : [data.coupon]
 
-          const normalized = raw.map((c) => ({
+          const normalized = raw.map((c: any) => ({
             code: c.code,
             discount: c.discountValue ?? c.discount ?? 0, // 🔥 converte discountValue → discount
           }))
@@ -42,11 +42,31 @@ export default function Checkout() {
         if (data.cartItems) {
           setCartStorage(data.cartItems)
         }
+        setFormStep(0)
         if (data.email) {
+          setFormData({
+            email: data.email,
+            phone: data.phone,
+            name: data.name,
+          })
           setFormStep(1)
         }
         if (data.address) {
-          console.log(data.address.cep)
+          setFormData((prev) => ({
+            ...prev,
+            email: data.email,
+            phone: data.phone,
+            name: data.name,
+            postalCode: data.address.cep,
+            street: data.address.street,
+            district: data.address.neighborhood,
+            addressComplement: data.address.addressComplement,
+            number: data.address.number,
+            city: data.address.city,
+            state: data.address.state,
+          }))
+
+          console.log(data.address.city)
           setFormPostalCode(data.address.cep)
           setFormStep(2)
         }

@@ -191,6 +191,7 @@ export default function PaymentCardForm() {
             neighborhood: formData.district,
             city: formData.city,
             state: formData.state,
+            addressComplement: formData.addressComplement,
           },
           document: data.cpf,
           cartItems: cartStorage,
