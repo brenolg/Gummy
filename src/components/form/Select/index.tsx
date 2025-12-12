@@ -1,12 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { useController, useFormContext } from 'react-hook-form'
-import {
-  Placeholder,
-  InputError,
-  InputContainer,
-} from '../FormCommomStyle/index'
+import { Placeholder, InputError, InputContainer } from '../FormCommomStyle/index'
 import { SelectWrapper, SelectDisplay, Dropdown, DropdownItem } from './styles'
 import imgError from '@/assets/icons/error.svg'
+import chevron from '@/assets/icons/chevron-down.svg'
 
 interface Option {
   label: string
@@ -50,13 +47,10 @@ const CustomSelectComponent: React.FC<SelectComponentProps> = ({
 
   const error = errors[name]?.message as string | undefined
   const isFocusedOrValid = focused || !!value || value === 0
-  const {  clearErrors } = useFormContext()
+  const { clearErrors } = useFormContext()
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (
-        dropdownRef.current &&
-        !dropdownRef.current.contains(event.target as Node)
-      ) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
         setOpen(false)
         if (onBlur) {
           onBlur()
@@ -69,17 +63,13 @@ const CustomSelectComponent: React.FC<SelectComponentProps> = ({
     }
   }, [onBlur])
 
-  const selectedLabel =
-  options.find((opt) => opt.value === value)?.label || "Parcelas"
+  const selectedLabel = options.find((opt) => opt.value === value)?.label || 'Parcelas'
   useEffect(() => {
     setSearchValue(selectedLabel || '')
   }, [selectedLabel]) // Troca o valor do input toda vez que o valor do select mudar
 
   return (
-    <InputContainer
-      ref={dropdownRef}
-      className="select"
-    >
+    <InputContainer ref={dropdownRef} className="select">
       <div className="relative">
         <Placeholder $isFocusedOrValid={isFocusedOrValid} $isDisabled={disabled}>
           {placeholder}
@@ -117,6 +107,8 @@ const CustomSelectComponent: React.FC<SelectComponentProps> = ({
             value={searchValue}
           />
 
+          <img src={chevron} className={`chevron ${open ? 'open' : ''}`} alt="abrir" />
+
           {open && (
             <Dropdown>
               {filteredOptions.map((opt) => (
@@ -135,11 +127,8 @@ const CustomSelectComponent: React.FC<SelectComponentProps> = ({
           )}
         </SelectWrapper>
 
-        <InputError
-          $error={!!error}
-          $disabled={disabled}
-        >
-          <img src={imgError} className='img-error'/>  {error}
+        <InputError $error={!!error} $disabled={disabled}>
+          <img src={imgError} className="img-error" /> {error}
         </InputError>
       </div>
     </InputContainer>

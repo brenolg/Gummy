@@ -8,7 +8,7 @@ import { schema, schemaPix } from './schema'
 import { useFetch } from '@/hooks/useFetch'
 import { onlyDigits } from '@/utils/helper'
 import { useEffect, useState } from 'react'
-import { InputError } from '@/components/form/FormCommomStyle'
+import { InputError } from './styles'
 import imgError from '@/assets/icons/error.svg'
 
 export type CheckoutFormData = {
@@ -221,6 +221,9 @@ export default function PaymentCardForm() {
         error?.response?.data?.error || error?.response?.data?.message || error?.message
 
       setError(backendMessage || 'Erro inesperado ao processar o pedido.')
+      setTimeout(() => {
+        setError('')
+      }, 5000)
       return
     } finally {
       setGlobalLoading(false)
